@@ -1,4 +1,4 @@
-NAME =cub3D
+NAME = cub3D
 
 SRCS = src/read_map.c \
 	   src/test.c \
@@ -41,7 +41,7 @@ libft :
 		@echo "\033[32m\t[OK]\033[0m"
 
 $(NAME) : mlx libft ${OBJS}
- / 		@echo -n  "Generating ${NAME}"
+		@echo -n  "Generating ${NAME}"
 		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
