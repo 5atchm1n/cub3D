@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/12 20:07:13 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/12 20:18:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,6 @@ int			main (int argc, char **argv)
 	game.win.win = mlx_new_window(game.win.mlx, game.settings.res.x,
 			game.settings.res.y, "cub3D");
 
-
-	game.settings.pos_x = game.settings.res.x / 2;
-	game.settings.pos_y = game.settings.res.y / 2;
-	
 	ft_player_pos(&game);
 
 	game.img.img = mlx_new_image(game.win.mlx, game.settings.res.x, game.settings.res.y);
