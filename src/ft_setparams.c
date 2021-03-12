@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/10 04:08:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/12 18:14:22 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	ft_isspace(char c)
+int				ft_isspace(char c)
 {
 	if ((c > 8 && c < 14) || c == 32)
 		return (1);
@@ -42,8 +42,8 @@ static int		ft_set_res(char *line, t_res *res)
 		x = x * 10 + (*line - '0');
 		line++;
 	}
-	res->res_y = y;
-	res->res_x = x;
+	res->y = y;
+	res->x = x;
 	return (1);
 }
 	
@@ -96,6 +96,7 @@ int			ft_setparams(char *line, t_settings *settings)
 	int		n;
 
 	n = 1;
+
 	while(ft_isspace(*line) == 1)
 		line++;
 	if (*line == 'R')

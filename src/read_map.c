@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 02:23:03 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/11 20:45:08 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/12 15:52:40 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int			gnl_return(char **line, char **gnline)
 	return (ret);
 }
 
-static int			ft_get_line(char **line, int fd)
+int			ft_get_line(char **line, int fd)
 {
 	int				n;
 	int				i;
@@ -54,28 +54,4 @@ static int			ft_get_line(char **line, int fd)
 		return (1);
 	}
 	return (gnl_return(line, &temp));
-}
-t_settings		ft_settings(char *map)
-{
-	int			fd;
-	char		*line;
-	t_settings	*settings;
-
-	settings = NULL;
-	settings = malloc(sizeof(t_settings));
-	fd = open(map, O_RDONLY);
-	while ((ft_get_line(&line, fd) > 0))
-	{
-		ft_setparams(line, settings);
-		free(line);
-	}
-	free(line);
-	printf("res_x = %d\n", settings->res.res_x);
-	printf("res_y = %d\n", settings->res.res_y);	
-	printf("floor = %d\n" , settings->floor);
-	printf("ceiling = %d\n" , settings->ceiling);
-	printf("size_y = %d\n" , settings->size_y);
-	printf("size_x = %d\n" , settings->size_x);
-	free(settings);
-	return (*settings);
 }

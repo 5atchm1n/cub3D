@@ -1,6 +1,10 @@
 NAME =cub3D
 
-SRCS = src/read_map.c src/test.c src/ft_setparams.c
+SRCS = src/read_map.c \
+	   src/test.c \
+	   src/ft_setparams.c \
+	   src/draw.c \
+	   src/ft_parse_map.c
 
 CC = clang
 
@@ -10,9 +14,11 @@ LIBFT = libft.a
 
 INC = cub3d.h
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 
 LIB = -lmlx -lXext -lX11 -lm -lbsd
+
+MEM = -fsanitize=address
 
 OBJS = ${SRCS:.c=.o}
 
@@ -36,7 +42,7 @@ libft :
 
 $(NAME) : mlx libft ${OBJS}
 		@echo -n  "Generating ${NAME}"
-		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 .c.o:
