@@ -6,18 +6,11 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/13 00:46:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/13 01:53:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int				ft_isspace(char c)
-{
-	if ((c > 8 && c < 14) || c == 32)
-		return (1);
-	return (0);
-}
 
 static int		ft_set_res(char *line, t_res *res)
 {
