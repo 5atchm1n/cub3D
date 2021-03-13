@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/13 01:33:23 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/13 17:14:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,17 @@ static void ft_player_pos(t_cub *game)
 		{
 			if (game->map[i][j] == 'N')
 			{
-				game->settings.dir = M_PI_2;
-				game->settings.pos_x = (j * offset) + (offset / 2);
-				game->settings.pos_y = (i * offset) + (offset / 2);
+				game->player.dir = M_PI_2;
+				game->player.pos_x = (j * offset) + (offset / 2);
+				game->player.pos_y = (i * offset) + (offset / 2);
 			}
 			j++;
 		}
 		i++;
 	}
 }
+
+
 int		key_hook(int keycode, t_win *win)
 {
 	if (win && keycode)
@@ -61,11 +63,22 @@ int		key_hook(int keycode, t_win *win)
 	printf("%d\n", keycode);
 	
 	return (0);
-}int			main (int argc, char **argv)
+}
+
+void	ft_init_move(t_move *move)
+{
+	move->right = 0;
+	move->left = 0;
+	move->up = 0;
+	move->down = 0;
+	move->turn_l = 0;
+	move->turn_l = 0;
+}
+
+int			main (int argc, char **argv)
 {
 	t_cub		game;
 	int			i;
-	int			j;
 
 	i = 0;
 
@@ -84,7 +97,12 @@ int		key_hook(int keycode, t_win *win)
 	}
 	
 	ft_init_map(&game);
+	ft_init_move(&game.player.move);
 	ft_parse_map(argv[1], &game);
+/*
+	// PRINT MAP	
+
+	int			j;
 	i = 0;
 	while (i < game.settings.size_y)
 	{
@@ -97,7 +115,7 @@ int		key_hook(int keycode, t_win *win)
 		i++;
 		printf("\n");
 	}
-		
+*/		
 	game.win.mlx = mlx_init();
 	game.win.win = mlx_new_window(game.win.mlx, game.settings.res.x,
 			game.settings.res.y, "cub3D");
@@ -107,23 +125,26 @@ int		key_hook(int keycode, t_win *win)
 	game.img.img = mlx_new_image(game.win.mlx, game.settings.res.x, game.settings.res.y);
 	
 	game.img.add = mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.len, &game.img.endian);
-
+/*
 	mlx_key_hook(game.win.win, key_hook, &game);
-//	mlx_mouse_hook(win.win, mouse_hook, &win);
-	my_player(&game.img, game.settings.pos_x, game.settings.pos_y);
+	mlx_mouse_hook(win.win, mouse_hook, &win);
+*/
 
 	draw_map(&game);
+	my_player(&game.img, game.player.pos_x, game.player.pos_y);
+	player_fov(&game);
 	mlx_put_image_to_window(game.win.mlx , game.win.win, game.img.img, 0 , 0);
 
-	mlx_hook(game.win.win, 2, 1L<<0, &ft_move, &game);
+	mlx_hook(game.win.win, 2, 1L<<0, &ft_keypress, &game);
+	mlx_hook(game.win.win, 3, 1L<<1, &ft_keyrelease, &game);
 	
-
+/*
 	printf("map size = map[%d][%d]\n" , game.settings.size_y, game.settings.size_x);
 	printf("res_x = %d\n", game.settings.res.x);
 	printf("res_y = %d\n", game.settings.res.y);	
 	printf("floor = %d | %#x \n" , game.settings.floor, game.settings.floor);
 	printf("ceiling = %d | %#x\n" , game.settings.ceiling, game.settings.ceiling);
-	
+*/	
 		
 	mlx_loop(game.win.mlx);
 

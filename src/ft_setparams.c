@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/13 01:53:06 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/13 17:00:55 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ int				ft_settings(char *map, t_settings *settings)
 	}
 	free(line);
 	close(fd);
-//	free(line);
 	return (0);
 }
 

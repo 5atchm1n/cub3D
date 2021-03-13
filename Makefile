@@ -4,6 +4,7 @@ SRCS = src/read_map.c \
 	   src/test.c \
 	   src/ft_setparams.c \
 	   src/draw.c \
+	   src/ft_move.c \
 	   src/ft_utils.c \
 	   src/ft_parse_map.c
 

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:10:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/12 17:21:40 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/13 17:01:07 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static char		**ft_setmap(char *line, char **map, int *n)
 {
 	int			i;
 
-	i = 0;
 	i = 0;
 	while (*line != '\0')
 	{

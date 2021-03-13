@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/13 01:49:42 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/13 17:17:49 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ void	background(t_cub *game)
 	int	i;
 	int	j;
 
-	j = 0;
-	while (j < game->settings.res.y)
+	i = 0;
+	while (i < game->settings.res.x)
 	{
-		i = 0;
-		while (i < game->settings.res.x)
+		j = 0;
+		while (j < game->settings.res.y)
 		{
 			my_pixel_put(&game->img, i, j, 0x00000000);
-			i++;
+			j++;
 		}
-		j++;
+		i++;
 	}
 }
 
@@ -70,6 +70,10 @@ void	draw_map(t_cub *game)
 		j = 0;
 		while (j < game->settings.size_x)
 		{
+			if (game->map[i][j] == '0')
+				put_wall(game, j, i, 0x00000000);
+			if (game->map[i][j] == ' ')
+				put_wall(game, j, i, 0x000000FF);
 			if (game->map[i][j] == '1')
 				put_wall(game, j, i, 0x00FF0000);
 			if (game->map[i][j] == '2')
@@ -98,88 +102,72 @@ void	my_player(t_img *img, int x, int y)
 	}
 }
 
-void			player_fov(t_cub *game)
+void			fov_line(t_cub *game, double theta)
 {
-	double		fov;
 	int			l;
 	double		x;
 	double		y;
 
-	l = 25;
-	fov = 0.6;
-
+	l = 150;
 	while(l > 0)
 	{
-		x = sin(game->settings.dir) * l;
-		y = cos(game->settings.dir) * l;
-		my_pixel_put(&game->img, game->settings.pos_x + x + 2,
-				game->settings.pos_y + y + 2, 0x00FFFFFF);
+		y = sin(theta) * l;
+		x = cos(theta) * l;
+		if (game->player.pos_y - y + 2 > 2)
+			my_pixel_put(&game->img, game->player.pos_x + x + 2,
+				game->player.pos_y - y + 2, 0x00FFFFFF);
 		l--;
 	}
-	printf("x = %f\n", x);
-	printf("y = %f\n", y);
-	printf("dir = %.8f\n", game->settings.dir);
-
+//	printf("x = %f\n", x);
+//	printf("y = %f\n", y);
+//	printf("dir = %.8f\n", game->settings.dir);
 }
 
-int		ft_move(int keycode, t_cub *game)
+void			player_fov(t_cub *game)
 {
-	int	i;
-	i = 0;
-	if (keycode == 0xff1b)
+	double		fov;
+
+	fov = game->player.dir + 0.3;
+	while(fov > game->player.dir - 0.3)
 	{
-		mlx_destroy_window(game->win.mlx, game->win.win);
-	//	mlx_destroy_image(game->win.mlx, game->win.win);
-		while(i < game->settings.size_y)
-		{
-			free(game->map[i]);
-			i++;
-		}
-		free(game->map);
-		exit(0);
+		fov_line(game, fov);
+		fov -= 0.0005;
 	}
-	if (keycode == 119)
+//	printf("x = %f\n", x);
+//	printf("y = %f\n", y);
+//	printf("dir = %.8f\n", game->settings.dir);
+}
+
+int		ft_update_fov(t_cub *game)
+{
+	if (game->player.move.turn_r)
+		game->player.dir += 0.05;
+	if (game->player.move.turn_l)
+		game->player.dir -= 0.05;
+		return (0);
+}
+
+int		ft_update_pos(t_cub *game)
+{
+	if (game->player.move.up)
 	{
-		if (game->settings.pos_y > 2)
-			game->settings.pos_y -= 2;
+		if (game->player.pos_y > 2)
+			game->player.pos_y -= 2;
 	}
-	if (keycode == 115)
-		game->settings.pos_y += 2;
-	if (keycode == 97)
-		game->settings.pos_x -= 2;
-	if (keycode == 100)
-		game->settings.pos_x += 2;
-	if (keycode == 65361)
-		game->settings.dir += 0.1;
-	if (keycode == 65363)
-		game->settings.dir -= 0.1;
+	if (game->player.move.down)
+		game->player.pos_y += 2;
+	if (game->player.move.left)
+		game->player.pos_x -= 2;
+	if (game->player.move.right)
+		game->player.pos_x += 2;
+
+	ft_update_fov(game);
 
 	background(game);
 	draw_map(game);
-	my_player(&game->img, game->settings.pos_x, game->settings.pos_y);
+	my_player(&game->img, game->player.pos_x, game->player.pos_y);
 	player_fov(game);
 	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
 
 	return (0);
 }
-/*
-int		mouse_hook(int button, int x, int y, t_win *win)
-{
-	if (win)
-		write(1, "#", 1);
-	printf("%d\t", button);
-	printf("%d\t", x);
-	printf("%d\t", y);
-	return (0);
-}
-*/
-/*
-int		key_hook(int keycode, t_win *win)
-{
-	if (win && keycode)
-		write(1 , "#", 1);
-	printf("%d\n", keycode);
-	
-	return (0);
-}
-*/
