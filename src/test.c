@@ -6,28 +6,11 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/12 20:18:06 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/13 01:33:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int				ft_settings(char *map, t_settings *settings)
-{
-	int			fd;
-	char		*line;
-
-	fd = open(map, O_RDONLY);
-	while ((ft_get_line(&line, fd) > 0))
-	{
-		ft_setparams(line, settings);
-		free(line);
-	}
-	free(line);
-	close(fd);
-//	free(line);
-	return (0);
-}
 
 static void	ft_init_map(t_cub *game)
 {
@@ -62,6 +45,7 @@ static void ft_player_pos(t_cub *game)
 		{
 			if (game->map[i][j] == 'N')
 			{
+				game->settings.dir = M_PI_2;
 				game->settings.pos_x = (j * offset) + (offset / 2);
 				game->settings.pos_y = (i * offset) + (offset / 2);
 			}
@@ -70,8 +54,14 @@ static void ft_player_pos(t_cub *game)
 		i++;
 	}
 }
-
-int			main (int argc, char **argv)
+int		key_hook(int keycode, t_win *win)
+{
+	if (win && keycode)
+		write(1 , "#", 1);
+	printf("%d\n", keycode);
+	
+	return (0);
+}int			main (int argc, char **argv)
 {
 	t_cub		game;
 	int			i;
@@ -118,7 +108,7 @@ int			main (int argc, char **argv)
 	
 	game.img.add = mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.len, &game.img.endian);
 
-//	mlx_key_hook(game.win.win, key_hook, &game);
+	mlx_key_hook(game.win.win, key_hook, &game);
 //	mlx_mouse_hook(win.win, mouse_hook, &win);
 	my_player(&game.img, game.settings.pos_x, game.settings.pos_y);
 

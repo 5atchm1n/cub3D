@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/12 20:08:12 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/13 01:49:42 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,30 @@ void	my_player(t_img *img, int x, int y)
 	}
 }
 
+void			player_fov(t_cub *game)
+{
+	double		fov;
+	int			l;
+	double		x;
+	double		y;
+
+	l = 25;
+	fov = 0.6;
+
+	while(l > 0)
+	{
+		x = sin(game->settings.dir) * l;
+		y = cos(game->settings.dir) * l;
+		my_pixel_put(&game->img, game->settings.pos_x + x + 2,
+				game->settings.pos_y + y + 2, 0x00FFFFFF);
+		l--;
+	}
+	printf("x = %f\n", x);
+	printf("y = %f\n", y);
+	printf("dir = %.8f\n", game->settings.dir);
+
+}
+
 int		ft_move(int keycode, t_cub *game)
 {
 	int	i;
@@ -125,10 +149,15 @@ int		ft_move(int keycode, t_cub *game)
 		game->settings.pos_x -= 2;
 	if (keycode == 100)
 		game->settings.pos_x += 2;
+	if (keycode == 65361)
+		game->settings.dir += 0.1;
+	if (keycode == 65363)
+		game->settings.dir -= 0.1;
 
 	background(game);
 	draw_map(game);
 	my_player(&game->img, game->settings.pos_x, game->settings.pos_y);
+	player_fov(game);
 	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
 
 	return (0);
