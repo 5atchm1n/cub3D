@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/15 15:29:03 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/15 16:29:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,78 @@ void	my_player(t_img *img, int x, int y)
 		j++;
 	}
 }
+int		ft_isempty(t_cub *game, int x, int y)
+{
+	int	grid_x;
+	int	grid_y;
+	int	offset;
+
+	offset = game->settings.res.x / game->settings.size_x;
+	grid_y = (game->player.pos_y + y) / offset;
+	grid_x = (game->player.pos_x + x) / offset;
+
+	if (grid_x > game->settings.size_x || grid_x < 0)
+		return (0);
+	if (grid_y > game->settings.size_y || grid_y < 0)
+		return (0);
+//	printf("y = %d\n", grid_y);
+//	printf("x = %d\n", grid_x);
+//	printf("map = %d\n", game->map[grid_y][grid_x]);
+	if (game->map[grid_y][grid_x] != '0')
+	{	
+//		printf("map = %d\n", game->map[grid_y][grid_x]);
+		return (0);
+	}
+	return (1);
+}
+
+int		ft_can_see(t_cub *game, int x, int y)
+{
+	int	grid_x;
+	int	grid_y;
+	int	offset;
+
+	offset = game->settings.res.x / game->settings.size_x;
+	grid_y = y / offset;
+	grid_x = x / offset;
+
+	if (grid_x > game->settings.size_x - 1 || grid_x < 0)
+		return (0);
+	if (grid_y > game->settings.size_y - 1 || grid_y < 0)
+		return (0);
+//	printf("y = %d\n", grid_y);
+//	printf("x = %d\n", grid_x);
+//	printf("map = %d\n", game->map[grid_y][grid_x]);
+	if (game->map[grid_y][grid_x] != '0')
+	{	
+//		printf("map = %d\n", game->map[grid_y][grid_x]);
+		return (0);
+	}
+	return (1);
+}
 
 void			fov_line(t_cub *game, double theta)
 {
 	int			l;
 	double		x;
 	double		y;
+	int			x1,y1;
 
-	l = 150;
-	while(l > 0)
+	l = 0;
+	y = sin(theta) * l;
+	x = cos(theta) * l;
+
+	while(l < 150)
 	{
 		y = sin(theta) * l;
 		x = cos(theta) * l;
-		if (game->player.pos_y - y + 2 > 2)
+		y1 = game->player.pos_y - y + 2;
+		x1 = game->player.pos_x + x + 2;
+		if (game->player.pos_y - y + 2 > 2  && ft_can_see(game,x1, y1))
 			my_pixel_put(&game->img, game->player.pos_x + x + 2,
 				game->player.pos_y - y + 2, 0x00FFFFFF);
+		if (ft_can_see(game, x1, y1) == 0)
+			break;
 		l--;
 	}
 //	printf("x = %f\n", x);
@@ -148,26 +205,6 @@ int		ft_update_fov(t_cub *game)
 		return (0);
 }
 
-int		ft_isempty(t_cub *game, int x, int y)
-{
-	int	grid_x;
-	int	grid_y;
-	int	offset;
-
-	offset = game->settings.res.x / game->settings.size_x;
-	grid_y = (game->player.pos_y + y) / offset;
-	grid_x = (game->player.pos_x + x) / offset;
-
-	printf("y = %d\n", grid_y);
-	printf("x = %d\n", grid_x);
-	printf("map = %d\n", game->map[grid_y][grid_x]);
-	if (game->map[grid_y][grid_x] != '0')
-	{	
-		printf("map = %d\n", game->map[grid_y][grid_x]);
-		return (0);
-	}
-	return (1);
-}
 
 int		ft_update_pos(t_cub *game)
 {
