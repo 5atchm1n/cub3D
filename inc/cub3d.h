@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/13 16:36:36 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/15 15:24:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct		s_cub
 	t_player		player;
 	t_win			win;
 	char			**map;
+	int				show;
 }					t_cub;
 
 /*

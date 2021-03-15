@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/13 17:05:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/15 15:41:11 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ int		ft_move_stop(int keycode, t_cub *game)
 
 int		ft_keypress(int keycode, t_cub *game)
 {
+	game->show = 0;
 	ft_turn(keycode, game);
 	ft_move(keycode, game);
-	ft_update_pos(game);
+//	ft_update_pos(game);
 
 	return (0);
 }
@@ -87,7 +88,7 @@ int		ft_keyrelease(int keycode, t_cub *game)
 {
 	ft_turn_stop(keycode, game);
 	ft_move_stop(keycode, game);
-	ft_update_pos(game);
+//	ft_update_pos(game);
 
 	return (0);
 }

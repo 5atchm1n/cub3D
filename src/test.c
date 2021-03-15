@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/13 17:14:06 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/15 15:41:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void ft_player_pos(t_cub *game)
 				game->player.dir = M_PI_2;
 				game->player.pos_x = (j * offset) + (offset / 2);
 				game->player.pos_y = (i * offset) + (offset / 2);
+				game->map[i][j] = '0';
 			}
 			j++;
 		}
@@ -137,7 +138,8 @@ int			main (int argc, char **argv)
 
 	mlx_hook(game.win.win, 2, 1L<<0, &ft_keypress, &game);
 	mlx_hook(game.win.win, 3, 1L<<1, &ft_keyrelease, &game);
-	
+
+	mlx_loop_hook(game.win.mlx, &ft_update_pos, &game);
 /*
 	printf("map size = map[%d][%d]\n" , game.settings.size_y, game.settings.size_x);
 	printf("res_x = %d\n", game.settings.res.x);
