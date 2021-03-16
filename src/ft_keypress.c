@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/16 04:22:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/16 19:03:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		ft_turn(int keycode, t_cub *game)
+static int		ft_turn_start(int keycode, t_cub *game)
 {
 	if (keycode == 65361)
 		game->player.move.turn_r = 1;
@@ -21,7 +21,7 @@ static int		ft_turn(int keycode, t_cub *game)
 		return (0);
 }
 
-static int		ft_move(int keycode, t_cub *game)
+static int		ft_move_start(int keycode, t_cub *game)
 {
 	int			i;
 
@@ -52,8 +52,8 @@ static int		ft_move(int keycode, t_cub *game)
 int		ft_keypress(int keycode, t_cub *game)
 {
 	game->show = 0;
-	ft_turn(keycode, game);
-	ft_move(keycode, game);
+	ft_turn_start(keycode, game);
+	ft_move_start(keycode, game);
 
 	return (0);
 }

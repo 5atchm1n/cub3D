@@ -6,35 +6,26 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/16 04:23:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/16 19:15:04 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_init_map(t_cub *game)
+int		key_hook(int keycode, t_win *win)
 {
-	int		i;
-	int		j;
+	if (win && keycode)
+		write(1 , "#", 1);
+	printf("%d\n", keycode);
 	
-	i = 0;
-	while (i < game->settings.size_y)
-	{
-		j = 0;
-		while (j < game->settings.size_x)
-		{
-			game->map[i][j] = ' ';;
-			j++;
-		}
-		i++;
-	}
+	return (0);
 }
 
-static void ft_player_pos(t_cub *game)
+static void		ft_player_pos(t_cub *game)
 {
-	int		offset;
-	int		i;
-	int		j;
+	int			offset;
+	int			i;
+	int			j;
 
 	i = 0;
 	offset = game->settings.res.x / game->settings.size_x;
@@ -54,26 +45,6 @@ static void ft_player_pos(t_cub *game)
 		}
 		i++;
 	}
-}
-
-
-int		key_hook(int keycode, t_win *win)
-{
-	if (win && keycode)
-		write(1 , "#", 1);
-	printf("%d\n", keycode);
-	
-	return (0);
-}
-
-void	ft_init_move(t_move *move)
-{
-	move->right = 0;
-	move->left = 0;
-	move->up = 0;
-	move->down = 0;
-	move->turn_l = 0;
-	move->turn_l = 0;
 }
 
 int			main (int argc, char **argv)
@@ -97,8 +68,9 @@ int			main (int argc, char **argv)
 		i++;
 	}
 	
-	ft_init_map(&game);
-	ft_init_move(&game.player.move);
+//	ft_init_map(&game);
+//	ft_init_move(&game.player.move);
+	ft_init(&game);
 	ft_parse_map(argv[1], &game);
 	
 	/*
@@ -139,7 +111,7 @@ int			main (int argc, char **argv)
 	mlx_hook(game.win.win, 3, 1L<<1, &ft_keyrelease, &game);
 
 //	mlx_key_hook(game.win.win, key_hook, &game);
-	mlx_loop_hook(game.win.mlx, &ft_update_pos, &game);
+	mlx_loop_hook(game.win.mlx, &ft_move, &game);
 /*
 	printf("map size = map[%d][%d]\n" , game.settings.size_y, game.settings.size_x);
 	printf("res_x = %d\n", game.settings.res.x);

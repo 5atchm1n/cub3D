@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/16 04:32:54 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/16 20:18:26 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,7 @@ void	my_pixel_put(t_img *img, int x, int y ,int color)
 	dst = img->add + (y * img->len + x * (img->bpp / 8));
 	*(unsigned int*)dst = color;
 }
-/*
-void	background(t_cub *game)
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	while (i < game->settings.res.x)
-	{
-		j = 0;
-		while (j < game->settings.res.y)
-		{
-			my_pixel_put(&game->img, i, j, 0x00000000);
-			j++;
-		}
-		i++;
-	}
-}
-*/
 void		put_wall(t_cub *game, int x, int y, int colour)
 {
 	int		k;
@@ -90,40 +72,16 @@ void	my_player(t_img *img, int x, int y)
 	int	j;
 
 	j = 0;
-	while (j < 5)
+	while (j < 4)
 	{
 		i = 0;
-		while (i < 5)
+		while (i < 4)
 		{
 			my_pixel_put(img, x + i, y + j, 0x00FFFFFF);
 			i++;
 		}
 		j++;
 	}
-}
-int		ft_isempty(t_cub *game, int x, int y)
-{
-	int	grid_x;
-	int	grid_y;
-	int	offset;
-
-	offset = game->settings.res.x / game->settings.size_x;
-	grid_y = (game->player.pos_y + y) / offset;
-	grid_x = (game->player.pos_x + x) / offset;
-
-	if (grid_x > game->settings.size_x || grid_x < 0)
-		return (0);
-	if (grid_y > game->settings.size_y || grid_y < 0)
-		return (0);
-//	printf("y = %d\n", grid_y);
-//	printf("x = %d\n", grid_x);
-//	printf("map = %d\n", game->map[grid_y][grid_x]);
-	if (game->map[grid_y][grid_x] != '0')
-	{	
-//		printf("map = %d\n", game->map[grid_y][grid_x]);
-		return (0);
-	}
-	return (1);
 }
 
 int		ft_can_see(t_cub *game, int x, int y)
@@ -193,58 +151,4 @@ void			player_fov(t_cub *game)
 //	printf("x = %f\n", x);
 //	printf("y = %f\n", y);
 //	printf("dir = %.8f\n", game->settings.dir);
-}
-
-int		ft_update_fov(t_cub *game)
-{
-	if (game->player.move.turn_r)
-		game->player.dir += TURN_SPEED;
-	if (game->player.move.turn_l)
-		game->player.dir -= TURN_SPEED;
-		return (0);
-}
-
-static int		ft_move(t_cub *game, int dir_x, int dir_y)
-{
-	if (dir_y == 1 && dir_x == 0)
-	{
-		game->player.pos_y += sin(game->player.dir) * MOVE_SPEED;
-		game->player.pos_x -= cos(game->player.dir) * MOVE_SPEED;
-	}
-	if (dir_y == -1 && dir_x == 0)
-	{
-		game->player.pos_y -= sin(game->player.dir) * MOVE_SPEED;
-		game->player.pos_x += cos(game->player.dir) * MOVE_SPEED;
-	}
-	if (dir_y == 0 && dir_x == 1)
-	{
-		game->player.pos_x += sin(game->player.dir) * MOVE_SPEED;
-		game->player.pos_y -= cos(game->player.dir) * MOVE_SPEED;
-	}
-	if (dir_y == 0 && dir_x == -1)
-	{
-		game->player.pos_x -= sin(game->player.dir) * MOVE_SPEED;
-		game->player.pos_y += cos(game->player.dir) * MOVE_SPEED;
-	}
-	return (0);
-}
-
-int		ft_update_pos(t_cub *game)
-{
-	ft_update_fov(game);
-	if (game->player.move.up && ft_isempty(game, 0, -1))
-		ft_move(game, 0 , 1);
-	if (game->player.move.down && ft_isempty(game, 0, 1))
-		ft_move(game, 0, -1);
- 	if (game->player.move.left && ft_isempty(game, -1, 0))
-		ft_move(game, 1, 0);
-	if (game->player.move.right && ft_isempty(game, 1, 0))
-		ft_move(game, -1, 0);
-
-	draw_map(game);
-	my_player(&game->img, game->player.pos_x, game->player.pos_y);
-	player_fov(game);
-	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
-
-	return (0);
 }

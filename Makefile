@@ -7,6 +7,7 @@ SRCS = src/read_map.c \
 	   src/ft_keypress.c \
 	   src/ft_keyrelease.c \
 	   src/ft_move.c \
+	   src/ft_init.c \
 	   src/ft_utils.c \
 	   src/ft_parse_map.c
 
