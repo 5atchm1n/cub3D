@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/15 15:24:45 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/16 04:31:20 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-#define BUFF_SIZE 256
+# define BUFF_SIZE 256
+# define MOVE_SPEED 2;
+# define TURN_SPEED 0.05;
+
 
 typedef struct		s_win
 {
@@ -68,8 +71,8 @@ typedef struct		s_player
 {
 	t_move			move;
 	double_t		dir;
-	int				pos_x;
-	int				pos_y;
+	double			pos_x;
+	double			pos_y;
 }					t_player;
 
 typedef struct		s_cub
@@ -96,17 +99,11 @@ void				my_pixel_put(t_img *img, int x, int y, int color);
 /*
 ** MOVE PLAYER AND ROTATE PLAYER
 */
-int					ft_move(int keycode, t_cub *game);
-int					ft_move_stop(int keycode, t_cub *game);
-int					ft_turn(int keycode, t_cub *game);
-int					ft_turn_stop(int keycode, t_cub *game);
 int					ft_keypress(int keycode, t_cub *game);
 int					ft_keyrelease(int keycode, t_cub *game);
 /*
 ** DISPLAY
 */
-
-
 int					ft_update_fov(t_cub *game);
 int					ft_update_pos(t_cub *game);
 

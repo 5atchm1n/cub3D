@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/15 16:29:23 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/16 04:32:54 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,6 @@ void			player_fov(t_cub *game)
 		fov_line(game, fov);
 		fov -= 0.0005;
 	}
-	game->show = 1;
 //	printf("x = %f\n", x);
 //	printf("y = %f\n", y);
 //	printf("dir = %.8f\n", game->settings.dir);
@@ -199,34 +198,53 @@ void			player_fov(t_cub *game)
 int		ft_update_fov(t_cub *game)
 {
 	if (game->player.move.turn_r)
-		game->player.dir += 0.05;
+		game->player.dir += TURN_SPEED;
 	if (game->player.move.turn_l)
-		game->player.dir -= 0.05;
+		game->player.dir -= TURN_SPEED;
 		return (0);
 }
 
+static int		ft_move(t_cub *game, int dir_x, int dir_y)
+{
+	if (dir_y == 1 && dir_x == 0)
+	{
+		game->player.pos_y += sin(game->player.dir) * MOVE_SPEED;
+		game->player.pos_x -= cos(game->player.dir) * MOVE_SPEED;
+	}
+	if (dir_y == -1 && dir_x == 0)
+	{
+		game->player.pos_y -= sin(game->player.dir) * MOVE_SPEED;
+		game->player.pos_x += cos(game->player.dir) * MOVE_SPEED;
+	}
+	if (dir_y == 0 && dir_x == 1)
+	{
+		game->player.pos_x += sin(game->player.dir) * MOVE_SPEED;
+		game->player.pos_y -= cos(game->player.dir) * MOVE_SPEED;
+	}
+	if (dir_y == 0 && dir_x == -1)
+	{
+		game->player.pos_x -= sin(game->player.dir) * MOVE_SPEED;
+		game->player.pos_y += cos(game->player.dir) * MOVE_SPEED;
+	}
+	return (0);
+}
 
 int		ft_update_pos(t_cub *game)
 {
-	if (game->player.move.up && ft_isempty(game, 0, -2))
-	{
-		if (game->player.pos_y > 2)
-			game->player.pos_y -= 2;
-	}
-	if (game->player.move.down && ft_isempty(game, 0, 2))
-		game->player.pos_y += 2;
-	if (game->player.move.left && ft_isempty(game, -2, 0))
-		game->player.pos_x -= 2;
-	if (game->player.move.right && ft_isempty(game, 2, 0))
-		game->player.pos_x += 2;
-
 	ft_update_fov(game);
-//	background(game);
+	if (game->player.move.up && ft_isempty(game, 0, -1))
+		ft_move(game, 0 , 1);
+	if (game->player.move.down && ft_isempty(game, 0, 1))
+		ft_move(game, 0, -1);
+ 	if (game->player.move.left && ft_isempty(game, -1, 0))
+		ft_move(game, 1, 0);
+	if (game->player.move.right && ft_isempty(game, 1, 0))
+		ft_move(game, -1, 0);
+
 	draw_map(game);
 	my_player(&game->img, game->player.pos_x, game->player.pos_y);
 	player_fov(game);
-	if (game->show == 1)
-		mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
+	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
 
 	return (0);
 }

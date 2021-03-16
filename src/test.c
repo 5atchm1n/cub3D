@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/15 15:41:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/16 04:23:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int			main (int argc, char **argv)
 	ft_init_map(&game);
 	ft_init_move(&game.player.move);
 	ft_parse_map(argv[1], &game);
-/*
+	
+	/*
 	// PRINT MAP	
 
 	int			j;
@@ -126,10 +127,8 @@ int			main (int argc, char **argv)
 	game.img.img = mlx_new_image(game.win.mlx, game.settings.res.x, game.settings.res.y);
 	
 	game.img.add = mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.len, &game.img.endian);
-/*
-	mlx_key_hook(game.win.win, key_hook, &game);
-	mlx_mouse_hook(win.win, mouse_hook, &win);
-*/
+	
+//	mlx_mouse_hook(win.win, mouse_hook, &win);
 
 	draw_map(&game);
 	my_player(&game.img, game.player.pos_x, game.player.pos_y);
@@ -139,6 +138,7 @@ int			main (int argc, char **argv)
 	mlx_hook(game.win.win, 2, 1L<<0, &ft_keypress, &game);
 	mlx_hook(game.win.win, 3, 1L<<1, &ft_keyrelease, &game);
 
+//	mlx_key_hook(game.win.win, key_hook, &game);
 	mlx_loop_hook(game.win.mlx, &ft_update_pos, &game);
 /*
 	printf("map size = map[%d][%d]\n" , game.settings.size_y, game.settings.size_x);
