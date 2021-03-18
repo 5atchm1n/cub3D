@@ -6,12 +6,12 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/16 20:22:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/18 12:12:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+/*
 static int		ft_isempty(t_cub *game, int x, int y)
 {
 	int			grid_x;
@@ -36,26 +36,39 @@ static int		ft_isempty(t_cub *game, int x, int y)
 	}
 	return (1);
 }
-
+*/
 
 static int		ft_update_fov(t_cub *game)
 {
+	float		d;
+	d = game->player.dir;
+
 	if (game->player.move.turn_r)
-		game->player.dir += TURN_SPEED;
+	{
+		d += TURN_SPEED;
+		if (d > M_PI * 2 - TURN_SPEED)
+			d = 0;
+		game->player.dir = d;
+	}
 	if (game->player.move.turn_l)
-		game->player.dir -= TURN_SPEED;
-		return (0);
+	{	
+		d -= TURN_SPEED;
+		if (d < TURN_SPEED)
+			d = M_PI * 2;
+		game->player.dir = d;
+	}
+	return (0);
 }
 
 static void		ft_move_up(t_cub *game)
 {
-	int			x;
-	int			y;
+	double			x;
+	double			y;
 
 	x = game->player.pos_x - (cos(game->player.dir) * MOVE_SPEED);
 	y = game->player.pos_y + (sin(game->player.dir) * MOVE_SPEED);
 
-	if (ft_can_see(game, x - 3, y + 3))
+	if (ft_can_see(game, x, y))
 	{
 		game->player.pos_x = x;
 		game->player.pos_y = y;
@@ -64,13 +77,13 @@ static void		ft_move_up(t_cub *game)
 
 static void		ft_move_down(t_cub *game)
 {
-	int			x;
-	int			y;
+	double		x;
+	double		y;
 
 	x = game->player.pos_x + (cos(game->player.dir) * MOVE_SPEED);
 	y = game->player.pos_y - (sin(game->player.dir) * MOVE_SPEED);
 
-	if (ft_can_see(game, x + 3, y - 3))
+	if (ft_can_see(game, x, y))
 	{
 		game->player.pos_x = x;
 		game->player.pos_y = y;
@@ -79,13 +92,14 @@ static void		ft_move_down(t_cub *game)
 
 static void		ft_move_right(t_cub *game)
 {
-	int			x;
-	int			y;
+	double		x;
+	double		y;
 
+	printf("dir = %.6f\n", game->player.dir);
 	x = game->player.pos_x + (sin(game->player.dir) * MOVE_SPEED);
-	y = game->player.pos_y - (cos(game->player.dir) * MOVE_SPEED);
+	y = game->player.pos_y + (cos(game->player.dir) * MOVE_SPEED);
 
-	if (ft_can_see(game, x + 3, y - 3))
+	if (ft_can_see(game, x, y))
 	{
 		game->player.pos_x = x;
 		game->player.pos_y = y;
@@ -94,13 +108,13 @@ static void		ft_move_right(t_cub *game)
 
 static void		ft_move_left(t_cub *game)
 {
-	int			x;
-	int			y;
+	double		x;
+	double		y;
 
 	x = game->player.pos_x - (sin(game->player.dir) * MOVE_SPEED);
-	y = game->player.pos_y + (cos(game->player.dir) * MOVE_SPEED);
+	y = game->player.pos_y - (cos(game->player.dir) * MOVE_SPEED);
 
-	if (ft_can_see(game, x - 3, y + 3))
+	if (ft_can_see(game, x, y))
 	{
 		game->player.pos_x = x;
 		game->player.pos_y = y;
@@ -123,16 +137,17 @@ static int		ft_update_pos(t_cub *game, int dir_x, int dir_y)
 int		ft_move(t_cub *game)
 {
 	ft_update_fov(game);
-	if (game->player.move.up && ft_isempty(game, 0, -1))
+	if (game->player.move.up)
 		ft_update_pos(game, 0 , 1);
-	if (game->player.move.down && ft_isempty(game, 0, 1))
+	if (game->player.move.down)
 		ft_update_pos(game, 0, -1);
- 	if (game->player.move.left && ft_isempty(game, -1, 0))
+ 	if (game->player.move.left)
 		ft_update_pos(game, 1, 0);
-	if (game->player.move.right && ft_isempty(game, 1, 0))
+	if (game->player.move.right)
 		ft_update_pos(game, -1, 0);
 
 	draw_map(game);
+	put_grid(game);
 	my_player(&game->img, game->player.pos_x, game->player.pos_y);
 	player_fov(game);
 	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);

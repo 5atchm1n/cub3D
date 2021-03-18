@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/16 20:18:26 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/18 12:31:35 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,49 @@ void	my_pixel_put(t_img *img, int x, int y ,int color)
 	*(unsigned int*)dst = color;
 }
 
+void		put_grid(t_cub *game)
+{
+	int		k;
+	int		l;
+	float	offset;
+
+	offset = game->settings.offset * MAP_SIZE;
+	l = 0;
+	while (l < game->settings.size_y)
+	{
+		k = 0;
+		while(k < game->settings.res.x)
+		{
+			my_pixel_put(&game->img, k, l * offset, 0x00000000);
+			k++;
+		}
+		l++;
+	}
+	l = 0;
+	while (l < game->settings.size_x)
+	{
+		k = 0;
+		while (k < game->settings.res.y)
+		{
+			my_pixel_put(&game->img, l * offset, k, 0x00000000);
+			k++;
+		}
+		l++;
+	}
+}
+
 void		put_wall(t_cub *game, int x, int y, int colour)
 {
 	int		k;
 	int		l;
-	int		offset;
+	float	offset;
 
-	offset = game->settings.res.x / game->settings.size_x;
+	offset = game->settings.offset * MAP_SIZE;
 	k = 0;
-	while (k < offset - 1)
+	while (k < offset)
 	{
 		l = 0;
-		while (l < offset - 1)
+		while (l < offset)
 		{
 			my_pixel_put(&game->img, x * offset + k, y * offset + l, colour);
 			l++;
@@ -77,22 +108,22 @@ void	my_player(t_img *img, int x, int y)
 		i = 0;
 		while (i < 4)
 		{
-			my_pixel_put(img, x + i, y + j, 0x00FFFFFF);
+			my_pixel_put(img, (x * MAP_SIZE) + i, (y * MAP_SIZE) + j, 0x00FFFFFF);
 			i++;
 		}
 		j++;
 	}
 }
 
-int		ft_can_see(t_cub *game, int x, int y)
+int			ft_can_see(t_cub *game, double x, double y)
 {
-	int	grid_x;
-	int	grid_y;
-	int	offset;
+	int		grid_x;
+	int		grid_y;
+	float	offset;
 
-	offset = game->settings.res.x / game->settings.size_x;
-	grid_y = y / offset;
-	grid_x = x / offset;
+	offset = game->settings.offset;
+	grid_y = (int)(y / offset);
+	grid_x = (int)(x / offset);
 
 	if (grid_x > game->settings.size_x - 1 || grid_x < 0)
 		return (0);
@@ -114,7 +145,7 @@ void			fov_line(t_cub *game, double theta)
 	int			l;
 	double		x;
 	double		y;
-	int			x1,y1;
+	double		x1,y1;
 
 	l = 0;
 	y = sin(theta) * l;
@@ -127,8 +158,7 @@ void			fov_line(t_cub *game, double theta)
 		y1 = game->player.pos_y - y + 2;
 		x1 = game->player.pos_x + x + 2;
 		if (game->player.pos_y - y + 2 > 2  && ft_can_see(game,x1, y1))
-			my_pixel_put(&game->img, game->player.pos_x + x + 2,
-				game->player.pos_y - y + 2, 0x00FFFFFF);
+			my_pixel_put(&game->img, x1 * MAP_SIZE, y1 * MAP_SIZE, 0x00FFFFFF);
 		if (ft_can_see(game, x1, y1) == 0)
 			break;
 		l--;

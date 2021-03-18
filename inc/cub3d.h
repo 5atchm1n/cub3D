@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/16 19:55:14 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/18 12:32:00 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define BUFF_SIZE 256
 # define MOVE_SPEED 2
 # define TURN_SPEED 0.05
+# define MAP_SIZE 1
 
 
 typedef struct		s_win
@@ -50,11 +51,11 @@ typedef struct		s_res
 typedef struct		s_settings
 {
 	t_res			res;
-	double_t		dir;
 	int				floor;
 	int				ceiling;
 	int				size_x;
 	int				size_y;
+	float			offset;
 }					t_settings;
 
 typedef struct		s_move
@@ -70,7 +71,7 @@ typedef struct		s_move
 typedef struct		s_player
 {
 	t_move			move;
-	double_t		dir;
+	float			dir;
 	double			pos_x;
 	double			pos_y;
 }					t_player;
@@ -113,12 +114,12 @@ int					ft_move(t_cub *game);
 /*
 ** TEST FUNCTIONS -> MINIMAP
 */
-void				background(t_cub *game);
+void				put_grid(t_cub *game);
 void				my_player(t_img *img, int x, int y);
 void				draw_map(t_cub *game);
 void				player_fov(t_cub *game);
 void				put_wall(t_cub *game, int x, int y, int colour);
-int					ft_can_see(t_cub *game, int x, int y);
+int					ft_can_see(t_cub *game, double x, double y);
 /*
 ** UTILS FUNCTION ADD TO LIBFT
 */
