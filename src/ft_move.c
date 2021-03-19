@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/18 12:12:37 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/19 02:32:31 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,15 @@ static void		ft_move_up(t_cub *game)
 	double			x;
 	double			y;
 
-	x = game->player.pos_x - (cos(game->player.dir) * MOVE_SPEED);
-	y = game->player.pos_y + (sin(game->player.dir) * MOVE_SPEED);
+	x = (game->player.pos_x * game->settings.offset) - 
+		(cos(game->player.dir) * MOVE_SPEED);
+	y = (game->player.pos_y * game->settings.offset) +
+		(sin(game->player.dir) * MOVE_SPEED);
 
 	if (ft_can_see(game, x, y))
 	{
-		game->player.pos_x = x;
-		game->player.pos_y = y;
+		game->player.pos_x = x / game->settings.offset;
+		game->player.pos_y = y / game->settings.offset;
 	}
 }
 
@@ -80,13 +82,15 @@ static void		ft_move_down(t_cub *game)
 	double		x;
 	double		y;
 
-	x = game->player.pos_x + (cos(game->player.dir) * MOVE_SPEED);
-	y = game->player.pos_y - (sin(game->player.dir) * MOVE_SPEED);
+	x = (game->player.pos_x * game->settings.offset) +
+		(cos(game->player.dir) * MOVE_SPEED);
+	y = (game->player.pos_y * game->settings.offset) -
+		(sin(game->player.dir) * MOVE_SPEED);
 
 	if (ft_can_see(game, x, y))
-	{
-		game->player.pos_x = x;
-		game->player.pos_y = y;
+	{		
+		game->player.pos_x = x / game->settings.offset;
+		game->player.pos_y = y / game->settings.offset;
 	}
 }
 
@@ -96,13 +100,15 @@ static void		ft_move_right(t_cub *game)
 	double		y;
 
 	printf("dir = %.6f\n", game->player.dir);
-	x = game->player.pos_x + (sin(game->player.dir) * MOVE_SPEED);
-	y = game->player.pos_y + (cos(game->player.dir) * MOVE_SPEED);
+	x = (game->player.pos_x * game->settings.offset) +
+		(sin(game->player.dir) * MOVE_SPEED);
+	y = (game->player.pos_y * game->settings.offset) +
+		(cos(game->player.dir) * MOVE_SPEED);
 
 	if (ft_can_see(game, x, y))
-	{
-		game->player.pos_x = x;
-		game->player.pos_y = y;
+	{		
+		game->player.pos_x = x / game->settings.offset;
+		game->player.pos_y = y / game->settings.offset;
 	}
 }
 
@@ -111,13 +117,15 @@ static void		ft_move_left(t_cub *game)
 	double		x;
 	double		y;
 
-	x = game->player.pos_x - (sin(game->player.dir) * MOVE_SPEED);
-	y = game->player.pos_y - (cos(game->player.dir) * MOVE_SPEED);
+	x = (game->player.pos_x * game->settings.offset) -
+		(sin(game->player.dir) * MOVE_SPEED);
+	y = (game->player.pos_y * game->settings.offset) -
+		(cos(game->player.dir) * MOVE_SPEED);
 
 	if (ft_can_see(game, x, y))
-	{
-		game->player.pos_x = x;
-		game->player.pos_y = y;
+	{		
+		game->player.pos_x = x / game->settings.offset;
+		game->player.pos_y = y / game->settings.offset;
 	}
 }
 
@@ -148,7 +156,7 @@ int		ft_move(t_cub *game)
 
 	draw_map(game);
 	put_grid(game);
-	my_player(&game->img, game->player.pos_x, game->player.pos_y);
+	my_player(&game->img, game->player.pos_x * game->settings.offset, game->player.pos_y * game->settings.offset);
 	player_fov(game);
 	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
 

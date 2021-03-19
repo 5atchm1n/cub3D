@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/18 12:06:03 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/19 02:32:13 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		key_hook(int keycode, t_win *win)
 	return (0);
 }
 
-static void		ft_player_pos(t_cub *game, float offset)
+static void		ft_player_pos(t_cub *game)
 {
 	int			i;
 	int			j;
@@ -35,8 +35,8 @@ static void		ft_player_pos(t_cub *game, float offset)
 			if (game->map[i][j] == 'N')
 			{
 				game->player.dir = M_PI  + M_PI / 2;
-				game->player.pos_x = (j * offset) + (offset / 2);
-				game->player.pos_y = (i * offset) + (offset / 2);
+				game->player.pos_x = j + 0.5;
+				game->player.pos_y = i + 0.5;
 				game->map[i][j] = '0';
 			}
 			j++;
@@ -93,7 +93,7 @@ int			main (int argc, char **argv)
 	game.win.win = mlx_new_window(game.win.mlx, game.settings.res.x,
 			game.settings.res.y, "cub3D");
 
-	ft_player_pos(&game, game.settings.offset);
+	ft_player_pos(&game);
 
 	game.img.img = mlx_new_image(game.win.mlx, game.settings.res.x, game.settings.res.y);
 	
