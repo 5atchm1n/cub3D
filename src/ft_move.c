@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/19 02:32:31 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/19 21:03:16 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ static void		ft_move_right(t_cub *game)
 	double		x;
 	double		y;
 
-	printf("dir = %.6f\n", game->player.dir);
 	x = (game->player.pos_x * game->settings.offset) +
 		(sin(game->player.dir) * MOVE_SPEED);
 	y = (game->player.pos_y * game->settings.offset) +
@@ -141,7 +140,24 @@ static int		ft_update_pos(t_cub *game, int dir_x, int dir_y)
 		ft_move_left(game);
 	return (0);
 }
-
+void	put_black(t_cub *game)
+{
+	int x;
+	int y;
+	x = 0;
+	y = 0;
+	while (x < game->settings.res.x)
+	{
+		y = 0;
+		while (y < game->settings.res.y)
+		{
+			my_pixel_put(&game->img, x, y, 0x0000000);
+			y++;
+		}
+		x++;
+	}
+}
+	
 int		ft_move(t_cub *game)
 {
 	ft_update_fov(game);
@@ -154,6 +170,8 @@ int		ft_move(t_cub *game)
 	if (game->player.move.right)
 		ft_update_pos(game, -1, 0);
 
+	put_black(game);
+	ft_drawrays3D(game);
 	draw_map(game);
 	put_grid(game);
 	my_player(&game->img, game->player.pos_x * game->settings.offset, game->player.pos_y * game->settings.offset);

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/19 02:32:13 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/19 14:17:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,14 @@ int			main (int argc, char **argv)
 	i = 0;
 
 	ft_memset(&game, 0, sizeof(game));
-
 	if (argc != 2)
 		return (0);
 	if (argc == 2)
 		ft_settings(argv[1], &game.settings);
-/*	
-	game.map = (char **)malloc(sizeof(char *) * game.settings.size_y);
-	while (i < game.settings.size_y)
-	{
-		game.map[i] = (char *)malloc(sizeof(char) * game.settings.size_x);
-		i++;
-	}
-*/	
-//	ft_init_map(&game);
-//	ft_init_move(&game.player.move);
 	ft_init(&game);
 	ft_parse_map(argv[1], &game);
-	
-
+	ft_player_pos(&game);
 // PRINT MAP	
-
 	int			j;
 	i = 0;
 	while (i < game.settings.size_y)
@@ -87,32 +74,26 @@ int			main (int argc, char **argv)
 		i++;
 		printf("\n");
 	}
-
-
+// INIT MLX
 	game.win.mlx = mlx_init();
 	game.win.win = mlx_new_window(game.win.mlx, game.settings.res.x,
 			game.settings.res.y, "cub3D");
-
-	ft_player_pos(&game);
-
 	game.img.img = mlx_new_image(game.win.mlx, game.settings.res.x, game.settings.res.y);
-	
 	game.img.add = mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.len, &game.img.endian);
-	
-//	mlx_mouse_hook(win.win, mouse_hook, &win);
-
+//	DRAW START POSITION
 	draw_map(&game);
 	put_grid(&game);
 	my_player(&game.img, game.player.pos_x, game.player.pos_y);
 	player_fov(&game);
+// PUT TO WINDOW
 	mlx_put_image_to_window(game.win.mlx , game.win.win, game.img.img, 0 , 0);
-
+// START KEYHOOKS
 	mlx_hook(game.win.win, 2, 1L<<0, &ft_keypress, &game);
 	mlx_hook(game.win.win, 3, 1L<<1, &ft_keyrelease, &game);
-
+//	mlx_mouse_hook(win.win, mouse_hook, &win);
 //	mlx_key_hook(game.win.win, key_hook, &game);
 	mlx_loop_hook(game.win.mlx, &ft_move, &game);
-
+// PRINTF INITIAL POSITION AND SETTINGS
 	printf("map size = map[%d][%d]\n" , game.settings.size_y, game.settings.size_x);
 	printf("res_x = %d\n", game.settings.res.x);
 	printf("res_y = %d\n", game.settings.res.y);	
@@ -121,9 +102,8 @@ int			main (int argc, char **argv)
 	printf("pos_x = %.5f\n", game.player.pos_x);
 	printf("pos_y = %.5f\n", game.player.pos_y);
 	printf("offset = %.5f\n", game.settings.offset);
-		
+// MAIN LOOP FUNCTION		
 	mlx_loop(game.win.mlx);
-
 
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/18 12:32:00 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/19 21:19:19 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define BUFF_SIZE 256
 # define MOVE_SPEED 2
 # define TURN_SPEED 0.05
-# define MAP_SIZE 1
+# define MAP_SIZE 0.3
 
 
 typedef struct		s_win
@@ -117,6 +117,7 @@ int					ft_move(t_cub *game);
 void				put_grid(t_cub *game);
 void				my_player(t_img *img, int x, int y);
 void				draw_map(t_cub *game);
+void				ft_drawrays3D(t_cub *game);
 void				player_fov(t_cub *game);
 void				put_wall(t_cub *game, int x, int y, int colour);
 int					ft_can_see(t_cub *game, double x, double y);
