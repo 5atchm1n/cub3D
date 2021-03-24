@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/19 14:17:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/24 02:52:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			main (int argc, char **argv)
 	if (argc == 2)
 		ft_settings(argv[1], &game.settings);
 	ft_init(&game);
-	ft_parse_map(argv[1], &game);
+	game.map = ft_parse_map(argv[1], &game);
 	ft_player_pos(&game);
 // PRINT MAP	
 	int			j;
