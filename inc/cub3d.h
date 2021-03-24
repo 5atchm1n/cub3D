@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/19 21:19:19 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/23 02:47:11 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE 256
-# define MOVE_SPEED 2
+# define MOVE_SPEED 0.2
 # define TURN_SPEED 0.05
 # define MAP_SIZE 0.3
 
@@ -68,6 +68,14 @@ typedef struct		s_move
 	int				turn_r;
 }					t_move;
 
+typedef struct		s_camera
+{
+	double			dirx;
+	double			diry;
+	double			planex;
+	double			planey;
+}					t_camera;
+
 typedef struct		s_player
 {
 	t_move			move;
@@ -81,6 +89,7 @@ typedef struct		s_cub
 	t_settings		settings;
 	t_img			img;
 	t_player		player;
+	t_camera		camera;
 	t_win			win;
 	char			**map;
 	int				show;

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/19 21:03:16 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/24 02:16:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,64 +41,99 @@ static int		ft_isempty(t_cub *game, int x, int y)
 static int		ft_update_fov(t_cub *game)
 {
 	float		d;
+	double		dir;
+	double		plane;
+
 	d = game->player.dir;
 
 	if (game->player.move.turn_r)
 	{
-		d += TURN_SPEED;
-		if (d > M_PI * 2 - TURN_SPEED)
-			d = 0;
-		game->player.dir = d;
+		dir = game->camera.dirx;
+		game->camera.dirx = game->camera.dirx * cos(-TURN_SPEED) - game->camera.diry * sin(-TURN_SPEED);
+		game->camera.diry = dir * sin(-TURN_SPEED) + game->camera.diry * cos(-TURN_SPEED);
+		plane = game->camera.planex;
+		game->camera.planex = game->camera.planex * cos(-TURN_SPEED) - game->camera.planey * sin(-TURN_SPEED);
+		game->camera.planey = plane * sin(-TURN_SPEED) + game->camera.planey * cos(-TURN_SPEED);
+		game->player.dir = tan(game->camera.dirx / game->camera.diry);
 	}
 	if (game->player.move.turn_l)
 	{	
-		d -= TURN_SPEED;
-		if (d < TURN_SPEED)
-			d = M_PI * 2;
 		game->player.dir = d;
+		dir = game->camera.dirx;
+		game->camera.dirx = game->camera.dirx * cos(TURN_SPEED) - game->camera.diry * sin(TURN_SPEED);
+		game->camera.diry = dir * sin(-TURN_SPEED) + game->camera.diry * cos(-TURN_SPEED);
+		plane = game->camera.planex;
+		game->camera.planex = game->camera.planex * cos(TURN_SPEED) - game->camera.planey * sin(TURN_SPEED);
+		game->camera.planey = plane * sin(TURN_SPEED) + game->camera.planey * cos(TURN_SPEED);
+		game->player.dir = tan(game->camera.dirx / game->camera.diry);
 	}
 	return (0);
 }
 
 static void		ft_move_up(t_cub *game)
 {
-	double			x;
-	double			y;
-
+	double		x;
+	double		y;
+/*
 	x = (game->player.pos_x * game->settings.offset) - 
 		(cos(game->player.dir) * MOVE_SPEED);
 	y = (game->player.pos_y * game->settings.offset) +
 		(sin(game->player.dir) * MOVE_SPEED);
 
-	if (ft_can_see(game, x, y))
-	{
-		game->player.pos_x = x / game->settings.offset;
-		game->player.pos_y = y / game->settings.offset;
+//	if (ft_can_see(game, x, y))
+//	{
+	//	game->player.pos_x = x / game->settings.offset;
+	//	game->player.pos_y = y / game->settings.offset;
 	}
+*/		
+	x = game->player.pos_x + game->camera.dirx * MOVE_SPEED;
+	y = game->player.pos_y + game->camera.diry * MOVE_SPEED;
+	if (game->map[(int)y][(int)x] == '0')
+	{
+		game->player.pos_x += game->camera.dirx * MOVE_SPEED;
+		game->player.pos_y += game->camera.diry * MOVE_SPEED;
+	}
+
 }
 
 static void		ft_move_down(t_cub *game)
 {
 	double		x;
 	double		y;
-
+/*
 	x = (game->player.pos_x * game->settings.offset) +
 		(cos(game->player.dir) * MOVE_SPEED);
 	y = (game->player.pos_y * game->settings.offset) -
 		(sin(game->player.dir) * MOVE_SPEED);
 
-	if (ft_can_see(game, x, y))
-	{		
-		game->player.pos_x = x / game->settings.offset;
-		game->player.pos_y = y / game->settings.offset;
+//	if (ft_can_see(game, x, y))
+//	{		
+	//	game->player.pos_x = x / game->settings.offset;
+	//	game->player.pos_y = y / game->settings.offset;
+//	}
+*/
+	x = game->player.pos_x - game->camera.dirx * MOVE_SPEED;
+	y = game->player.pos_y - game->camera.diry * MOVE_SPEED;
+	if (game->map[(int)y][(int)x] == '0')
+	{
+		game->player.pos_x -= game->camera.dirx * MOVE_SPEED;
+		game->player.pos_y -= game->camera.diry * MOVE_SPEED;
 	}
+
 }
 
 static void		ft_move_right(t_cub *game)
 {
 	double		x;
 	double		y;
-
+	x = game->player.pos_x + game->camera.dirx * MOVE_SPEED;
+	y = game->player.pos_y + game->camera.diry * MOVE_SPEED;
+	if (game->map[(int)y][(int)x] == '0')
+	{
+		game->player.pos_x += game->camera.dirx * MOVE_SPEED;
+		game->player.pos_y += game->camera.diry * MOVE_SPEED;
+	}
+/*
 	x = (game->player.pos_x * game->settings.offset) +
 		(sin(game->player.dir) * MOVE_SPEED);
 	y = (game->player.pos_y * game->settings.offset) +
@@ -109,6 +144,7 @@ static void		ft_move_right(t_cub *game)
 		game->player.pos_x = x / game->settings.offset;
 		game->player.pos_y = y / game->settings.offset;
 	}
+*/
 }
 
 static void		ft_move_left(t_cub *game)
@@ -116,6 +152,14 @@ static void		ft_move_left(t_cub *game)
 	double		x;
 	double		y;
 
+	x = game->player.pos_x - game->camera.dirx * MOVE_SPEED;
+	y = game->player.pos_y - game->camera.diry * MOVE_SPEED;
+	if (game->map[(int)y][(int)x] == '0')
+	{
+		game->player.pos_x -= game->camera.dirx * MOVE_SPEED;
+		game->player.pos_y -= game->camera.diry * MOVE_SPEED;
+	}
+/*
 	x = (game->player.pos_x * game->settings.offset) -
 		(sin(game->player.dir) * MOVE_SPEED);
 	y = (game->player.pos_y * game->settings.offset) -
@@ -126,6 +170,7 @@ static void		ft_move_left(t_cub *game)
 		game->player.pos_x = x / game->settings.offset;
 		game->player.pos_y = y / game->settings.offset;
 	}
+*/
 }
 
 static int		ft_update_pos(t_cub *game, int dir_x, int dir_y)
