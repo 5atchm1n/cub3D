@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:18:44 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/24 02:31:48 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/29 01:19:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		ft_verLine(int x, double drawStart, double drawEnd, int color, t_cub *game
 
 void		ft_drawrays3D(t_cub *game)
 {
-	double	x;
+	int		x;
 	double	camerax;
 
 /*	
@@ -66,22 +66,22 @@ void		ft_drawrays3D(t_cub *game)
 
 		double sidedistx;
 		double sidedisty;
-		double deltadistx = sqrt(1 + (raydiry * raydiry) / (raydirx * raydirx));
-		double deltadisty = sqrt(1 + (raydirx * raydirx) / (raydiry * raydiry));
-/*		if ((int)x % 1200 == 0)
+		double deltadistx = fabs(1 / raydirx);
+		double deltadisty = fabs(1 / raydiry);
+		if ((int)x % 12 == 0)
 		{
-		printf("dx = %.10f\n", dirx);
-		printf("dy = %.10f\n", diry);
-		printf("rx = %.10f\n", raydirx);
-		printf("ry = %.10f\n", raydiry);
-		printf("px = %.10f\n", planex);
-		printf("px = %.10f\n", planey);
-		printf("dlx%.10f\n", deltadistx);
-		printf("dly%.10f\n", deltadisty);
+		printf("dirx = %.10f\n", game->camera.dirx);
+		printf("diry = %.10f\n", game->camera.diry);
+		printf("rayx = %.10f\n", raydirx);
+		printf("rayy = %.10f\n", raydiry);
+		printf("plx = %.10f\n", game->camera.planex);
+		printf("plx = %.10f\n", game->camera.planey);
+		printf("deltax = %.10f\n", deltadistx);
+		printf("deltay = %.10f\n", deltadisty);
 		printf("cmrx = %.10f\n", camerax);
-		printf("mapx= %d\n", mapx);
-		printf("mapy= %d\n", mapy);
-		}  */
+		printf("mapx = %d\n", mapx);
+		printf("mapy = %d\n", mapy);
+		}  
 		double distwall;
 
 		int stepx;
@@ -102,11 +102,11 @@ void		ft_drawrays3D(t_cub *game)
 		if (raydiry < 0)
 		{
 			stepy = -1;
-			sidedistx = (game->player.pos_y - mapy) * deltadisty;
+			sidedisty = (game->player.pos_y - mapy) * deltadisty;
 		}
 		else
 		{
-			stepy =1;
+			stepy = 1;
 			sidedisty = (mapy + 1.0 - game->player.pos_y) * deltadisty;
 		}
 		while (hit == 0)

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/23 02:47:11 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/29 01:13:18 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define BUFF_SIZE 256
 # define MOVE_SPEED 0.2
-# define TURN_SPEED 0.05
+# define TURN_SPEED 0.01
 # define MAP_SIZE 0.3
 
 

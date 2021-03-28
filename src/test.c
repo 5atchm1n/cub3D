@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/24 02:48:11 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/29 00:59:17 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		ft_player_pos(t_cub *game)
 			//	game->player.dir = M_PI / 2;
 				game->player.dir = 0;
 				game->player.pos_x = j + 0.5;
-				game->player.pos_y = i + 0.5;
+				game->player.pos_y = i - 0.5;
 				game->camera.dirx = -1;
 				game->camera.diry = 0;
 				game->camera.planex = 0;
