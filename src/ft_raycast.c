@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:18:44 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/19 21:17:01 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/29 01:23:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void		ft_drawrays3D(t_cub *game)
 		if (raydiry < 0)
 		{
 			stepy = -1;
-			sidedistx = (game->player.pos_y - mapy) * deltadisty;
+			sidedisty = (game->player.pos_y - mapy) * deltadisty;
 		}
 		else
 		{
