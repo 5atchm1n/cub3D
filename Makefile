@@ -9,7 +9,7 @@ SRCS = src/read_map.c \
 	   src/ft_move.c \
 	   src/ft_init.c \
 	   src/ft_utils.c \
-	   src/ft_raycast.c \
+	   src/ft_raycast_2.c \
 	   src/ft_minimap.c \
 	   src/ft_minimap_player.c \
 	   src/ft_parse_map.c

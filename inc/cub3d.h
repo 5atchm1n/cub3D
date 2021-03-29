@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/29 01:13:18 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/29 20:36:55 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE 256
-# define MOVE_SPEED 0.2
-# define TURN_SPEED 0.01
+# define MOVE_SPEED 0.05
+# define TURN_SPEED 0.02
 # define MAP_SIZE 0.3
-
 
 typedef struct		s_win
 {
@@ -68,10 +67,16 @@ typedef struct		s_move
 	int				turn_r;
 }					t_move;
 
+typedef struct		s_vector
+{
+	double			x;
+	double			y;
+	double			dx;
+	double			dy;
+}					t_vector;
+
 typedef struct		s_camera
 {
-	double			dirx;
-	double			diry;
 	double			planex;
 	double			planey;
 }					t_camera;
@@ -79,17 +84,30 @@ typedef struct		s_camera
 typedef struct		s_player
 {
 	t_move			move;
-	float			dir;
-	double			pos_x;
-	double			pos_y;
+	t_vector		vector;
+	t_camera		camera;
 }					t_player;
+
+typedef struct		s_ray
+{
+	double			dirx;
+	double			diry;
+	double			deltax;
+	double			deltay;
+	double			distx;
+	double			disty;
+	int				mapx;
+	int				mapy;
+	int				stepx;
+	int				stepy;
+	int				side;
+}					t_ray;
 
 typedef struct		s_cub
 {
 	t_settings		settings;
 	t_img			img;
 	t_player		player;
-	t_camera		camera;
 	t_win			win;
 	char			**map;
 	int				show;
@@ -127,6 +145,7 @@ void				put_grid(t_cub *game);
 void				my_player(t_img *img, int x, int y);
 void				draw_map(t_cub *game);
 void				ft_drawrays3D(t_cub *game);
+void				ft_raycasting(t_cub *game);
 void				player_fov(t_cub *game);
 void				put_wall(t_cub *game, int x, int y, int colour);
 int					ft_can_see(t_cub *game, double x, double y);

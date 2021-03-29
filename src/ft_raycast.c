@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 14:18:44 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/29 01:19:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/29 18:54:54 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,35 +28,10 @@ void		ft_drawrays3D(t_cub *game)
 	int		x;
 	double	camerax;
 
-/*	
-	if (game->player.dir >= 0 && game->player.dir < M_PI)
-	{
-		dirx = cos(game->player.dir);
-//		planex = 1 - sin(game->player.dir);
-	}
-	if (game->player.dir >= 0 && game->player.dir < M_PI_2)
-	{
-		diry = sin(game->player.dir);
-//		planey = 0.66 - cos(game->player.dir);
-	}
-	if (game->player.dir >= M_PI && game->player.dir <= M_PI * 2)
-	{
-		dirx = 1 - cos(game->player.dir);
-//		planex = 1 + sin(game->player.dir);
-	}
-	if (game->player.dir >=M_PI_2 && game->player.dir <= M_PI + M_PI_2)
-	{	
-		diry = 1 - sin(game->player.dir);
-//		planey = 0.66 + cos(game->player.dir);
-	}
-
-	planex = 0;
-	planey = 0.66;
-*/
 	x = 0;
 	while (x < game->settings.res.x)
 	{
-		camerax = (2.0 * x )/ ((double)game->settings.res.x - 1.0);
+		camerax = 2 * x / (double)game->settings.res.x - 1;
 
 		double raydirx = game->camera.dirx + game->camera.planex * camerax;
 		double raydiry = game->camera.diry + game->camera.planey * camerax;
@@ -68,8 +43,7 @@ void		ft_drawrays3D(t_cub *game)
 		double sidedisty;
 		double deltadistx = fabs(1 / raydirx);
 		double deltadisty = fabs(1 / raydiry);
-		if ((int)x % 12 == 0)
-		{
+		printf("x = %d\n", x);
 		printf("dirx = %.10f\n", game->camera.dirx);
 		printf("diry = %.10f\n", game->camera.diry);
 		printf("rayx = %.10f\n", raydirx);
@@ -81,7 +55,8 @@ void		ft_drawrays3D(t_cub *game)
 		printf("cmrx = %.10f\n", camerax);
 		printf("mapx = %d\n", mapx);
 		printf("mapy = %d\n", mapy);
-		}  
+		printf("\n");
+		
 		double distwall;
 
 		int stepx;

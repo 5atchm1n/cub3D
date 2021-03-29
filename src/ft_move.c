@@ -6,94 +6,92 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/29 01:12:29 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/29 20:36:26 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		ft_update_fov(t_cub *game)
+static int		ft_update_fov(t_vector *vector, t_camera *camera, t_move *move)
 {
 	double		dir;
 	double		plane;
 
-	if (game->player.move.turn_r)
+	if (move->turn_r)
 	{
-		dir = game->camera.dirx;
-		game->camera.dirx = game->camera.dirx * cos(-TURN_SPEED) - game->camera.diry * sin(-TURN_SPEED);
-		game->camera.diry = dir * sin(-TURN_SPEED) + game->camera.diry * cos(-TURN_SPEED);
-		plane = game->camera.planex;
-		game->camera.planex = game->camera.planex * cos(-TURN_SPEED) - game->camera.planey * sin(-TURN_SPEED);
-		game->camera.planey = plane * sin(-TURN_SPEED) + game->camera.planey * cos(-TURN_SPEED);
-		game->player.dir = tan(game->camera.diry / game->camera.dirx);
+		dir = vector->dx;
+		vector->dx = (vector->dx * cos(-TURN_SPEED)) - (vector->dy * sin(-TURN_SPEED));
+		vector->dy = (dir * sin(-TURN_SPEED)) + (vector->dy * cos(-TURN_SPEED));
+		plane = camera->planex;
+		camera->planex = camera->planex * cos(-TURN_SPEED) - camera->planey * sin(-TURN_SPEED);
+		camera->planey = plane * sin(-TURN_SPEED) + camera->planey * cos(-TURN_SPEED);
 	}
-	if (game->player.move.turn_l)
+	if (move->turn_l)
 	{	
-		dir = game->camera.dirx;
-		game->camera.dirx = game->camera.dirx * cos(TURN_SPEED) - game->camera.diry * sin(TURN_SPEED);
-		game->camera.diry = dir * sin(-TURN_SPEED) + game->camera.diry * cos(-TURN_SPEED);
-		plane = game->camera.planex;
-		game->camera.planex = game->camera.planex * cos(TURN_SPEED) - game->camera.planey * sin(TURN_SPEED);
-		game->camera.planey = plane * sin(TURN_SPEED) + game->camera.planey * cos(TURN_SPEED);
-		game->player.dir = tan(game->camera.diry / game->camera.dirx);
+		dir = vector->dx;
+		vector->dx = vector->dx * cos(TURN_SPEED) - vector->dy * sin(TURN_SPEED);
+		vector->dy = dir * sin(TURN_SPEED) + vector->dy * cos(TURN_SPEED);
+		plane = camera->planex;
+		camera->planex = camera->planex * cos(TURN_SPEED) - camera->planey * sin(TURN_SPEED);
+		camera->planey = plane * sin(TURN_SPEED) + camera->planey * cos(TURN_SPEED);
 	}
 	return (0);
 }
 
-static void		ft_move_up(t_cub *game)
+static void		ft_move_up(t_vector *vector, char **map)
 {
 	double		x;
 	double		y;
 
-	x = game->player.pos_x + game->camera.dirx * MOVE_SPEED;
-	y = game->player.pos_y + game->camera.diry * MOVE_SPEED;
-	if (game->map[(int)y][(int)x] == '0')
+	x = vector->x + vector->dx * MOVE_SPEED;
+	y = vector->y + vector->dy * MOVE_SPEED;
+	if (map[(int)y][(int)x] == '0')
 	{
-		game->player.pos_x += game->camera.dirx * MOVE_SPEED;
-		game->player.pos_y += game->camera.diry * MOVE_SPEED;
+		vector->x += vector->dx * MOVE_SPEED;
+		vector->y += vector->dy * MOVE_SPEED;
 	}
 
 }
 
-static void		ft_move_down(t_cub *game)
+static void		ft_move_down(t_vector *vector, char **map)
 {
 	double		x;
 	double		y;
 
-	x = game->player.pos_x - game->camera.dirx * MOVE_SPEED;
-	y = game->player.pos_y - game->camera.diry * MOVE_SPEED;
-	if (game->map[(int)y][(int)x] == '0')
+	x = vector->x - vector->dx * MOVE_SPEED;
+	y = vector->y - vector->dy * MOVE_SPEED;
+	if (map[(int)y][(int)x] == '0')
 	{
-		game->player.pos_x -= game->camera.dirx * MOVE_SPEED;
-		game->player.pos_y -= game->camera.diry * MOVE_SPEED;
+		vector->x -= vector->dx * MOVE_SPEED;
+		vector->y -= vector->dy * MOVE_SPEED;
 	}
 
 }
 
-static void		ft_move_right(t_cub *game)
+static void		ft_move_right(t_vector *vector, char **map)
 {
 	double		x;
 	double		y;
-	x = game->player.pos_x - game->camera.dirx * MOVE_SPEED;
-	y = game->player.pos_y + game->camera.diry * MOVE_SPEED;
-	if (game->map[(int)y][(int)x] == '0')
+	x = vector->x + (vector->dy * MOVE_SPEED);
+	y = vector->y - (vector->dx * MOVE_SPEED);
+	if (map[(int)y][(int)x] == '0')
 	{
-		game->player.pos_x -= game->camera.dirx * MOVE_SPEED;
-		game->player.pos_y += game->camera.diry * MOVE_SPEED;
+		vector->x += vector->dy * MOVE_SPEED;
+		vector->y -= vector->dx * MOVE_SPEED;
 	}
 }
 
-static void		ft_move_left(t_cub *game)
+static void		ft_move_left(t_vector *vector, char **map)
 {
 	double		x;
 	double		y;
 
-	x = game->player.pos_x + game->camera.dirx * MOVE_SPEED;
-	y = game->player.pos_y - game->camera.diry * MOVE_SPEED;
-	if (game->map[(int)y][(int)x] == '0')
+	x = vector->x - vector->dy * MOVE_SPEED;
+	y = vector->y + vector->dx * MOVE_SPEED;
+	if (map[(int)y][(int)x] == '0')
 	{
-		game->player.pos_x += game->camera.dirx * MOVE_SPEED;
-		game->player.pos_y -= game->camera.diry * MOVE_SPEED;
+		vector->x -= vector->dy * MOVE_SPEED;
+		vector->y += vector->dx * MOVE_SPEED;
 	}
 }
 
@@ -117,22 +115,29 @@ void	put_black(t_cub *game)
 	
 int		ft_move(t_cub *game)
 {
+	ft_update_fov(&game->player.vector, &game->player.camera, &game->player.move);
 	if (game->player.move.up)
-		ft_move_up(game);
+		ft_move_up(&game->player.vector, game->map);
 	if (game->player.move.down)
-		ft_move_down(game);;
+		ft_move_down(&game->player.vector, game->map);
  	if (game->player.move.left)
-		ft_move_left(game);
+		ft_move_left(&game->player.vector, game->map);
 	if (game->player.move.right)
-		ft_move_right(game);
-	ft_update_fov(game);
+		ft_move_right(&game->player.vector, game->map);
 	put_black(game);
-	ft_drawrays3D(game);
+//	ft_drawrays3D(game);
+	ft_raycasting(game);
 	draw_map(game);
 	put_grid(game);
-	my_player(&game->img, game->player.pos_x * game->settings.offset, game->player.pos_y * game->settings.offset);
-//	player_fov(game);
+	my_player(&game->img, game->player.vector.x * game->settings.offset, game->player.vector.y * game->settings.offset);
+	player_fov(game);
 	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
-
+/*
+	printf("dirx = %.10f\n", vector->dx);
+		printf("diry = %.10f\n", vector->dy);
+		printf("plx = %.10f\n", camera->planex);
+		printf("plx = %.10f\n", camera->planey);
+		printf("\n");
+*/
 	return (0);
 }
