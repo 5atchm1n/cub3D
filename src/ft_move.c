@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/29 20:36:26 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 02:08:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static int		ft_update_fov(t_vector *vector, t_camera *camera, t_move *move)
 	if (move->turn_r)
 	{
 		dir = vector->dx;
-		vector->dx = (vector->dx * cos(-TURN_SPEED)) - (vector->dy * sin(-TURN_SPEED));
-		vector->dy = (dir * sin(-TURN_SPEED)) + (vector->dy * cos(-TURN_SPEED));
+		vector->dx = vector->dx * cos(-TURN_SPEED) - vector->dy * sin(-TURN_SPEED);
+		vector->dy = dir * sin(-TURN_SPEED) + vector->dy * cos(-TURN_SPEED);
 		plane = camera->planex;
 		camera->planex = camera->planex * cos(-TURN_SPEED) - camera->planey * sin(-TURN_SPEED);
 		camera->planey = plane * sin(-TURN_SPEED) + camera->planey * cos(-TURN_SPEED);
@@ -127,17 +127,13 @@ int		ft_move(t_cub *game)
 	put_black(game);
 //	ft_drawrays3D(game);
 	ft_raycasting(game);
+	ft_minimap(game);
+/*
 	draw_map(game);
 	put_grid(game);
 	my_player(&game->img, game->player.vector.x * game->settings.offset, game->player.vector.y * game->settings.offset);
 	player_fov(game);
-	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
-/*
-	printf("dirx = %.10f\n", vector->dx);
-		printf("diry = %.10f\n", vector->dy);
-		printf("plx = %.10f\n", camera->planex);
-		printf("plx = %.10f\n", camera->planey);
-		printf("\n");
 */
+	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
 	return (0);
 }

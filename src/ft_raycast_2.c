@@ -6,20 +6,20 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 19:19:43 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/29 20:45:18 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 02:40:24 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		ft_vertline(int x, double drawStart, double drawEnd, int color, t_img *img)
+void		ft_vertline(int x, int drawStart, int drawEnd, int color, t_img *img)
 {
-	double	start;
+	int start;
 	start = drawStart;
 	while (start < drawEnd)
 	{
 		my_pixel_put(img, x, start, color);
-		start = start + 1.0;
+		start++;
 	}
 }
 
@@ -80,8 +80,6 @@ double			ft_run_dda(t_ray *ray, t_vector *vector, char **map)
 			ray->mapy += ray->stepy;
 			ray->side = 1;
 		}
-		printf("x = %d\n", ray->mapx);
-		printf("y = %d\n", ray->mapy);
 		if (map[ray->mapy][ray->mapx] == '1')
 			hit = 1;
 	}
@@ -99,13 +97,13 @@ void		ft_cast_ray(double distwall, t_settings *settings, t_img *img, t_ray *ray,
 	int		start;
 	int		end;
 
-	lineheight = (int)((double)settings->res.y / distwall);
+	lineheight = (int)(settings->res.y / distwall);
 	start = -lineheight / 2 + settings->res.y / 2;
 	if (start < 0)
 		start = 0;
 	end = lineheight / 2 + settings->res.y / 2;
 	if (end >= settings->res.y)
-		end = settings->res.x -1;
+		end = settings->res.y - 1;
 
 	int		color = 0x00FF0000;
 	if (ray->side == 1)
@@ -120,6 +118,7 @@ void		ft_raycasting(t_cub *game)
 	double	distwall;
 
 	x = 0;
+	ft_memset(&ray, 0, sizeof(ray));
 	while (x < game->settings.res.x)
 	{
 		ft_set_ray(&ray, &game->player, x, &game->settings);
@@ -128,5 +127,12 @@ void		ft_raycasting(t_cub *game)
 		ft_cast_ray(distwall, &game->settings, &game->img, &ray, &x);
 		x++;
 	}
+	printf("ray.dirx = %f\n", ray.dirx);
+	printf("ray.diry = %f\n", ray.diry);
+	printf("ray.deltax = %f\n", ray.deltax);
+	printf("ray.deltay = %f\n", ray.deltay);
+	printf("ray.distx = %f\n", ray.distx);
+	printf("ray.disty = %f\n", ray.disty);
+
 }
 

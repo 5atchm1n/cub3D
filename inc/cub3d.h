@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/29 20:36:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 01:45:28 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ typedef struct		s_cub
 	t_player		player;
 	t_win			win;
 	char			**map;
-	int				show;
 }					t_cub;
 
 /*
@@ -137,18 +136,18 @@ int					ft_keyrelease(int keycode, t_cub *game);
 ** DISPLAY
 */
 int					ft_move(t_cub *game);
-
 /*
 ** TEST FUNCTIONS -> MINIMAP
 */
-void				put_grid(t_cub *game);
-void				my_player(t_img *img, int x, int y);
-void				draw_map(t_cub *game);
+//void				put_grid(t_cub *game);
+//void				my_player(t_img *img, int x, int y);
+void				ft_draw_map(t_cub *game);
 void				ft_drawrays3D(t_cub *game);
 void				ft_raycasting(t_cub *game);
-void				player_fov(t_cub *game);
-void				put_wall(t_cub *game, int x, int y, int colour);
-int					ft_can_see(t_cub *game, double x, double y);
+void				ft_minimap(t_cub *game);
+//void				player_fov(t_cub *game);
+//void				put_wall(t_cub *game, int x, int y, int colour);
+//int					ft_can_see(t_cub *game, double x, double y);
 /*
 ** UTILS FUNCTION ADD TO LIBFT
 */

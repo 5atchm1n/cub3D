@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:18:41 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 02:43:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 01:30:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void		ft_player_pos(t_player *player, t_settings *settings, char **map)
 			if (map[i][j] == 'N')
 			{
 			//	game->player.dir = M_PI / 2;
-				player->vector.x = j + 0.5;
-				player->vector.y = i + 0.5;
+				player->vector.x = j;
+				player->vector.y = i;
 				player->vector.dx = -1;
 				player->vector.dy = 0;
 				player->camera.planex = 0;
@@ -92,7 +92,7 @@ int			main (int argc, char **argv)
 	my_player(&game.img, game.player.vector.x, game.player.vector.y);
 	player_fov(&game);
 */
-	ft_minimap(&game);
+	ft_minimap(game);
 // PUT TO WINDOW
 	mlx_put_image_to_window(game.win.mlx , game.win.win, game.img.img, 0 , 0);
 // START KEYHOOKS
@@ -107,12 +107,8 @@ int			main (int argc, char **argv)
 	printf("res_y = %d\n", game.settings.res.y);
 	printf("floor = %d | %#.8x \n" , game.settings.floor, game.settings.floor);
 	printf("ceiling = %d | %#.8x\n" , game.settings.ceiling, game.settings.ceiling);
-	printf("x = %.5f\n", game.player.vector.x);
-	printf("y = %.5f\n", game.player.vector.y);
-	printf("dx = %.5f\n", game.player.vector.dx);
-	printf("dy = %.5f\n", game.player.vector.dy);
-	printf("px = %.5f\n", game.player.camera.planex);
-	printf("py = %.5f\n", game.player.camera.planey);
+	printf("pos_x = %.5f\n", game.player.vector.x);
+	printf("pos_y = %.5f\n", game.player.vector.y);
 	printf("offset = %.5f\n", game.settings.offset);
 // MAIN LOOP FUNCTION		
 	mlx_loop(game.win.mlx);
