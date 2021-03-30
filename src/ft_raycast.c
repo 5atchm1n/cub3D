@@ -6,13 +6,14 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:16:31 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 21:16:36 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:31:48 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_set_ray(t_ray *ray, t_player *player, int x, t_settings *settings)
+static void		ft_set_ray(t_ray *ray, t_player *player, int x,
+		t_settings *settings)
 {
 	double		camx;
 
@@ -71,10 +72,10 @@ static void		ft_run_dda(t_ray *ray, t_vector *v, char **map)
 		if (map[ray->mapy][ray->mapx] == '1')
 			hit = 1;
 	}
-		if (ray->side == 0)
-			ray->dw = (ray->mapx - v->x + (1 - ray->stepx) / 2) / ray->dirx;
-		else
-			ray->dw = (ray->mapy - v->y + (1 - ray->stepy) / 2) / ray->diry;
+	if (ray->side == 0)
+		ray->dw = (ray->mapx - v->x + (1 - ray->stepx) / 2) / ray->dirx;
+	else
+		ray->dw = (ray->mapy - v->y + (1 - ray->stepy) / 2) / ray->diry;
 }
 
 static void		ft_cast_ray(t_cub *game, t_ray *ray, int *x)
@@ -82,7 +83,9 @@ static void		ft_cast_ray(t_cub *game, t_ray *ray, int *x)
 	int			lineheight;
 	int			start;
 	int			end;
+	int			color;
 
+	color = 0x00FF0000;
 	lineheight = (int)(game->settings.res.y / ray->dw);
 	start = -lineheight / 2 + game->settings.res.y / 2;
 	if (start < 0)
@@ -90,8 +93,6 @@ static void		ft_cast_ray(t_cub *game, t_ray *ray, int *x)
 	end = lineheight / 2 + game->settings.res.y / 2;
 	if (end >= game->settings.res.y)
 		end = game->settings.res.y - 1;
-
-	int		color = 0x00FF0000;
 	if (ray->side == 1)
 		color = color / 2;
 	ft_vertline(*x, start, end, color, &game->img);

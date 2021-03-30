@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 02:23:03 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/12 15:52:40 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:29:56 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int			gnl_return(char **line, char **gnline)
 	return (ret);
 }
 
-int			ft_get_line(char **line, int fd)
+int					ft_get_line(char **line, int fd)
 {
 	int				n;
 	int				i;
@@ -44,7 +44,7 @@ int			ft_get_line(char **line, int fd)
 		buffer[n] = '\0';
 		temp = gnl_join(temp, buffer);
 		if (gnl_find(temp) != -1)
-			break;
+			break ;
 	}
 	i = gnl_find(temp);
 	if (i != -1)

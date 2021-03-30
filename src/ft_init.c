@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 21:10:33 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:35:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void		ft_init_map(t_cub *game)
 		j = 0;
 		while (j < game->settings.size_x)
 		{
-			game->map[i][j] = ' ';;
+			game->map[i][j] = ' ';
 			j++;
 		}
 		i++;

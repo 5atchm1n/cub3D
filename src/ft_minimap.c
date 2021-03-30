@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 21:04:42 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:40:03 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static void		map_grid(t_cub *game)
 {
-	int		k;
-	int		l;
-	float	offset;
+	int			k;
+	int			l;
+	float		offset;
 
 	offset = game->settings.offset * MAP_SIZE;
 	l = 0;
 	while (l < game->settings.size_y)
 	{
 		k = 0;
-		while(k < game->settings.res.x * MAP_SIZE)
+		while (k < game->settings.res.x * MAP_SIZE)
 		{
 			ft_pixelput(&game->img, k, l * offset, 0x00000000);
 			k++;
@@ -54,7 +54,7 @@ static void		map_wall(t_cub *game, int x, int y, int colour)
 	while (k < offset)
 	{
 		l = 0;
-	while (l < offset)
+		while (l < offset)
 		{
 			ft_pixelput(&game->img, x * offset + k, y * offset + l, colour);
 			l++;
@@ -63,11 +63,10 @@ static void		map_wall(t_cub *game, int x, int y, int colour)
 	}
 }
 
-void		ft_draw_map(t_cub *game)
+void			ft_draw_map(t_cub *game)
 {
-
-	int		i;
-	int		j;
+	int			i;
+	int			j;
 
 	i = 0;
 	while (i < game->settings.size_y)
