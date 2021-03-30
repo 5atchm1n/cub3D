@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 01:45:28 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:03:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ typedef struct		s_vector
 
 typedef struct		s_camera
 {
-	double			planex;
-	double			planey;
+	double			px;
+	double			py;
 }					t_camera;
 
 typedef struct		s_player
@@ -101,6 +101,7 @@ typedef struct		s_ray
 	int				stepx;
 	int				stepy;
 	int				side;
+	double			dw;
 }					t_ray;
 
 typedef struct		s_cub
@@ -122,11 +123,12 @@ char				**ft_parse_map(char *map, t_cub *game);
 /*
 ** CUSTOM PIXEL PUT FOR PERFORMANCE - MLX
 */
-void				my_pixel_put(t_img *img, int x, int y, int color);
+void				ft_pixelput(t_img *img, int x, int y, int color);
+void				ft_vertline(int x, int start, int end, int color, t_img *img);
 /*
 ** INITIALIZE PLAYER AND GAME
 */
-void				ft_init(t_cub *game);
+void				ft_init(t_cub *game, char *map);
 /*
 ** MOVE PLAYER AND ROTATE PLAYER
 */
@@ -139,15 +141,9 @@ int					ft_move(t_cub *game);
 /*
 ** TEST FUNCTIONS -> MINIMAP
 */
-//void				put_grid(t_cub *game);
-//void				my_player(t_img *img, int x, int y);
 void				ft_draw_map(t_cub *game);
-void				ft_drawrays3D(t_cub *game);
 void				ft_raycasting(t_cub *game);
 void				ft_minimap(t_cub *game);
-//void				player_fov(t_cub *game);
-//void				put_wall(t_cub *game, int x, int y, int colour);
-//int					ft_can_see(t_cub *game, double x, double y);
 /*
 ** UTILS FUNCTION ADD TO LIBFT
 */

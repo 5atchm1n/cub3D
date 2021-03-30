@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 01:48:52 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:04:42 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		map_grid(t_cub *game)
 		k = 0;
 		while(k < game->settings.res.x * MAP_SIZE)
 		{
-			my_pixel_put(&game->img, k, l * offset, 0x00000000);
+			ft_pixelput(&game->img, k, l * offset, 0x00000000);
 			k++;
 		}
 		l++;
@@ -36,7 +36,7 @@ static void		map_grid(t_cub *game)
 		k = 0;
 		while (k < game->settings.size_y * offset)
 		{
-			my_pixel_put(&game->img, l * offset, k, 0x00000000);
+			ft_pixelput(&game->img, l * offset, k, 0x00000000);
 			k++;
 		}
 		l++;
@@ -56,7 +56,7 @@ static void		map_wall(t_cub *game, int x, int y, int colour)
 		l = 0;
 	while (l < offset)
 		{
-			my_pixel_put(&game->img, x * offset + k, y * offset + l, colour);
+			ft_pixelput(&game->img, x * offset + k, y * offset + l, colour);
 			l++;
 		}
 		k++;

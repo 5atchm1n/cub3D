@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 01:58:37 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:04:51 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,41 +31,25 @@ int			ft_can_see(t_cub *game, double x, double y)
 	return (1);
 }
 
-void			fov_line(t_cub *game)
+void			ft_player_fov(t_cub *game)
 {
 	int			l;
 	double		x1;
 	double		y1;
 
 	l = 0;
-	while(l < game->settings.res.x)
+	while(l < 40)
 	{
-		x1 = (game->player.vector.x * game->settings.offset) + ((game->player.vector.dx * 0.94604) - (game->player.vector.dy * -0.32404)) * l;
-		y1 = (game->player.vector.y * game->settings.offset) + ((game->player.vector.dx * -0.32404) + (game->player.vector.dy * 0.94604)) * l;
+		x1 = (game->player.vector.x * game->settings.offset) +
+			((game->player.vector.dx) ) * l;
+		y1 = (game->player.vector.y * game->settings.offset) +
+			((game->player.vector.dy) ) * l;
 		if (x1 > 2  && ft_can_see(game,x1, y1))
-			my_pixel_put(&game->img, x1 * MAP_SIZE, y1 * MAP_SIZE, 0x00FFFFFF);
+			ft_pixelput(&game->img, x1 * MAP_SIZE, y1 * MAP_SIZE, 0x00FFFFFF);
 		if (ft_can_see(game, x1, y1) == 0)
 			break;
 		l++;
 	}
-}
-
-void			ft_player_fov(t_cub *game)
-{
-/*
-	double		fov;
-
-	fov = game->player.dir + 0.3;
-	while(fov > game->player.dir - 0.3)
-	{
-		fov_line(game, fov);
-		fov -= 0.0005;
-	}
-//	printf("x = %f\n", x);
-//	printf("y = %f\n", y);
-//	printf("dir = %.8f\n", game->settings.dir);
-*/
-	fov_line(game);
 }
 
 void	ft_minimap_player(t_cub *game)
@@ -83,7 +67,7 @@ void	ft_minimap_player(t_cub *game)
 	{
 		x1 = 1 * cos(angle);
 		y1 = 1 * sin(angle);
-		my_pixel_put(&game->img, x + x1, y + y1, 0x00FFFFFF);
+		ft_pixelput(&game->img, x + x1, y + y1, 0x00FFFFFF);
 		angle += 0.1;
 	}
 }

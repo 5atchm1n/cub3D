@@ -6,92 +6,92 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 02:08:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:02:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		ft_update_fov(t_vector *vector, t_camera *camera, t_move *move)
+static int		ft_update_fov(t_vector *v, t_camera *cam, t_move *move)
 {
 	double		dir;
-	double		plane;
+	double		p;
 
 	if (move->turn_r)
 	{
-		dir = vector->dx;
-		vector->dx = vector->dx * cos(-TURN_SPEED) - vector->dy * sin(-TURN_SPEED);
-		vector->dy = dir * sin(-TURN_SPEED) + vector->dy * cos(-TURN_SPEED);
-		plane = camera->planex;
-		camera->planex = camera->planex * cos(-TURN_SPEED) - camera->planey * sin(-TURN_SPEED);
-		camera->planey = plane * sin(-TURN_SPEED) + camera->planey * cos(-TURN_SPEED);
+		dir = v->dx;
+		v->dx = v->dx * cos(-TURN_SPEED) - v->dy * sin(-TURN_SPEED);
+		v->dy = dir * sin(-TURN_SPEED) + v->dy * cos(-TURN_SPEED);
+		p = cam->px;
+		cam->px = cam->px * cos(-TURN_SPEED) - cam->py * sin(-TURN_SPEED);
+		cam->py = p * sin(-TURN_SPEED) + cam->py * cos(-TURN_SPEED);
 	}
 	if (move->turn_l)
 	{	
-		dir = vector->dx;
-		vector->dx = vector->dx * cos(TURN_SPEED) - vector->dy * sin(TURN_SPEED);
-		vector->dy = dir * sin(TURN_SPEED) + vector->dy * cos(TURN_SPEED);
-		plane = camera->planex;
-		camera->planex = camera->planex * cos(TURN_SPEED) - camera->planey * sin(TURN_SPEED);
-		camera->planey = plane * sin(TURN_SPEED) + camera->planey * cos(TURN_SPEED);
+		dir = v->dx;
+		v->dx = v->dx * cos(TURN_SPEED) - v->dy * sin(TURN_SPEED);
+		v->dy = dir * sin(TURN_SPEED) + v->dy * cos(TURN_SPEED);
+		p = cam->px;
+		cam->px = cam->px * cos(TURN_SPEED) - cam->py * sin(TURN_SPEED);
+		cam->py = p * sin(TURN_SPEED) + cam->py * cos(TURN_SPEED);
 	}
 	return (0);
 }
 
-static void		ft_move_up(t_vector *vector, char **map)
+static void		ft_move_up(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
 
-	x = vector->x + vector->dx * MOVE_SPEED;
-	y = vector->y + vector->dy * MOVE_SPEED;
+	x = v->x + v->dx * MOVE_SPEED;
+	y = v->y + v->dy * MOVE_SPEED;
 	if (map[(int)y][(int)x] == '0')
 	{
-		vector->x += vector->dx * MOVE_SPEED;
-		vector->y += vector->dy * MOVE_SPEED;
+		v->x += v->dx * MOVE_SPEED;
+		v->y += v->dy * MOVE_SPEED;
 	}
 
 }
 
-static void		ft_move_down(t_vector *vector, char **map)
+static void		ft_move_down(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
 
-	x = vector->x - vector->dx * MOVE_SPEED;
-	y = vector->y - vector->dy * MOVE_SPEED;
+	x = v->x - v->dx * MOVE_SPEED;
+	y = v->y - v->dy * MOVE_SPEED;
 	if (map[(int)y][(int)x] == '0')
 	{
-		vector->x -= vector->dx * MOVE_SPEED;
-		vector->y -= vector->dy * MOVE_SPEED;
+		v->x -= v->dx * MOVE_SPEED;
+		v->y -= v->dy * MOVE_SPEED;
 	}
 
 }
 
-static void		ft_move_right(t_vector *vector, char **map)
+static void		ft_move_right(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
-	x = vector->x + (vector->dy * MOVE_SPEED);
-	y = vector->y - (vector->dx * MOVE_SPEED);
+	x = v->x + (v->dy * MOVE_SPEED);
+	y = v->y - (v->dx * MOVE_SPEED);
 	if (map[(int)y][(int)x] == '0')
 	{
-		vector->x += vector->dy * MOVE_SPEED;
-		vector->y -= vector->dx * MOVE_SPEED;
+		v->x += v->dy * MOVE_SPEED;
+		v->y -= v->dx * MOVE_SPEED;
 	}
 }
 
-static void		ft_move_left(t_vector *vector, char **map)
+static void		ft_move_left(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
 
-	x = vector->x - vector->dy * MOVE_SPEED;
-	y = vector->y + vector->dx * MOVE_SPEED;
+	x = v->x - v->dy * MOVE_SPEED;
+	y = v->y + v->dx * MOVE_SPEED;
 	if (map[(int)y][(int)x] == '0')
 	{
-		vector->x -= vector->dy * MOVE_SPEED;
-		vector->y += vector->dx * MOVE_SPEED;
+		v->x -= v->dy * MOVE_SPEED;
+		v->y += v->dx * MOVE_SPEED;
 	}
 }
 
@@ -106,7 +106,7 @@ void	put_black(t_cub *game)
 		y = 0;
 		while (y < game->settings.res.y)
 		{
-			my_pixel_put(&game->img, x, y, 0x0000000);
+			ft_pixelput(&game->img, x, y, 0x0000000);
 			y++;
 		}
 		x++;
@@ -125,15 +125,8 @@ int		ft_move(t_cub *game)
 	if (game->player.move.right)
 		ft_move_right(&game->player.vector, game->map);
 	put_black(game);
-//	ft_drawrays3D(game);
 	ft_raycasting(game);
 	ft_minimap(game);
-/*
-	draw_map(game);
-	put_grid(game);
-	my_player(&game->img, game->player.vector.x * game->settings.offset, game->player.vector.y * game->settings.offset);
-	player_fov(game);
-*/
 	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
 	return (0);
 }

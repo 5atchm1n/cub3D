@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/18 10:24:27 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:10:33 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,47 @@ static void		ft_init_map(t_cub *game)
 	}
 }
 
-void			ft_init(t_cub *game)
+static void		ft_player_pos(t_player *player, t_settings *settings,
+		char **map)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	while (i < settings->size_y)
+	{
+		j = 0;
+		while (j < settings->size_x)
+		{
+			if (map[i][j] == 'N')
+			{
+				player->vector.x = j + 0.5;
+				player->vector.y = i + 0.5;
+				player->vector.dx = -1;
+				player->vector.dy = 0;
+				player->camera.px = 0;
+				player->camera.py = 0.66;
+				map[i][j] = '0';
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void			ft_init(t_cub *game, char *map)
 {
 	ft_init_map(game);
 	ft_init_move(&game->player.move);
-	game->settings.offset = (float)game->settings.res.x / (float)game->settings.size_x;
+	game->settings.offset = (float)game->settings.res.x /
+		(float)game->settings.size_x;
+	game->map = ft_parse_map(map, game);
+	game->win.mlx = mlx_init();
+	game->win.win = mlx_new_window(game->win.mlx, game->settings.res.x,
+			game->settings.res.y, "cub3D");
+	game->img.img = mlx_new_image(game->win.mlx, game->settings.res.x,
+			game->settings.res.y);
+	game->img.add = mlx_get_data_addr(game->img.img, &game->img.bpp,
+			&game->img.len, &game->img.endian);
+	ft_player_pos(&game->player, &game->settings, game->map);
 }
