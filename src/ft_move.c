@@ -6,140 +6,95 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/19 21:03:16 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 21:02:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-/*
-static int		ft_isempty(t_cub *game, int x, int y)
+
+static int		ft_update_fov(t_vector *v, t_camera *cam, t_move *move)
 {
-	int			grid_x;
-	int			grid_y;
-	int			offset;
+	double		dir;
+	double		p;
 
-	offset = game->settings.res.x / game->settings.size_x;
-	grid_y = (game->player.pos_y + y) / offset;
-	grid_x = (game->player.pos_x + x) / offset;
-
-	if (grid_x > game->settings.size_x || grid_x < 0)
-		return (0);
-	if (grid_y > game->settings.size_y || grid_y < 0)
-		return (0);
-//	printf("y = %d\n", grid_y);
-//	printf("x = %d\n", grid_x);
-//	printf("map = %d\n", game->map[grid_y][grid_x]);
-	if (game->map[grid_y][grid_x] != '0')
-	{	
-//		printf("map = %d\n", game->map[grid_y][grid_x]);
-		return (0);
-	}
-	return (1);
-}
-*/
-
-static int		ft_update_fov(t_cub *game)
-{
-	float		d;
-	d = game->player.dir;
-
-	if (game->player.move.turn_r)
+	if (move->turn_r)
 	{
-		d += TURN_SPEED;
-		if (d > M_PI * 2 - TURN_SPEED)
-			d = 0;
-		game->player.dir = d;
+		dir = v->dx;
+		v->dx = v->dx * cos(-TURN_SPEED) - v->dy * sin(-TURN_SPEED);
+		v->dy = dir * sin(-TURN_SPEED) + v->dy * cos(-TURN_SPEED);
+		p = cam->px;
+		cam->px = cam->px * cos(-TURN_SPEED) - cam->py * sin(-TURN_SPEED);
+		cam->py = p * sin(-TURN_SPEED) + cam->py * cos(-TURN_SPEED);
 	}
-	if (game->player.move.turn_l)
+	if (move->turn_l)
 	{	
-		d -= TURN_SPEED;
-		if (d < TURN_SPEED)
-			d = M_PI * 2;
-		game->player.dir = d;
+		dir = v->dx;
+		v->dx = v->dx * cos(TURN_SPEED) - v->dy * sin(TURN_SPEED);
+		v->dy = dir * sin(TURN_SPEED) + v->dy * cos(TURN_SPEED);
+		p = cam->px;
+		cam->px = cam->px * cos(TURN_SPEED) - cam->py * sin(TURN_SPEED);
+		cam->py = p * sin(TURN_SPEED) + cam->py * cos(TURN_SPEED);
 	}
 	return (0);
 }
 
-static void		ft_move_up(t_cub *game)
+static void		ft_move_up(t_vector *v, char **map)
 {
-	double			x;
-	double			y;
+	double		x;
+	double		y;
 
-	x = (game->player.pos_x * game->settings.offset) - 
-		(cos(game->player.dir) * MOVE_SPEED);
-	y = (game->player.pos_y * game->settings.offset) +
-		(sin(game->player.dir) * MOVE_SPEED);
-
-	if (ft_can_see(game, x, y))
+	x = v->x + v->dx * MOVE_SPEED;
+	y = v->y + v->dy * MOVE_SPEED;
+	if (map[(int)y][(int)x] == '0')
 	{
-		game->player.pos_x = x / game->settings.offset;
-		game->player.pos_y = y / game->settings.offset;
+		v->x += v->dx * MOVE_SPEED;
+		v->y += v->dy * MOVE_SPEED;
 	}
+
 }
 
-static void		ft_move_down(t_cub *game)
+static void		ft_move_down(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
 
-	x = (game->player.pos_x * game->settings.offset) +
-		(cos(game->player.dir) * MOVE_SPEED);
-	y = (game->player.pos_y * game->settings.offset) -
-		(sin(game->player.dir) * MOVE_SPEED);
+	x = v->x - v->dx * MOVE_SPEED;
+	y = v->y - v->dy * MOVE_SPEED;
+	if (map[(int)y][(int)x] == '0')
+	{
+		v->x -= v->dx * MOVE_SPEED;
+		v->y -= v->dy * MOVE_SPEED;
+	}
 
-	if (ft_can_see(game, x, y))
-	{		
-		game->player.pos_x = x / game->settings.offset;
-		game->player.pos_y = y / game->settings.offset;
+}
+
+static void		ft_move_right(t_vector *v, char **map)
+{
+	double		x;
+	double		y;
+	x = v->x + (v->dy * MOVE_SPEED);
+	y = v->y - (v->dx * MOVE_SPEED);
+	if (map[(int)y][(int)x] == '0')
+	{
+		v->x += v->dy * MOVE_SPEED;
+		v->y -= v->dx * MOVE_SPEED;
 	}
 }
 
-static void		ft_move_right(t_cub *game)
+static void		ft_move_left(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
 
-	x = (game->player.pos_x * game->settings.offset) +
-		(sin(game->player.dir) * MOVE_SPEED);
-	y = (game->player.pos_y * game->settings.offset) +
-		(cos(game->player.dir) * MOVE_SPEED);
-
-	if (ft_can_see(game, x, y))
-	{		
-		game->player.pos_x = x / game->settings.offset;
-		game->player.pos_y = y / game->settings.offset;
+	x = v->x - v->dy * MOVE_SPEED;
+	y = v->y + v->dx * MOVE_SPEED;
+	if (map[(int)y][(int)x] == '0')
+	{
+		v->x -= v->dy * MOVE_SPEED;
+		v->y += v->dx * MOVE_SPEED;
 	}
 }
 
-static void		ft_move_left(t_cub *game)
-{
-	double		x;
-	double		y;
-
-	x = (game->player.pos_x * game->settings.offset) -
-		(sin(game->player.dir) * MOVE_SPEED);
-	y = (game->player.pos_y * game->settings.offset) -
-		(cos(game->player.dir) * MOVE_SPEED);
-
-	if (ft_can_see(game, x, y))
-	{		
-		game->player.pos_x = x / game->settings.offset;
-		game->player.pos_y = y / game->settings.offset;
-	}
-}
-
-static int		ft_update_pos(t_cub *game, int dir_x, int dir_y)
-{
-	if (dir_y == 1 && dir_x == 0)
-		ft_move_up(game);
-	if (dir_y == -1 && dir_x == 0)
-		ft_move_down(game);
-	if (dir_y == 0 && dir_x == 1)
-		ft_move_right(game);
-	if (dir_y == 0 && dir_x == -1)
-		ft_move_left(game);
-	return (0);
-}
 void	put_black(t_cub *game)
 {
 	int x;
@@ -151,7 +106,7 @@ void	put_black(t_cub *game)
 		y = 0;
 		while (y < game->settings.res.y)
 		{
-			my_pixel_put(&game->img, x, y, 0x0000000);
+			ft_pixelput(&game->img, x, y, 0x0000000);
 			y++;
 		}
 		x++;
@@ -160,23 +115,18 @@ void	put_black(t_cub *game)
 	
 int		ft_move(t_cub *game)
 {
-	ft_update_fov(game);
+	ft_update_fov(&game->player.vector, &game->player.camera, &game->player.move);
 	if (game->player.move.up)
-		ft_update_pos(game, 0 , 1);
+		ft_move_up(&game->player.vector, game->map);
 	if (game->player.move.down)
-		ft_update_pos(game, 0, -1);
+		ft_move_down(&game->player.vector, game->map);
  	if (game->player.move.left)
-		ft_update_pos(game, 1, 0);
+		ft_move_left(&game->player.vector, game->map);
 	if (game->player.move.right)
-		ft_update_pos(game, -1, 0);
-
+		ft_move_right(&game->player.vector, game->map);
 	put_black(game);
-	ft_drawrays3D(game);
-	draw_map(game);
-	put_grid(game);
-	my_player(&game->img, game->player.pos_x * game->settings.offset, game->player.pos_y * game->settings.offset);
-	player_fov(game);
+	ft_raycasting(game);
+	ft_minimap(game);
 	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
-
 	return (0);
 }

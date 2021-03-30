@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/18 10:43:04 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/30 19:30:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int		ft_move_start(int keycode, t_cub *game)
 
 int		ft_keypress(int keycode, t_cub *game)
 {
-	game->show = 0;
 	ft_turn_start(keycode, game);
 	ft_move_start(keycode, game);
 
