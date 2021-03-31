@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 21:02:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/31 13:12:10 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		ft_update_fov(t_vector *v, t_camera *cam, t_move *move)
 		cam->py = p * sin(-TURN_SPEED) + cam->py * cos(-TURN_SPEED);
 	}
 	if (move->turn_l)
-	{	
+	{
 		dir = v->dx;
 		v->dx = v->dx * cos(TURN_SPEED) - v->dy * sin(TURN_SPEED);
 		v->dy = dir * sin(TURN_SPEED) + v->dy * cos(TURN_SPEED);
@@ -50,7 +50,6 @@ static void		ft_move_up(t_vector *v, char **map)
 		v->x += v->dx * MOVE_SPEED;
 		v->y += v->dy * MOVE_SPEED;
 	}
-
 }
 
 static void		ft_move_down(t_vector *v, char **map)
@@ -65,13 +64,13 @@ static void		ft_move_down(t_vector *v, char **map)
 		v->x -= v->dx * MOVE_SPEED;
 		v->y -= v->dy * MOVE_SPEED;
 	}
-
 }
 
 static void		ft_move_right(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
+
 	x = v->x + (v->dy * MOVE_SPEED);
 	y = v->y - (v->dx * MOVE_SPEED);
 	if (map[(int)y][(int)x] == '0')
@@ -95,10 +94,11 @@ static void		ft_move_left(t_vector *v, char **map)
 	}
 }
 
-void	put_black(t_cub *game)
+static void		put_black(t_cub *game)
 {
-	int x;
-	int y;
+	int			x;
+	int			y;
+
 	x = 0;
 	y = 0;
 	while (x < game->settings.res.x)
@@ -112,21 +112,21 @@ void	put_black(t_cub *game)
 		x++;
 	}
 }
-	
-int		ft_move(t_cub *game)
+
+int				ft_move(t_cub *game)
 {
 	ft_update_fov(&game->player.vector, &game->player.camera, &game->player.move);
 	if (game->player.move.up)
 		ft_move_up(&game->player.vector, game->map);
 	if (game->player.move.down)
 		ft_move_down(&game->player.vector, game->map);
- 	if (game->player.move.left)
+	if (game->player.move.left)
 		ft_move_left(&game->player.vector, game->map);
 	if (game->player.move.right)
 		ft_move_right(&game->player.vector, game->map);
 	put_black(game);
 	ft_raycasting(game);
 	ft_minimap(game);
-	mlx_put_image_to_window(game->win.mlx , game->win.win, game->img.img, 0 , 0);
+	mlx_put_image_to_window(game->win.mlx, game->win.win, game->img.img, 0, 0);
 	return (0);
 }

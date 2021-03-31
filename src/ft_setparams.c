@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/18 10:20:38 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/31 13:16:32 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 static int		ft_set_res(char *line, t_res *res)
 {
-
 	int			y;
 	int			x;
 
 	line++;
 	x = 0;
 	y = 0;
-	while(ft_isspace(*line) == 1)
+	while (ft_isspace(*line) == 1)
 		line++;
-	while(ft_isdigit(*line))
+	while (ft_isdigit(*line))
 	{
 		y = y * 10 + (*line - '0');
 		line++;
 	}
-	while(ft_isspace(*line) == 1)
+	while (ft_isspace(*line) == 1)
 		line++;
-	while(ft_isdigit(*line))
+	while (ft_isdigit(*line))
 	{
 		x = x * 10 + (*line - '0');
 		line++;
@@ -39,32 +38,32 @@ static int		ft_set_res(char *line, t_res *res)
 	res->x = x;
 	return (1);
 }
-	
-static int	ft_set_colour(char *line, int *floor)
+
+static int		ft_set_colour(char *line, int *floor)
 {
-	int		r;
-	int		g;
-	int		b;
-		
+	int			r;
+	int			g;
+	int			b;
+
 	line++;
 	r = 0;
 	g = 0;
 	b = 0;
-	while(ft_isspace(*line))
+	while (ft_isspace(*line))
 		line++;
-	while(ft_isdigit(*line) == 1)
+	while (ft_isdigit(*line) == 1)
 	{
 		r = r * 10 + (*line - '0');
 		line++;
 	}
 	line++;
-	while(ft_isdigit(*line) == 1)
+	while (ft_isdigit(*line) == 1)
 	{
 		g = g * 10 + (*line - '0');
 		line++;
 	}
 	line++;
-	while(ft_isdigit(*line) == 1)
+	while (ft_isdigit(*line) == 1)
 	{
 		b = b * 10 + (*line - '0');
 		line++;
@@ -75,22 +74,21 @@ static int	ft_set_colour(char *line, int *floor)
 	return (0);
 }
 
-static void	ft_set_size(char *line, int *size_x)
+static void		ft_set_size(char *line, int *size_x)
 {
-	int		n;
+	int			n;
 
 	n = ft_strlen(line);
 	if (n > *size_x)
 		*size_x = n;
 }
 
-int			ft_setparams(char *line, t_settings *settings)
+int				ft_setparams(char *line, t_settings *settings)
 {
-	int		n;
+	int			n;
 
 	n = 1;
-
-	while(ft_isspace(*line) == 1)
+	while (ft_isspace(*line) == 1)
 		line++;
 	if (*line == 'R')
 		ft_set_res(line, &settings->res);
@@ -121,4 +119,3 @@ int				ft_settings(char *map, t_settings *settings)
 	close(fd);
 	return (0);
 }
-
