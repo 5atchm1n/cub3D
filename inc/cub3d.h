@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 21:03:06 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/03/31 22:53:25 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # define TURN_SPEED 0.02
 # define MAP_SIZE 0.3
 
+/*
+** ------------------------ MLX DEFINED STRUCTURES
+*/
+
 typedef struct		s_win
 {
 	void			*mlx;
@@ -39,8 +43,12 @@ typedef struct		s_img
 	int				bpp;
 	int				len;
 	int				endian;
+	int				x;
+	int				y;
 }					t_img;
-
+/*
+** ------------------------ SETTINGS
+*/
 typedef struct		s_res
 {
 	int				x;
@@ -56,7 +64,9 @@ typedef struct		s_settings
 	int				size_y;
 	float			offset;
 }					t_settings;
-
+/* 
+** ------------------------- PLAYER
+*/
 typedef struct		s_move
 {
 	int				left;
@@ -87,6 +97,18 @@ typedef struct		s_player
 	t_vector		vector;
 	t_camera		camera;
 }					t_player;
+/*
+** -------------------------- RAYCASTING TEXTURE
+*/
+typedef struct		s_tex
+{
+	int				n;
+	double			wx;
+	int				tx;
+	double			step;
+	double			pos;
+	int				color;
+}					t_tex;
 
 typedef struct		s_ray
 {
@@ -103,7 +125,9 @@ typedef struct		s_ray
 	int				side;
 	double			dw;
 }					t_ray;
-
+/*
+** GLOBAL STRUCT
+*/
 typedef struct		s_cub
 {
 	t_settings		settings;
@@ -111,6 +135,7 @@ typedef struct		s_cub
 	t_player		player;
 	t_win			win;
 	char			**map;
+	int				**txt;
 }					t_cub;
 
 /*
