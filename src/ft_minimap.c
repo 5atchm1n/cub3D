@@ -6,85 +6,83 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 21:40:03 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/01 05:33:49 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		map_grid(t_cub *game)
+static void		map_grid(float offset, t_world *world, t_mlx *mlx)
 {
 	int			k;
 	int			l;
-	float		offset;
 
-	offset = game->settings.offset * MAP_SIZE;
 	l = 0;
-	while (l < game->settings.size_y)
+	while (l < world->size_y)
 	{
 		k = 0;
-		while (k < game->settings.res.x * MAP_SIZE)
+		while (k < mlx->res.x * MAP_SIZE)
 		{
-			ft_pixelput(&game->img, k, l * offset, 0x00000000);
+			ft_pixelput(&mlx->img, k, l * offset, 0x00000000);
 			k++;
 		}
 		l++;
 	}
 	l = 0;
-	while (l < game->settings.size_x)
+	while (l < world->size_x)
 	{
 		k = 0;
-		while (k < game->settings.size_y * offset)
+		while (k < world->size_y * offset)
 		{
-			ft_pixelput(&game->img, l * offset, k, 0x00000000);
+			ft_pixelput(&mlx->img, l * offset, k, 0x00000000);
 			k++;
 		}
 		l++;
 	}
 }
 
-static void		map_wall(t_cub *game, int x, int y, int colour)
+static void		map_wall(float offset, t_grid pos, t_mlx *mlx, int colour)
 {
 	int			k;
 	int			l;
-	float		offset;
 
-	offset = game->settings.offset * MAP_SIZE;
 	k = 0;
 	while (k < offset)
 	{
 		l = 0;
 		while (l < offset)
 		{
-			ft_pixelput(&game->img, x * offset + k, y * offset + l, colour);
+			ft_pixelput(&mlx->img, pos.x * offset + k,
+					pos.y * offset + l, colour);
 			l++;
 		}
 		k++;
 	}
 }
 
-void			ft_draw_map(t_cub *game)
+void			ft_draw_map(t_world *world, t_mlx *mlx)
 {
-	int			i;
-	int			j;
+	t_grid		grid;
+	float		offset;
 
-	i = 0;
-	while (i < game->settings.size_y)
+	offset = world->offset * MAP_SIZE;
+	grid.y = 0;
+	while (grid.y < world->size_y)
 	{
-		j = 0;
-		while (j < game->settings.size_x)
+		grid.x = 0;
+		while (grid.x < world->size_x)
 		{
-			if (game->map[i][j] == '0')
-				map_wall(game, j, i, 0x00000000);
-			if (game->map[i][j] == ' ')
-				map_wall(game, j, i, 0x000000FF);
-			if (game->map[i][j] == '1')
-				map_wall(game, j, i, 0x00FF0000);
-			if (game->map[i][j] == '2')
-				map_wall(game, j, i, 0x0000FF00);
-			j++;
+			if (world->map[grid.y][grid.x] == '0')
+				map_wall(offset, grid, mlx, 0x00000000);
+			if (world->map[grid.y][grid.x] == ' ')
+				map_wall(offset, grid, mlx, 0x00FF0000);
+			if (world->map[grid.y][grid.x] == '1')
+				map_wall(offset, grid, mlx, 0x0000FF00);
+			if (world->map[grid.y][grid.x] == '2')
+				map_wall(offset, grid, mlx, 0x000000FF);
+			grid.x++;
 		}
-		i++;
+		grid.y++;
 	}
-	map_grid(game);
+	map_grid(offset, world, mlx);
 }

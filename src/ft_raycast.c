@@ -6,18 +6,17 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:16:31 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/30 21:31:48 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/01 05:25:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_set_ray(t_ray *ray, t_player *player, int x,
-		t_settings *settings)
+static void		ft_set_ray(t_ray *ray, t_player *player, int x, t_mlx *mlx)
 {
 	double		camx;
 
-	camx = 2 * x / (double)settings->res.x - 1;
+	camx = 2 * x / (double)mlx->res.x - 1;
 	ray->dirx = player->vector.dx + player->camera.px * camx;
 	ray->diry = player->vector.dy + player->camera.py * camx;
 	ray->mapx = (int)player->vector.x;
@@ -78,7 +77,7 @@ static void		ft_run_dda(t_ray *ray, t_vector *v, char **map)
 		ray->dw = (ray->mapy - v->y + (1 - ray->stepy) / 2) / ray->diry;
 }
 
-static void		ft_cast_ray(t_cub *game, t_ray *ray, int *x)
+static void		ft_cast_ray(t_mlx *mlx, t_ray *ray, int *x)
 {
 	int			lineheight;
 	int			start;
@@ -86,16 +85,16 @@ static void		ft_cast_ray(t_cub *game, t_ray *ray, int *x)
 	int			color;
 
 	color = 0x00FF0000;
-	lineheight = (int)(game->settings.res.y / ray->dw);
-	start = -lineheight / 2 + game->settings.res.y / 2;
+	lineheight = (int)(mlx->res.y / ray->dw);
+	start = -lineheight / 2 + mlx->res.y / 2;
 	if (start < 0)
 		start = 0;
-	end = lineheight / 2 + game->settings.res.y / 2;
-	if (end >= game->settings.res.y)
-		end = game->settings.res.y - 1;
+	end = lineheight / 2 + mlx->res.y / 2;
+	if (end >= mlx->res.y)
+		end = mlx->res.y - 1;
 	if (ray->side == 1)
 		color = color / 2;
-	ft_vertline(*x, start, end, color, &game->img);
+	ft_vertline(*x, start, end, color, &mlx->img);
 }
 
 void			ft_raycasting(t_cub *game)
@@ -105,12 +104,12 @@ void			ft_raycasting(t_cub *game)
 
 	x = 0;
 	ft_memset(&ray, 0, sizeof(ray));
-	while (x < game->settings.res.x)
+	while (x < game->mlx.res.x)
 	{
-		ft_set_ray(&ray, &game->player, x, &game->settings);
+		ft_set_ray(&ray, &game->player, x, &game->mlx);
 		ft_ray_vector(&ray, &game->player.vector);
-		ft_run_dda(&ray, &game->player.vector, game->map);
-		ft_cast_ray(game, &ray, &x);
+		ft_run_dda(&ray, &game->player.vector, game->world.map);
+		ft_cast_ray(&game->mlx, &ray, &x);
 		x++;
 	}
 }

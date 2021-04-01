@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/31 13:16:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/01 05:09:17 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void		ft_set_size(char *line, int *size_x)
 		*size_x = n;
 }
 
-int				ft_setparams(char *line, t_settings *settings)
+static int		ft_setparams(char *line, t_world *world, t_mlx *mlx)
 {
 	int			n;
 
@@ -91,20 +91,20 @@ int				ft_setparams(char *line, t_settings *settings)
 	while (ft_isspace(*line) == 1)
 		line++;
 	if (*line == 'R')
-		ft_set_res(line, &settings->res);
+		ft_set_res(line, &mlx->res);
 	if (*line == 'F')
-		ft_set_colour(line, &settings->floor);
+		ft_set_colour(line, &world->floor);
 	if (*line == 'C')
-		ft_set_colour(line, &settings->ceiling);
+		ft_set_colour(line, &world->ceiling);
 	if (*line == '1')
 	{
-		ft_set_size(line, &settings->size_x);
-		settings->size_y = settings->size_y + 1;
+		ft_set_size(line, &world->size_x);
+		world->size_y = world->size_y + 1;
 	}
 	return (n);
 }
 
-int				ft_settings(char *map, t_settings *settings)
+int				ft_settings(char *map, t_world *world, t_mlx *mlx)
 {
 	int			fd;
 	char		*line;
@@ -112,7 +112,7 @@ int				ft_settings(char *map, t_settings *settings)
 	fd = open(map, O_RDONLY);
 	while ((ft_get_line(&line, fd) > 0))
 	{
-		ft_setparams(line, settings);
+		ft_setparams(line, world, mlx);
 		free(line);
 	}
 	free(line);

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:10:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/13 17:01:07 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/01 04:01:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char		**ft_setmap(char *line, char **map, int *n)
 	return (map);
 }
 
-char			**ft_parse_map(char *map, t_cub *game)
+char			**ft_parse_map(char *map, t_world *world)
 {
 	int			fd;
 	char		*line;
@@ -38,12 +38,12 @@ char			**ft_parse_map(char *map, t_cub *game)
 	{
 		if (*line == '1' || *line == ' ')
 		{
-			game->map = ft_setmap(line, game->map, &n);
+			world->map = ft_setmap(line, world->map, &n);
 			n++;
 		}
 		free(line);
 	}
 	free(line);
 	close(fd);
-	return (game->map);
+	return (world->map);
 }

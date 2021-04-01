@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/31 16:50:38 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/01 05:24:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,43 @@ static void		ft_init_move(t_move *move)
 	move->turn_l = 0;
 }
 
-static void		ft_init_map(t_cub *game)
+static void		ft_init_map(t_world *world)
 {
 	int			i;
 	int			j;
 
 	i = 0;
-	game->map = (char **)malloc(sizeof(char *) * game->settings.size_y);
-	while (i < game->settings.size_y)
+	world->map = (char **)malloc(sizeof(char *) * world->size_y);
+	while (i < world->size_y)
 	{
-		game->map[i] = (char *)malloc(sizeof(char) * game->settings.size_x);
+		world->map[i] = (char *)malloc(sizeof(char) * world->size_x);
 		i++;
 	}
 	i = 0;
-	while (i < game->settings.size_y)
+	while (i < world->size_y)
 	{
 		j = 0;
-		while (j < game->settings.size_x)
+		while (j < world->size_x)
 		{
-			game->map[i][j] = ' ';
+			world->map[i][j] = ' ';
 			j++;
 		}
 		i++;
 	}
 }
 
-static void		ft_player_pos(t_player *player, t_settings *settings,
-		char **map)
+static void		ft_player_pos(t_player *player, t_world *world)
 {
 	int			i;
 	int			j;
 
 	i = 0;
-	while (i < settings->size_y)
+	while (i < world->size_y)
 	{
 		j = 0;
-		while (j < settings->size_x)
+		while (j < world->size_x)
 		{
-			if (map[i][j] == 'N')
+			if (world->map[i][j] == 'N')
 			{
 				player->vector.x = j + 0.5;
 				player->vector.y = i + 0.5;
@@ -67,7 +66,7 @@ static void		ft_player_pos(t_player *player, t_settings *settings,
 				player->vector.dy = 0;
 				player->camera.px = 0;
 				player->camera.py = 0.66;
-				map[i][j] = '0';
+				world->map[i][j] = '0';
 			}
 			j++;
 		}
@@ -75,19 +74,27 @@ static void		ft_player_pos(t_player *player, t_settings *settings,
 	}
 }
 
+static void		ft_init_mlx(t_mlx *mlx)
+{
+	mlx->win.mlx = mlx_init();
+	mlx->win.win = mlx_new_window(mlx->win.mlx, mlx->res.x,
+			mlx->res.y, "cub3D");
+	mlx->img.img = mlx_new_image(mlx->win.mlx, mlx->res.x,
+			mlx->res.y);
+	mlx->img.add = mlx_get_data_addr(mlx->img.img, &mlx->img.bpp,
+			&mlx->img.len, &mlx->img.endian);
+}
+
+
 void			ft_init(t_cub *game, char *map)
 {
-	ft_init_map(game);
+	ft_init_map(&game->world);
 	ft_init_move(&game->player.move);
-	game->settings.offset = (float)game->settings.res.x /
-		(float)game->settings.size_x;
-	game->map = ft_parse_map(map, game);
-	game->win.mlx = mlx_init();
-	game->win.win = mlx_new_window(game->win.mlx, game->settings.res.x,
-			game->settings.res.y, "cub3D");
-	game->img.img = mlx_new_image(game->win.mlx, game->settings.res.x,
-			game->settings.res.y);
-	game->img.add = mlx_get_data_addr(game->img.img, &game->img.bpp,
-			&game->img.len, &game->img.endian);
-	ft_player_pos(&game->player, &game->settings, game->map);
+	ft_init_mlx(&game->mlx);
+	
+	game->world.offset = (float)game->mlx.res.x /
+		(float)game->world.size_x;
+	game->world.map = ft_parse_map(map, &game->world);
+
+	ft_player_pos(&game->player, &game->world);
 }
