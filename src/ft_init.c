@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/01 05:24:41 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/01 20:34:51 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,42 @@ static void		ft_init_mlx(t_mlx *mlx)
 			&mlx->img.len, &mlx->img.endian);
 }
 
+static void		ft_init_textures(t_world *world)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	world->tex = (int **)malloc(sizeof(int *) * TEXTURES);
+	while (i < TEXTURES)
+	{
+		world->tex[i] = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
+		i++;
+	}
+	i = 0;
+	while (i < TEXTURES)
+	{
+		j = 0;
+		while (j < TEX_X * TEX_Y)
+		{
+			world->tex[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
 
 void			ft_init(t_cub *game, char *map)
 {
 	ft_init_map(&game->world);
 	ft_init_move(&game->player.move);
 	ft_init_mlx(&game->mlx);
+	ft_init_textures(&game->world);
 	
 	game->world.offset = (float)game->mlx.res.x /
 		(float)game->world.size_x;
 	game->world.map = ft_parse_map(map, &game->world);
 
 	ft_player_pos(&game->player, &game->world);
+	ft_load_textures(&game->mlx, &game->world);
 }

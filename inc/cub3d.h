@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/01 05:30:54 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/01 20:35:51 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # define MOVE_SPEED 0.05
 # define TURN_SPEED 0.02
 # define MAP_SIZE 0.3
+# define TEXTURES 4
+# define TEX_X 64
+# define TEX_Y 64
 
 /*
 ** -------------------------- FUNCTION SPECIFIC STRUCTS
@@ -141,7 +144,7 @@ typedef struct		s_world
 	int				size_x;
 	int				size_y;
 	char			**map;
-	int				**tx;
+	int				**tex;
 }					t_world;
 
 /*
@@ -170,6 +173,7 @@ void				ft_vertline(int x, int start, int end, int color, t_img *img);
 ** INITIALIZE PLAYER AND GAME
 */
 void				ft_init(t_cub *game, char *map);
+void				ft_load_textures(t_mlx *mlx, t_world *world);
 /*
 ** MOVE PLAYER AND ROTATE PLAYER
 */
