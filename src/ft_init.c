@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/01 20:34:51 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 04:02:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,31 @@ static void		ft_init_mlx(t_mlx *mlx)
 			&mlx->img.len, &mlx->img.endian);
 }
 
+static void		ft_init_img_buffer(t_mlx *mlx)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	mlx->buffer = (int **)malloc(sizeof(int *) * mlx->res.y);
+	while (i < mlx->res.y)
+	{
+		mlx->buffer[i] = (int *)malloc(sizeof(int) * mlx->res.x);
+		i++;
+	}
+	i = 0;
+	while (i < mlx->res.y)
+	{
+		j = 0;
+		while (j < mlx->res.x)
+		{
+			mlx->buffer[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
+
 static void		ft_init_textures(t_world *world)
 {
 	int			i;
@@ -115,6 +140,7 @@ void			ft_init(t_cub *game, char *map)
 	ft_init_map(&game->world);
 	ft_init_move(&game->player.move);
 	ft_init_mlx(&game->mlx);
+	ft_init_img_buffer(&game->mlx);
 	ft_init_textures(&game->world);
 	
 	game->world.offset = (float)game->mlx.res.x /

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/01 05:20:11 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 04:42:03 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ int				ft_move(t_cub *game)
 		ft_move_right(&game->player.vector, game->world.map);
 	put_black(game);
 	ft_raycasting(game);
+	ft_draw(&game->mlx);
 	ft_minimap(game);
 	mlx_put_image_to_window(game->mlx.win.mlx, game->mlx.win.win, game->mlx.img.img, 0, 0);
 	return (0);

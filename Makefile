@@ -13,6 +13,7 @@ SRCS = src/read_map.c \
 	   src/ft_minimap.c \
 	   src/ft_minimap_player.c \
 	   src/ft_load_xpm.c \
+	   src/ft_set_texture.c \
 	   src/ft_parse_map.c
 
 CC = clang

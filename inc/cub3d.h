@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/01 20:35:51 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 04:31:58 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,6 @@
 /*
 ** -------------------------- FUNCTION SPECIFIC STRUCTS
 */
-typedef struct		s_tex
-{
-	int				n;
-	double			wx;
-	int				tx;
-	double			step;
-	double			pos;
-	int				color;
-}					t_tex;
 
 typedef struct		s_ray
 {
@@ -63,6 +54,23 @@ typedef struct		s_grid
 	int				x;
 	int				y;
 }					t_grid;
+
+typedef enum		e_dir
+{
+	NO = 0,
+	SO = 1,
+	EA = 2,
+	WE = 3
+}					t_dir;
+
+typedef struct		s_texture
+{
+	t_dir			dir;
+	int				lineheight;
+	int				start;
+	int				end;
+	double			pos;
+}					t_texture;
 
 /*
 ** ------------------------ MLX DEFINED STRUCTURES
@@ -96,6 +104,7 @@ typedef struct		s_mlx
 	t_win			win;
 	t_img			img;
 	t_res			res;
+	int				**buffer;
 }					t_mlx;
 
 /* 
@@ -133,7 +142,7 @@ typedef struct		s_player
 	t_camera		camera;
 }					t_player;
 /*
-** MAP, TEXTURES AND SETTINGS
+** ------------------------- MAP, TEXTURES AND SETTINGS
 */
 
 typedef struct		s_world
@@ -189,6 +198,8 @@ int					ft_move(t_cub *game);
 void				ft_draw_map(t_world *world, t_mlx *mlx);
 void				ft_raycasting(t_cub *game);
 void				ft_minimap(t_cub *game);
+void				ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x);
+void				ft_draw(t_mlx *mlx);
 /*
 ** UTILS FUNCTION ADD TO LIBFT
 */

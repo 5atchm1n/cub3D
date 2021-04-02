@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:16:31 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/01 05:25:06 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 04:12:00 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		ft_set_ray(t_ray *ray, t_player *player, int x, t_mlx *mlx)
 	ray->deltay = fabs(1 / ray->diry);
 }
 
-static void		ft_ray_vector(t_ray *ray, t_vector *v)
+static void		ft_set_dda_vector(t_ray *ray, t_vector *v)
 {
 	if (ray->dirx < 0)
 	{
@@ -77,39 +77,32 @@ static void		ft_run_dda(t_ray *ray, t_vector *v, char **map)
 		ray->dw = (ray->mapy - v->y + (1 - ray->stepy) / 2) / ray->diry;
 }
 
-static void		ft_cast_ray(t_mlx *mlx, t_ray *ray, int *x)
+static void		ft_set_stripe(t_mlx *mlx, t_ray *ray, t_texture *t)
 {
-	int			lineheight;
-	int			start;
-	int			end;
-	int			color;
-
-	color = 0x00FF0000;
-	lineheight = (int)(mlx->res.y / ray->dw);
-	start = -lineheight / 2 + mlx->res.y / 2;
-	if (start < 0)
-		start = 0;
-	end = lineheight / 2 + mlx->res.y / 2;
-	if (end >= mlx->res.y)
-		end = mlx->res.y - 1;
-	if (ray->side == 1)
-		color = color / 2;
-	ft_vertline(*x, start, end, color, &mlx->img);
+	t->lineheight = (int)(mlx->res.y / ray->dw);
+	t->start = -t->lineheight / 2 + mlx->res.y / 2;
+	if (t->start < 0)
+		t->start = 0;
+	t->end = t->lineheight / 2 + mlx->res.y / 2;
+	if (t->end >= mlx->res.y)
+		t->end = mlx->res.y - 1;
 }
 
 void			ft_raycasting(t_cub *game)
 {
 	int			x;
 	t_ray		ray;
+	t_texture	texture;
 
 	x = 0;
 	ft_memset(&ray, 0, sizeof(ray));
 	while (x < game->mlx.res.x)
 	{
 		ft_set_ray(&ray, &game->player, x, &game->mlx);
-		ft_ray_vector(&ray, &game->player.vector);
+		ft_set_dda_vector(&ray, &game->player.vector);
 		ft_run_dda(&ray, &game->player.vector, game->world.map);
-		ft_cast_ray(&game->mlx, &ray, &x);
+		ft_set_stripe(&game->mlx, &ray, &texture);
+		ft_set_texture(game, &texture, &ray, x); 
 		x++;
 	}
 }

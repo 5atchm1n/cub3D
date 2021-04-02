@@ -6,16 +6,16 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:07:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/01 21:22:53 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 03:52:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
+static void		ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
 
 	img->img = mlx_xpm_file_to_image(mlx->win.mlx, path, &img->x, &img->y);
 	if (img->img == NULL)
@@ -35,9 +35,9 @@ void		ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
 		mlx_destroy_image(mlx->win.mlx, img->img);
 }
 
-void		ft_load_textures(t_mlx *mlx, t_world *world)
+void			ft_load_textures(t_mlx *mlx, t_world *world)
 {
-	t_img	img;
+	t_img		img;
 
 	ft_load_xpm(mlx, world->tex[0], "textures/brick.xpm", &img);
 	ft_load_xpm(mlx, world->tex[1], "textures/purplestone.xpm", &img);
