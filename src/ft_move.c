@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 04:42:03 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 16:56:04 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void		ft_move_left(t_vector *v, char **map)
 		v->y += v->dx * MOVE_SPEED;
 	}
 }
-
+/*
 static void		put_black(t_cub *game)
 {
 	int			x;
@@ -112,7 +112,7 @@ static void		put_black(t_cub *game)
 		x++;
 	}
 }
-
+*/
 int				ft_move(t_cub *game)
 {
 	ft_update_fov(&game->player.vector, &game->player.camera, &game->player.move);
@@ -124,10 +124,10 @@ int				ft_move(t_cub *game)
 		ft_move_left(&game->player.vector, game->world.map);
 	if (game->player.move.right)
 		ft_move_right(&game->player.vector, game->world.map);
-	put_black(game);
+//	put_black(game);
 	ft_raycasting(game);
-	ft_draw(&game->mlx);
 	ft_minimap(game);
+	ft_draw(&game->mlx);
 	mlx_put_image_to_window(game->mlx.win.mlx, game->mlx.win.win, game->mlx.img.img, 0, 0);
 	return (0);
 }

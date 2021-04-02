@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:16:31 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 04:12:00 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 16:16:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void		ft_run_dda(t_ray *ray, t_vector *v, char **map)
 static void		ft_set_stripe(t_mlx *mlx, t_ray *ray, t_texture *t)
 {
 	t->lineheight = (int)(mlx->res.y / ray->dw);
-	t->start = -t->lineheight / 2 + mlx->res.y / 2;
+	t->start = (-1 * t->lineheight) / 2 + mlx->res.y / 2;
 	if (t->start < 0)
 		t->start = 0;
 	t->end = t->lineheight / 2 + mlx->res.y / 2;

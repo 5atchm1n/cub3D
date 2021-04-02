@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/01 05:33:49 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 17:04:49 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		map_grid(float offset, t_world *world, t_mlx *mlx)
 		while (k < mlx->res.x * MAP_SIZE)
 		{
 			ft_pixelput(&mlx->img, k, l * offset, 0x00000000);
+		//	mlx->buffer[l * (int)(offset)][k] = 0x00FFFFFF;
 			k++;
 		}
 		l++;
@@ -35,6 +36,7 @@ static void		map_grid(float offset, t_world *world, t_mlx *mlx)
 		while (k < world->size_y * offset)
 		{
 			ft_pixelput(&mlx->img, l * offset, k, 0x00000000);
+		//	mlx->buffer[k][l * (int)(offset)] = 0x00FFFFFF;
 			k++;
 		}
 		l++;
@@ -54,6 +56,7 @@ static void		map_wall(float offset, t_grid pos, t_mlx *mlx, int colour)
 		{
 			ft_pixelput(&mlx->img, pos.x * offset + k,
 					pos.y * offset + l, colour);
+			mlx->buffer[(int)(pos.y * offset + l)][(int)(pos.x * offset + k)] = colour;
 			l++;
 		}
 		k++;

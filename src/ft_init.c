@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 04:02:50 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 16:24:32 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void		ft_init_mlx(t_mlx *mlx)
 			mlx->res.y, "cub3D");
 	mlx->img.img = mlx_new_image(mlx->win.mlx, mlx->res.x,
 			mlx->res.y);
-	mlx->img.add = mlx_get_data_addr(mlx->img.img, &mlx->img.bpp,
+	mlx->img.add = (int *)mlx_get_data_addr(mlx->img.img, &mlx->img.bpp,
 			&mlx->img.len, &mlx->img.endian);
 }
 

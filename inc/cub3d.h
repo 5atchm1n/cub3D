@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 04:31:58 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 17:05:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define BUFF_SIZE 256
 # define MOVE_SPEED 0.05
 # define TURN_SPEED 0.02
-# define MAP_SIZE 0.3
+# define MAP_SIZE 0.1
 # define TEXTURES 4
 # define TEX_X 64
 # define TEX_Y 64
@@ -85,7 +85,7 @@ typedef struct		s_win
 typedef struct		s_img
 {
 	void			*img;
-	char			*add;
+	int				*add;
 	int				bpp;
 	int				len;
 	int				endian;

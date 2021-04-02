@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 04:43:24 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 16:49:24 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void		ft_vertline(int x, int drawstart, int drawend, int color,
 
 void		ft_pixelput(t_img *img, int x, int y, int color)
 {
-	char	*dst;
+	int		*dst;
 
-	dst = img->add + (y * img->len + x * (img->bpp / 8));
+	dst = img->add + ( y * img->len + x * (img->bpp / 8));
 	*(unsigned int*)dst = color;
 }
