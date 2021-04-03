@@ -8,13 +8,13 @@ SRCS =	read_map.c \
 		ft_keyrelease.c \
 		ft_move.c \
 		ft_init.c \
-	   ft_utils.c \
-	   ft_raycast.c \
-	   ft_minimap.c \
-	   ft_minimap_player.c \
-	   ft_load_xpm.c \
-	   ft_set_texture.c \
-	   ft_parse_map.c
+		ft_utils.c \
+		ft_raycast.c \
+		ft_minimap.c \
+		ft_minimap_player.c \
+		ft_load_xpm.c \
+		ft_set_texture.c \
+		ft_parse_map.c
 
 CC = clang
 
@@ -63,8 +63,8 @@ $(NAME) : mlx libft ${OBJS}
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${OBJDIR}/%.o: ${SRCDIR}/%.c
-	@mkdir -p ${OBJDIR}
-	${CC} ${CFLAGS} -I./inc -c $< -o $@
+		@mkdir -p ${OBJDIR}
+		@${CC} ${CFLAGS} -I./inc -c $< -o $@
 
 clean :	
 		@rm -rf ${OBJDIR} > /dev/null
