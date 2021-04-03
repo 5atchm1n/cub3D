@@ -1,20 +1,20 @@
 NAME = cub3D
 
-SRCS = src/read_map.c \
-	   src/test.c \
-	   src/ft_setparams.c \
-	   src/draw.c \
-	   src/ft_keypress.c \
-	   src/ft_keyrelease.c \
-	   src/ft_move.c \
-	   src/ft_init.c \
-	   src/ft_utils.c \
-	   src/ft_raycast.c \
-	   src/ft_minimap.c \
-	   src/ft_minimap_player.c \
-	   src/ft_load_xpm.c \
-	   src/ft_set_texture.c \
-	   src/ft_parse_map.c
+SRCS =	read_map.c \
+		test.c \
+		ft_setparams.c \
+		draw.c \
+		ft_keypress.c \
+		ft_keyrelease.c \
+		ft_move.c \
+		ft_init.c \
+	   ft_utils.c \
+	   ft_raycast.c \
+	   ft_minimap.c \
+	   ft_minimap_player.c \
+	   ft_load_xpm.c \
+	   ft_set_texture.c \
+	   ft_parse_map.c
 
 CC = clang
 
@@ -30,7 +30,11 @@ LIB = -lmlx -lXext -lX11 -lm -lbsd
 
 MEM = -fsanitize=address
 
-OBJS = ${SRCS:.c=.o}
+OBJDIR = objs
+
+SRCDIR = src
+
+OBJS = $(addprefix ${OBJDIR}/,${SRCS:.c=.o})
 
 all : ${NAME}
 
@@ -52,14 +56,18 @@ libft :
 
 $(NAME) : mlx libft ${OBJS}
 		@echo -n  "Generating ${NAME}"
-		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 .c.o:
-	${CC} ${CFLAGS} -I./inc -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+
+${OBJDIR}/%.o: ${SRCDIR}/%.c
+	@mkdir -p ${OBJDIR}
+	${CC} ${CFLAGS} -I./inc -c $< -o $@
 
 clean :	
-		@rm -rf ${OBJS} > /dev/null
+		@rm -rf ${OBJDIR} > /dev/null
 		@echo "deleting object files\033[32m\t[OK]\033[0m"
 
 fclean : clean

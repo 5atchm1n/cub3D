@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:10:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/01 04:01:23 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/03 04:51:18 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,31 @@ char			**ft_parse_map(char *map, t_world *world)
 	free(line);
 	close(fd);
 	return (world->map);
+}
+
+void			ft_player_pos(t_player *player, t_world *world)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	while (i < world->size_y)
+	{
+		j = 0;
+		while (j < world->size_x)
+		{
+			if (world->map[i][j] == 'N')
+			{
+				player->vector.x = j + 0.5;
+				player->vector.y = i + 0.5;
+				player->vector.dx = -1;
+				player->vector.dy = 0;
+				player->camera.px = 0;
+				player->camera.py = 0.66;
+				world->map[i][j] = '0';
+			}
+			j++;
+		}
+		i++;
+	}
 }

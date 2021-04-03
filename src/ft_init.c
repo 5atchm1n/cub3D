@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 16:24:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/03 04:50:07 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,33 +47,6 @@ static void		ft_init_map(t_world *world)
 	}
 }
 
-static void		ft_player_pos(t_player *player, t_world *world)
-{
-	int			i;
-	int			j;
-
-	i = 0;
-	while (i < world->size_y)
-	{
-		j = 0;
-		while (j < world->size_x)
-		{
-			if (world->map[i][j] == 'N')
-			{
-				player->vector.x = j + 0.5;
-				player->vector.y = i + 0.5;
-				player->vector.dx = -1;
-				player->vector.dy = 0;
-				player->camera.px = 0;
-				player->camera.py = 0.66;
-				world->map[i][j] = '0';
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
 static void		ft_init_mlx(t_mlx *mlx)
 {
 	mlx->win.mlx = mlx_init();
@@ -83,6 +56,7 @@ static void		ft_init_mlx(t_mlx *mlx)
 			mlx->res.y);
 	mlx->img.add = (int *)mlx_get_data_addr(mlx->img.img, &mlx->img.bpp,
 			&mlx->img.len, &mlx->img.endian);
+	mlx->on = 1;
 }
 
 static void		ft_init_img_buffer(t_mlx *mlx)

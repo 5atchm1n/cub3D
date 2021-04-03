@@ -6,12 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 17:04:49 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/03 04:39:51 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
 static void		map_grid(float offset, t_world *world, t_mlx *mlx)
 {
 	int			k;
@@ -42,6 +43,7 @@ static void		map_grid(float offset, t_world *world, t_mlx *mlx)
 		l++;
 	}
 }
+*/
 
 static void		map_wall(float offset, t_grid pos, t_mlx *mlx, int colour)
 {
@@ -54,8 +56,7 @@ static void		map_wall(float offset, t_grid pos, t_mlx *mlx, int colour)
 		l = 0;
 		while (l < offset)
 		{
-			ft_pixelput(&mlx->img, pos.x * offset + k,
-					pos.y * offset + l, colour);
+			//ft_pixelput(&mlx->img, pos.x * offset + k, pos.y * offset + l, colour);
 			mlx->buffer[(int)(pos.y * offset + l)][(int)(pos.x * offset + k)] = colour;
 			l++;
 		}
@@ -77,8 +78,8 @@ void			ft_draw_map(t_world *world, t_mlx *mlx)
 		{
 			if (world->map[grid.y][grid.x] == '0')
 				map_wall(offset, grid, mlx, 0x00000000);
-			if (world->map[grid.y][grid.x] == ' ')
-				map_wall(offset, grid, mlx, 0x00FF0000);
+		//	if (world->map[grid.y][grid.x] == ' ')
+		//		map_wall(offset, grid, mlx, 0x00FF0000);
 			if (world->map[grid.y][grid.x] == '1')
 				map_wall(offset, grid, mlx, 0x0000FF00);
 			if (world->map[grid.y][grid.x] == '2')
@@ -87,5 +88,5 @@ void			ft_draw_map(t_world *world, t_mlx *mlx)
 		}
 		grid.y++;
 	}
-	map_grid(offset, world, mlx);
+//	map_grid(offset, world, mlx);
 }

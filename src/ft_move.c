@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 16:56:04 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/03 04:34:39 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int		ft_update_fov(t_vector *v, t_camera *cam, t_move *move)
 	double		dir;
 	double		p;
 
-	if (move->turn_r)
+	if (move->turn_l)
 	{
 		dir = v->dx;
 		v->dx = v->dx * cos(-TURN_SPEED) - v->dy * sin(-TURN_SPEED);
@@ -26,7 +26,7 @@ static int		ft_update_fov(t_vector *v, t_camera *cam, t_move *move)
 		cam->px = cam->px * cos(-TURN_SPEED) - cam->py * sin(-TURN_SPEED);
 		cam->py = p * sin(-TURN_SPEED) + cam->py * cos(-TURN_SPEED);
 	}
-	if (move->turn_l)
+	if (move->turn_r)
 	{
 		dir = v->dx;
 		v->dx = v->dx * cos(TURN_SPEED) - v->dy * sin(TURN_SPEED);
@@ -38,13 +38,27 @@ static int		ft_update_fov(t_vector *v, t_camera *cam, t_move *move)
 	return (0);
 }
 
+static void		ft_player_offset(t_vector *v, double *offset)
+{
+	if (v->dx > 0)
+		offset[0] = PLAYER_SIZE;
+	else
+		offset[0] = -PLAYER_SIZE;
+	if (v->dy > 0)
+		offset[1] = PLAYER_SIZE;
+	else
+		offset[1] = -PLAYER_SIZE;
+}
+
 static void		ft_move_up(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
+	double		offset[2];
 
-	x = v->x + v->dx * MOVE_SPEED;
-	y = v->y + v->dy * MOVE_SPEED;
+	ft_player_offset(v, offset);
+	x = v->x + v->dx * MOVE_SPEED + offset[0];
+	y = v->y + v->dy * MOVE_SPEED + offset[1];
 	if (map[(int)y][(int)x] == '0')
 	{
 		v->x += v->dx * MOVE_SPEED;
@@ -56,9 +70,11 @@ static void		ft_move_down(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
+	double		offset[2];
 
-	x = v->x - v->dx * MOVE_SPEED;
-	y = v->y - v->dy * MOVE_SPEED;
+	ft_player_offset(v, offset);
+	x = v->x - v->dx * MOVE_SPEED - offset[0];
+	y = v->y - v->dy * MOVE_SPEED - offset[1];
 	if (map[(int)y][(int)x] == '0')
 	{
 		v->x -= v->dx * MOVE_SPEED;
@@ -70,9 +86,11 @@ static void		ft_move_right(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
+	double		offset[2];
 
-	x = v->x + (v->dy * MOVE_SPEED);
-	y = v->y - (v->dx * MOVE_SPEED);
+	ft_player_offset(v, offset);
+	x = v->x + (v->dy * MOVE_SPEED) + offset[1] / 2;
+	y = v->y - (v->dx * MOVE_SPEED) - offset[0] / 2;
 	if (map[(int)y][(int)x] == '0')
 	{
 		v->x += v->dy * MOVE_SPEED;
@@ -84,35 +102,18 @@ static void		ft_move_left(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
+	double		offset[2];
 
-	x = v->x - v->dy * MOVE_SPEED;
-	y = v->y + v->dx * MOVE_SPEED;
+	ft_player_offset(v, offset);
+	x = v->x - v->dy * MOVE_SPEED - offset[1] / 2;
+	y = v->y + v->dx * MOVE_SPEED + offset[0] / 2;
 	if (map[(int)y][(int)x] == '0')
 	{
 		v->x -= v->dy * MOVE_SPEED;
 		v->y += v->dx * MOVE_SPEED;
 	}
 }
-/*
-static void		put_black(t_cub *game)
-{
-	int			x;
-	int			y;
 
-	x = 0;
-	y = 0;
-	while (x < game->mlx.res.x)
-	{
-		y = 0;
-		while (y < game->mlx.res.y)
-		{
-			ft_pixelput(&game->mlx.img, x, y, 0x0000000);
-			y++;
-		}
-		x++;
-	}
-}
-*/
 int				ft_move(t_cub *game)
 {
 	ft_update_fov(&game->player.vector, &game->player.camera, &game->player.move);
@@ -124,10 +125,10 @@ int				ft_move(t_cub *game)
 		ft_move_left(&game->player.vector, game->world.map);
 	if (game->player.move.right)
 		ft_move_right(&game->player.vector, game->world.map);
-//	put_black(game);
 	ft_raycasting(game);
 	ft_minimap(game);
 	ft_draw(&game->mlx);
-	mlx_put_image_to_window(game->mlx.win.mlx, game->mlx.win.win, game->mlx.img.img, 0, 0);
+	if (game->mlx.on == 0)
+		ft_quit(game);
 	return (0);
 }

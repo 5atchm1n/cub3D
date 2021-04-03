@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 17:05:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/03 05:22:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,16 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE 256
-# define MOVE_SPEED 0.05
-# define TURN_SPEED 0.02
-# define MAP_SIZE 0.1
+# define MOVE_SPEED 0.02
+# define TURN_SPEED 0.008
+# define MAP_SIZE 0.2
 # define TEXTURES 4
 # define TEX_X 64
 # define TEX_Y 64
-
+# define PLAYER_SIZE 0.1
 /*
-** -------------------------- FUNCTION SPECIFIC STRUCTS
+** RAYCASTING, TEXTURE CASTING, GRID
 */
-
 typedef struct		s_ray
 {
 	double			dirx;
@@ -71,11 +70,9 @@ typedef struct		s_texture
 	int				end;
 	double			pos;
 }					t_texture;
-
 /*
-** ------------------------ MLX DEFINED STRUCTURES
+** MLX -- WINDOW, IMAGE, BUFFER --
 */
-
 typedef struct		s_win
 {
 	void			*mlx;
@@ -105,12 +102,11 @@ typedef struct		s_mlx
 	t_img			img;
 	t_res			res;
 	int				**buffer;
+	int				on;
 }					t_mlx;
-
 /* 
-** ------------------------- PLAYER
+** PLAYER -- MOVE, VECTOR, CAMERA --
 */
-
 typedef struct		s_move
 {
 	int				left;
@@ -142,9 +138,8 @@ typedef struct		s_player
 	t_camera		camera;
 }					t_player;
 /*
-** ------------------------- MAP, TEXTURES AND SETTINGS
+** WORLD -- MAP, TEXTURES, FLOOR, CEILING --
 */
-
 typedef struct		s_world
 {
 	float			offset;
@@ -155,18 +150,15 @@ typedef struct		s_world
 	char			**map;
 	int				**tex;
 }					t_world;
-
 /*
 ** GLOBAL STRUCT
 */
-
 typedef struct		s_cub
 {
 	t_player		player;
 	t_mlx			mlx;
 	t_world			world;
 }					t_cub;
-
 /*
 ** PARSE MAP AND INITILIASE SETTINGS
 */
@@ -178,30 +170,30 @@ char				**ft_parse_map(char *map, t_world *world);
 */
 void				ft_pixelput(t_img *img, int x, int y, int color);
 void				ft_vertline(int x, int start, int end, int color, t_img *img);
+void				ft_draw(t_mlx *mlx);
 /*
 ** INITIALIZE PLAYER AND GAME
 */
 void				ft_init(t_cub *game, char *map);
+void				ft_player_pos(t_player *player, t_world *world);
 void				ft_load_textures(t_mlx *mlx, t_world *world);
+void				ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x);
+int					ft_quit(t_cub *game);
 /*
 ** MOVE PLAYER AND ROTATE PLAYER
 */
 int					ft_keypress(int keycode, t_cub *game);
 int					ft_keyrelease(int keycode, t_cub *game);
-/*
-** DISPLAY
-*/
 int					ft_move(t_cub *game);
+void				ft_raycasting(t_cub *game);
 /*
-** TEST FUNCTIONS -> MINIMAP
+** MINIMAP
 */
 void				ft_draw_map(t_world *world, t_mlx *mlx);
-void				ft_raycasting(t_cub *game);
 void				ft_minimap(t_cub *game);
-void				ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x);
-void				ft_draw(t_mlx *mlx);
 /*
 ** UTILS FUNCTION ADD TO LIBFT
 */
 int					ft_isspace(char c);
+
 #endif

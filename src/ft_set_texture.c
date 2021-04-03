@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 03:51:42 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 17:10:03 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/02 17:18:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,8 @@ void			ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 		y++;
 	}
 	while (y < game->mlx.res.y)
-		game->mlx.buffer[y++][x] = game->world.floor;
+	{
+		game->mlx.buffer[y][x] = game->world.floor;
+		y++;
+	}
 }
