@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 04:08:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/04 06:53:05 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,12 @@ typedef struct		s_objs
 	int				spritew;
 	int				spriteh;
 	int				index;
+	int				hitx;
+	int				voffset;
+	int				startx;
+	int				starty;
+	int				endx;
+	int				endy;
 }					t_objs;
 
 typedef struct		s_sprite
@@ -184,6 +190,7 @@ typedef struct		s_world
 	char			**map;
 	int				**tex;
 	int				**obj;
+	double			*zbuffer;
 }					t_world;
 /*
 ** GLOBAL STRUCT
@@ -218,6 +225,7 @@ void				ft_init_object_pos(t_world *world);
 void				ft_init_object(t_world *world);
 int					ft_quit(t_cub *game);
 int					ft_nobject(t_world *world);
+void				ft_sort_sprites(t_objs *objs);
 /*
 ** MOVE PLAYER AND ROTATE PLAYER
 */
@@ -225,6 +233,7 @@ int					ft_keypress(int keycode, t_cub *game);
 int					ft_keyrelease(int keycode, t_cub *game);
 int					ft_move(t_cub *game);
 void				ft_raycasting(t_cub *game);
+void				ft_cast_sprites(t_cub *game);
 /*
 ** MINIMAP
 */

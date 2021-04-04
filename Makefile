@@ -15,6 +15,8 @@ SRCS =	read_map.c \
 		ft_load_xpm.c \
 		ft_load_objects.c \
 		ft_set_texture.c \
+		ft_set_sprites.c \
+		ft_sort_sprites.c \
 		ft_parse_map.c
 
 CC = clang
@@ -57,7 +59,7 @@ libft :
 
 $(NAME) : mlx libft ${OBJS}
 		@echo -n  "Generating ${NAME}"
-		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 .c.o:
