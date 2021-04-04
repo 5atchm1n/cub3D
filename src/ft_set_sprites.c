@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 06:54:24 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/04 07:49:52 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void		ft_transform_sprite(t_sprite *s, t_player *player, t_objs *objs, in
 	double		inv;
 
 	objs->index = i;
-	x = s[i].x - player->vector.x;
-	y = s[i].y - player->vector.y;
+	x = s[objs->order[i]].x - player->vector.x;
+	y = s[objs->order[i]].y - player->vector.y;
 	inv = 1.0 / ((player->camera.px * player->vector.y) -
 			(player->camera.py * player->vector.dx));
 	objs->tx = inv * (player->vector.dy * x - player->vector.dx * y);
@@ -46,7 +46,7 @@ static void		ft_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s)
 	objs->hitx = (int)((mlx->res.x / 2) * (1 + (objs->tx / objs->ty)));
 	objs->voffset = (int)(s->vmove / objs->ty);
 
-	objs->spriteh = (int)fabs((mlx->res.x / objs->ty) / s->vdiv);
+	objs->spriteh = (int)fabs((mlx->res.y / objs->ty) / s->vdiv);
 	objs->starty = -objs->spriteh / 2 + mlx->res.y / 2 + objs->voffset;
 	if (objs->starty < 0)
 		objs->starty = 0;
@@ -83,7 +83,7 @@ static void		ft_set_sprite_image_buffer(t_mlx *mlx, t_objs *objs, t_world *world
 	x = objs->startx;
 	while (x < objs->endx)
 	{
-		tex_x = (int)((256 * (x - (objs->spritew / 2 + objs->hitx)) * SPRITE_W / objs->spritew) / 256);
+		tex_x = (int)((256 * (x - (-objs->spritew / 2 + objs->hitx)) * SPRITE_W / objs->spritew) / 256);
 		if (objs->ty > 0 && x > 0 && x < mlx->res.x && objs->ty < zbuffer[x])
 		{
 			y = objs->starty;
@@ -92,7 +92,6 @@ static void		ft_set_sprite_image_buffer(t_mlx *mlx, t_objs *objs, t_world *world
 				d = (y - objs->voffset) * 256 - mlx->res.y * 128 + objs->spriteh * 128;
 				tex_y = ((d * SPRITE_H) / objs->spriteh) / 256;
 				colour = world->obj[world->sprite[objs->order[objs->index]].id][SPRITE_W * tex_x + tex_y];
-				printf("colour = %#.8x\n",colour);
 				if ((colour & 0x00FFFFFF) != 0)
 					mlx->buffer[y][x] = colour;
 				y++;
@@ -122,4 +121,5 @@ void			ft_cast_sprites(t_cub *game)
 	}
 	free(objs.order);
 	free(objs.dist);
+	free(game->world.zbuffer);
 }

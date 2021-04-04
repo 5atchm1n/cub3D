@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 06:56:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/04 07:50:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int			ft_quit(t_cub *game)
 		i++;
 	}
 	free(game->world.tex);
-	free(game->world.zbuffer);
 	mlx_destroy_image(game->mlx.win.mlx, game->mlx.img.img);
 	mlx_destroy_window(game->mlx.win.mlx, game->mlx.win.win);
 	exit(0);
