@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:07:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 16:23:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/03 15:51:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void		ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
 			x++;
 		}
 		y++;
-		}
-		mlx_destroy_image(mlx->win.mlx, img->img);
+	}
+	mlx_destroy_image(mlx->win.mlx, img->img);
 }
 
 void			ft_load_textures(t_mlx *mlx, t_world *world)
@@ -43,4 +43,6 @@ void			ft_load_textures(t_mlx *mlx, t_world *world)
 	ft_load_xpm(mlx, world->tex[1], "textures/purplestone.xpm", &img);
 	ft_load_xpm(mlx, world->tex[2], "textures/colorstone.xpm", &img);
 	ft_load_xpm(mlx, world->tex[3], "textures/blue_brick.xpm", &img);
+	ft_load_xpm(mlx, world->obj[0], "textures/barrel.xpm", &img);
+	ft_load_xpm(mlx, world->obj[1], "textures/tree.xpm", &img);
 }

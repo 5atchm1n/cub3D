@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/03 05:22:06 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/04 04:08:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,24 @@
 # define TURN_SPEED 0.008
 # define MAP_SIZE 0.2
 # define TEXTURES 4
+# define SPRITES 2
+# define SPRITE_H 64
+# define SPRITE_W 64
 # define TEX_X 64
 # define TEX_Y 64
 # define PLAYER_SIZE 0.1
 /*
 ** RAYCASTING, TEXTURE CASTING, GRID
 */
+
+typedef enum		e_dir
+{
+	NO = 0,
+	SO = 1,
+	EA = 2,
+	WE = 3
+}					t_dir;
+
 typedef struct		s_ray
 {
 	double			dirx;
@@ -53,14 +65,6 @@ typedef struct		s_grid
 	int				x;
 	int				y;
 }					t_grid;
-
-typedef enum		e_dir
-{
-	NO = 0,
-	SO = 1,
-	EA = 2,
-	WE = 3
-}					t_dir;
 
 typedef struct		s_texture
 {
@@ -140,8 +144,38 @@ typedef struct		s_player
 /*
 ** WORLD -- MAP, TEXTURES, FLOOR, CEILING --
 */
+
+typedef struct		s_sort
+{
+	int				order;
+	double			dist;
+}					t_sort;
+
+typedef struct		s_objs
+{
+	int				*order;
+	double			*dist;
+	int				count;
+	double			tx;
+	double			ty;
+	int				spritew;
+	int				spriteh;
+	int				index;
+}					t_objs;
+
+typedef struct		s_sprite
+{
+	double			x;
+	double			y;
+	int				id;
+	int				udiv;
+	int				vdiv;
+	double			vmove;
+}					t_sprite;
+
 typedef struct		s_world
 {
+	t_sprite		*sprite;
 	float			offset;
 	int				floor;
 	int				ceiling;
@@ -149,6 +183,7 @@ typedef struct		s_world
 	int				size_y;
 	char			**map;
 	int				**tex;
+	int				**obj;
 }					t_world;
 /*
 ** GLOBAL STRUCT
@@ -177,8 +212,12 @@ void				ft_draw(t_mlx *mlx);
 void				ft_init(t_cub *game, char *map);
 void				ft_player_pos(t_player *player, t_world *world);
 void				ft_load_textures(t_mlx *mlx, t_world *world);
+void				ft_load_objects(t_world *world);
 void				ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x);
+void				ft_init_object_pos(t_world *world);
+void				ft_init_object(t_world *world);
 int					ft_quit(t_cub *game);
+int					ft_nobject(t_world *world);
 /*
 ** MOVE PLAYER AND ROTATE PLAYER
 */

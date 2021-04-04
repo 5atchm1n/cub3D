@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:16:31 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/02 16:16:45 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/04 02:18:17 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void		ft_set_stripe(t_mlx *mlx, t_ray *ray, t_texture *t)
 		t->end = mlx->res.y - 1;
 }
 
-void			ft_raycasting(t_cub *game)
+void			ft_raycasting(t_cub *game, double *zbuffer)
 {
 	int			x;
 	t_ray		ray;
@@ -102,7 +102,8 @@ void			ft_raycasting(t_cub *game)
 		ft_set_dda_vector(&ray, &game->player.vector);
 		ft_run_dda(&ray, &game->player.vector, game->world.map);
 		ft_set_stripe(&game->mlx, &ray, &texture);
-		ft_set_texture(game, &texture, &ray, x); 
+		ft_set_texture(game, &texture, &ray, x);
+		zbuffer[x] = ray.dw;
 		x++;
 	}
 }

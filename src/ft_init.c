@@ -6,46 +6,11 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/03 04:50:07 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/03 16:35:25 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void		ft_init_move(t_move *move)
-{
-	move->right = 0;
-	move->left = 0;
-	move->up = 0;
-	move->down = 0;
-	move->turn_l = 0;
-	move->turn_l = 0;
-}
-
-static void		ft_init_map(t_world *world)
-{
-	int			i;
-	int			j;
-
-	i = 0;
-	world->map = (char **)malloc(sizeof(char *) * world->size_y);
-	while (i < world->size_y)
-	{
-		world->map[i] = (char *)malloc(sizeof(char) * world->size_x);
-		i++;
-	}
-	i = 0;
-	while (i < world->size_y)
-	{
-		j = 0;
-		while (j < world->size_x)
-		{
-			world->map[i][j] = ' ';
-			j++;
-		}
-		i++;
-	}
-}
 
 static void		ft_init_mlx(t_mlx *mlx)
 {
@@ -84,6 +49,31 @@ static void		ft_init_img_buffer(t_mlx *mlx)
 	}
 }
 
+static void		ft_init_map(t_world *world)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	world->map = (char **)malloc(sizeof(char *) * world->size_y);
+	while (i < world->size_y)
+	{
+		world->map[i] = (char *)malloc(sizeof(char) * world->size_x);
+		i++;
+	}
+	i = 0;
+	while (i < world->size_y)
+	{
+		j = 0;
+		while (j < world->size_x)
+		{
+			world->map[i][j] = ' ';
+			j++;
+		}
+		i++;
+	}
+}
+
 static void		ft_init_textures(t_world *world)
 {
 	int			i;
@@ -109,6 +99,16 @@ static void		ft_init_textures(t_world *world)
 	}
 }
 
+static void		ft_init_move(t_move *move)
+{
+	move->right = 0;
+	move->left = 0;
+	move->up = 0;
+	move->down = 0;
+	move->turn_l = 0;
+	move->turn_l = 0;
+}
+
 void			ft_init(t_cub *game, char *map)
 {
 	ft_init_map(&game->world);
@@ -116,11 +116,14 @@ void			ft_init(t_cub *game, char *map)
 	ft_init_mlx(&game->mlx);
 	ft_init_img_buffer(&game->mlx);
 	ft_init_textures(&game->world);
+	ft_init_object(&game->world);
+	ft_init_object_pos(&game->world);
 	
 	game->world.offset = (float)game->mlx.res.x /
 		(float)game->world.size_x;
 	game->world.map = ft_parse_map(map, &game->world);
 
 	ft_player_pos(&game->player, &game->world);
+	ft_load_objects(&game->world);
 	ft_load_textures(&game->mlx, &game->world);
 }

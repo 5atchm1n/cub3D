@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/03 04:34:39 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/04 01:54:44 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,9 @@ static void		ft_move_left(t_vector *v, char **map)
 
 int				ft_move(t_cub *game)
 {
+	double		*zbuffer;
+
+	zbuffer = malloc(sizeof(double) * game->mlx.res.x);
 	ft_update_fov(&game->player.vector, &game->player.camera, &game->player.move);
 	if (game->player.move.up)
 		ft_move_up(&game->player.vector, game->world.map);
@@ -125,7 +128,9 @@ int				ft_move(t_cub *game)
 		ft_move_left(&game->player.vector, game->world.map);
 	if (game->player.move.right)
 		ft_move_right(&game->player.vector, game->world.map);
-	ft_raycasting(game);
+// SPLIT FILES HERE //	
+	ft_raycasting(game, zbuffer);
+	ft_cast_sprites(game, zbuffer);
 	ft_minimap(game);
 	ft_draw(&game->mlx);
 	if (game->mlx.on == 0)

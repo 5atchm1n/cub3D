@@ -13,6 +13,7 @@ SRCS =	read_map.c \
 		ft_minimap.c \
 		ft_minimap_player.c \
 		ft_load_xpm.c \
+		ft_load_objects.c \
 		ft_set_texture.c \
 		ft_parse_map.c
 
