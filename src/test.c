@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:17:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 06:53:18 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/04 23:45:10 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,10 @@ int				main(int argc, char **argv)
 	if (argc == 2)
 		ft_settings(argv[1], &game.world, &game.mlx);
 	ft_init(&game, argv[1]);
-	ft_minimap(&game);
-	ft_raycasting(&game);
-	mlx_put_image_to_window(game.mlx.win.mlx, game.mlx.win.win, game.mlx.img.img, 0, 0);
 	mlx_hook(game.mlx.win.win, 2, 1L << 0, &ft_keypress, &game);
 	mlx_hook(game.mlx.win.win, 3, 1L << 1, &ft_keyrelease, &game);
 	//	mlx_mouse_hook(win.win, mouse_hook, &win);
-	//	mlx_key_hook(game.win.win, key_hook, &game);
+	//mlx_key_hook(game.mlx.win.win, key_hook, &game);
 	mlx_hook(game.mlx.win.win, 33, 1L << 2, &ft_quit, &game);
 	mlx_loop_hook(game.mlx.win.mlx, &ft_move, &game);
 	ft_print_info(&game);

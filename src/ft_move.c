@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 06:53:45 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 00:55:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int		ft_update_fov(t_vector *v, t_camera *cam, t_move *move)
 	double		dir;
 	double		p;
 
-	if (move->turn_l)
+	if (move->turn_r)
 	{
 		dir = v->dx;
 		v->dx = v->dx * cos(-TURN_SPEED) - v->dy * sin(-TURN_SPEED);
@@ -26,7 +26,7 @@ static int		ft_update_fov(t_vector *v, t_camera *cam, t_move *move)
 		cam->px = cam->px * cos(-TURN_SPEED) - cam->py * sin(-TURN_SPEED);
 		cam->py = p * sin(-TURN_SPEED) + cam->py * cos(-TURN_SPEED);
 	}
-	if (move->turn_r)
+	if (move->turn_l)
 	{
 		dir = v->dx;
 		v->dx = v->dx * cos(TURN_SPEED) - v->dy * sin(TURN_SPEED);
@@ -70,11 +70,9 @@ static void		ft_move_down(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
-	double		offset[2];
 
-	ft_player_offset(v, offset);
-	x = v->x - v->dx * MOVE_SPEED - offset[0];
-	y = v->y - v->dy * MOVE_SPEED - offset[1];
+	x = v->x - v->dx * MOVE_SPEED;
+	y = v->y - v->dy * MOVE_SPEED;
 	if (map[(int)y][(int)x] == '0')
 	{
 		v->x -= v->dx * MOVE_SPEED;
@@ -86,11 +84,9 @@ static void		ft_move_right(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
-	double		offset[2];
 
-	ft_player_offset(v, offset);
-	x = v->x + (v->dy * MOVE_SPEED) + offset[1] / 2;
-	y = v->y - (v->dx * MOVE_SPEED) - offset[0] / 2;
+	x = v->x + (v->dy * MOVE_SPEED);
+	y = v->y - (v->dx * MOVE_SPEED);
 	if (map[(int)y][(int)x] == '0')
 	{
 		v->x += v->dy * MOVE_SPEED;
@@ -102,11 +98,9 @@ static void		ft_move_left(t_vector *v, char **map)
 {
 	double		x;
 	double		y;
-	double		offset[2];
 
-	ft_player_offset(v, offset);
-	x = v->x - v->dy * MOVE_SPEED - offset[1] / 2;
-	y = v->y + v->dx * MOVE_SPEED + offset[0] / 2;
+	x = v->x - v->dy * MOVE_SPEED;
+	y = v->y + v->dx * MOVE_SPEED;
 	if (map[(int)y][(int)x] == '0')
 	{
 		v->x -= v->dy * MOVE_SPEED;

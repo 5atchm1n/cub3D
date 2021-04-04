@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 07:49:52 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 01:00:46 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		ft_transform_sprite(t_sprite *s, t_player *player, t_objs *objs, in
 	objs->index = i;
 	x = s[objs->order[i]].x - player->vector.x;
 	y = s[objs->order[i]].y - player->vector.y;
-	inv = 1.0 / ((player->camera.px * player->vector.y) -
+	inv = 1.0 / ((player->camera.px * player->vector.dy) -
 			(player->camera.py * player->vector.dx));
 	objs->tx = inv * (player->vector.dy * x - player->vector.dx * y);
 	objs->ty = inv * (-player->camera.py * x + player->camera.px * y);
@@ -43,7 +43,7 @@ static void		ft_transform_sprite(t_sprite *s, t_player *player, t_objs *objs, in
 
 static void		ft_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s)
 {	
-	objs->hitx = (int)((mlx->res.x / 2) * (1 + (objs->tx / objs->ty)));
+	objs->hitx = (int)((mlx->res.x / 2) * (1 + objs->tx / objs->ty));
 	objs->voffset = (int)(s->vmove / objs->ty);
 
 	objs->spriteh = (int)fabs((mlx->res.y / objs->ty) / s->vdiv);
@@ -53,7 +53,6 @@ static void		ft_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s)
 	objs->endy = objs->spriteh / 2 + mlx->res.y / 2 + objs->voffset;
 	if (objs->endy >= mlx->res.y)
 		objs->endy = mlx->res.y - 1;
-
 	objs->spritew = (int)fabs((mlx->res.y / objs->ty) / s->udiv);
 	objs->startx = -objs->spritew / 2 + objs->hitx;
 	if (objs->startx < 0)
@@ -61,15 +60,19 @@ static void		ft_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s)
 	objs->endx = objs->spritew / 2 + objs->hitx;
 	if (objs->endx >= mlx->res.x)
 		objs->endx = mlx->res.x - 1;
+/*	
 	printf("tx[%d] = %.5f\n", objs->index, objs->tx);
 	printf("ty[%d] = %.5f\n", objs->index, objs->ty);
 	printf("hitx[%d] = %d\n", objs->index, objs->hitx);
 	printf("voffset[%d] = %d\n", objs->index,objs->voffset);
 	printf("spriteh[%d] = %d\n", objs->index,objs->spriteh);
 	printf("spritew[%d] = %d\n", objs->index,objs->spritew);
-	printf("startx[%d] = %d\n", objs->index,objs->starty);
-	printf("endx[%d] = %d\n", objs->index,objs->endy);
-	}
+	printf("startx[%d] = %d\n", objs->index,objs->startx);
+	printf("endx[%d] = %d\n", objs->index,objs->endx);
+	printf("starty[%d] = %d\n", objs->index,objs->starty);
+	printf("endy[%d] = %d\n", objs->index,objs->endy);
+*/
+}
 
 static void		ft_set_sprite_image_buffer(t_mlx *mlx, t_objs *objs, t_world *world, double *zbuffer)
 {
@@ -83,7 +86,7 @@ static void		ft_set_sprite_image_buffer(t_mlx *mlx, t_objs *objs, t_world *world
 	x = objs->startx;
 	while (x < objs->endx)
 	{
-		tex_x = (int)((256 * (x - (-objs->spritew / 2 + objs->hitx)) * SPRITE_W / objs->spritew) / 256);
+		tex_x = (int)(256 * (x - (-objs->spritew / 2 + objs->hitx)) * SPRITE_W / objs->spritew) / 256;
 		if (objs->ty > 0 && x > 0 && x < mlx->res.x && objs->ty < zbuffer[x])
 		{
 			y = objs->starty;
@@ -91,7 +94,7 @@ static void		ft_set_sprite_image_buffer(t_mlx *mlx, t_objs *objs, t_world *world
 			{
 				d = (y - objs->voffset) * 256 - mlx->res.y * 128 + objs->spriteh * 128;
 				tex_y = ((d * SPRITE_H) / objs->spriteh) / 256;
-				colour = world->obj[world->sprite[objs->order[objs->index]].id][SPRITE_W * tex_x + tex_y];
+				colour = world->obj[world->sprite[objs->order[objs->index]].id][SPRITE_W * tex_y + tex_x];
 				if ((colour & 0x00FFFFFF) != 0)
 					mlx->buffer[y][x] = colour;
 				y++;
@@ -108,10 +111,18 @@ void			ft_cast_sprites(t_cub *game)
 
 	i = 0;
 	objs.count = ft_nobject(&game->world);
+//	printf("%d\n", objs.count);
 	objs.order = malloc(sizeof(int) * objs.count);
 	objs.dist = malloc(sizeof(double) * objs.count);
 	ft_set_sprites(&objs, &game->player.vector, game->world.sprite);
 	ft_sort_sprites(&objs);
+	while (i < objs.count)
+	{
+		printf("obj[%d].order = %d\n", i, objs.order[i]);
+		printf("obj[%d].dist = %f\n", i, objs.dist[i]);
+		i++;
+	}
+	i = 0;
 	while (i < objs.count)
 	{
 		ft_transform_sprite(game->world.sprite, &game->player, &objs, i);

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 07:50:12 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/04 23:44:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int			ft_quit(t_cub *game)
 
 static int	ft_turn_start(int keycode, t_cub *game)
 {
-	if (keycode == 65361)
-		game->player.move.turn_r = 1;
 	if (keycode == 65363)
+		game->player.move.turn_r = 1;
+	if (keycode == 65361)
 		game->player.move.turn_l = 1;
 	return (0);
 }

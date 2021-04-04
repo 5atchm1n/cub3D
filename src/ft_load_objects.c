@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 06:32:35 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 00:02:04 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			ft_load_objects(t_world *world)
 		j = 0;
 		while (j < world->size_x)
 		{
-			if (world->map[i][j] == '2')
+			if (world->map[i][j] == '2' || world->map[i][j] == '3')
 			{
 				world->sprite[x].x = j + 0.5;
 				world->sprite[x].y = i + 0.5;
