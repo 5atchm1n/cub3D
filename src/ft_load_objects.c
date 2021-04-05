@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 00:02:04 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 03:47:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ void			ft_load_objects(t_world *world)
 				world->sprite[x].id = world->map[i][j] - 48 - 2;
 				world->sprite[x].udiv = 1;
 				world->sprite[x].vdiv = 1;
-				world->sprite[x].vmove = 0.0;
-
+				world->sprite[x].vmove = 64.0;
 				printf("obj[%d] : x = %.5f\n", x, world->sprite[x].x);
 				printf("obj[%d] : y = %.5f\n", x, world->sprite[x].y);
 				printf("obj[%d] : id = %d\n", x, world->sprite[x].id);

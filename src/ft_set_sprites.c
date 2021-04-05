@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 01:00:46 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 03:43:07 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,21 @@ static void		ft_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s)
 	objs->hitx = (int)((mlx->res.x / 2) * (1 + objs->tx / objs->ty));
 	objs->voffset = (int)(s->vmove / objs->ty);
 
-	objs->spriteh = (int)fabs((mlx->res.y / objs->ty) / s->vdiv);
+	objs->spriteh = abs((int)(mlx->res.y / (objs->ty))) / s->vdiv;
 	objs->starty = -objs->spriteh / 2 + mlx->res.y / 2 + objs->voffset;
 	if (objs->starty < 0)
 		objs->starty = 0;
 	objs->endy = objs->spriteh / 2 + mlx->res.y / 2 + objs->voffset;
 	if (objs->endy >= mlx->res.y)
 		objs->endy = mlx->res.y - 1;
-	objs->spritew = (int)fabs((mlx->res.y / objs->ty) / s->udiv);
+	objs->spritew = abs((int)(mlx->res.y / (objs->ty))) / s->udiv;
 	objs->startx = -objs->spritew / 2 + objs->hitx;
 	if (objs->startx < 0)
 		objs->startx = 0;
 	objs->endx = objs->spritew / 2 + objs->hitx;
 	if (objs->endx >= mlx->res.x)
 		objs->endx = mlx->res.x - 1;
-/*	
+	
 	printf("tx[%d] = %.5f\n", objs->index, objs->tx);
 	printf("ty[%d] = %.5f\n", objs->index, objs->ty);
 	printf("hitx[%d] = %d\n", objs->index, objs->hitx);
@@ -71,7 +71,7 @@ static void		ft_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s)
 	printf("endx[%d] = %d\n", objs->index,objs->endx);
 	printf("starty[%d] = %d\n", objs->index,objs->starty);
 	printf("endy[%d] = %d\n", objs->index,objs->endy);
-*/
+
 }
 
 static void		ft_set_sprite_image_buffer(t_mlx *mlx, t_objs *objs, t_world *world, double *zbuffer)
@@ -109,19 +109,11 @@ void			ft_cast_sprites(t_cub *game)
 	t_objs		objs;
 	int			i;
 
-	i = 0;
 	objs.count = ft_nobject(&game->world);
-//	printf("%d\n", objs.count);
 	objs.order = malloc(sizeof(int) * objs.count);
 	objs.dist = malloc(sizeof(double) * objs.count);
 	ft_set_sprites(&objs, &game->player.vector, game->world.sprite);
 	ft_sort_sprites(&objs);
-	while (i < objs.count)
-	{
-		printf("obj[%d].order = %d\n", i, objs.order[i]);
-		printf("obj[%d].dist = %f\n", i, objs.dist[i]);
-		i++;
-	}
 	i = 0;
 	while (i < objs.count)
 	{

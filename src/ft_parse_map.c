@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:10:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 00:33:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 03:04:25 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void			ft_player_pos(t_player *player, t_world *world)
 			{
 				player->vector.x = j + 0.5;
 				player->vector.y = i + 0.5;
-				player->vector.dx = 0;
-				player->vector.dy = -1;
-				player->camera.px = -0.66;
-				player->camera.py = 0.0;
+				player->vector.dx = -1;
+				player->vector.dy = 0;
+				player->camera.px = 0.0;
+				player->camera.py = 0.66;
 				world->map[i][j] = '0';
 			}
 			j++;
