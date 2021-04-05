@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 00:55:45 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 16:21:14 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		ft_move_up(t_vector *v, char **map)
 	ft_player_offset(v, offset);
 	x = v->x + v->dx * MOVE_SPEED + offset[0];
 	y = v->y + v->dy * MOVE_SPEED + offset[1];
-	if (map[(int)y][(int)x] == '0')
+	if (map[(int)y][(int)x] != '1')
 	{
 		v->x += v->dx * MOVE_SPEED;
 		v->y += v->dy * MOVE_SPEED;

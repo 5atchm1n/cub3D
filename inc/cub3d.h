@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 04:53:41 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 20:57:52 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,10 +173,10 @@ typedef struct		s_sprite
 {
 	double			x;
 	double			y;
+	double			vmove;
 	int				id;
 	int				udiv;
 	int				vdiv;
-	double			vmove;
 }					t_sprite;
 
 typedef struct		s_world
@@ -191,6 +191,7 @@ typedef struct		s_world
 	int				**tex;
 	int				**obj;
 	double			*zbuffer;
+	int				scount;
 }					t_world;
 /*
 ** GLOBAL STRUCT
@@ -225,7 +226,7 @@ void				ft_init_object_pos(t_world *world);
 void				ft_init_object(t_world *world);
 int					ft_quit(t_cub *game);
 int					ft_nobject(t_world *world);
-void				ft_sort_sprites(t_objs *objs);
+void				ft_sort_sprites(t_objs *objs, int count);
 /*
 ** MOVE PLAYER AND ROTATE PLAYER
 */

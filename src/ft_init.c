@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/03 16:35:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 20:44:58 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,10 @@ void			ft_init(t_cub *game, char *map)
 	ft_init_img_buffer(&game->mlx);
 	ft_init_textures(&game->world);
 	ft_init_object(&game->world);
-	ft_init_object_pos(&game->world);
-	
 	game->world.offset = (float)game->mlx.res.x /
 		(float)game->world.size_x;
 	game->world.map = ft_parse_map(map, &game->world);
-
+	game->world.scount = ft_nobject(&game->world);
 	ft_player_pos(&game->player, &game->world);
 	ft_load_objects(&game->world);
 	ft_load_textures(&game->mlx, &game->world);

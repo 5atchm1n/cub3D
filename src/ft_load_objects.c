@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 05:10:57 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 20:45:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,6 @@ int				ft_nobject(t_world *world)
 		i++;
 	}
 	return (count);
-}
-
-void			ft_init_object_pos(t_world *world)
-{
-	int			i;
-	int			num;
-
-	num = ft_nobject(world);
-	world->sprite = malloc(sizeof(t_sprite) * num);
-	i = 0;
-	while (i < num)
-	{
-		world->sprite[i].x = 0;
-		world->sprite[i].y = 0;
-		world->sprite[i].id = 0;
-		i++;
-	}
 }
 
 void			ft_init_object(t_world *world)
@@ -84,6 +67,7 @@ void			ft_load_objects(t_world *world)
 
 	i = 0;
 	x = 0;
+	world->sprite = malloc(sizeof(t_sprite) * world->scount);
 	while (i < world->size_y)
 	{
 		j = 0;
@@ -91,12 +75,13 @@ void			ft_load_objects(t_world *world)
 		{
 			if (world->map[i][j] == '2' || world->map[i][j] == '3')
 			{
-				world->sprite[x].x = j + 0.5;
-				world->sprite[x].y = i + 0.5;
+				world->sprite[x].x = (double)j + 0.5;
+				world->sprite[x].y = (double)i + 0.5;
 				world->sprite[x].id = world->map[i][j] - 48 - 2;
 				world->sprite[x].udiv = 1;
 				world->sprite[x].vdiv = 1;
 				world->sprite[x].vmove = 0.0;
+			//	world->map[i][j] = '0';
 				printf("obj[%d] : x = %.5f\n", x, world->sprite[x].x);
 				printf("obj[%d] : y = %.5f\n", x, world->sprite[x].y);
 				printf("obj[%d] : id = %d\n", x, world->sprite[x].id);
@@ -109,4 +94,5 @@ void			ft_load_objects(t_world *world)
 		}
 		i++;
 	}
+	printf("X = %d\n", x);
 }

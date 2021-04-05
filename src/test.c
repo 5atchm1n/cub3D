@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:17:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 23:45:10 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 20:29:24 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ static void		ft_print_info(t_cub *game)
 	printf("px = %.5f\n", game->player.camera.px);
 	printf("py = %.5f\n", game->player.camera.py);
 	printf("offset = %.5f\n", game->world.offset);
+	int x = 0;
+	while (x < ft_nobject(&game->world))
+	{
+	printf("obj[%d] : x = %.5f\n", x, game->world.sprite[x].x);
+	printf("obj[%d] : y = %.5f\n", x, game->world.sprite[x].y);
+	printf("obj[%d] : id = %d\n", x, game->world.sprite[x].id);
+	printf("obj[%d] : udiv = %d\n", x, game->world.sprite[x].udiv);
+	printf("obj[%d] : vdiv = %d\n", x, game->world.sprite[x].vdiv);
+	printf("obj[%d] : vmove = %.5f\n", x, game->world.sprite[x].vmove);
+	x++;
+	}
+
 }
 
 int				main(int argc, char **argv)
