@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 03:47:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 05:10:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				ft_nobject(t_world *world)
 		j = 0;
 		while (j < world->size_x)
 		{
-			if (world->map[i][j] > '1')
+			if (world->map[i][j] == '2' || world->map[i][j] == '3')
 				count++;
 			j++;
 		}
@@ -47,7 +47,7 @@ void			ft_init_object_pos(t_world *world)
 		world->sprite[i].x = 0;
 		world->sprite[i].y = 0;
 		world->sprite[i].id = 0;
-				i++;
+		i++;
 	}
 }
 
@@ -96,7 +96,7 @@ void			ft_load_objects(t_world *world)
 				world->sprite[x].id = world->map[i][j] - 48 - 2;
 				world->sprite[x].udiv = 1;
 				world->sprite[x].vdiv = 1;
-				world->sprite[x].vmove = 64.0;
+				world->sprite[x].vmove = 0.0;
 				printf("obj[%d] : x = %.5f\n", x, world->sprite[x].x);
 				printf("obj[%d] : y = %.5f\n", x, world->sprite[x].y);
 				printf("obj[%d] : id = %d\n", x, world->sprite[x].id);

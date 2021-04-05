@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 02:51:36 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/05 04:53:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define MOVE_SPEED 0.02
 # define TURN_SPEED 0.01
 # define MAP_SIZE 0.2
-# define TEXTURES 4
+# define TEXTURES 5
 # define SPRITES 2
 # define SPRITE_H 64
 # define SPRITE_W 64
