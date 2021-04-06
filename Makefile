@@ -6,8 +6,7 @@ SRCS =	read_map.c \
 		ft_quit.c \
 		ft_set_settings.c \
 		draw.c \
-		ft_keypress.c \
-		ft_keyrelease.c \
+		ft_keyhook.c \
 		ft_move.c \
 		ft_init.c \
 		ft_utils.c \
@@ -69,7 +68,7 @@ $(NAME) : mlx libft ${OBJS}
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${OBJDIR}/%.o: ${SRCDIR}/%.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
 		@mkdir -p ${OBJDIR}
 		@${CC} ${CFLAGS} -I./inc -c $< -o $@
 
