@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:07:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/06 21:52:44 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 00:07:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
 		x = 0;
 		while (x < img->x)
 		{
-			tex[img->x * y  + x] = img->add[img->x * y + x];
+			tex[img->x * y + x] = img->add[img->x * y + x];
 			x++;
 		}
 		y++;

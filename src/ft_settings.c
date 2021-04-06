@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/06 21:47:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 00:05:31 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char		*ft_set_path(char *line, char *dir)
 	isdir = 0;
 	if (*line && *line == dir[0])
 		isdir++;
-		line++;
+	line++;
 	if (*line && *line == dir[1])
 	{
 		isdir++;
@@ -31,7 +31,7 @@ static char		*ft_set_path(char *line, char *dir)
 		line++;
 	if (isdir == 2)
 		path = ft_strdup(line);
-	return(path);
+	return (path);
 }
 
 static char		*ft_set_sprite_path(char *line)

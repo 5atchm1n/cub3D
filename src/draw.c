@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/03 04:14:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/06 23:26:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,4 @@ void		ft_draw(t_mlx *mlx)
 		y++;
 	}
 	mlx_put_image_to_window(mlx->win.mlx, mlx->win.win, mlx->img.img, 0, 0);
-}
-
-void		ft_vertline(int x, int drawstart, int drawend, int color,
-		t_img *img)
-{
-	int		start;
-
-	start = drawstart;
-	while (start < drawend)
-	{
-		ft_pixelput(img, x, start, color);
-		start++;
-	}
-}
-
-void		ft_pixelput(t_img *img, int x, int y, int color)
-{
-	int		*dst;
-
-	dst = img->add + ( y * img->len + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
 }

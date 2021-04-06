@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/03 05:02:40 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/06 23:24:54 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static void		ft_minimap_player(t_player *player, t_world *world, t_mlx *mlx)
 	{
 		x1 = 1 * cos(angle);
 		y1 = 1 * sin(angle);
-		ft_pixelput(&mlx->img, x + x1, y + y1, 0x00FFFFFF);
 		mlx->buffer[(int)(y + y1)][(int)(x + x1)] = 0x00FFFFFF;
 		angle += 0.1;
 	}

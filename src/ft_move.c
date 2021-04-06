@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/06 00:37:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 00:05:56 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ static void		ft_move_right(t_vector *v, char **map)
 	double		x;
 	double		y;
 
-	x = v->x + (v->dy * MOVE_SPEED);
-	y = v->y - (v->dx * MOVE_SPEED);
+	x = v->x + v->dy * MOVE_SPEED;
+	y = v->y - v->dx * MOVE_SPEED;
 	if (map[(int)y][(int)x] == '0')
 	{
 		v->x += v->dy * MOVE_SPEED;
@@ -119,7 +119,6 @@ int				ft_move(t_cub *game)
 		ft_move_left(&game->player.vector, game->world.map);
 	if (game->player.move.right)
 		ft_move_right(&game->player.vector, game->world.map);
-// SPLIT FILES HERE //	
 	ft_raycasting(game);
 	ft_cast_sprites(game);
 	ft_minimap(game);

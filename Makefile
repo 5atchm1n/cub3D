@@ -41,6 +41,8 @@ SRCDIR = src
 
 OBJS = $(addprefix ${OBJDIR}/,${SRCS:.c=.o})
 
+NORM = $(addprefix ${SRCDIR}/,${SRCS})
+
 all : ${NAME}
 
 mlx :
@@ -70,6 +72,9 @@ $(NAME) : mlx libft ${OBJS}
 ${OBJDIR}/%.o: ${SRCDIR}/%.c
 		@mkdir -p ${OBJDIR}
 		@${CC} ${CFLAGS} -I./inc -c $< -o $@
+
+norm :
+		@~/.norminette/norminette.rb ${NORM}
 
 clean :	
 		@rm -rf ${OBJDIR} > /dev/null
