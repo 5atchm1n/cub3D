@@ -2,7 +2,9 @@ NAME = cub3D
 
 SRCS =	read_map.c \
 		test.c \
-		ft_setparams.c \
+		ft_settings.c \
+		ft_quit.c \
+		ft_set_settings.c \
 		draw.c \
 		ft_keypress.c \
 		ft_keyrelease.c \
@@ -59,7 +61,7 @@ libft :
 
 $(NAME) : mlx libft ${OBJS}
 		@echo -n  "Generating ${NAME}"
-		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 .c.o:

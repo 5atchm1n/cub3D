@@ -1,10 +1,11 @@
 R	800	1200
-NO	texture/brick.xpm
-SO	texture/brick.xpm
-WE	texture/colorstone.xpm
-EA	texture/rock.xpm
+NO	textures/wood.xpm
+SO	textures/purplestone.xpm
+WE	textures/colorstone.xpm
+EA	textures/moss.xpm
 
-S	texture/barrel.xpm
+S	textures/barrel.xpm
+S	textures/tree.xpm
 F	220,100,0
 C	225,30,0
 

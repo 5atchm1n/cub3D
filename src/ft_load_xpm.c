@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:07:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/03 15:51:41 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/06 21:52:44 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,18 @@ static void		ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
 void			ft_load_textures(t_mlx *mlx, t_world *world)
 {
 	t_img		img;
+	int			i;
 
-	ft_load_xpm(mlx, world->tex[0], "textures/brick.xpm", &img);
-	ft_load_xpm(mlx, world->tex[1], "textures/purplestone.xpm", &img);
-	ft_load_xpm(mlx, world->tex[2], "textures/colorstone.xpm", &img);
-	ft_load_xpm(mlx, world->tex[3], "textures/blue_brick.xpm", &img);
-	ft_load_xpm(mlx, world->obj[0], "textures/barrel.xpm", &img);
-	ft_load_xpm(mlx, world->obj[1], "textures/tree.xpm", &img);
+	i = 0;
+	while (i < TEXTURES)
+	{
+		ft_load_xpm(mlx, world->tex[i], world->tpath[i], &img);
+		i++;
+	}
+	i = 0;
+	while (i < SPRITES)
+	{
+		ft_load_xpm(mlx, world->obj[i], world->objpath[i], &img);
+		i++;
+	}
 }

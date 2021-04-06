@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 20:57:52 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/06 22:48:35 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define MOVE_SPEED 0.02
 # define TURN_SPEED 0.01
 # define MAP_SIZE 0.2
-# define TEXTURES 5
+# define TEXTURES 4
 # define SPRITES 2
 # define SPRITE_H 64
 # define SPRITE_W 64
@@ -35,6 +35,13 @@
 /*
 ** RAYCASTING, TEXTURE CASTING, GRID
 */
+
+typedef struct		t_error
+{
+	int				error;
+	char			**errmsg;
+}					t_error;
+
 
 typedef enum		e_dir
 {
@@ -192,6 +199,8 @@ typedef struct		s_world
 	int				**obj;
 	double			*zbuffer;
 	int				scount;
+	char			**tpath;
+	char			**objpath;
 }					t_world;
 /*
 ** GLOBAL STRUCT
@@ -227,6 +236,9 @@ void				ft_init_object(t_world *world);
 int					ft_quit(t_cub *game);
 int					ft_nobject(t_world *world);
 void				ft_sort_sprites(t_objs *objs, int count);
+int					ft_set_res(char *line, t_res *res);
+int					ft_set_colour(char *line, int *color);
+
 /*
 ** MOVE PLAYER AND ROTATE PLAYER
 */

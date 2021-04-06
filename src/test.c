@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:17:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 20:29:24 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/06 21:15:51 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		ft_print_info(t_cub *game)
 {
 	int			j;
 	int			i;
+	int			x;
 
 	i = 0;
 	while (i < game->world.size_y)
@@ -43,6 +44,7 @@ static void		ft_print_info(t_cub *game)
 	printf("res_y = %d\n", game->mlx.res.y);
 	printf("floor = %d | %#.8x \n", game->world.floor, game->world.floor);
 	printf("ceiling = %d | %#.8x\n", game->world.ceiling, game->world.ceiling);
+	// PRINT PLAYER VECVTOR
 	printf("x = %.5f\n", game->player.vector.x);
 	printf("y = %.5f\n", game->player.vector.y);
 	printf("dx = %.5f\n", game->player.vector.dx);
@@ -50,7 +52,9 @@ static void		ft_print_info(t_cub *game)
 	printf("px = %.5f\n", game->player.camera.px);
 	printf("py = %.5f\n", game->player.camera.py);
 	printf("offset = %.5f\n", game->world.offset);
-	int x = 0;
+/*	
+	// PRINT SPRITES INFO
+	x = 0;
 	while (x < ft_nobject(&game->world))
 	{
 	printf("obj[%d] : x = %.5f\n", x, game->world.sprite[x].x);
@@ -61,7 +65,20 @@ static void		ft_print_info(t_cub *game)
 	printf("obj[%d] : vmove = %.5f\n", x, game->world.sprite[x].vmove);
 	x++;
 	}
-
+*/
+	// PRINT PATHS
+	x = 0;
+	while (x < TEXTURES)
+	{
+		printf("tpath[%d] = %s\n", x ,game->world.tpath[x]);
+		x++;
+	}
+	x = 0;
+	while (x < SPRITES)
+	{
+		printf("objpath[%d] = %s\n", x ,game->world.objpath[x]);
+		x++;
+	}
 }
 
 int				main(int argc, char **argv)
@@ -76,7 +93,7 @@ int				main(int argc, char **argv)
 	ft_init(&game, argv[1]);
 	mlx_hook(game.mlx.win.win, 2, 1L << 0, &ft_keypress, &game);
 	mlx_hook(game.mlx.win.win, 3, 1L << 1, &ft_keyrelease, &game);
-	//	mlx_mouse_hook(win.win, mouse_hook, &win);
+	//mlx_mouse_hook(win.win, mouse_hook, &win);
 	//mlx_key_hook(game.mlx.win.win, key_hook, &game);
 	mlx_hook(game.mlx.win.win, 33, 1L << 2, &ft_quit, &game);
 	mlx_loop_hook(game.mlx.win.mlx, &ft_move, &game);

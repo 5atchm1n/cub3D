@@ -6,42 +6,11 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 23:44:23 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/06 21:49:01 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int			ft_quit(t_cub *game)
-{
-	int		i;
-
-	i = 0;
-	while (i < game->world.size_y)
-	{
-		free(game->world.map[i]);
-		i++;
-	}
-	free(game->world.map);
-	i = 0;
-	while (i < game->mlx.res.y)
-	{
-		free(game->mlx.buffer[i]);
-		i++;
-	}
-	free(game->mlx.buffer);
-	i = 0;
-	while (i < TEXTURES)
-	{
-		free(game->world.tex[i]);
-		i++;
-	}
-	free(game->world.tex);
-	mlx_destroy_image(game->mlx.win.mlx, game->mlx.img.img);
-	mlx_destroy_window(game->mlx.win.mlx, game->mlx.win.win);
-	exit(0);
-	return (0);
-}
 
 static int	ft_turn_start(int keycode, t_cub *game)
 {

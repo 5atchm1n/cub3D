@@ -1,8 +1,8 @@
 R	800	1200
-NO	texture/brick.xpm
-SO	texture/brick.xpm
-WE	texture/colorstone.xpm
-EA	texture/rock.xpm
+NO	textures/brick.xpm
+SO	textures/brick.xpm
+WE	textures/colorstone.xpm
+EA	textures/rock.xpm
 
 S	texture/barrel.xpm
 F	220,100,0
