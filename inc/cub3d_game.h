@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 19:58:36 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 22:44:29 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ typedef enum		e_errn
 {
 	NO_ERR = 0,
 	INV_CHAR = 1,
-	O_MAP = 2
+	O_MAP = 2,
+	IS_PATH = 3,
+	INV_FILE = 4,
+	SPACE_EOL = 5,
+	INV_EXT = 6
 }					t_errn;
 
 typedef struct		s_grid

@@ -6,46 +6,59 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 20:43:40 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 21:03:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 23:01:35 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-
-static char	ft_check_extension(char *path)
+static void		ft_check_path(char *path, t_error *error)
 {
-	len = ft_strlen(path);
-	if (len < 4)
-		return (-1);
-	if (ft_isspace(path[len]))
-		return (-1);
-	if (path[len] != 'm')
-		return (-1);
-	if (path[len - 1] != 'p')
-		return (-1);
-	if (path[len - 2] != 'x')
-		return (-1);
-	if (path[len - 3] != '.')
-		return (-1);
+	int		test;
+
+	test = open(path, O_DIRECTORY);
+	if (test > 0)
+	{
+		error->id = IS_PATH;
+		close(test);
+	}
+	test = open(path, O_RDONLY);
+	if (test < 0)
+		error->id = INV_FILE;
+	else
+		close(test);
 }
 
-void		ft_check_paths(t_world *world)
+static void		ft_check_extension(char *path, t_error *error)
 {
-	int		i;
+	int			len;
+
+	len = ft_strlen(path) - 1;
+	if (len < 4)
+		error->id = INV_FILE;
+	if (ft_isspace(path[len]))
+		error->id = SPACE_EOL;
+	if (path[len] != 'm' || path[len - 1] != 'p' ||
+			path[len - 2] != 'x' || path[len - 3] != '.')
+		error->id = INV_EXT;
+}
+
+void			ft_check_files(t_world *world, t_error *error)
+{
+	int			i;
 
 	i = 0;
 	while (i < TEXTURES)
 	{
-		ft_check_extension(world->tpath[i]);
+		ft_check_extension(world->tpath[i], error);
+		ft_check_path(world->tpath[i], error);
 		i++;
 	}
 	i = 0;
 	while (i < SPRITES)
 	{
-		ft_check_extension(world->objpath[i]);
+		ft_check_extension(world->objpath[i], error);
+		ft_check_path(world->objpath[i], error);
 		i++;
 	}
 }
-

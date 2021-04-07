@@ -4,7 +4,8 @@ SO	textures/brick.xpm
 WE	textures/colorstone.xpm
 EA	textures/rock.xpm
 
-S	texture/barrel.xpm
+S	textures/barrel.xpm
+S	textures/tree.xpm
 F	220,100,0
 C	225,30,0
 

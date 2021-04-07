@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:17:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 20:29:58 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 22:47:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int				main(int argc, char **argv)
 	if (argc == 2)
 		ft_settings(argv[1], &game.world, &game.mlx);
 	ft_init(&game, argv[1]);
-	ft_check_map(&game.world, &game);
+	ft_check(&game.world, &game);
 	mlx_hook(game.mlx.win.win, 2, 1L << 0, &ft_keypress, &game);
 	mlx_hook(game.mlx.win.win, 3, 1L << 1, &ft_keyrelease, &game);
 	//mlx_mouse_hook(win.win, mouse_hook, &win);

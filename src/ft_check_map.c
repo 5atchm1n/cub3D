@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 20:31:29 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 22:55:13 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static void		ft_check_map_chars(char **map, t_map_size *size, t_error *error)
 	}
 }
 
-void			ft_check_map(t_world *world, t_cub *game)
+void			ft_check(t_world *world, t_cub *game)
 {
 	t_error		error;
 
@@ -109,6 +109,7 @@ void			ft_check_map(t_world *world, t_cub *game)
 
 	ft_check_map_chars(world->map, &world->msize, &error);
 	ft_check_if_open(world->map, &world->msize, &error);
+	ft_check_files(world, &error);
 	printf("error = %d\n", error.id);
 	printf("co_x = %d\n", error.coords.x);
 	printf("cp_y = %d\n", error.coords.y);

@@ -19,6 +19,7 @@ SRCS =	ft_read_map.c \
 		ft_set_sprites.c \
 		ft_sort_sprites.c \
 		ft_check_map.c \
+		ft_check_paths.c \
 		ft_parse_map.c
 
 CC = clang
