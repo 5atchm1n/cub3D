@@ -6,11 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 20:43:40 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 20:56:52 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 21:03:25 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+
 
 static char	ft_check_extension(char *path)
 {
