@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 00:07:01 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 17:32:26 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void			ft_draw_map(t_world *world, t_mlx *mlx)
 
 	offset = world->offset * MAP_SIZE;
 	grid.y = 0;
-	while (grid.y < world->size_y)
+	while (grid.y < world->msize.y)
 	{
 		grid.x = 0;
-		while (grid.x < world->size_x)
+		while (grid.x < world->msize.x)
 		{
 			if (world->map[grid.y][grid.x] == '0')
 				map_wall(offset, grid, mlx, 0x00000000);

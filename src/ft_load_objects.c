@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/06 21:56:58 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 17:31:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int				ft_nobject(t_world *world)
 
 	i = 0;
 	count = 0;
-	while (i < world->size_y)
+	while (i < world->msize.y)
 	{
 		j = 0;
-		while (j < world->size_x)
+		while (j < world->msize.x)
 		{
 			if (world->map[i][j] == '2' || world->map[i][j] == '3')
 				count++;
@@ -68,10 +68,10 @@ void			ft_load_objects(t_world *world)
 	i = 0;
 	x = 0;
 	world->sprite = malloc(sizeof(t_sprite) * world->scount);
-	while (i < world->size_y)
+	while (i < world->msize.y)
 	{
 		j = 0;
-		while (j < world->size_x)
+		while (j < world->msize.x)
 		{
 			if (world->map[i][j] == '2' || world->map[i][j] == '3')
 			{

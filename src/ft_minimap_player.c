@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/06 23:24:54 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 17:32:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int		ft_can_see(t_world *world, double x, double y)
 	offset = world->offset;
 	grid_y = (int)(y / offset);
 	grid_x = (int)(x / offset);
-	if (grid_x > world->size_x - 1 || grid_x < 0)
+	if (grid_x > world->msize.x - 1 || grid_x < 0)
 		return (0);
-	if (grid_y > world->size_y - 1 || grid_y < 0)
+	if (grid_y > world->msize.y - 1 || grid_y < 0)
 		return (0);
 	if (world->map[grid_y][grid_x] != '0')
 		return (0);

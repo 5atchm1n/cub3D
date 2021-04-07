@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:48:46 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/06 21:49:12 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 17:34:32 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			ft_quit(t_cub *game)
 	int		i;
 
 	i = 0;
-	while (i < game->world.size_y)
+	while (i < game->world.msize.y)
 	{
 		free(game->world.map[i]);
 		i++;

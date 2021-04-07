@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 00:26:46 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 17:37:17 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,40 @@
 # define MAP_SIZE 0.2
 # define MOVE_SPEED 0.02
 # define TURN_SPEED 0.01
+/*
+** MLX -- WINDOW, IMAGE, BUFFER --
+*/
+typedef struct		s_win
+{
+	void			*mlx;
+	void			*win;
+}					t_win;
 
+typedef struct		s_img
+{
+	void			*img;
+	int				*add;
+	int				bpp;
+	int				len;
+	int				endian;
+	int				x;
+	int				y;
+}					t_img;
+
+typedef struct		s_res
+{
+	int				x;
+	int				y;
+}					t_res;
+
+typedef struct		s_mlx
+{
+	t_win			win;
+	t_img			img;
+	t_res			res;
+	int				**buffer;
+	int				on;
+}					t_mlx;
 /*
 ** PLAYER -- MOVE, VECTOR, CAMERA --
 */
@@ -54,30 +87,6 @@ typedef struct		s_player
 /*
 ** WORLD -- MAP, TEXTURES, FLOOR, CEILING --
 */
-typedef struct		s_sort
-{
-	int				order;
-	double			dist;
-}					t_sort;
-
-typedef struct		s_objs
-{
-	int				*order;
-	double			*dist;
-	int				count;
-	double			tx;
-	double			ty;
-	int				spritew;
-	int				spriteh;
-	int				index;
-	int				hitx;
-	int				voffset;
-	int				startx;
-	int				starty;
-	int				endx;
-	int				endy;
-}					t_objs;
-
 typedef struct		s_sprite
 {
 	double			x;
@@ -88,19 +97,24 @@ typedef struct		s_sprite
 	int				vdiv;
 }					t_sprite;
 
+typedef struct		s_map_size
+{
+	int				x;
+	int				y;
+}					t_map_size;
+
 typedef struct		s_world
 {
 	t_sprite		*sprite;
+	t_map_size		msize;
+	double			*zbuffer;
 	float			offset;
 	int				floor;
 	int				ceiling;
-	int				size_x;
-	int				size_y;
-	char			**map;
+	int				scount;
 	int				**tex;
 	int				**obj;
-	double			*zbuffer;
-	int				scount;
+	char			**map;
 	char			**tpath;
 	char			**objpath;
 }					t_world;

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/06 20:04:23 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 17:31:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,17 @@ static void		ft_init_map(t_world *world)
 	int			j;
 
 	i = 0;
-	world->map = (char **)malloc(sizeof(char *) * world->size_y);
-	while (i < world->size_y)
+	world->map = (char **)malloc(sizeof(char *) * world->msize.y);
+	while (i < world->msize.y)
 	{
-		world->map[i] = (char *)malloc(sizeof(char) * world->size_x);
+		world->map[i] = (char *)malloc(sizeof(char) * world->msize.x);
 		i++;
 	}
 	i = 0;
-	while (i < world->size_y)
+	while (i < world->msize.y)
 	{
 		j = 0;
-		while (j < world->size_x)
+		while (j < world->msize.x)
 		{
 			world->map[i][j] = ' ';
 			j++;
@@ -117,10 +117,12 @@ void			ft_init(t_cub *game, char *map)
 	ft_init_img_buffer(&game->mlx);
 	ft_init_textures(&game->world);
 	ft_init_object(&game->world);
+	
 	game->world.offset = (float)game->mlx.res.x /
-		(float)game->world.size_x;
+		(float)game->world.msize.x;
 	game->world.map = ft_parse_map(map, &game->world);
 	game->world.scount = ft_nobject(&game->world);
+	
 	ft_player_pos(&game->player, &game->world);
 	ft_load_objects(&game->world);
 	ft_load_textures(&game->mlx, &game->world);

@@ -1,6 +1,6 @@
 NAME = cub3D
 
-SRCS =	read_map.c \
+SRCS =	ft_read_map.c \
 		test.c \
 		ft_settings.c \
 		ft_quit.c \
@@ -18,6 +18,7 @@ SRCS =	read_map.c \
 		ft_set_texture.c \
 		ft_set_sprites.c \
 		ft_sort_sprites.c \
+		ft_check_map.c \
 		ft_parse_map.c
 
 CC = clang

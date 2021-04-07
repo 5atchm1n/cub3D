@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 00:28:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 19:58:36 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,23 @@
 /*
 ** RAYCASTING, TEXTURE CASTING, GRID
 */
+typedef enum		e_errn
+{
+	NO_ERR = 0,
+	INV_CHAR = 1,
+	O_MAP = 2
+}					t_errn;
+
+typedef struct		s_grid
+{
+	int				x;
+	int				y;
+}					t_grid;
+
 typedef struct		s_error
 {
-	int				error;
+	t_errn			id;
+	t_grid			coords;
 	char			**errmsg;
 }					t_error;
 
@@ -56,12 +70,6 @@ typedef struct		s_ray
 	double			dw;
 }					t_ray;
 
-typedef struct		s_grid
-{
-	int				x;
-	int				y;
-}					t_grid;
-
 typedef struct		s_texture
 {
 	t_dir			dir;
@@ -70,40 +78,31 @@ typedef struct		s_texture
 	int				end;
 	double			pos;
 }					t_texture;
-/*
-** MLX -- WINDOW, IMAGE, BUFFER --
-*/
-typedef struct		s_win
-{
-	void			*mlx;
-	void			*win;
-}					t_win;
 
-typedef struct		s_img
+typedef struct		s_sort
 {
-	void			*img;
-	int				*add;
-	int				bpp;
-	int				len;
-	int				endian;
-	int				x;
-	int				y;
-}					t_img;
+	int				order;
+	double			dist;
+}					t_sort;
 
-typedef struct		s_res
+typedef struct		s_objs
 {
-	int				x;
-	int				y;
-}					t_res;
+	int				*order;
+	double			*dist;
+	int				count;
+	double			tx;
+	double			ty;
+	int				spritew;
+	int				spriteh;
+	int				index;
+	int				hitx;
+	int				voffset;
+	int				startx;
+	int				starty;
+	int				endx;
+	int				endy;
+}					t_objs;
 
-typedef struct		s_mlx
-{
-	t_win			win;
-	t_img			img;
-	t_res			res;
-	int				**buffer;
-	int				on;
-}					t_mlx;
 /*
 ** GLOBAL STRUCT
 */

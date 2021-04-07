@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 00:05:31 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 17:29:00 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		ft_set_texture_paths(char *line, t_world *world, int *i)
 		world->tpath[2] = ft_set_path(line, "EA");
 	if (*line && *line == 'W')
 		world->tpath[3] = ft_set_path(line, "WE");
-	if (*line && *line == 'S' && ft_isspace(*(line + 1)))
+	if (*line && *line == 'S' && ft_isspace(*(line + 1)) && *i < SPRITES)
 	{
 		world->objpath[*i] = ft_set_sprite_path(line);
 		*i = *i + 1;
@@ -96,8 +96,8 @@ static int		ft_setparams(char *line, t_world *world, t_mlx *mlx, int *i)
 		ft_set_colour(line, &world->ceiling);
 	if (*line == '1')
 	{
-		ft_set_size(line, &world->size_x);
-		world->size_y = world->size_y + 1;
+		ft_set_size(line, &world->msize.x);
+		world->msize.y = world->msize.y + 1;
 	}
 	if (*line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
 		ft_set_texture_paths(line, world, i);

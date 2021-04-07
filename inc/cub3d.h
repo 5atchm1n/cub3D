@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 00:25:17 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/07 20:29:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ char	**ft_parse_map(char *map, t_world *world);
 /*
 ** CUSTOM PIXEL PUT FOR PERFORMANCE - MLX
 */
-void	ft_pixelput(t_img *img, int x, int y, int color);
-void	ft_vertline(int x, int start, int end, int color, t_img *img);
 void	ft_draw(t_mlx *mlx);
 /*
 ** INITIALIZE PLAYER AND GAME
@@ -50,6 +48,8 @@ int		ft_nobject(t_world *world);
 void	ft_sort_sprites(t_objs *objs, int count);
 int		ft_set_res(char *line, t_res *res);
 int		ft_set_colour(char *line, int *color);
+void	ft_check_map(t_world *world, t_cub *game);
+
 /*
 ** MOVE PLAYER AND ROTATE PLAYER
 */
