@@ -6,23 +6,42 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:48:46 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 17:34:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 05:01:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			ft_quit(t_cub *game)
+static void	ft_free_world(t_world *world)
 {
 	int		i;
 
 	i = 0;
-	while (i < game->world.msize.y)
+	while (i < world->msize.y)
 	{
-		free(game->world.map[i]);
+		free(world->map[i]);
 		i++;
 	}
-	free(game->world.map);
+	free(world->map);
+	i = 0;
+	while (i < TEXTURES)
+	{
+		free(world->tex[i]);
+		free(world->tpath[i]);
+		i++;
+	}
+	i = 0;
+	while (i < SPRITES)
+	{
+		free(world->objpath[i]);
+		i++;
+	}
+}
+
+int			ft_quit(t_cub *game)
+{
+	int		i;
+
 	i = 0;
 	while (i < game->mlx.res.y)
 	{
@@ -30,19 +49,7 @@ int			ft_quit(t_cub *game)
 		i++;
 	}
 	free(game->mlx.buffer);
-	i = 0;
-	while (i < TEXTURES)
-	{
-		free(game->world.tex[i]);
-		free(game->world.tpath[i]);
-		i++;
-	}
-	i = 0;
-	while (i < SPRITES)
-	{
-		free(game->world.objpath[i]);
-		i++;
-	}
+	ft_free_world(&game->world);
 	free(game->world.objpath);
 	free(game->world.tex);
 	free(game->world.tpath);

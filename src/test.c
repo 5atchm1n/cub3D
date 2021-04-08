@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:17:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 02:08:19 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 03:52:29 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void		ft_print_info(t_cub *game)
 	printf("map size = map[%d][%d]\n", game->world.msize.y, game->world.msize.x);
 	printf("res_x = %d\n", game->mlx.res.x);
 	printf("res_y = %d\n", game->mlx.res.y);
-	printf("floor = %d | %#.8x \n", game->world.floor, game->world.floor);
-	printf("ceiling = %d | %#.8x\n", game->world.ceiling, game->world.ceiling);
+	printf("floor = %d | %#.8x \n", game->world.floor.color, game->world.floor.color);
+	printf("ceiling = %d | %#.8x\n", game->world.ceiling.color, game->world.ceiling.color);
 	// PRINT PLAYER VECVTOR
 	printf("x = %.5f\n", game->player.vector.x);
 	printf("y = %.5f\n", game->player.vector.y);
@@ -79,7 +79,6 @@ static void		ft_print_info(t_cub *game)
 		printf("objpath[%d] = %s\n", x ,game->world.objpath[x]);
 		x++;
 	}
-
 }
 
 int				main(int argc, char **argv)

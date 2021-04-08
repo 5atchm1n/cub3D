@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 22:55:13 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 04:50:11 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int ft_check_next(int x, int y, char **map, t_map_size *size)
+static int		ft_check_next(int x, int y, char **map, t_map_size *size)
 {
 	if (x == 0 || x == size->x)
 		return (1);
@@ -29,8 +29,7 @@ static int ft_check_next(int x, int y, char **map, t_map_size *size)
 	return (0);
 }
 
-
-static void	ft_check_if_open(char **map, t_map_size *size, t_error *error)
+static void		ft_check_if_open(char **map, t_map_size *size, t_error *error)
 {
 	int		x;
 	int		y;
@@ -57,10 +56,10 @@ static void	ft_check_if_open(char **map, t_map_size *size, t_error *error)
 	}
 }
 
-static int	ft_isvalid(char c)
+static int		ft_isvalid(char c)
 {
-	char	*dir;
-	int		i;
+	char		*dir;
+	int			i;
 
 	dir = " NSEW01";
 	i = 0;
@@ -106,7 +105,6 @@ void			ft_check(t_world *world, t_cub *game)
 	error.id = NO_ERR;
 	error.coords.x = 0;
 	error.coords.y = 0;
-
 	ft_check_map_chars(world->map, &world->msize, &error);
 	ft_check_if_open(world->map, &world->msize, &error);
 	ft_check_files(world, &error);

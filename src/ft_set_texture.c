@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 03:51:42 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/04 01:52:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 03:49:07 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 	y = 0;
 	ft_set_tex_dir(t, ray);
 	while (y <= t->start)
-		game->mlx.buffer[y++][x] = game->world.ceiling;
+		game->mlx.buffer[y++][x] = game->world.ceiling.color;
 	while (y < t->end)
 	{
 		tex_y = (int)tex_pos & (TEX_Y - 1);
@@ -74,7 +74,7 @@ void			ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 	}
 	while (y < game->mlx.res.y)
 	{
-		game->mlx.buffer[y][x] = game->world.floor;
+		game->mlx.buffer[y][x] = game->world.floor.color;
 		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 02:06:39 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 04:41:36 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,47 +25,56 @@
 # include "cub3d_error.h"
 
 /*
-** PARSE MAP AND INITILIASE SETTINGS
-*/
-int		ft_settings(char *map_path, t_cub *game);
-int		ft_get_line(char **line, int fd);
-char	**ft_parse_map(char *map_path, t_world *world);
-/*
 ** CUSTOM PIXEL PUT FOR PERFORMANCE - MLX
 */
 void	ft_draw(t_mlx *mlx);
 /*
-** INITIALIZE PLAYER AND GAME
+** INITIALIZE GAME
 */
 void	ft_init(t_cub *game, char *map);
-void	ft_player_pos(t_player *player, t_world *world);
+void	ft_init_player(t_player *player, t_world *world);
 void	ft_load_textures(t_mlx *mlx, t_world *world);
 void	ft_load_objects(t_world *world);
-void	ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x);
 void	ft_init_object_pos(t_world *world);
 void	ft_init_object(t_world *world);
-int		ft_quit(t_cub *game);
-int		ft_nobject(t_world *world);
-void	ft_sort_sprites(t_objs *objs, int count);
-int		ft_set_res(char *line, t_res *res);
-int		ft_set_colour(char *line, int *color);
-void	ft_check(t_world *world, t_cub *game);
-void	ft_check_files(t_world *world, t_error *error);
+int		ft_settings(char *map_path, t_cub *game);
+void	ft_init_world(t_world *world, t_mlx mlx, char *map_path);
 /*
-** MOVE PLAYER AND ROTATE PLAYER
+** MOVE PLAYER
 */
 int		ft_keypress(int keycode, t_cub *game);
 int		ft_keyrelease(int keycode, t_cub *game);
 int		ft_move(t_cub *game);
+/*
+** RAYCASTING - SPRITES, TEXTURES
+*/
 void	ft_raycasting(t_cub *game);
+void	ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x);
+int		ft_nobject(t_world *world);
 void	ft_cast_sprites(t_cub *game);
+void	ft_sort_sprites(t_objs *objs, int count);
 /*
 ** MINIMAP
 */
 void	ft_draw_map(t_world *world, t_mlx *mlx);
 void	ft_minimap(t_cub *game);
 /*
-** UTILS FUNCTION ADD TO LIBFT
+** ERROR AND EXIT
+*/
+void	ft_check(t_world *world, t_cub *game);
+void	ft_check_files(t_world *world, t_error *error);
+int		ft_quit(t_cub *game);
+/*
+** UTILS FUNCTION
+*/
+int		ft_get_line(char **line, int fd);
+char	**ft_copy_map(char *map_path, t_world *world);
+int		ft_set_rgb(char *line, t_color *color);
+int		ft_set_res(char *line, t_res *res);
+void	ft_set_texture_paths(char *line, t_world *world, int *i);
+int		ft_rgb_to_int(t_color color);
+/*
+** ADD TO LIBFT
 */
 int		ft_isspace(char c);
 
