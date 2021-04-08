@@ -6,15 +6,15 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:48:46 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 16:34:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 00:50:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void ft_free_map(t_world *world)
+static void		ft_free_map(t_world *world)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (i < world->msize.y)
@@ -25,9 +25,9 @@ static void ft_free_map(t_world *world)
 	free(world->map);
 }
 
-void		ft_free_world(t_world *world)
+void			ft_free_world(t_world *world)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (i < TEXTURES)
@@ -44,9 +44,9 @@ void		ft_free_world(t_world *world)
 	}
 }
 
-int			ft_quit(t_cub *game)
+int				ft_quit(t_cub *game)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (i < game->mlx.res.y)

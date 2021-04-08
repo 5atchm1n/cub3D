@@ -1,12 +1,12 @@
 NAME = cub3D
 
 INC =	cub3d.h \
-		cub3d_error.h \
 		cub3d_game.h \
 		cub3d_world.h
 
 SRCS =	ft_read_map.c \
 		ft_settings.c \
+		ft_import_settings.c \
 		ft_settings_utils.c \
 		ft_init.c \
 		ft_raycast.c \
@@ -18,6 +18,7 @@ SRCS =	ft_read_map.c \
 		ft_init_player.c \
 		ft_get_line.c \
 		ft_quit.c \
+		ft_error.c \
 		ft_keyhook.c \
 		ft_move.c \
 		ft_utils.c \
@@ -26,7 +27,6 @@ SRCS =	ft_read_map.c \
 		ft_load_xpm.c \
 		ft_load_objects.c \
 		ft_set_sprites.c \
-		ft_error.c \
 		test.c 
 
 CC = clang
@@ -72,7 +72,7 @@ libft :
 
 $(NAME) : mlx libft ${OBJS}
 		@echo -n  "Generating ${NAME}"
-		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 .c.o:

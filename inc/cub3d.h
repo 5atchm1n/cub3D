@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 16:28:03 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 00:40:42 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@
 */
 void	ft_draw(t_mlx *mlx);
 /*
+** SETTINGS
+*/
+int		ft_settings(char *map_path, t_cub *game);
+void	ft_import_settings(char *map_path, t_cub *game, t_error *error);
+/*
 ** INITIALIZE GAME
 */
 void	ft_init(t_cub *game, char *map);
@@ -37,7 +42,6 @@ void	ft_load_textures(t_mlx *mlx, t_world *world);
 void	ft_load_objects(t_world *world);
 void	ft_init_object_pos(t_world *world);
 void	ft_init_object(t_world *world);
-int		ft_settings(char *map_path, t_cub *game);
 void	ft_init_world(t_world *world, t_mlx mlx, char *map_path);
 /*
 ** MOVE PLAYER
@@ -64,7 +68,7 @@ void	ft_minimap(t_cub *game);
 void	ft_check(t_world *world, t_cub *game);
 void	ft_check_files(t_world *world, t_error *error);
 int		ft_quit(t_cub *game);
-void	ft_error(t_error error, t_cub *game);
+void	ft_error(t_error error, t_cub *game, int state);
 void	ft_free_world(t_world *world);
 /*
 ** UTILS FUNCTION
@@ -79,5 +83,5 @@ int		ft_rgb_to_int(t_color color);
 ** ADD TO LIBFT
 */
 int		ft_isspace(char c);
-
+int		ft_strcmp(char *s1, char *s2);
 #endif

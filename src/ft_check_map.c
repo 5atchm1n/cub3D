@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 17:19:53 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 00:43:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ void			ft_check(t_world *world, t_cub *game)
 	ft_check_if_open(world->map, &world->msize, &error);
 	ft_check_files(world, &error);
 	if (error.id != 0)
-		ft_error(error, game);
+		ft_error(error, game, 0);
 }

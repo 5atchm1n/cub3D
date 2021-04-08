@@ -6,11 +6,31 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 04:55:13 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 00:51:22 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int			ft_strcmp(char *s1, char *s2)
+{
+	int		l1;
+	int		l2;
+	int		i;
+
+	l1 = ft_strlen(s1);
+	l2 = ft_strlen(s2);
+	i = 0;
+	if (l1 != l2)
+		return (0);
+	while (i < l1)
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int			ft_isspace(char c)
 {
@@ -26,7 +46,6 @@ int			ft_rgb_to_int(t_color color)
 	val = color.rgb.r;
 	val = (val << 8) + color.rgb.g;
 	val = (val << 8) + color.rgb.b;
-
 	return (val);
 }
 
