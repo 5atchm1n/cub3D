@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 22:54:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 02:06:39 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@
 # include "../libft/inc/libft.h"
 # include "cub3d_world.h"
 # include "cub3d_game.h"
+# include "cub3d_error.h"
 
 /*
 ** PARSE MAP AND INITILIASE SETTINGS
 */
-int		ft_settings(char *map, t_world *world, t_mlx *mlx);
+int		ft_settings(char *map_path, t_cub *game);
 int		ft_get_line(char **line, int fd);
-char	**ft_parse_map(char *map, t_world *world);
+char	**ft_parse_map(char *map_path, t_world *world);
 /*
 ** CUSTOM PIXEL PUT FOR PERFORMANCE - MLX
 */

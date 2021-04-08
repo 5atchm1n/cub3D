@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 22:44:29 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 00:42:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,12 @@
 /*
 ** RAYCASTING, TEXTURE CASTING, GRID
 */
-typedef enum		e_errn
-{
-	NO_ERR = 0,
-	INV_CHAR = 1,
-	O_MAP = 2,
-	IS_PATH = 3,
-	INV_FILE = 4,
-	SPACE_EOL = 5,
-	INV_EXT = 6
-}					t_errn;
 
 typedef struct		s_grid
 {
 	int				x;
 	int				y;
 }					t_grid;
-
-typedef struct		s_error
-{
-	t_errn			id;
-	t_grid			coords;
-	char			**errmsg;
-}					t_error;
 
 typedef enum		e_dir
 {
