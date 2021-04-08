@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 04:41:36 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 05:25:24 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
-
+# include "mlx.h"
 # include "../libft/inc/libft.h"
+
 # include "cub3d_world.h"
 # include "cub3d_game.h"
-# include "cub3d_error.h"
 
 /*
 ** CUSTOM PIXEL PUT FOR PERFORMANCE - MLX

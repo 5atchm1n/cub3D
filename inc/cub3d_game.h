@@ -5,91 +5,84 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 00:42:43 by sshakya          ###   ########.fr       */
+/*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
+/*   Updated: 2021/04/08 05:26:48 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_GAME_H
 # define CUB3D_GAME_H
 
-# include "mlx.h"
-
-# define BUFF_SIZE 256
-# define TEXTURES 4
-# define SPRITES 2
-# define SPRITE_H 64
-# define SPRITE_W 64
-# define TEX_X 64
-# define TEX_Y 64
+# define PLAYER_SIZE 0.2
+# define MAP_SIZE 0.2
+# define MOVE_SPEED 0.02
+# define TURN_SPEED 0.01
 
 /*
-** RAYCASTING, TEXTURE CASTING, GRID
+** ERROR HANDLING
 */
-
-typedef struct		s_grid
+typedef enum		e_errn
 {
-	int				x;
-	int				y;
-}					t_grid;
+	NO_ERR = 0,
+	INV_CHAR = 1,
+	O_MAP = 2,
+	IS_PATH = 3,
+	INV_FILE = 4,
+	SPACE_EOL = 5,
+	INV_EXT = 6,
+	MAP_NOEND = 7
+}					t_errn;
 
-typedef enum		e_dir
+typedef struct		s_error
 {
-	NO = 0,
-	SO = 1,
-	EA = 2,
-	WE = 3
-}					t_dir;
+	t_errn			id;
+	t_grid			coords;
+	int				texture;
+	int				res;
+	int				floor;
+	int				ceiling;
+	int				map;
 
-typedef struct		s_ray
+}					t_error;
+/*
+** MLX -- WIN, IMG, RES
+*/
+typedef struct		s_mlx
 {
-	double			dirx;
-	double			diry;
-	double			deltax;
-	double			deltay;
-	double			distx;
-	double			disty;
-	int				mapx;
-	int				mapy;
-	int				stepx;
-	int				stepy;
-	int				side;
-	double			dw;
-}					t_ray;
-
-typedef struct		s_texture
+	t_win			win;
+	t_img			img;
+	t_res			res;
+	int				**buffer;
+	int				on;
+}					t_mlx;
+/*
+** PLAYER -- MOVE, VECTOR, CAMERA --
+*/
+typedef struct		s_player
 {
-	t_dir			dir;
-	int				lineheight;
-	int				start;
-	int				end;
-	double			pos;
-}					t_texture;
-
-typedef struct		s_sort
+	t_move			move;
+	t_vector		vector;
+	t_camera		camera;
+}					t_player;
+/*
+** WORLD -- SPRITE, PARAMS, PATHS
+**			TEXTURE, BUFFERS
+*/
+typedef struct		s_world
 {
-	int				order;
-	double			dist;
-}					t_sort;
-
-typedef struct		s_objs
-{
-	int				*order;
-	double			*dist;
-	int				count;
-	double			tx;
-	double			ty;
-	int				spritew;
-	int				spriteh;
-	int				index;
-	int				hitx;
-	int				voffset;
-	int				startx;
-	int				starty;
-	int				endx;
-	int				endy;
-}					t_objs;
-
+	t_sprite		*sprite;
+	t_map_size		msize;
+	t_color			floor;
+	t_color			ceiling;
+	double			*zbuffer;
+	float			offset;
+	int				scount;
+	int				**tex;
+	int				**obj;
+	char			**map;
+	char			**tpath;
+	char			**objpath;
+}					t_world;
 /*
 ** GLOBAL STRUCT
 */

@@ -5,18 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 04:46:28 by sshakya          ###   ########.fr       */
+/*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
+/*   Updated: 2021/04/08 05:27:48 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_WORLD_H
 # define CUB3D_WORLD_H
 
-# define PLAYER_SIZE 0.2
-# define MAP_SIZE 0.2
-# define MOVE_SPEED 0.02
-# define TURN_SPEED 0.01
+# define BUFF_SIZE 256
+# define TEXTURES 4
+# define SPRITES 2
+# define SPRITE_H 64
+# define SPRITE_W 64
+# define TEX_X 64
+# define TEX_Y 64
 
 /*
 ** MLX -- WINDOW, IMAGE, BUFFER --
@@ -44,49 +47,73 @@ typedef struct		s_res
 	int				y;
 }					t_res;
 
-typedef struct		s_mlx
-{
-	t_win			win;
-	t_img			img;
-	t_res			res;
-	int				**buffer;
-	int				on;
-}					t_mlx;
 /*
-** PLAYER -- MOVE, VECTOR, CAMERA --
+** RAYCASTING, TEXTURE CASTING, GRID
 */
-typedef struct		s_move
+typedef struct		s_grid
 {
-	int				left;
-	int				right;
-	int				up;
-	int				down;
-	int				turn_l;
-	int				turn_r;
-}					t_move;
+	int				x;
+	int				y;
+}					t_grid;
 
-typedef struct		s_vector
+typedef enum		e_dir
 {
-	double			x;
-	double			y;
-	double			dx;
-	double			dy;
-}					t_vector;
+	NO = 0,
+	SO = 1,
+	EA = 2,
+	WE = 3
+}					t_dir;
 
-typedef struct		s_camera
+typedef struct		s_ray
 {
-	double			px;
-	double			py;
-}					t_camera;
+	double			dirx;
+	double			diry;
+	double			deltax;
+	double			deltay;
+	double			distx;
+	double			disty;
+	int				mapx;
+	int				mapy;
+	int				stepx;
+	int				stepy;
+	int				side;
+	double			dw;
+}					t_ray;
 
-typedef struct		s_player
+typedef struct		s_texture
 {
-	t_move			move;
-	t_vector		vector;
-	t_camera		camera;
-}					t_player;
+	t_dir			dir;
+	int				lineheight;
+	int				start;
+	int				end;
+	double			pos;
+}					t_texture;
+
+typedef struct		s_sort
+{
+	int				order;
+	double			dist;
+}					t_sort;
+
+typedef struct		s_objs
+{
+	int				*order;
+	double			*dist;
+	int				count;
+	double			tx;
+	double			ty;
+	int				spritew;
+	int				spriteh;
+	int				index;
+	int				hitx;
+	int				voffset;
+	int				startx;
+	int				starty;
+	int				endx;
+	int				endy;
+}					t_objs;
 /*
-** WORLD -- MAP, TEXTURES, FLOOR, CEILING --
+** SUB STRUCTURE - WORLD
 */
 typedef struct		s_sprite
 {
@@ -116,21 +143,31 @@ typedef union		u_color
 	int				color;
 	t_rgb			rgb;
 }					t_color;
-
-typedef struct		s_world
+/*
+** SUB STRUCTURE - PLAYER
+*/
+typedef struct		s_move
 {
-	t_sprite		*sprite;
-	t_map_size		msize;
-	t_color			floor;
-	t_color			ceiling;
-	double			*zbuffer;
-	float			offset;
-	int				scount;
-	int				**tex;
-	int				**obj;
-	char			**map;
-	char			**tpath;
-	char			**objpath;
-}					t_world;
+	int				left;
+	int				right;
+	int				up;
+	int				down;
+	int				turn_l;
+	int				turn_r;
+}					t_move;
+
+typedef struct		s_vector
+{
+	double			x;
+	double			y;
+	double			dx;
+	double			dy;
+}					t_vector;
+
+typedef struct		s_camera
+{
+	double			px;
+	double			py;
+}					t_camera;
 
 #endif
