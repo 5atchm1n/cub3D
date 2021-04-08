@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 04:28:19 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 16:19:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ static t_errn	ft_sanity_check(t_error *error)
 {
 	if (error->map == 1)
 	{
-		if (error->texture < TEXTURES + SPRITES)
-			return (MAP_NOEND);
-		if (error->res < 1 && error->floor < 1 && error->ceiling < 1)
-			return (MAP_NOEND);
+		if (error->texture != TEXTURES + SPRITES)
+			return (MI_FILES);
+		if (error->res != 1)
+			return (MI_RES);
+		if (error->floor != 1)
+			return (MI_FLO);
+		if (error->ceiling != 1)
+			return (MI_CEI);
 	}
 	return (NO_ERR);
 }
@@ -88,12 +92,14 @@ int				ft_settings(char *map_path, t_cub *game)
 	{
 		ft_set_params(line, game, &error);
 		ft_set_map_textures(line, game, &i, &error);
+		if (error.id != 0)
+			break ;
 		error.id = ft_sanity_check(&error);
 		free(line);
 	}
 	free(line);
 	close(fd);
 	if (error.id != 0)
-		exit(0);
+		ft_error(error, game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 05:26:48 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 16:18:38 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define MAP_SIZE 0.2
 # define MOVE_SPEED 0.02
 # define TURN_SPEED 0.01
+# define ERRORS 11
 
 /*
 ** ERROR HANDLING
@@ -30,7 +31,11 @@ typedef enum		e_errn
 	INV_FILE = 4,
 	SPACE_EOL = 5,
 	INV_EXT = 6,
-	MAP_NOEND = 7
+	MAP_NOEND = 7,
+	MI_FILES = 8,
+	MI_RES = 9,
+	MI_FLO = 10,
+	MI_CEI = 11
 }					t_errn;
 
 typedef struct		s_error
@@ -42,7 +47,6 @@ typedef struct		s_error
 	int				floor;
 	int				ceiling;
 	int				map;
-
 }					t_error;
 /*
 ** MLX -- WIN, IMG, RES

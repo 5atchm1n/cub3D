@@ -26,6 +26,7 @@ SRCS =	ft_read_map.c \
 		ft_load_xpm.c \
 		ft_load_objects.c \
 		ft_set_sprites.c \
+		ft_error.c \
 		test.c 
 
 CC = clang

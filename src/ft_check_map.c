@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 04:50:11 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/08 17:19:53 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int		ft_check_next(int x, int y, char **map, t_map_size *size)
 {
-	if (x == 0 || x == size->x)
+	if (x == 0 || x == size->x - 1)
 		return (1);
-	if (y == 0 || y == size->y)
+	if (y == 0 || y == size->y - 1)
 		return (1);
 	if (map[y + 1][x] == ' ' || map[y - 1][x] == ' ')
 		return (1);
@@ -48,7 +48,7 @@ static void		ft_check_if_open(char **map, t_map_size *size, t_error *error)
 			{
 				error->id = O_MAP;
 				error->coords.x = x;
-				error->coords.y = y;
+				error->coords.y = y + 1;
 				break ;
 			}
 		}
@@ -108,9 +108,6 @@ void			ft_check(t_world *world, t_cub *game)
 	ft_check_map_chars(world->map, &world->msize, &error);
 	ft_check_if_open(world->map, &world->msize, &error);
 	ft_check_files(world, &error);
-	printf("error = %d\n", error.id);
-	printf("co_x = %d\n", error.coords.x);
-	printf("cp_y = %d\n", error.coords.y);
 	if (error.id != 0)
-		ft_quit(game);
+		ft_error(error, game);
 }
