@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 04:59:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 08:12:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,23 @@ int				ft_move(t_cub *game)
 		ft_move_left(&game->player.vector, game->world.map);
 	if (game->player.move.right)
 		ft_move_right(&game->player.vector, game->world.map);
+	if (game->player.move.u)
+	{
+		game->player.vector.pitch += 400 * MOVE_SPEED;
+		if (game->player.vector.pitch > game->mlx.res.y / 4)
+			game->player.vector.pitch = game->mlx.res.y / 4;
+	}
+	if (game->player.move.d)
+	{
+		game->player.vector.pitch -= 400 * MOVE_SPEED;
+		if (game->player.vector.pitch < -game->mlx.res.y / 4)
+			game->player.vector.pitch = -game->mlx.res.y / 4;
+	}
+	if (game->player.vector.pitch > 0)
+		ft_max(0, game->player.vector.pitch - 100 * MOVE_SPEED);
+	if (game->player.vector.pitch > 0)
+		ft_min(1, game->player.vector.pitch + 100 * MOVE_SPEED);
+	ft_floor_casting(&game->player, &game->world, &game->mlx);
 	ft_raycasting(game);
 	ft_cast_sprites(game);
 	ft_minimap(game);

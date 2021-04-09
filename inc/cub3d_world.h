@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 04:29:04 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 07:21:36 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,8 @@ typedef struct		s_move
 	int				down;
 	int				turn_l;
 	int				turn_r;
+	int				u;
+	int				d;
 }					t_move;
 
 typedef struct		s_vector
@@ -180,6 +182,8 @@ typedef struct		s_vector
 	double			y;
 	double			dx;
 	double			dy;
+	double			pitch;
+	double			posz;
 }					t_vector;
 
 typedef struct		s_camera

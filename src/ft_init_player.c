@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:10:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 04:44:57 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 07:39:19 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void		ft_init_move(t_move *move)
 	move->down = 0;
 	move->turn_l = 0;
 	move->turn_l = 0;
+	move->u = 0;
+	move->d = 0;
 }
 
 void			ft_init_player(t_player *player, t_world *world)
@@ -49,6 +51,8 @@ void			ft_init_player(t_player *player, t_world *world)
 				player->vector.y = (double)i + 0.5;
 				player->vector.dx = -1;
 				player->vector.dy = 0;
+				player->vector.posz = 0.0;
+				player->vector.pitch = 0.0;
 				player->camera.px = 0.0;
 				player->camera.py = 0.66;
 				world->map[i][j] = '0';

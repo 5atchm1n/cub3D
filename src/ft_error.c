@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:26:22 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 01:09:08 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 06:38:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,6 @@ void			ft_error(t_error error, t_cub *game, int state)
 	ft_error_msg(error.id - 1, error);
 	if (state == 0)
 		ft_free_state_0(game);
+	if (state == 1)
+		ft_quit(game);
 }

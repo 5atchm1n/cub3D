@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_keypress.c                                      :+:      :+:    :+:   */
+/*   ft_keyhook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 00:39:35 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 07:24:58 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static int	ft_turn_start(int keycode, t_cub *game)
 		game->player.move.turn_r = 1;
 	if (keycode == 65361)
 		game->player.move.turn_l = 1;
+	if (keycode == 65362)
+		game->player.move.u = 1;
+	if (keycode == 65364)
+		game->player.move.d = 1;
 	return (0);
 }
 
@@ -25,9 +29,9 @@ static int	ft_move_start(int keycode, t_player *player, t_mlx *mlx)
 {
 	if (keycode == 0xff1b)
 		mlx->on = 0;
-	if (keycode == 119 || keycode == 65362)
+	if (keycode == 119)
 		player->move.up = 1;
-	if (keycode == 115 || keycode == 65364)
+	if (keycode == 115)
 		player->move.down = 1;
 	if (keycode == 97)
 		player->move.left = 1;
@@ -42,6 +46,10 @@ static int	ft_turn_stop(int keycode, t_cub *game)
 		game->player.move.turn_r = 0;
 	if (keycode == 65361)
 		game->player.move.turn_l = 0;
+	if (keycode == 65362)
+		game->player.move.u = 0;
+	if (keycode == 65364)
+		game->player.move.d = 0;
 	return (0);
 }
 

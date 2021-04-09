@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 00:00:29 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 07:19:32 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static void		ft_transform_sprite(t_sprite *s, t_player *p, t_objs *o, int i)
 	o->ty = inv * (-p->camera.py * x + p->camera.px * y);
 }
 
-static void		ft_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s)
+static void		ft_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s, t_vector *v)
 {
 	objs->hitx = (int)((mlx->res.x / 2.0) * (1.0 + objs->tx / objs->ty));
-	objs->voffset = (int)(s[objs->index].vmove / objs->ty);
+	objs->voffset = (int)(s[objs->index].vmove / objs->ty) + v->pitch + v->posz / objs->ty;
 	objs->spriteh = (int)fabs((mlx->res.y / objs->ty)) / s[objs->index].vdiv;
 	objs->starty = -objs->spriteh / 2 + mlx->res.y / 2 + objs->voffset;
 	if (objs->starty < 0)
@@ -108,7 +108,7 @@ void			ft_cast_sprites(t_cub *game)
 	while (i < game->world.scount)
 	{
 		ft_transform_sprite(game->world.sprite, &game->player, &objs, i);
-		ft_set_sprite_screen(&game->mlx, &objs, game->world.sprite);
+		ft_set_sprite_screen(&game->mlx, &objs, game->world.sprite, &game->player.vector);
 		ft_set_sprite_image_buffer(&game->mlx, &objs, &game->world);
 		i++;
 	}

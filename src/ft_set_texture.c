@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 03:51:42 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 03:49:07 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 07:18:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ void			ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 
 	step = 1.0 * TEX_Y / t->lineheight;
 	tex_x = ft_set_texturex(ray, &game->player.vector);
-	tex_pos = (t->start - game->mlx.res.y / 2 + t->lineheight / 2) * step;
+	tex_pos = (t->start - game->player.vector.pitch - (game->player.vector.posz / ray->dw) - game->mlx.res.y / 2 + t->lineheight / 2) * step;
 	y = 0;
 	ft_set_tex_dir(t, ray);
-	while (y <= t->start)
-		game->mlx.buffer[y++][x] = game->world.ceiling.color;
+//	while (y <= t->start)
+//		game->mlx.buffer[y++][x] = game->world.ceiling.color;
+	y = t->start;
 	while (y < t->end)
 	{
 		tex_y = (int)tex_pos & (TEX_Y - 1);
@@ -72,9 +73,9 @@ void			ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 		game->mlx.buffer[y][x] = game->world.tex[t->dir][TEX_Y * tex_y + tex_x];
 		y++;
 	}
-	while (y < game->mlx.res.y)
-	{
-		game->mlx.buffer[y][x] = game->world.floor.color;
-		y++;
-	}
+//	while (y < game->mlx.res.y)
+//	{
+//		game->mlx.buffer[y][x] = game->world.floor.color;
+//		y++;
+//	}
 }

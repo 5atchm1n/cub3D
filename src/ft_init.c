@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 04:59:07 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 06:43:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,52 @@ static void		ft_init_textures(t_world *world)
 		}
 		i++;
 	}
+	world->ground = (int *)malloc(sizeof(int) * TEX_X * TEX_Y);
+	world->sky = (int *)malloc(sizeof(int) * TEX_X * TEX_Y);
+	i = 0;
+	while (i < TEX_X * TEX_Y)
+	{
+		world->ground[i] = 0;
+		world->sky[i] = 0;
+		i++;
+	}
+}
+
+static void		ft_test_game(t_cub *game, t_error *error)
+{
+	t_img		img;
+	int			i;
+
+	if (game->mlx.win.mlx == NULL)
+		error->id = MLX_ERR1;
+	if (game->mlx.img.img == NULL)
+		error->id = MLX_ERR1;
+	i = 0;
+	while (i < TEXTURES)
+	{
+		img.img = mlx_xpm_file_to_image(game->mlx.win.mlx, game->world.tpath[i],
+				&img.x, &img.endian);
+		if (img.img == NULL)
+			error->id = MLX_ERR2;
+		mlx_destroy_image(game->mlx.win.mlx, img.img);
+		i++;
+	}
+	i = 0;
+	while (i < SPRITES)
+	{
+		img.img = mlx_xpm_file_to_image(game->mlx.win.mlx,
+				game->world.objpath[i], &img.x, &img.endian);
+		if (img.img == NULL)
+			error->id = MLX_ERR2;
+		mlx_destroy_image(game->mlx.win.mlx, img.img);
+		i++;
+	}
 }
 
 void			ft_init(t_cub *game, char *map_path)
 {
+	t_error		error;
+
 	ft_init_map(&game->world);
 	ft_init_mlx(&game->mlx);
 	ft_init_img_buffer(&game->mlx);
@@ -116,6 +158,9 @@ void			ft_init(t_cub *game, char *map_path)
 	ft_init_object(&game->world);
 	ft_init_world(&game->world, game->mlx, map_path);
 	ft_init_player(&game->player, &game->world);
+	ft_test_game(game, &error);
+	if (error.id != 0)
+		ft_error(error, game, 1);
 	ft_load_objects(&game->world);
 	ft_load_textures(&game->mlx, &game->world);
 }

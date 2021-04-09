@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:16:31 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 00:06:23 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 07:17:56 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ static void		ft_run_dda(t_ray *ray, t_vector *v, char **map)
 		ray->dw = (ray->mapy - v->y + (1 - ray->stepy) / 2) / ray->diry;
 }
 
-static void		ft_set_stripe(t_mlx *mlx, t_ray *ray, t_texture *t)
+static void		ft_set_stripe(t_mlx *mlx, t_ray *ray, t_texture *t, t_vector *v)
 {
 	t->lineheight = (int)(mlx->res.y / ray->dw);
-	t->start = (-1 * t->lineheight) / 2 + mlx->res.y / 2;
+	t->start = -t->lineheight / 2 + mlx->res.y / 2 + v->pitch + (v->posz / ray->dw);
 	if (t->start < 0)
 		t->start = 0;
-	t->end = t->lineheight / 2 + mlx->res.y / 2;
+	t->end = t->lineheight / 2 + mlx->res.y / 2 + v->pitch + (v->posz / ray->dw);
 	if (t->end >= mlx->res.y)
 		t->end = mlx->res.y - 1;
 }
@@ -102,7 +102,7 @@ void			ft_raycasting(t_cub *game)
 		ft_set_ray(&ray, &game->player, x, &game->mlx);
 		ft_set_dda_vector(&ray, &game->player.vector);
 		ft_run_dda(&ray, &game->player.vector, game->world.map);
-		ft_set_stripe(&game->mlx, &ray, &texture);
+		ft_set_stripe(&game->mlx, &ray, &texture, &game->player.vector);
 		ft_set_texture(game, &texture, &ray, x);
 		game->world.zbuffer[x] = ray.dw;
 		x++;

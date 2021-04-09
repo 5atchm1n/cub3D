@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:07:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 04:43:04 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 05:35:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,6 @@ void			ft_load_textures(t_mlx *mlx, t_world *world)
 		ft_load_xpm(mlx, world->obj[i], world->objpath[i], &img);
 		i++;
 	}
+	ft_load_xpm(mlx, world->sky, "textures/purplestone.xpm", &img);
+	ft_load_xpm(mlx, world->ground, "textures/purplestone.xpm", &img);
 }

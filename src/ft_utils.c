@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 00:51:22 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 08:09:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,20 @@ int			ft_set_rgb(char *line, t_color *c)
 		line++;
 	}
 	return (0);
+}
+
+double	ft_max(double a, double b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
+}
+
+double	ft_min(double a, double b)
+{
+	if (a < b)
+		return (a);
+	else
+		return (b);
 }

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 04:56:44 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 06:15:13 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,6 @@ static void		ft_check_header(char *line, int line_number, t_error *error)
 		error->id = INV_SIZE;
 }
 
-static void		ft_test_mlx(char *path, t_error *error)
-{
-	t_win		win;
-	t_img		img;
-
-	win.mlx = mlx_init();
-	if (win.mlx == NULL)
-		error->id = MLX_ERR1;
-	win.win = mlx_new_window(win.mlx, 256, 256, "TEST");
-	img.img = mlx_xpm_file_to_image(win.mlx, path, &img.x, &img.endian);
-	if (img.img == NULL)
-		error->id = MLX_ERR2;
-	mlx_destroy_image(win.mlx, img.img);
-	mlx_destroy_window(win.mlx, win.win);
-}
-
 static void		ft_test_path(char **paths, t_error *error, int num)
 {
 	int			i;
@@ -82,9 +66,6 @@ static void		ft_test_path(char **paths, t_error *error, int num)
 		}
 		free(line);
 		close(fd);
-		if (error->id != 0)
-			break ;
-		ft_test_mlx(paths[i], error);
 		if (error->id != 0)
 			break ;
 		i++;
