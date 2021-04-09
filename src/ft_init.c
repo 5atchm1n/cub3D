@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 04:39:53 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 02:48:40 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 static void		ft_init_mlx(t_mlx *mlx)
 {
+	int			screenx;
+	int			screeny;
+
 	mlx->win.mlx = mlx_init();
+	mlx_get_screen_size(mlx->win.mlx, &screenx, &screeny);
+	if (screenx < mlx->res.x)
+		mlx->res.x = screenx;
+	if (screeny < mlx->res.x)
+		mlx->res.y = screeny;
 	mlx->win.win = mlx_new_window(mlx->win.mlx, mlx->res.x,
 			mlx->res.y, "cub3D");
 	mlx->img.img = mlx_new_image(mlx->win.mlx, mlx->res.x,
