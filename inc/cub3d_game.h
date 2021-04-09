@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 01:04:57 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 04:15:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,39 +19,6 @@
 # define TURN_SPEED 0.01
 # define ERRORS 13
 
-/*
-** ERROR HANDLING
-*/
-typedef enum		e_errn
-{
-	NO_ERR = 0,
-	INV_CHAR = 1,
-	O_MAP = 2,
-	IS_PATH = 3,
-	INV_FILE = 4,
-	SPACE_EOL = 5,
-	INV_EXT = 6,
-	MAP_NOEND = 7,
-	MI_FILES = 8,
-	MI_RES = 9,
-	MI_FLO = 10,
-	MI_CEI = 11,
-	INV_SIZE = 12,
-	M_FAIL = 13,
-	MLX_ERR1 = 14,
-	MLX_ERR2 = 15
-}					t_errn;
-
-typedef struct		s_error
-{
-	t_errn			id;
-	t_grid			coords;
-	int				texture;
-	int				res;
-	int				floor;
-	int				ceiling;
-	int				map;
-}					t_error;
 /*
 ** MLX -- WIN, IMG, RES
 */
@@ -90,6 +57,8 @@ typedef struct		s_world
 	char			**map;
 	char			**tpath;
 	char			**objpath;
+	int				*sky;
+	int				*ground;
 }					t_world;
 /*
 ** GLOBAL STRUCT

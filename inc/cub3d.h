@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 00:40:42 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 04:31:58 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdint.h>
 # include "mlx.h"
 # include "../libft/inc/libft.h"
 
@@ -43,6 +44,7 @@ void	ft_load_objects(t_world *world);
 void	ft_init_object_pos(t_world *world);
 void	ft_init_object(t_world *world);
 void	ft_init_world(t_world *world, t_mlx mlx, char *map_path);
+void	ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 /*
 ** MOVE PLAYER
 */
@@ -84,4 +86,8 @@ int		ft_rgb_to_int(t_color color);
 */
 int		ft_isspace(char c);
 int		ft_strcmp(char *s1, char *s2);
+/*
+** BONUS - FLOOR CASTING
+*/
+void	ft_floor_casting(t_player *player, t_world *world, t_mlx *mlx);
 #endif

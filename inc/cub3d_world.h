@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 05:27:48 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 04:29:04 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,32 @@ typedef struct		s_res
 	int				x;
 	int				y;
 }					t_res;
+/*
+** FLOOR , CEILIING CASTING
+*/
+typedef struct		s_fray
+{
+	float			dirx;
+	float			diry;
+}					t_fray;
+
+typedef struct		s_floor
+{
+	int				horizon;
+	float			camv;
+	float			rdist;
+	float			stepx;
+	float			stepy;
+	float			flx;
+	float			fly;
+	int				tx;
+	int				ty;
+}					t_floor;
+
 
 /*
-** RAYCASTING, TEXTURE CASTING, GRID
+** RAYCASTING, TEXTURE CASTING
 */
-typedef struct		s_grid
-{
-	int				x;
-	int				y;
-}					t_grid;
-
-typedef enum		e_dir
-{
-	NO = 0,
-	SO = 1,
-	EA = 2,
-	WE = 3
-}					t_dir;
-
 typedef struct		s_ray
 {
 	double			dirx;
@@ -80,6 +88,14 @@ typedef struct		s_ray
 	double			dw;
 }					t_ray;
 
+typedef enum		e_dir
+{
+	NO = 0,
+	SO = 1,
+	EA = 2,
+	WE = 3
+}					t_dir;
+
 typedef struct		s_texture
 {
 	t_dir			dir;
@@ -88,7 +104,9 @@ typedef struct		s_texture
 	int				end;
 	double			pos;
 }					t_texture;
-
+/*
+** OBJECTS CASTING - SORT ORDER , OBJS CASTING
+*/
 typedef struct		s_sort
 {
 	int				order;
@@ -113,7 +131,7 @@ typedef struct		s_objs
 	int				endy;
 }					t_objs;
 /*
-** SUB STRUCTURE - WORLD
+** WORLD -- SPRITE , COLOR[RGB], MAP SIZE
 */
 typedef struct		s_sprite
 {
@@ -144,7 +162,7 @@ typedef union		u_color
 	t_rgb			rgb;
 }					t_color;
 /*
-** SUB STRUCTURE - PLAYER
+** PLAYER -- MOVE , VECTOR, CAMERA PLANE
 */
 typedef struct		s_move
 {
@@ -169,5 +187,47 @@ typedef struct		s_camera
 	double			px;
 	double			py;
 }					t_camera;
+/*
+** ERROR HANDLING
+*/
+typedef enum		e_errn
+{
+	NO_ERR = 0,
+	INV_CHAR = 1,
+	O_MAP = 2,
+	IS_PATH = 3,
+	INV_FILE = 4,
+	SPACE_EOL = 5,
+	INV_EXT = 6,
+	MAP_NOEND = 7,
+	MI_FILES = 8,
+	MI_RES = 9,
+	MI_FLO = 10,
+	MI_CEI = 11,
+	INV_SIZE = 12,
+	M_FAIL = 13,
+	MLX_ERR1 = 14,
+	MLX_ERR2 = 15
+}					t_errn;
+
+typedef struct		s_grid
+{
+	int				x;
+	int				y;
+}					t_grid;
+
+typedef struct		s_error
+{
+	t_errn			id;
+	t_grid			coords;
+	int				texture;
+	int				res;
+	int				floor;
+	int				ceiling;
+	int				map;
+}					t_error;
+/*
+** 
+*/
 
 #endif

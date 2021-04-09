@@ -6,18 +6,20 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:07:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 20:58:29 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 04:43:04 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
+void			ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
 {
 	int			x;
 	int			y;
 
 	img->img = mlx_xpm_file_to_image(mlx->win.mlx, path, &img->x, &img->y);
+	if (img->img == NULL)
+		printf("FAIL\n");
 	img->add = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->len, &img->endian);
 	y = 0;
 	while (y < img->y)
