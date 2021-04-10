@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 06:43:12 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 04:59:38 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,21 @@ static void		ft_init_map(t_world *world)
 	}
 }
 
+static void		ft_init_sky_ground(t_world *world)
+{
+	int			i;
+
+	world->ground = (int *)malloc(sizeof(int) * TEX_X * TEX_Y);
+	world->sky = (int *)malloc(sizeof(int) * TEX_X * TEX_Y);
+	i = 0;
+	while (i < TEX_X * TEX_Y)
+	{
+		world->ground[i] = 0;
+		world->sky[i] = 0;
+		i++;
+	}
+}
+
 static void		ft_init_textures(t_world *world)
 {
 	int			i;
@@ -105,15 +120,6 @@ static void		ft_init_textures(t_world *world)
 		}
 		i++;
 	}
-	world->ground = (int *)malloc(sizeof(int) * TEX_X * TEX_Y);
-	world->sky = (int *)malloc(sizeof(int) * TEX_X * TEX_Y);
-	i = 0;
-	while (i < TEX_X * TEX_Y)
-	{
-		world->ground[i] = 0;
-		world->sky[i] = 0;
-		i++;
-	}
 }
 
 static void		ft_test_game(t_cub *game, t_error *error)
@@ -121,11 +127,7 @@ static void		ft_test_game(t_cub *game, t_error *error)
 	t_img		img;
 	int			i;
 
-	if (game->mlx.win.mlx == NULL)
-		error->id = MLX_ERR1;
-	if (game->mlx.img.img == NULL)
-		error->id = MLX_ERR1;
-	i = 0;
+		i = 0;
 	while (i < TEXTURES)
 	{
 		img.img = mlx_xpm_file_to_image(game->mlx.win.mlx, game->world.tpath[i],
@@ -155,6 +157,7 @@ void			ft_init(t_cub *game, char *map_path)
 	ft_init_mlx(&game->mlx);
 	ft_init_img_buffer(&game->mlx);
 	ft_init_textures(&game->world);
+	ft_init_sky_ground(&game->world);
 	ft_init_object(&game->world);
 	ft_init_world(&game->world, game->mlx, map_path);
 	ft_init_player(&game->player, &game->world);
