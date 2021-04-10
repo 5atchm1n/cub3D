@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:16:31 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 07:17:56 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 06:06:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_set_ray(t_ray *ray, t_player *player, int x, t_mlx *mlx)
+static void		cub_set_ray(t_ray *ray, t_player *player, int x, t_mlx *mlx)
 {
 	double		camx;
 
@@ -25,7 +25,7 @@ static void		ft_set_ray(t_ray *ray, t_player *player, int x, t_mlx *mlx)
 	ray->deltay = fabs(1 / ray->diry);
 }
 
-static void		ft_set_dda_vector(t_ray *ray, t_vector *v)
+static void		cub_set_dda_vector(t_ray *ray, t_vector *v)
 {
 	if (ray->dirx < 0)
 	{
@@ -49,7 +49,7 @@ static void		ft_set_dda_vector(t_ray *ray, t_vector *v)
 	}
 }
 
-static void		ft_run_dda(t_ray *ray, t_vector *v, char **map)
+static void		cub_run_dda(t_ray *ray, t_vector *v, char **map)
 {
 	int			hit;
 
@@ -77,7 +77,7 @@ static void		ft_run_dda(t_ray *ray, t_vector *v, char **map)
 		ray->dw = (ray->mapy - v->y + (1 - ray->stepy) / 2) / ray->diry;
 }
 
-static void		ft_set_stripe(t_mlx *mlx, t_ray *ray, t_texture *t, t_vector *v)
+static void		cub_set_stripe(t_mlx *mlx, t_ray *ray, t_texture *t, t_vector *v)
 {
 	t->lineheight = (int)(mlx->res.y / ray->dw);
 	t->start = -t->lineheight / 2 + mlx->res.y / 2 + v->pitch + (v->posz / ray->dw);
@@ -88,7 +88,7 @@ static void		ft_set_stripe(t_mlx *mlx, t_ray *ray, t_texture *t, t_vector *v)
 		t->end = mlx->res.y - 1;
 }
 
-void			ft_raycasting(t_cub *game)
+void			cub_raycasting(t_cub *game)
 {
 	int			x;
 	t_ray		ray;
@@ -99,11 +99,11 @@ void			ft_raycasting(t_cub *game)
 	ft_memset(&ray, 0, sizeof(ray));
 	while (x < game->mlx.res.x)
 	{
-		ft_set_ray(&ray, &game->player, x, &game->mlx);
-		ft_set_dda_vector(&ray, &game->player.vector);
-		ft_run_dda(&ray, &game->player.vector, game->world.map);
-		ft_set_stripe(&game->mlx, &ray, &texture, &game->player.vector);
-		ft_set_texture(game, &texture, &ray, x);
+		cub_set_ray(&ray, &game->player, x, &game->mlx);
+		cub_set_dda_vector(&ray, &game->player.vector);
+		cub_run_dda(&ray, &game->player.vector, game->world.map);
+		cub_set_stripe(&game->mlx, &ray, &texture, &game->player.vector);
+		cub_set_texture(game, &texture, &ray, x);
 		game->world.zbuffer[x] = ray.dw;
 		x++;
 	}

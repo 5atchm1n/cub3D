@@ -6,14 +6,14 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 03:00:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 19:46:20 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 06:10:28 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 
-static void		ft_init_ray(t_floor *ray, t_player *player, t_mlx *mlx, int y)
+static void		cub_init_ray(t_floor *ray, t_player *player, t_mlx *mlx, int y)
 {
 	t_fray		ray0;
 	t_fray		ray1;
@@ -34,20 +34,9 @@ static void		ft_init_ray(t_floor *ray, t_player *player, t_mlx *mlx, int y)
 	ray->stepy = ray->rdist * (ray1.diry - ray0.diry) / mlx->res.x;
 	ray->flx = player->vector.x + ray->rdist * ray0.dirx;
 	ray->fly = player->vector.y + ray->rdist * ray0.diry;
-
-	printf("y = %d\n", y);
-	printf("pitch = %f\n", player->vector.pitch);
-	printf("posz = %f\n", player->vector.posz);
-	printf("ray->hor = %d\n", ray->horizon);
-	//	printf("ray->flx = %f\n", ray->flx);
-	//	printf("ray->fly = %f\n", ray->fly);
-	printf("ray->rdist = %f\n", ray->rdist);
-	printf("ray->stepx = %f\n", ray->stepx);
-	printf("ray->stepy = %f\n", ray->stepy);
-
 }
 
-static void		ft_cast_ray(t_floor *ray, t_world *world, t_mlx *mlx, int y)
+static void		cub_cast_ray(t_floor *ray, t_world *world, t_mlx *mlx, int y)
 {
 	int			xcell;
 	int			ycell;
@@ -79,7 +68,7 @@ static void		ft_cast_ray(t_floor *ray, t_world *world, t_mlx *mlx, int y)
 	}
 }
 
-void		ft_floor_casting(t_player *player, t_world *world, t_mlx *mlx)
+void		cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx)
 {
 	int			y;
 	t_floor		ray;
@@ -88,8 +77,8 @@ void		ft_floor_casting(t_player *player, t_world *world, t_mlx *mlx)
 	ft_memset(&ray, 0, sizeof(ray));
 	while (y < mlx->res.y)
 	{
-		ft_init_ray(&ray, player, mlx, y);
-		ft_cast_ray(&ray, world, mlx, y);
+		cub_init_ray(&ray, player, mlx, y);
+		cub_cast_ray(&ray, world, mlx, y);
 		y++;
 	}
 }

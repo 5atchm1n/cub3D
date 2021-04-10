@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 04:15:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 12:39:55 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,75 +22,81 @@
 # include "mlx.h"
 # include "../libft/inc/libft.h"
 
+# include "cub3d_keys.h"
 # include "cub3d_world.h"
 # include "cub3d_game.h"
 
 /*
 ** CUSTOM PIXEL PUT FOR PERFORMANCE - MLX
 */
-void	ft_draw(t_mlx *mlx);
+void	cub_draw(t_mlx *mlx);
 /*
 ** SETTINGS
 */
-int		ft_settings(char *map_path, t_cub *game);
-void	ft_import_settings(char *map_path, t_cub *game, t_error *error);
+int		cub_settings(char *map_path, t_cub *game);
+void	cub_import_settings(char *map_path, t_cub *game, t_error *error);
 /*
 ** INITIALIZE GAME
 */
-void	ft_init(t_cub *game, char *map);
-void	ft_init_player(t_player *player, t_world *world);
-void	ft_load_textures(t_mlx *mlx, t_world *world);
-void	ft_load_objects(t_world *world);
-void	ft_init_object_pos(t_world *world);
-void	ft_init_object(t_world *world);
-void	ft_init_world(t_world *world, t_mlx mlx, char *map_path);
-void	ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
+void	cub_init(t_cub *game, char *map);
+void	cub_init_player(t_player *player, t_world *world);
+void	cub_load_textures(t_mlx *mlx, t_world *world);
+void	cub_load_objects(t_world *world);
+void	cub_init_object_pos(t_world *world);
+void	cub_init_object(t_world *world);
+void	cub_init_world(t_world *world, t_mlx mlx, char *map_path);
+void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 /*
 ** MOVE PLAYER
 */
-int		ft_keypress(int keycode, t_cub *game);
-int		ft_keyrelease(int keycode, t_cub *game);
-int		ft_move(t_cub *game);
+int		cub_keypress(int keycode, t_cub *game);
+int		cub_keyrelease(int keycode, t_cub *game);
+int		cub_move(t_cub *game);
 /*
 ** RAYCASTING - SPRITES, TEXTURES
 */
-void	ft_raycasting(t_cub *game);
-void	ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x);
-int		ft_nobject(t_world *world);
-void	ft_cast_sprites(t_cub *game);
-void	ft_sort_sprites(t_objs *objs, int count);
+void	cub_raycasting(t_cub *game);
+void	cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x);
+int		cub_nobject(t_world *world);
+void	cub_cast_sprites(t_cub *game);
+void	cub_sort_sprites(t_objs *objs, int count);
 /*
 ** MINIMAP
 */
-void	ft_draw_map(t_world *world, t_mlx *mlx);
-void	ft_minimap(t_cub *game);
+void	cub_draw_map(t_world *world, t_mlx *mlx);
+void	cub_minimap(t_cub *game);
 /*
 ** ERROR AND EXIT
 */
-void	ft_check(t_world *world, t_cub *game);
-void	ft_check_files(t_world *world, t_error *error);
-int		ft_quit(t_cub *game);
-void	ft_error(t_error error, t_cub *game, int state);
-void	ft_free_world(t_world *world);
+void	cub_check(t_world *world, t_cub *game);
+void	cub_check_files(t_world *world, t_error *error);
+int		cub_quit(t_cub *game);
+void	cub_error(t_error error, t_cub *game, int state);
+void	cub_free_world(t_world *world);
 /*
 ** UTILS FUNCTION
 */
-int		ft_get_line(char **line, int fd);
-char	**ft_copy_map(char *map_path, t_world *world);
-int		ft_set_rgb(char *line, t_color *color);
-int		ft_set_res(char *line, t_res *res);
-void	ft_set_texture_paths(char *line, t_world *world, int *i);
-int		ft_rgb_to_int(t_color color);
+int		cub_get_line(char **line, int fd);
+char	**cub_copy_map(char *map_path, t_world *world);
+int		cub_set_rgb(char *line, t_color *color);
+int		cub_set_res(char *line, t_res *res);
+void	cub_set_texture_paths(char *line, t_world *world, int *i);
+int		cub_rgb_to_int(t_color color);
+int		cub_isdir(char c);
 /*
 ** ADD TO LIBFT
 */
-int		ft_isdir(char c);
 int		ft_isspace(char c);
 int		ft_strcmp(char *s1, char *s2);
-double	ft_max(double a, double b);
-double	ft_min(double a, double b);
+double	ft_fmax(double a, double b);
+double	ft_fmin(double a, double b);
 /*
 ** BONUS - FLOOR CASTING
 */
-void	ft_floor_casting(t_player *player, t_world *world, t_mlx *mlx);
+void	cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx);
+/*
+** TEST - PRINT INFO
+*/
+void	cub_print_info(t_cub *game);
+int		key_hook(int keycode, t_win *win);
 #endif

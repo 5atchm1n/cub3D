@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 00:43:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 05:54:19 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		ft_check_next(int x, int y, char **map, t_map_size *size)
+static int		cub_check_next(int x, int y, char **map, t_map_size *size)
 {
 	if (x == 0 || x == size->x - 1)
 		return (1);
@@ -29,7 +29,7 @@ static int		ft_check_next(int x, int y, char **map, t_map_size *size)
 	return (0);
 }
 
-static void		ft_check_if_open(char **map, t_map_size *size, t_error *error)
+static void		cub_check_if_open(char **map, t_map_size *size, t_error *error)
 {
 	int		x;
 	int		y;
@@ -42,7 +42,7 @@ static void		ft_check_if_open(char **map, t_map_size *size, t_error *error)
 		while (x < size->x && !err)
 		{
 			if (map[y][x] == '0')
-				err = ft_check_next(x, y, map, size);
+				err = cub_check_next(x, y, map, size);
 			x++;
 			if (err)
 			{
@@ -56,7 +56,7 @@ static void		ft_check_if_open(char **map, t_map_size *size, t_error *error)
 	}
 }
 
-static int		ft_isvalid(char c)
+static int		cub_isvalid(char c)
 {
 	char		*dir;
 	int			i;
@@ -74,7 +74,7 @@ static int		ft_isvalid(char c)
 	return (0);
 }
 
-static void		ft_check_map_chars(char **map, t_map_size *size, t_error *error)
+static void		cub_check_map_chars(char **map, t_map_size *size, t_error *error)
 {
 	int			x;
 	int			y;
@@ -86,7 +86,7 @@ static void		ft_check_map_chars(char **map, t_map_size *size, t_error *error)
 		x = 0;
 		while (x < size->x)
 		{
-			if (ft_isvalid(map[y][x]) == 0)
+			if (cub_isvalid(map[y][x]) == 0)
 			{
 				error->id = INV_CHAR;
 				error->coords.x = x;
@@ -98,16 +98,16 @@ static void		ft_check_map_chars(char **map, t_map_size *size, t_error *error)
 	}
 }
 
-void			ft_check(t_world *world, t_cub *game)
+void			cub_check(t_world *world, t_cub *game)
 {
 	t_error		error;
 
 	error.id = NO_ERR;
 	error.coords.x = 0;
 	error.coords.y = 0;
-	ft_check_map_chars(world->map, &world->msize, &error);
-	ft_check_if_open(world->map, &world->msize, &error);
-	ft_check_files(world, &error);
+	cub_check_map_chars(world->map, &world->msize, &error);
+	cub_check_if_open(world->map, &world->msize, &error);
+	cub_check_files(world, &error);
 	if (error.id != 0)
-		ft_error(error, game, 0);
+		cub_error(error, game, 0);
 }

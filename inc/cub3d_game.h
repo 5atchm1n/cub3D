@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 04:15:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 10:33:33 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ typedef struct		s_mlx
 */
 typedef struct		s_player
 {
-	t_move			move;
 	t_vector		vector;
 	t_camera		camera;
+	uint_fast8_t	move;
 }					t_player;
 /*
 ** WORLD -- SPRITE, PARAMS, PATHS

@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:26:22 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 05:00:29 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 05:54:20 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_error_msg(int errnum, t_error error)
+static void		cub_error_msg(int errnum, t_error error)
 {
 	char		*errmsg[ERRORS];
 
@@ -40,7 +40,7 @@ static void		ft_error_msg(int errnum, t_error error)
 	printf("\n");
 }
 
-static int		ft_free_state_0(t_cub *game)
+static int		cub_free_state_0(t_cub *game)
 {
 	int			i;
 
@@ -63,11 +63,11 @@ static int		ft_free_state_0(t_cub *game)
 	exit(0);
 }
 
-void			ft_error(t_error error, t_cub *game, int state)
+void			cub_error(t_error error, t_cub *game, int state)
 {
-	ft_error_msg(error.id - 1, error);
+	cub_error_msg(error.id - 1, error);
 	if (state == 0)
-		ft_free_state_0(game);
+		cub_free_state_0(game);
 	if (state == 1)
-		ft_quit(game);
+		cub_quit(game);
 }

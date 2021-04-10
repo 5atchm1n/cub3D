@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 04:52:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/08 04:52:44 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 05:54:20 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int			gnl_return(char **line, char **gnline)
 	return (ret);
 }
 
-int					ft_get_line(char **line, int fd)
+int					cub_get_line(char **line, int fd)
 {
 	int				n;
 	int				i;

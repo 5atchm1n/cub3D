@@ -6,79 +6,79 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 03:57:57 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 10:57:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	ft_turn_start(int keycode, t_cub *game)
+static int	cub_turn_start(int keycode, t_player *player)
 {
-	if (keycode == 65363)
-		game->player.move.turn_r = 1;
-	if (keycode == 65361)
-		game->player.move.turn_l = 1;
-	if (keycode == 65362)
-		game->player.move.u = 1;
-	if (keycode == 65364)
-		game->player.move.d = 1;
+	if (keycode == KEY_LOOK_RIGHT)
+		player->move |= L_RIGHT;
+	if (keycode == KEY_LOOK_LEFT)
+		player->move |= L_LEFT;
+	if (keycode == KEY_LOOK_UP)
+		player->move |= L_UP;
+	if (keycode == KEY_LOOK_DOWN)
+		player->move |= L_DOWN;
 	return (0);
 }
 
-static int	ft_move_start(int keycode, t_player *player, t_mlx *mlx)
+static int	cub_move_start(int keycode, t_player *player, t_mlx *mlx)
 {
-	if (keycode == 0xff1b)
+	if (keycode == KEY_ESC_QUIT)
 		mlx->on = 0;
-	if (keycode == 119)
-		player->move.up = 1;
-	if (keycode == 115)
-		player->move.down = 1;
-	if (keycode == 97)
-		player->move.left = 1;
-	if (keycode == 100)
-		player->move.right = 1;
+	if (keycode == KEY_MOVE_UP)
+		player->move |= M_UP;
+	if (keycode == KEY_MOVE_DOWN)
+		player->move |= M_DOWN;
+	if (keycode == KEY_MOVE_LEFT)
+		player->move |= M_LEFT;
+	if (keycode == KEY_MOVE_RIGHT)
+		player->move |= M_RIGHT;
 	return (0);
 }
 
-static int	ft_turn_stop(int keycode, t_cub *game)
+static int	cub_turn_stop(int keycode, t_player *player)
 {
-	if (keycode == 65363)
-		game->player.move.turn_r = 0;
-	if (keycode == 65361)
-		game->player.move.turn_l = 0;
-	if (keycode == 65362)
-		game->player.move.u = 0;
-	if (keycode == 65364)
-		game->player.move.d = 0;
+	if (keycode == KEY_LOOK_RIGHT)
+		player->move &= ~L_RIGHT;
+	if (keycode == KEY_LOOK_LEFT)
+		player->move &= ~L_LEFT;
+	if (keycode == KEY_LOOK_UP)
+		player->move &= ~L_UP;
+	if (keycode == KEY_LOOK_DOWN)
+		player->move &= ~L_DOWN;
 	return (0);
 }
 
-static int	ft_move_stop(int keycode, t_cub *game)
+static int	cub_move_stop(int keycode, t_player *player)
 {
 	int		i;
 
 	i = 0;
-	if (keycode == 119)
-		game->player.move.up = 0;
-	if (keycode == 115)
-		game->player.move.down = 0;
-	if (keycode == 97)
-		game->player.move.left = 0;
-	if (keycode == 100)
-		game->player.move.right = 0;
+	if (keycode == KEY_MOVE_UP)
+		player->move &= ~M_UP;
+	if (keycode == KEY_MOVE_DOWN)
+		player->move &= ~M_DOWN;
+	if (keycode == KEY_MOVE_LEFT)
+		player->move &= ~M_LEFT;
+	if (keycode == KEY_MOVE_RIGHT)
+		player->move &= ~M_RIGHT;
 	return (0);
 }
 
-int			ft_keypress(int keycode, t_cub *game)
+int			cub_keypress(int keycode, t_cub *game)
 {
-	ft_turn_start(keycode, game);
-	ft_move_start(keycode, &game->player, &game->mlx);
+	cub_turn_start(keycode, &game->player);
+	cub_move_start(keycode, &game->player, &game->mlx);
 	return (0);
 }
 
-int			ft_keyrelease(int keycode, t_cub *game)
+int			cub_keyrelease(int keycode, t_cub *game)
 {
-	ft_turn_stop(keycode, game);
-	ft_move_stop(keycode, game);
+	cub_turn_stop(keycode, &game->player);
+	cub_move_stop(keycode, &game->player);
 	return (0);
 }

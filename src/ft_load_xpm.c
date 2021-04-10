@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:07:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 05:35:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 15:05:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
+void			cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
 {
 	int			x;
 	int			y;
@@ -35,7 +35,7 @@ void			ft_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img)
 	mlx_destroy_image(mlx->win.mlx, img->img);
 }
 
-void			ft_load_textures(t_mlx *mlx, t_world *world)
+void			cub_load_textures(t_mlx *mlx, t_world *world)
 {
 	t_img		img;
 	int			i;
@@ -43,15 +43,15 @@ void			ft_load_textures(t_mlx *mlx, t_world *world)
 	i = 0;
 	while (i < TEXTURES)
 	{
-		ft_load_xpm(mlx, world->tex[i], world->tpath[i], &img);
+		cub_load_xpm(mlx, world->tex[i], world->tpath[i], &img);
 		i++;
 	}
 	i = 0;
 	while (i < SPRITES)
 	{
-		ft_load_xpm(mlx, world->obj[i], world->objpath[i], &img);
+		cub_load_xpm(mlx, world->obj[i], world->objpath[i], &img);
 		i++;
 	}
-	ft_load_xpm(mlx, world->sky, "textures/purplestone.xpm", &img);
-	ft_load_xpm(mlx, world->ground, "textures/purplestone.xpm", &img);
+	cub_load_xpm(mlx, world->sky, "textures/wall4-64x64.xpm", &img);
+	cub_load_xpm(mlx, world->ground, "textures/wall6-64x64.xpm", &img);
 }

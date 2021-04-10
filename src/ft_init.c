@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 04:59:38 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 05:54:21 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_init_mlx(t_mlx *mlx)
+static void		cub_init_mlx(t_mlx *mlx)
 {
 	int			screenx;
 	int			screeny;
@@ -32,7 +32,7 @@ static void		ft_init_mlx(t_mlx *mlx)
 	mlx->on = 1;
 }
 
-static void		ft_init_img_buffer(t_mlx *mlx)
+static void		cub_init_img_buffer(t_mlx *mlx)
 {
 	int			i;
 	int			j;
@@ -57,7 +57,7 @@ static void		ft_init_img_buffer(t_mlx *mlx)
 	}
 }
 
-static void		ft_init_map(t_world *world)
+static void		cub_init_map(t_world *world)
 {
 	int			i;
 	int			j;
@@ -82,7 +82,7 @@ static void		ft_init_map(t_world *world)
 	}
 }
 
-static void		ft_init_sky_ground(t_world *world)
+static void		cub_init_sky_ground(t_world *world)
 {
 	int			i;
 
@@ -97,7 +97,7 @@ static void		ft_init_sky_ground(t_world *world)
 	}
 }
 
-static void		ft_init_textures(t_world *world)
+static void		cub_init_textures(t_world *world)
 {
 	int			i;
 	int			j;
@@ -122,7 +122,7 @@ static void		ft_init_textures(t_world *world)
 	}
 }
 
-static void		ft_test_game(t_cub *game, t_error *error)
+static void		cub_test_game(t_cub *game, t_error *error)
 {
 	t_img		img;
 	int			i;
@@ -149,21 +149,21 @@ static void		ft_test_game(t_cub *game, t_error *error)
 	}
 }
 
-void			ft_init(t_cub *game, char *map_path)
+void			cub_init(t_cub *game, char *map_path)
 {
 	t_error		error;
 
-	ft_init_map(&game->world);
-	ft_init_mlx(&game->mlx);
-	ft_init_img_buffer(&game->mlx);
-	ft_init_textures(&game->world);
-	ft_init_sky_ground(&game->world);
-	ft_init_object(&game->world);
-	ft_init_world(&game->world, game->mlx, map_path);
-	ft_init_player(&game->player, &game->world);
-	ft_test_game(game, &error);
+	cub_init_map(&game->world);
+	cub_init_mlx(&game->mlx);
+	cub_init_img_buffer(&game->mlx);
+	cub_init_textures(&game->world);
+	cub_init_sky_ground(&game->world);
+	cub_init_object(&game->world);
+	cub_init_world(&game->world, game->mlx, map_path);
+	cub_init_player(&game->player, &game->world);
+	cub_test_game(game, &error);
 	if (error.id != 0)
-		ft_error(error, game, 1);
-	ft_load_objects(&game->world);
-	ft_load_textures(&game->mlx, &game->world);
+		cub_error(error, game, 1);
+	cub_load_objects(&game->world);
+	cub_load_textures(&game->mlx, &game->world);
 }

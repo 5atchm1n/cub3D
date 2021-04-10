@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 03:51:42 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 04:28:28 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 15:03:14 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_set_tex_dir(t_texture *t, t_ray *ray)
+static void		cub_set_tex_dir(t_texture *t, t_ray *ray)
 {
 	if (ray->side == 0 && ray->dirx < 0)
 		t->dir = NO;
@@ -24,7 +24,7 @@ static void		ft_set_tex_dir(t_texture *t, t_ray *ray)
 		t->dir = WE;
 }
 
-static double	ft_set_wallx(t_ray *ray, t_vector *v)
+static double	cub_set_wallx(t_ray *ray, t_vector *v)
 {
 	double		wallx;
 
@@ -36,12 +36,12 @@ static double	ft_set_wallx(t_ray *ray, t_vector *v)
 	return (wallx);
 }
 
-static int		ft_set_texturex(t_ray *ray, t_vector *vector)
+static int		cub_set_texturex(t_ray *ray, t_vector *vector)
 {
 	double		wallx;
 	int			texturex;
 
-	wallx = ft_set_wallx(ray, vector);
+	wallx = cub_set_wallx(ray, vector);
 	texturex = (int)(wallx * (double)TEX_X);
 	if (ray->side == 0 && ray->dirx > 0)
 		texturex = TEX_X - texturex - 1;
@@ -50,7 +50,7 @@ static int		ft_set_texturex(t_ray *ray, t_vector *vector)
 	return (texturex);
 }
 
-void			ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
+void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 {
 	double		step;
 	double		tex_pos;
@@ -59,12 +59,12 @@ void			ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 	int			y;
 
 	step = 1.0 * TEX_Y / t->lineheight;
-	tex_x = ft_set_texturex(ray, &game->player.vector);
+	tex_x = cub_set_texturex(ray, &game->player.vector);
 	tex_pos = (t->start - game->player.vector.pitch - (game->player.vector.posz / ray->dw) - game->mlx.res.y / 2 + t->lineheight / 2) * step;
 	y = 0;
-	ft_set_tex_dir(t, ray);
-	while (y <= t->start)
-		game->mlx.buffer[y++][x] = game->world.ceiling.color;
+	cub_set_tex_dir(t, ray);
+//	while (y <= t->start)
+//		game->mlx.buffer[y++][x] = game->world.ceiling.color;
 	y = t->start;
 	while (y < t->end)
 	{
@@ -73,9 +73,9 @@ void			ft_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 		game->mlx.buffer[y][x] = game->world.tex[t->dir][TEX_Y * tex_y + tex_x];
 		y++;
 	}
-	while (y < game->mlx.res.y)
-	{
-		game->mlx.buffer[y][x] = game->world.floor.color;
-		y++;
-	}
+//	while (y < game->mlx.res.y)
+//	{
+//		game->mlx.buffer[y][x] = game->world.floor.color;
+//		y++;
+//	}
 }

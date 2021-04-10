@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 17:31:37 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 14:59:31 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int				ft_nobject(t_world *world)
+int				cub_nobject(t_world *world)
 {
 	int			i;
 	int			j;
@@ -34,7 +34,7 @@ int				ft_nobject(t_world *world)
 	return (count);
 }
 
-void			ft_init_object(t_world *world)
+void			cub_init_object(t_world *world)
 {
 	int			i;
 	int			j;
@@ -59,7 +59,7 @@ void			ft_init_object(t_world *world)
 	}
 }
 
-void			ft_load_objects(t_world *world)
+void			cub_load_objects(t_world *world)
 {
 	int			i;
 	int			j;
@@ -78,9 +78,9 @@ void			ft_load_objects(t_world *world)
 				world->sprite[x].x = (double)j + 0.5;
 				world->sprite[x].y = (double)i + 0.5;
 				world->sprite[x].id = world->map[i][j] - 48 - 2;
-				world->sprite[x].udiv = 1;
-				world->sprite[x].vdiv = 1;
-				world->sprite[x].vmove = 0.0;
+				world->sprite[x].udiv = 2;
+				world->sprite[x].vdiv = 2;
+				world->sprite[x].vmove = 256.0;
 				x++;
 			}
 			j++;

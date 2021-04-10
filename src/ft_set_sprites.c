@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 07:19:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 05:54:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_set_sprites(t_objs *objs, t_vector *v, t_world *w)
+static void		cub_set_sprites(t_objs *objs, t_vector *v, t_world *w)
 {
 	int			i;
 
@@ -26,7 +26,7 @@ static void		ft_set_sprites(t_objs *objs, t_vector *v, t_world *w)
 	}
 }
 
-static void		ft_transform_sprite(t_sprite *s, t_player *p, t_objs *o, int i)
+static void		cub_transform_sprite(t_sprite *s, t_player *p, t_objs *o, int i)
 {
 	double		x;
 	double		y;
@@ -41,7 +41,7 @@ static void		ft_transform_sprite(t_sprite *s, t_player *p, t_objs *o, int i)
 	o->ty = inv * (-p->camera.py * x + p->camera.px * y);
 }
 
-static void		ft_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s, t_vector *v)
+static void		cub_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s, t_vector *v)
 {
 	objs->hitx = (int)((mlx->res.x / 2.0) * (1.0 + objs->tx / objs->ty));
 	objs->voffset = (int)(s[objs->index].vmove / objs->ty) + v->pitch + v->posz / objs->ty;
@@ -61,7 +61,7 @@ static void		ft_set_sprite_screen(t_mlx *mlx, t_objs *objs, t_sprite *s, t_vecto
 		objs->endx = mlx->res.x - 1;
 }
 
-static void		ft_set_sprite_image_buffer(t_mlx *mlx, t_objs *o, t_world *w)
+static void		cub_set_sprite_image_buffer(t_mlx *mlx, t_objs *o, t_world *w)
 {
 	int			x;
 	int			y;
@@ -95,21 +95,21 @@ static void		ft_set_sprite_image_buffer(t_mlx *mlx, t_objs *o, t_world *w)
 	}
 }
 
-void			ft_cast_sprites(t_cub *game)
+void			cub_cast_sprites(t_cub *game)
 {
 	t_objs		objs;
 	int			i;
 
 	objs.order = malloc(sizeof(int) * game->world.scount);
 	objs.dist = malloc(sizeof(double) * game->world.scount);
-	ft_set_sprites(&objs, &game->player.vector, &game->world);
-	ft_sort_sprites(&objs, game->world.scount);
+	cub_set_sprites(&objs, &game->player.vector, &game->world);
+	cub_sort_sprites(&objs, game->world.scount);
 	i = 0;
 	while (i < game->world.scount)
 	{
-		ft_transform_sprite(game->world.sprite, &game->player, &objs, i);
-		ft_set_sprite_screen(&game->mlx, &objs, game->world.sprite, &game->player.vector);
-		ft_set_sprite_image_buffer(&game->mlx, &objs, &game->world);
+		cub_transform_sprite(game->world.sprite, &game->player, &objs, i);
+		cub_set_sprite_screen(&game->mlx, &objs, game->world.sprite, &game->player.vector);
+		cub_set_sprite_image_buffer(&game->mlx, &objs, &game->world);
 		i++;
 	}
 	free(objs.order);

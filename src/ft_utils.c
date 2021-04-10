@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 04:21:48 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 06:09:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			ft_isspace(char c)
 	return (0);
 }
 
-int			ft_rgb_to_int(t_color color)
+int			cub_rgb_to_int(t_color color)
 {
 	int		val;
 
@@ -49,7 +49,7 @@ int			ft_rgb_to_int(t_color color)
 	return (val);
 }
 
-int			ft_set_res(char *line, t_res *res)
+int			cub_set_res(char *line, t_res *res)
 {
 	int		y;
 	int		x;
@@ -76,7 +76,7 @@ int			ft_set_res(char *line, t_res *res)
 	return (0);
 }
 
-int			ft_set_rgb(char *line, t_color *c)
+int			cub_set_rgb(char *line, t_color *c)
 {
 	line++;
 	while (ft_isspace(*line))
@@ -101,7 +101,7 @@ int			ft_set_rgb(char *line, t_color *c)
 	return (0);
 }
 
-double	ft_max(double a, double b)
+double	ft_fmax(double a, double b)
 {
 	if (a > b)
 		return (a);
@@ -109,7 +109,7 @@ double	ft_max(double a, double b)
 		return (b);
 }
 
-double	ft_min(double a, double b)
+double	ft_fmin(double a, double b)
 {
 	if (a < b)
 		return (a);
@@ -117,7 +117,7 @@ double	ft_min(double a, double b)
 		return (b);
 }
 
-int		ft_isdir(char c)
+int		cub_isdir(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 19:45:57 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 12:04:11 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ typedef enum		e_errn
 	MI_FLO = 10,
 	MI_CEI = 11,
 	INV_SIZE = 12,
-	M_FAIL = 13,
+	MEM_FAIL = 13,
 	MLX_ERR1 = 14,
 	MLX_ERR2 = 15
 }					t_errn;

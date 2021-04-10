@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/07 17:32:45 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 05:54:22 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		ft_can_see(t_world *world, double x, double y)
+static int		cub_can_see(t_world *world, double x, double y)
 {
 	int			grid_x;
 	int			grid_y;
@@ -30,7 +30,7 @@ static int		ft_can_see(t_world *world, double x, double y)
 	return (1);
 }
 
-static void		ft_player_fov(t_player *player, t_world *world, t_mlx *mlx)
+static void		cub_player_fov(t_player *player, t_world *world, t_mlx *mlx)
 {
 	int			l;
 	double		x1;
@@ -41,15 +41,15 @@ static void		ft_player_fov(t_player *player, t_world *world, t_mlx *mlx)
 	{
 		x1 = player->vector.x * world->offset + player->vector.dx * l;
 		y1 = player->vector.y * world->offset + player->vector.dy * l;
-		if (ft_can_see(world, x1, y1))
+		if (cub_can_see(world, x1, y1))
 			mlx->buffer[(int)(y1 * MAP_SIZE)][(int)(x1 * MAP_SIZE)] = 0x00FFFFFF;
-		if (ft_can_see(world, x1, y1) == 0)
+		if (cub_can_see(world, x1, y1) == 0)
 			break ;
 		l++;
 	}
 }
 
-static void		ft_minimap_player(t_player *player, t_world *world, t_mlx *mlx)
+static void		cub_minimap_player(t_player *player, t_world *world, t_mlx *mlx)
 {
 	double		x1;
 	double		y1;
@@ -69,9 +69,9 @@ static void		ft_minimap_player(t_player *player, t_world *world, t_mlx *mlx)
 	}
 }
 
-void			ft_minimap(t_cub *game)
+void			cub_minimap(t_cub *game)
 {
-	ft_draw_map(&game->world, &game->mlx);
-	ft_player_fov(&game->player, &game->world, &game->mlx);
-	ft_minimap_player(&game->player, &game->world, &game->mlx);
+	cub_draw_map(&game->world, &game->mlx);
+	cub_player_fov(&game->player, &game->world, &game->mlx);
+	cub_minimap_player(&game->player, &game->world, &game->mlx);
 }

@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/05 20:57:38 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 05:54:28 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_sprite_order(t_sort *sort, int count)
+static void		cub_sprite_order(t_sort *sort, int count)
 {
 	t_sort		tmp;
 	int			i;
@@ -39,7 +39,7 @@ static void		ft_sprite_order(t_sort *sort, int count)
 	}
 }
 
-void			ft_sort_sprites(t_objs *s, int count)
+void			cub_sort_sprites(t_objs *s, int count)
 {
 	t_sort		*tmp;
 	int			i;
@@ -52,7 +52,7 @@ void			ft_sort_sprites(t_objs *s, int count)
 		tmp[i].order = s->order[i];
 		i++;
 	}
-	ft_sprite_order(tmp, count);
+	cub_sprite_order(tmp, count);
 	i = 0;
 	while (i < count)
 	{

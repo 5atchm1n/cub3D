@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:48:46 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 06:40:33 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 05:54:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_free_map(t_world *world)
+static void		cub_free_map(t_world *world)
 {
 	int			i;
 
@@ -25,7 +25,7 @@ static void		ft_free_map(t_world *world)
 	free(world->map);
 }
 
-void			ft_free_world(t_world *world)
+void			cub_free_world(t_world *world)
 {
 	int			i;
 
@@ -44,7 +44,7 @@ void			ft_free_world(t_world *world)
 	}
 }
 
-int				ft_quit(t_cub *game)
+int				cub_quit(t_cub *game)
 {
 	int			i;
 
@@ -55,8 +55,8 @@ int				ft_quit(t_cub *game)
 		i++;
 	}
 	free(game->mlx.buffer);
-	ft_free_world(&game->world);
-	ft_free_map(&game->world);
+	cub_free_world(&game->world);
+	cub_free_map(&game->world);
 	free(game->world.objpath);
 	free(game->world.tex);
 	free(game->world.tpath);

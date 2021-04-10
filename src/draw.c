@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/06 23:26:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 05:54:11 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		ft_draw(t_mlx *mlx)
+void		cub_draw(t_mlx *mlx)
 {
 	int		x;
 	int		y;
