@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 08:09:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 04:21:48 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,11 @@ double	ft_min(double a, double b)
 		return (a);
 	else
 		return (b);
+}
+
+int		ft_isdir(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
 }

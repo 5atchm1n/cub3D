@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 08:10:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 04:15:21 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		ft_rgb_to_int(t_color color);
 /*
 ** ADD TO LIBFT
 */
+int		ft_isdir(char c);
 int		ft_isspace(char c);
 int		ft_strcmp(char *s1, char *s2);
 double	ft_max(double a, double b);

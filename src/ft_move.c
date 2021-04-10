@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 08:12:45 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 03:59:14 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		ft_update_fov(t_vector *v, t_camera *cam, t_move *move)
+static int		ft_look_left_right(t_vector *v, t_camera *cam, t_move *move)
 {
 	double		dir;
 	double		p;
@@ -108,9 +108,30 @@ static void		ft_move_left(t_vector *v, char **map)
 	}
 }
 
+static void		ft_look_up_down(t_vector *v, t_mlx mlx, t_move move)
+{
+	if (move.u)
+	{
+		v->pitch += (mlx.res.y / 2) * MOVE_SPEED;
+		if (v->pitch > mlx.res.y / 4)
+			v->pitch = mlx.res.y / 4;
+	}
+	if (move.d)
+	{
+		v->pitch -= (mlx.res.y / 2) * MOVE_SPEED;
+		if (v->pitch < -mlx.res.y / 4)
+			v->pitch = -mlx.res.y / 4;
+	}
+	if (v->pitch > 0)
+		ft_max(0, v->pitch - 100 * MOVE_SPEED);
+	if (v->pitch < 0)
+		ft_min(1, v->pitch + 100 * MOVE_SPEED);
+}
+
 int				ft_move(t_cub *game)
 {
-	ft_update_fov(&game->player.vector, &game->player.camera, &game->player.move);
+	ft_look_left_right(&game->player.vector, &game->player.camera, &game->player.move);
+	ft_look_up_down(&game->player.vector, game->mlx, game->player.move);
 	if (game->player.move.up)
 		ft_move_up(&game->player.vector, game->world.map);
 	if (game->player.move.down)
@@ -119,22 +140,6 @@ int				ft_move(t_cub *game)
 		ft_move_left(&game->player.vector, game->world.map);
 	if (game->player.move.right)
 		ft_move_right(&game->player.vector, game->world.map);
-	if (game->player.move.u)
-	{
-		game->player.vector.pitch += 400 * MOVE_SPEED;
-		if (game->player.vector.pitch > game->mlx.res.y / 4)
-			game->player.vector.pitch = game->mlx.res.y / 4;
-	}
-	if (game->player.move.d)
-	{
-		game->player.vector.pitch -= 400 * MOVE_SPEED;
-		if (game->player.vector.pitch < -game->mlx.res.y / 4)
-			game->player.vector.pitch = -game->mlx.res.y / 4;
-	}
-	if (game->player.vector.pitch > 0)
-		ft_max(0, game->player.vector.pitch - 100 * MOVE_SPEED);
-	if (game->player.vector.pitch > 0)
-		ft_min(1, game->player.vector.pitch + 100 * MOVE_SPEED);
 	ft_floor_casting(&game->player, &game->world, &game->mlx);
 	ft_raycasting(game);
 	ft_cast_sprites(game);

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 07:21:36 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/09 19:45:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct		s_floor
 	float			fly;
 	int				tx;
 	int				ty;
+	int				isfloor;
 }					t_floor;
 
 

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/09 07:24:58 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 03:57:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static int	ft_move_stop(int keycode, t_cub *game)
 	int		i;
 
 	i = 0;
-	if (keycode == 119 || keycode == 65362)
+	if (keycode == 119)
 		game->player.move.up = 0;
-	if (keycode == 115 || keycode == 65364)
+	if (keycode == 115)
 		game->player.move.down = 0;
 	if (keycode == 97)
 		game->player.move.left = 0;
