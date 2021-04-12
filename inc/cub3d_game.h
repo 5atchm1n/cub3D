@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 10:33:33 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/12 03:49:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define PLAYER_SIZE 0.2
 # define MAP_SIZE 0.2
 # define MOVE_SPEED 0.02
-# define TURN_SPEED 0.01
+# define TURN_SPEED 0.015
 # define ERRORS 13
 
 /*
@@ -29,6 +29,7 @@ typedef struct		s_mlx
 	t_res			res;
 	int				**buffer;
 	int				on;
+	t_mouse			mouse;
 }					t_mlx;
 /*
 ** PLAYER -- MOVE, VECTOR, CAMERA --

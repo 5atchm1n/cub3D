@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 12:04:11 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/12 02:23:48 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ typedef struct		s_res
 	int				x;
 	int				y;
 }					t_res;
+
+typedef struct		s_mouse
+{
+	int				x;
+	int				y;
+}					t_mouse;
+
 /*
 ** FLOOR , CEILIING CASTING
 */
@@ -165,17 +172,6 @@ typedef union		u_color
 /*
 ** PLAYER -- MOVE , VECTOR, CAMERA PLANE
 */
-typedef struct		s_move
-{
-	int				left;
-	int				right;
-	int				up;
-	int				down;
-	int				turn_l;
-	int				turn_r;
-	int				u;
-	int				d;
-}					t_move;
 
 typedef struct		s_vector
 {

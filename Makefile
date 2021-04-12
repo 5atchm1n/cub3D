@@ -58,7 +58,7 @@ all : ${NAME}
 
 mlx :
 		@echo -n "Compiling minilibx"
-		@make -s -Cmlx_linux > /dev/null
+		@make -s -Cmlx_linux > /dev/null 2>&1
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 		@echo -n "Copy libmlx.a to working directory"
 		@cp mlx_linux/libmlx_Linux.a libmlx.a
@@ -89,8 +89,15 @@ norm :
 		@~/.norminette/norminette.rb ${NORM2}
 
 clean :	
+		@echo -n "deleting mlx object files"
+		@make clean -s -Cmlx_linux > /dev/null
+		@echo "\033[32m\t[OK]\033[0m"
+		@echo -n "deleting libft object files"
+		@make clean -s -Clibft > /dev/null
+		@echo "\033[32m\t[OK]\033[0m"
+		@echo "deleting object files"
 		@rm -rf ${OBJDIR} > /dev/null
-		@echo "deleting object files\033[32m\t[OK]\033[0m"
+		@echo "\033[32m\t\t[OK]\033[0m"
 
 fclean : clean
 		@rm -rf ${NAME} ${MLX} ${LIBFT}

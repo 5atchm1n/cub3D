@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 15:03:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/10 17:31:55 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void		cub_move_up(t_vector *v, char **map)
 	cub_player_offset(v, offset);
 	x = v->x + v->dx * MOVE_SPEED + offset[0];
 	y = v->y + v->dy * MOVE_SPEED + offset[1];
-	if (map[(int)y][(int)x] != '1')
+	if (map[(int)y][(int)x] == '0')
 	{
 		v->x += v->dx * MOVE_SPEED;
 		v->y += v->dy * MOVE_SPEED;

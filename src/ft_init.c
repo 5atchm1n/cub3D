@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 05:54:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/12 04:06:26 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		cub_init_mlx(t_mlx *mlx)
 	mlx_get_screen_size(mlx->win.mlx, &screenx, &screeny);
 	if (screenx < mlx->res.x)
 		mlx->res.x = screenx;
-	if (screeny < mlx->res.x)
+	if (screeny < mlx->res.y)
 		mlx->res.y = screeny;
 	mlx->win.win = mlx_new_window(mlx->win.mlx, mlx->res.x,
 			mlx->res.y, "cub3D");
