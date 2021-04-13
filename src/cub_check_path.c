@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_paths.c                                   :+:      :+:    :+:   */
+/*   cub_check_path.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 20:43:40 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 06:07:20 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 07:20:39 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static void		cub_check_path(char *path, t_error *error)
 	test = open(path, O_RDONLY);
 	if (test < 0)
 		error->id = INV_FILE;
-	else
-		close(test);
+	close(test);
 }
 
 static void		cub_check_extension(char *path, t_error *error)

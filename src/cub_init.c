@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   cub_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/12 04:06:26 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 06:50:42 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,8 @@ void			cub_init(t_cub *game, char *map_path)
 {
 	t_error		error;
 
-	cub_init_map(&game->world);
 	cub_init_mlx(&game->mlx);
+	cub_init_map(&game->world);
 	cub_init_img_buffer(&game->mlx);
 	cub_init_textures(&game->world);
 	cub_init_sky_ground(&game->world);

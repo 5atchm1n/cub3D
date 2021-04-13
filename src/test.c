@@ -6,11 +6,19 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:17:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 04:17:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 08:02:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void			cub_render(t_cub *game)
+{
+	cub_raycasting(game);
+	cub_cast_sprites(game);
+	cub_minimap(game);
+	cub_draw(&game->mlx);
+}
 
 static void		cub_mlx_hooks(t_cub *game)
 {
@@ -22,7 +30,6 @@ static void		cub_mlx_hooks(t_cub *game)
 	cub_print_info(game);
 	mlx_loop(game->mlx.win.mlx);
 }
-
 
 int				main(int argc, char **argv)
 {

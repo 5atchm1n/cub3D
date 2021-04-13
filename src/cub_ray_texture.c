@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 03:51:42 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 04:55:27 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 08:05:27 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int		cub_set_texturex(t_ray *ray, t_vector *vector)
 		texturex = TEX_X - texturex - 1;
 	return (texturex);
 }
-/*
+
 static void		cub_set_floor_ceiling(int start, int end, int x, t_cub *game)
 {
 	int			y;
@@ -64,7 +64,7 @@ static void		cub_set_floor_ceiling(int start, int end, int x, t_cub *game)
 		y++;
 	}
 }
-*/
+
 void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 {
 	double		step;
@@ -75,7 +75,9 @@ void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 
 	step = 1.0 * TEX_Y / t->lineheight;
 	tex_x = cub_set_texturex(ray, &game->player.vector);
-	tex_pos = (t->start - game->player.vector.pitch - (game->player.vector.posz / ray->dw) - game->mlx.res.y / 2 + t->lineheight / 2) * step;
+	tex_pos = (t->start - game->player.vector.pitch
+			- (game->player.vector.posz / ray->dw)
+			- game->mlx.res.y / 2 + t->lineheight / 2) * step;
 	y = 0;
 	cub_set_tex_dir(t, ray);
 	y = t->start;
@@ -86,5 +88,5 @@ void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 		game->mlx.buffer[y][x] = game->world.tex[t->dir][TEX_Y * tex_y + tex_x];
 		y++;
 	}
-//	cub_set_floor_ceiling(t->start, t->end, x, game);
+	cub_set_floor_ceiling(t->start, t->end, x, game);
 }

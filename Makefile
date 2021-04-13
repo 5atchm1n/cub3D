@@ -4,7 +4,7 @@ INC =	cub3d.h \
 		cub3d_game.h \
 		cub3d_world.h
 
-SRCS =	cub_check_map.c \
+SRCS =	cub_check.c \
 		cub_check_path.c \
 		cub_draw.c \
 		cub_error.c \
@@ -78,11 +78,6 @@ libft :
 $(NAME) : mlx libft ${OBJS}
 		@echo -n  "Generating ${NAME}"
 		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
-		@echo "\033[32m\t\t\t[OK]\033[0m"
-
-bonus : mlx libft ${OBJS}
-		@echo -n  "Generating ${NAME} - BONUS"
-		${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c

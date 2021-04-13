@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 04:31:42 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 08:03:25 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@
 # include "cub3d_world.h"
 # include "cub3d_game.h"
 
-# ifndef BONUS
-# define BONUS 0
-# endif
 /*
 ** CUSTOM PIXEL PUT FOR PERFORMANCE - MLX
 */
@@ -66,6 +63,7 @@ void	cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x);
 int		cub_nobject(t_world *world);
 void	cub_cast_sprites(t_cub *game);
 void	cub_sort_sprites(t_objs *objs, int count);
+void	cub_render(t_cub *game);
 /*
 ** MINIMAP
 */

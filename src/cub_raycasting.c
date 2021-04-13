@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_raycast.c                                       :+:      :+:    :+:   */
+/*   cub_raycasting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:16:31 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 06:06:50 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 07:54:36 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,16 @@ static void		cub_run_dda(t_ray *ray, t_vector *v, char **map)
 		ray->dw = (ray->mapy - v->y + (1 - ray->stepy) / 2) / ray->diry;
 }
 
-static void		cub_set_stripe(t_mlx *mlx, t_ray *ray, t_texture *t, t_vector *v)
+static void		cub_set_stripe(t_mlx *mlx, t_ray *ray,
+		t_texture *t, t_vector *v)
 {
 	t->lineheight = (int)(mlx->res.y / ray->dw);
-	t->start = -t->lineheight / 2 + mlx->res.y / 2 + v->pitch + (v->posz / ray->dw);
+	t->start = -t->lineheight / 2 + mlx->res.y / 2
+		+ v->pitch + (v->posz / ray->dw);
 	if (t->start < 0)
 		t->start = 0;
-	t->end = t->lineheight / 2 + mlx->res.y / 2 + v->pitch + (v->posz / ray->dw);
+	t->end = t->lineheight / 2 + mlx->res.y / 2
+		+ v->pitch + (v->posz / ray->dw);
 	if (t->end >= mlx->res.y)
 		t->end = mlx->res.y - 1;
 }

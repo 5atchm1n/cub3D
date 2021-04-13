@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/12 02:23:48 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 07:53:21 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ typedef struct		s_floor
 	int				ty;
 	int				isfloor;
 }					t_floor;
-
-
 /*
 ** RAYCASTING, TEXTURE CASTING
 */
@@ -227,8 +225,5 @@ typedef struct		s_error
 	int				ceiling;
 	int				map;
 }					t_error;
-/*
-** 
-*/
 
 #endif

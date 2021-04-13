@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 04:54:52 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 08:04:20 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,7 @@ int				cub_move(t_cub *game)
 		cub_move_left(&game->player.vector, game->world.map);
 	if (game->player.move & M_RIGHT)
 		cub_move_right(&game->player.vector, game->world.map);
-	cub_floor_casting(&game->player, &game->world, &game->mlx);
-	cub_raycasting(game);
-	cub_cast_sprites(game);
-	cub_minimap(game);
-	cub_draw(&game->mlx);
+	cub_render(game);
 	if (game->mlx.on == 0)
 		cub_quit(game);
 	return (0);
