@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set_texture.c                                   :+:      :+:    :+:   */
+/*   cub_ray_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 03:51:42 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 15:03:14 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 04:55:27 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,22 @@ static int		cub_set_texturex(t_ray *ray, t_vector *vector)
 		texturex = TEX_X - texturex - 1;
 	return (texturex);
 }
+/*
+static void		cub_set_floor_ceiling(int start, int end, int x, t_cub *game)
+{
+	int			y;
 
+	y = 0;
+	while (y <= start)
+		game->mlx.buffer[y++][x] = game->world.ceiling.color;
+	y = end;
+	while (y < game->mlx.res.y)
+	{
+		game->mlx.buffer[y][x] = game->world.floor.color;
+		y++;
+	}
+}
+*/
 void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 {
 	double		step;
@@ -63,8 +78,6 @@ void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 	tex_pos = (t->start - game->player.vector.pitch - (game->player.vector.posz / ray->dw) - game->mlx.res.y / 2 + t->lineheight / 2) * step;
 	y = 0;
 	cub_set_tex_dir(t, ray);
-//	while (y <= t->start)
-//		game->mlx.buffer[y++][x] = game->world.ceiling.color;
 	y = t->start;
 	while (y < t->end)
 	{
@@ -73,9 +86,5 @@ void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 		game->mlx.buffer[y][x] = game->world.tex[t->dir][TEX_Y * tex_y + tex_x];
 		y++;
 	}
-//	while (y < game->mlx.res.y)
-//	{
-//		game->mlx.buffer[y][x] = game->world.floor.color;
-//		y++;
-//	}
+//	cub_set_floor_ceiling(t->start, t->end, x, game);
 }

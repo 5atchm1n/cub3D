@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 12:39:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 04:31:42 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # include "cub3d_world.h"
 # include "cub3d_game.h"
 
+# ifndef BONUS
+# define BONUS 0
+# endif
 /*
 ** CUSTOM PIXEL PUT FOR PERFORMANCE - MLX
 */
@@ -52,6 +55,9 @@ void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 int		cub_keypress(int keycode, t_cub *game);
 int		cub_keyrelease(int keycode, t_cub *game);
 int		cub_move(t_cub *game);
+void	cub_look_left_right(t_vector *v, t_camera *cam, uint_fast8_t move);
+void	cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast8_t move);
+void	cub_player_offset(t_vector *v, double *offset);
 /*
 ** RAYCASTING - SPRITES, TEXTURES
 */
@@ -94,6 +100,7 @@ double	ft_fmin(double a, double b);
 ** BONUS - FLOOR CASTING
 */
 void	cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx);
+int		cub_mouse(int x, int y, t_cub *game);
 /*
 ** TEST - PRINT INFO
 */

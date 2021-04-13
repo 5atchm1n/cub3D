@@ -4,32 +4,35 @@ INC =	cub3d.h \
 		cub3d_game.h \
 		cub3d_world.h
 
-SRCS =	ft_read_map.c \
-		ft_settings.c \
-		ft_import_settings.c \
-		ft_settings_utils.c \
-		ft_init.c \
-		ft_raycast.c \
-		ft_set_texture.c \
-		draw.c \
-		ft_sort_sprites.c \
-		ft_check_map.c \
-		ft_check_paths.c \
-		ft_init_player.c \
-		ft_get_line.c \
-		ft_quit.c \
-		ft_error.c \
-		ft_keyhook.c \
-		ft_move.c \
-		ft_utils.c \
-		ft_minimap.c \
-		ft_print_info.c \
-		ft_minimap_player.c \
-		ft_load_xpm.c \
-		ft_load_objects.c \
-		ft_set_sprites.c \
-		ft_floor_casting.c \
-		test.c 
+SRCS =	cub_check_map.c \
+		cub_check_path.c \
+		cub_draw.c \
+		cub_error.c \
+		cub_get_line.c \
+		cub_import_settings.c \
+		cub_init.c \
+		cub_init_player.c \
+		cub_mlx_keyhook.c \
+		cub_load_objects.c \
+		cub_load_xpm.c \
+		cub_minimap.c \
+		cub_minimap_player.c \
+		cub_player_look.c \
+		cub_player_move.c \
+		cub_player_move_bonus.c \
+		cub_print_info.c \
+		cub_quit.c \
+		cub_ray_floor.c \
+		cub_ray_sprites.c \
+		cub_ray_sprites_sort.c \
+		cub_ray_texture.c \
+		cub_raycasting.c \
+		cub_read_map.c \
+		cub_settings.c \
+		cub_settings_utils.c \
+		cub_utils.c \
+		cub_utils_colors.c \
+		test.c
 
 CC = clang
 
@@ -77,8 +80,10 @@ $(NAME) : mlx libft ${OBJS}
 		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
-.c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+bonus : mlx libft ${OBJS}
+		@echo -n  "Generating ${NAME} - BONUS"
+		${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 		@mkdir -p ${OBJDIR}
@@ -95,7 +100,7 @@ clean :
 		@echo -n "deleting libft object files"
 		@make clean -s -Clibft > /dev/null
 		@echo "\033[32m\t[OK]\033[0m"
-		@echo "deleting object files"
+		@echo -n "deleting object files"
 		@rm -rf ${OBJDIR} > /dev/null
 		@echo "\033[32m\t\t[OK]\033[0m"
 

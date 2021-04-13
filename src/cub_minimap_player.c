@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minimap_player.c                                :+:      :+:    :+:   */
+/*   cub_minimap_player.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 05:54:22 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 04:00:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		cub_can_see(t_world *world, double x, double y)
 	return (1);
 }
 
-static void		cub_player_fov(t_player *player, t_world *world, t_mlx *mlx)
+static void		cub_player_dir(t_player *player, t_world *world, t_mlx *mlx)
 {
 	int			l;
 	double		x1;
@@ -72,6 +72,6 @@ static void		cub_minimap_player(t_player *player, t_world *world, t_mlx *mlx)
 void			cub_minimap(t_cub *game)
 {
 	cub_draw_map(&game->world, &game->mlx);
-	cub_player_fov(&game->player, &game->world, &game->mlx);
+	cub_player_dir(&game->player, &game->world, &game->mlx);
 	cub_minimap_player(&game->player, &game->world, &game->mlx);
 }
