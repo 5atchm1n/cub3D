@@ -11,6 +11,7 @@ SRCS =	cub_check.c \
 		cub_get_line.c \
 		cub_import_settings.c \
 		cub_init.c \
+		cub_init_utils.c \
 		cub_init_player.c \
 		cub_mlx_keyhook.c \
 		cub_load_objects.c \
@@ -82,7 +83,14 @@ $(NAME) : mlx libft ${OBJS}
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 		@mkdir -p ${OBJDIR}
-		@${CC} ${CFLAGS} -I./inc -c $< -o $@
+		@${CC} ${BONUS} ${CFLAGS} -I./inc -c $< -o $@
+
+bonus : BONUS = -DBONUS=1
+
+bonus : mlx libft ${OBJS}
+		@echo -n  "Generating ${NAME}"
+		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 norm :
 		@~/.norminette/norminette.rb ${NORM}

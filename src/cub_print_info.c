@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_info.c                                    :+:      :+:    :+:   */
+/*   cub_print_info.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 12:28:37 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 12:32:01 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 17:17:26 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ void			cub_print_info(t_cub *game)
 		printf("objpath[%d] = %s\n", x ,game->world.objpath[x]);
 		x++;
 	}
+	if (BONUS)
+		printf("bonus\n");
+	if (!BONUS)
+		printf("no bonus\n");
 }
 
 int				key_hook(int keycode, t_win *win)

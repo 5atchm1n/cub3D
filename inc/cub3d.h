@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 08:03:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 18:52:27 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 # include "cub3d_world.h"
 # include "cub3d_game.h"
 
+# ifndef BONUS
+# define BONUS 0
+# endif
+
 /*
 ** CUSTOM PIXEL PUT FOR PERFORMANCE - MLX
 */
@@ -39,11 +43,12 @@ void	cub_import_settings(char *map_path, t_cub *game, t_error *error);
 ** INITIALIZE GAME
 */
 void	cub_init(t_cub *game, char *map);
+void	cub_init_mlx(t_mlx *mlx, t_error *error);
 void	cub_init_player(t_player *player, t_world *world);
 void	cub_load_textures(t_mlx *mlx, t_world *world);
 void	cub_load_objects(t_world *world);
 void	cub_init_object_pos(t_world *world);
-void	cub_init_object(t_world *world);
+void	cub_init_object(t_world *world, t_error *error);
 void	cub_init_world(t_world *world, t_mlx mlx, char *map_path);
 void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 /*
@@ -70,13 +75,15 @@ void	cub_render(t_cub *game);
 void	cub_draw_map(t_world *world, t_mlx *mlx);
 void	cub_minimap(t_cub *game);
 /*
-** ERROR AND EXIT
+** ERROR ,CHECKS AND EXIT
 */
+void	cub_test_xpm(t_cub *game, t_error *error);
 void	cub_check(t_world *world, t_cub *game);
 void	cub_check_files(t_world *world, t_error *error);
 int		cub_quit(t_cub *game);
 void	cub_error(t_error error, t_cub *game, int state);
 void	cub_free_world(t_world *world);
+void	cub_error_set(t_error *error, t_errn id);
 /*
 ** UTILS FUNCTION
 */

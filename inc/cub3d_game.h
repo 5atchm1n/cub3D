@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/12 03:49:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 18:45:21 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define MAP_SIZE 0.2
 # define MOVE_SPEED 0.02
 # define TURN_SPEED 0.015
-# define ERRORS 13
 
 /*
 ** MLX -- WIN, IMG, RES

@@ -6,47 +6,50 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 08:42:57 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 16:42:27 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_set_sprites(t_objs *objs, t_vector *v, t_world *w)
+static void		cub_set_sprites(t_objs *objs, t_vector player, t_world world)
 {
 	int			i;
 
 	i = 0;
-	while (i < w->scount)
+	while (i < world.scount)
 	{
 		objs->order[i] = i;
-		objs->dist[i] = ((v->x - w->sprite[i].x) * (v->x - w->sprite[i].x)
-		+ (v->y - w->sprite[i].y) * (v->y - w->sprite[i].y));
+		objs->dist[i] = ((player.x - world.sprite[i].x)
+			* (player.x - world.sprite[i].x)
+			+ (player.y - world.sprite[i].y)
+			* (player.y - world.sprite[i].y));
 		i++;
 	}
 }
 
-static void		cub_transform_sprite(t_sprite s, t_player p, t_objs obj, int i)
+static void		cub_transform_sprite(t_sprite *sprite, t_player player, t_objs *obj, int i)
 {
 	double		x;
 	double		y;
 	double		inv;
 
-	o->index = i;
-	x = s[o->order[i]].x - p->vector.x;
-	y = s[o->order[i]].y - p->vector.y;
-	inv = 1.0 / (p->camera.px * p->vector.dy -
-			p->camera.py * p->vector.dx);
-	o->tx = inv * (p->vector.dy * x - p->vector.dx * y);
-	o->ty = inv * (-p->camera.py * x + p->camera.px * y);
+	obj->index = i;
+	x = sprite[obj->order[i]].x - player.vector.x;
+	y = sprite[obj->order[i]].y - player.vector.y;
+	inv = 1.0
+		/ (player.camera.px * player.vector.dy
+		- player.camera.py * player.vector.dx);
+	obj->tx = inv * (player.vector.dy * x - player.vector.dx * y);
+	obj->ty = inv * (-player.camera.py * x + player.camera.px * y);
 }
 
 static void		cub_set_sprite_screen(t_mlx mlx, t_objs *objs, t_sprite *s,
-		t_vector *v)
+		t_vector v)
 {
 	objs->hitx = (int)((mlx.res.x / 2.0) * (1.0 + objs->tx / objs->ty));
 	objs->voffset = (int)(s[objs->index].vmove / objs->ty)
-		+ v->pitch + v->posz / objs->ty;
+		+ v.pitch + v.posz / objs->ty;
 	objs->spriteh = (int)fabs((mlx.res.y / objs->ty)) / s[objs->index].vdiv;
 	objs->starty = -objs->spriteh / 2 + mlx.res.y / 2 + objs->voffset;
 	if (objs->starty < 0)
@@ -63,52 +66,36 @@ static void		cub_set_sprite_screen(t_mlx mlx, t_objs *objs, t_sprite *s,
 		objs->endx = mlx.res.x - 1;
 }
 
-static void		cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs obj, int tex_x)
+static void		cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs obj, t_pixel *px)
 {
 	int			d;
-	int			y;
-	int			tex_y;
+	int			colour;
 	int			sorted;
 
-	y = o.starty;
+	px->y = obj.starty;
 	sorted = world.sprite[obj.order[obj.index]].id;
-	while (y < o.endy)
+	while (px->y < obj.endy)
 	{
-		d = (y - o.voffset) * 256 - mlx->res.y * 128 + o->spriteh * 128;
-		tex_y = ((d * SPRITE_H) / o->spriteh) / 256;
-		colour = w.obj[sorted][SPRITE_W * tex_y + tex_x];
+		d = (px->y - obj.voffset) * 256 - mlx->res.y * 128 + obj.spriteh * 128;
+		px->tex_y = ((d * SPRITE_H) / obj.spriteh) / 256;
+		colour = world.obj[sorted][SPRITE_W * px->tex_y + px->tex_x];
 		if ((colour & 0x00FFFFFF) != 0)
-			mlx->buffer[y][x] = colour;
-		y++;
+			mlx->buffer[px->y][px->x] = colour;
+		px->y += 1;
 	}
 }
 
 static void		cub_set_sprite_image_buffer(t_mlx *mlx, t_objs obj, t_world world)
 {
-	int			x;
-	int			tex_x;
+	t_pixel		px;
 
-	x = obj.startx;
-	while (x < obj.endx)
+	px.x = obj.startx;
+	while (px.x < obj.endx)
 	{
-		tex_x = (int)(256 * (x - (-obj.spritew / 2 + obj.hitx)) * SPRITE_W / obj.spritew) / 256;
-		if (obj.ty > 0 && x > 0 && x < mlx->res.x && obj.ty < world.zbuffer[x])
-			cub_set_buffer_pixel(mlx, world, obj, tex_x);
-/*		{
-			y = o->starty;
-			while (y < o->endy)
-			{
-				d = (y - o->voffset) * 256 - mlx->res.y * 128 +
-					o->spriteh * 128;
-				tex_y = ((d * SPRITE_H) / o->spriteh) / 256;
-				colour = w->obj[w->sprite[o->order[o->index]].id]
-					[SPRITE_W * tex_y + tex_x];
-				if ((colour & 0x00FFFFFF) != 0)
-					mlx->buffer[y][x] = colour;
-				y++;
-			}
-		}*/
-		x++;
+		px.tex_x = (int)(256 * (px.x - (-obj.spritew / 2 + obj.hitx)) * SPRITE_W / obj.spritew) / 256;
+		if (obj.ty > 0 && px.x > 0 && px.x < mlx->res.x && obj.ty < world.zbuffer[px.x])
+			cub_set_buffer_pixel(mlx, world, obj, &px);
+		px.x += 1;
 	}
 }
 
@@ -119,13 +106,13 @@ void			cub_cast_sprites(t_cub *game)
 
 	objs.order = malloc(sizeof(int) * game->world.scount);
 	objs.dist = malloc(sizeof(double) * game->world.scount);
-	cub_set_sprites(&objs, &game->player.vector, &game->world);
+	cub_set_sprites(&objs, game->player.vector, game->world);
 	cub_sort_sprites(&objs, game->world.scount);
 	i = 0;
 	while (i < game->world.scount)
 	{
 		cub_transform_sprite(game->world.sprite, game->player, &objs, i);
-		cub_set_sprite_screen(game->mlx, &objs, game->world.sprite, &game->player.vector);
+		cub_set_sprite_screen(game->mlx, &objs, game->world.sprite, game->player.vector);
 		cub_set_sprite_image_buffer(&game->mlx, objs, game->world);
 		i++;
 	}

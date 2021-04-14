@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_player.c                                   :+:      :+:    :+:   */
+/*   cub_init_player.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:10:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/12 00:59:49 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 18:43:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void			cub_init_world(t_world *world, t_mlx mlx, char *map_path)
-{
-	world->offset = (float)mlx.res.x / (float)world->msize.x;
-	world->map = cub_copy_map(map_path, world);
-	world->scount = cub_nobject(world);
-	world->floor.color = cub_rgb_to_int(world->floor);
-	world->ceiling.color = cub_rgb_to_int(world->ceiling);
-}
 
 static void		cub_set_player_dir(t_player *player, char dir)
 {

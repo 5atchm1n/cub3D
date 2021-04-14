@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   cub_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:26:22 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 05:54:20 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/13 18:23:32 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ static void		cub_error_msg(int errnum, t_error error)
 	errmsg[10] = "\033[36m\tMissing Ceiling colour";
 	errmsg[11] = "\033[36m\tXPM size is not valid";
 	errmsg[12] = "\033[31m\t system fail \033[36m MALLOC";
-	errmsg[12] = "\033[31m\t MLX fail \033[36m INIT";
-	errmsg[12] = "\033[31m\t MLX fail \033[36m can't read XPM file";
+	errmsg[13] = "\033[31m\t MLX fail \033[36m INIT";
+	errmsg[14] = "\033[31m\t MLX fail \033[36m can't read XPM file";
+	errmsg[15] = "\033[36m Invalid RGB input [0 - 255]";
 	printf("\033[31mError\033[0m\n ");
 	printf("%s", errmsg[errnum]);
 	if (errnum == 1)
@@ -61,6 +62,11 @@ static int		cub_free_state_0(t_cub *game)
 	free(game->world.tpath);
 	free(game->world.objpath);
 	exit(0);
+}
+
+void			cub_error_set(t_error *error, t_errn id)
+{
+	error->id = id;
 }
 
 void			cub_error(t_error error, t_cub *game, int state)
