@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 08:04:20 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:40:44 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static void		cub_move_left(t_vector *v, char **map)
 
 int				cub_move(t_cub *game)
 {
-	cub_look_left_right(&game->player.vector, &game->player.camera, game->player.move);
+	cub_look_left_right(&game->player.vector, &game->player.camera,
+			game->player.move);
 	cub_look_up_down(&game->player.vector, game->mlx, game->player.move);
 	if (game->player.move & M_UP)
 		cub_move_up(&game->player.vector, game->world.map);

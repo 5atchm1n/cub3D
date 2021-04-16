@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minimap.c                                       :+:      :+:    :+:   */
+/*   cub_minimap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 11:58:16 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:39:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void		cub_map_wall(float offset, t_grid pos, t_mlx *mlx, int colour)
 		l = 0;
 		while (l < offset)
 		{
-			mlx->buffer[(int)(pos.y * offset + l)][(int)(pos.x * offset + k)] = colour;
+			mlx->buffer[(int)(pos.y * offset + l)]
+				[(int)(pos.x * offset + k)] = colour;
 			l++;
 		}
 		k++;

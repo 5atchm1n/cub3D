@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 11:04:09 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:37:48 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			cub_init_object(t_world *world, t_error *error)
 	i = 0;
 	world->obj = (int **)malloc(sizeof(int *) * SPRITES);
 	if (world->obj == NULL)
-		return(cub_error_set(error, MEM_FAIL));
+		return (cub_error_set(error, MEM_FAIL));
 	while (i < SPRITES)
 	{
 		world->obj[i] = (int *)malloc(sizeof(int) * (SPRITE_W * SPRITE_H));
@@ -60,6 +60,22 @@ void			cub_init_object(t_world *world, t_error *error)
 			j++;
 		}
 		i++;
+	}
+}
+
+static void		cub_set_object_size(t_sprite *sprite)
+{
+	if (sprite->id == 0)
+	{
+		sprite->udiv = 2;
+		sprite->vdiv = 2;
+		sprite->vmove = 256.0;
+	}
+	if (sprite->id == 1)
+	{
+		sprite->udiv = 2;
+		sprite->vdiv = 2;
+		sprite->vmove = 256.0;
 	}
 }
 
@@ -82,9 +98,7 @@ void			cub_load_objects(t_world *world)
 				world->sprite[x].x = (double)j + 0.5;
 				world->sprite[x].y = (double)i + 0.5;
 				world->sprite[x].id = world->map[i][j] - 48 - 2;
-				world->sprite[x].udiv = 2;
-				world->sprite[x].vdiv = 2;
-				world->sprite[x].vmove = 256.0;
+				cub_set_object_size(&world->sprite[x]);
 				x++;
 			}
 			j++;

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:35:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 10:58:04 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:22:07 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void			cub_test_xpm(t_cub *game, t_error *error)
 	t_img		img;
 	int			i;
 
-		i = 0;
+	i = 0;
 	while (i < TEXTURES)
 	{
 		img.img = mlx_xpm_file_to_image(game->mlx.win.mlx, game->world.tpath[i],
@@ -69,7 +69,7 @@ void			cub_init_mlx(t_mlx *mlx, t_error *error)
 
 	mlx->win.mlx = mlx_init();
 	if (mlx->win.mlx == NULL)
-		return (cub_error_set(error, 14)); 
+		return (cub_error_set(error, 14));
 	mlx_get_screen_size(mlx->win.mlx, &screenx, &screeny);
 	if (screenx < mlx->res.x)
 		mlx->res.x = screenx;
@@ -83,5 +83,3 @@ void			cub_init_mlx(t_mlx *mlx, t_error *error)
 			&mlx->img.len, &mlx->img.endian);
 	mlx->on = 1;
 }
-
-

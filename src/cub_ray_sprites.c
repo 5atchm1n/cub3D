@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 16:42:27 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:18:32 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,6 @@ static void		cub_set_sprite_screen(t_mlx mlx, t_objs *objs, t_sprite *s,
 	objs->endx = objs->spritew / 2 + objs->hitx;
 	if (objs->endx >= mlx.res.x)
 		objs->endx = mlx.res.x - 1;
-}
-
-static void		cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs obj, t_pixel *px)
-{
-	int			d;
-	int			colour;
-	int			sorted;
-
-	px->y = obj.starty;
-	sorted = world.sprite[obj.order[obj.index]].id;
-	while (px->y < obj.endy)
-	{
-		d = (px->y - obj.voffset) * 256 - mlx->res.y * 128 + obj.spriteh * 128;
-		px->tex_y = ((d * SPRITE_H) / obj.spriteh) / 256;
-		colour = world.obj[sorted][SPRITE_W * px->tex_y + px->tex_x];
-		if ((colour & 0x00FFFFFF) != 0)
-			mlx->buffer[px->y][px->x] = colour;
-		px->y += 1;
-	}
 }
 
 static void		cub_set_sprite_image_buffer(t_mlx *mlx, t_objs obj, t_world world)

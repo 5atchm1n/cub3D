@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 11:00:35 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 12:10:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void			cub_init(t_cub *game, char *map_path)
 {
 	t_error		error;
 
+	ft_memset(&error, 0, sizeof(error));
 	cub_init_mlx(&game->mlx, &error);
 	if (error.id != 0)
 		cub_error(error, game, 0);
@@ -133,7 +134,7 @@ void			cub_init(t_cub *game, char *map_path)
 	cub_init_world(&game->world, game->mlx, map_path, &error);
 	if (error.id != 0)
 		cub_error(error, game, 1);
-	cub_init_player(&game->player, &game->world);
+	cub_init_player(&game->player, &game->world, &error);
 	cub_test_xpm(game, &error);
 	if (error.id != 0)
 		cub_error(error, game, 1);

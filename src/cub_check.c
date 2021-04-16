@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_map.c                                     :+:      :+:    :+:   */
+/*   cub_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 05:54:19 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:27:16 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,27 @@ static void		cub_check_if_open(char **map, t_map_size *size, t_error *error)
 
 static int		cub_isvalid(char c)
 {
-	char		*dir;
+	char		*valid;
 	int			i;
 
-	dir = " NSEW01";
+	valid = " NSEW012";
 	i = 0;
-	while (dir[i] != '\0')
+	while (valid[i] != '\0')
 	{
-		if (c == dir[i])
-			return (1);
-		if ((c - 48 > 1) && (c - 48 <= SPRITES + 1))
+		if (c == valid[i])
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-static void		cub_check_map_chars(char **map, t_map_size *size, t_error *error)
+static void		cub_check_map_chars(char **map, t_map_size *size,
+		t_error *error)
 {
 	int			x;
 	int			y;
 
 	y = 0;
-	error->id = NO_ERR;
 	while (y < size->y)
 	{
 		x = 0;
@@ -91,6 +89,7 @@ static void		cub_check_map_chars(char **map, t_map_size *size, t_error *error)
 				error->id = INV_CHAR;
 				error->coords.x = x;
 				error->coords.y = y;
+				break ;
 			}
 			x++;
 		}
@@ -102,9 +101,7 @@ void			cub_check(t_world *world, t_cub *game)
 {
 	t_error		error;
 
-	error.id = NO_ERR;
-	error.coords.x = 0;
-	error.coords.y = 0;
+	ft_memset(&error, 0, sizeof(error));
 	cub_check_map_chars(world->map, &world->msize, &error);
 	cub_check_if_open(world->map, &world->msize, &error);
 	cub_check_files(world, &error);

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 03:51:42 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 17:20:38 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 13:48:33 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 {
 	double		step;
 	double		tex_pos;
-	int			tex_x;
-	int			tex_y;
+	t_grid		tex;
+	int			colour;
 	int			y;
 
 	step = 1.0 * TEX_Y / t->lineheight;
-	tex_x = cub_set_texturex(ray, &game->player.vector);
+	tex.x = cub_set_texturex(ray, &game->player.vector);
 	tex_pos = (t->start - game->player.vector.pitch
 			- (game->player.vector.posz / ray->dw)
 			- game->mlx.res.y / 2 + t->lineheight / 2) * step;
@@ -83,9 +83,10 @@ void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 	y = t->start;
 	while (y < t->end)
 	{
-		tex_y = (int)tex_pos & (TEX_Y - 1);
+		tex.y = (int)tex_pos & (TEX_Y - 1);
 		tex_pos += step;
-		game->mlx.buffer[y][x] = game->world.tex[t->dir][TEX_Y * tex_y + tex_x];
+		colour = game->world.tex[t->dir][TEX_Y * tex.y + tex.x];
+		game->mlx.buffer[y][x] = cub_set_shadow(colour, ray->dw);
 		y++;
 	}
 	if (!BONUS)

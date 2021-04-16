@@ -6,16 +6,14 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:26:22 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 18:23:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:31:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_error_msg(int errnum, t_error error)
+static void		cub_set_errmsg(char **errmsg)
 {
-	char		*errmsg[ERRORS];
-
 	errmsg[0] = "\033[36m\tInvalid char in map";
 	errmsg[1] = "\033[36m\tMap is open - check co-oridnates";
 	errmsg[2] = "\033[36m\tPath to xpm file is a directory";
@@ -32,10 +30,18 @@ static void		cub_error_msg(int errnum, t_error error)
 	errmsg[13] = "\033[31m\t MLX fail \033[36m INIT";
 	errmsg[14] = "\033[31m\t MLX fail \033[36m can't read XPM file";
 	errmsg[15] = "\033[36m Invalid RGB input [0 - 255]";
+	errmsg[16] = "\033[36m Multiple start positions";
+}
+
+static void		cub_error_msg(int errnum, t_error error)
+{
+	char		*errmsg[ERRORS];
+
+	cub_set_errmsg(errmsg);
 	printf("\033[31mError\033[0m\n ");
 	printf("%s", errmsg[errnum]);
-	if (errnum == 1)
-		printf("\033[0m [x = %d\t] [y = %d]", error.coords.x, error.coords.y);
+	if (errnum == 1 || errnum == 0)
+		printf("\033[0m [x = %d] [y = %d]", error.coords.x, error.coords.y);
 	if (errnum == 11)
 		printf("\033[0m - Must be %d by %d", TEX_X, TEX_Y);
 	printf("\n");

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_look.c                                         :+:      :+:    :+:   */
+/*   cub_player_look.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 08:02:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 03:48:56 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:40:32 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void			cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast8_t move)
 		ft_fmin(1, v->pitch + 100 * MOVE_SPEED);
 }
 
-void			cub_look_left_right(t_vector *v, t_camera *cam, uint_fast8_t move)
+void			cub_look_left_right(t_vector *v, t_camera *cam,
+		uint_fast8_t move)
 {
 	double		dir;
 	double		p;

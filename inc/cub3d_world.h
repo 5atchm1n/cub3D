@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 18:45:19 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:18:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define SPRITE_W 64
 # define TEX_X 64
 # define TEX_Y 64
-# define ERRORS 16
+# define ERRORS 17
 
 /*
 ** MLX -- WINDOW, IMAGE, BUFFER --
@@ -208,7 +208,8 @@ typedef enum		e_errn
 	MEM_FAIL = 13,
 	MLX_ERR1 = 14,
 	MLX_ERR2 = 15,
-	INV_RGB = 16
+	INV_RGB = 16,
+	MUL_ST = 17,
 }					t_errn;
 
 typedef struct		s_grid
@@ -226,6 +227,7 @@ typedef struct		s_error
 	int				floor;
 	int				ceiling;
 	int				map;
+	int				dir;
 }					t_error;
 
 typedef struct		s_pixel
@@ -235,6 +237,5 @@ typedef struct		s_pixel
 	int				tex_x;
 	int				tex_y;
 }					t_pixel;
-
 
 #endif

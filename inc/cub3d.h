@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 10:59:12 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:20:56 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "cub3d_game.h"
 
 # ifndef BONUS
-# define BONUS 0
+#  define BONUS 0
 # endif
 
 /*
@@ -44,12 +44,13 @@ void	cub_import_settings(char *map_path, t_cub *game, t_error *error);
 */
 void	cub_init(t_cub *game, char *map);
 void	cub_init_mlx(t_mlx *mlx, t_error *error);
-void	cub_init_player(t_player *player, t_world *world);
+void	cub_init_player(t_player *player, t_world *world, t_error *error);
 void	cub_load_textures(t_mlx *mlx, t_world *world);
 void	cub_load_objects(t_world *world);
 void	cub_init_object_pos(t_world *world);
 void	cub_init_object(t_world *world, t_error *error);
-void	cub_init_world(t_world *world, t_mlx mlx, char *map_path, t_error *error);
+void	cub_init_world(t_world *world, t_mlx mlx, char *map_path, t_error
+		*error);
 void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 /*
 ** MOVE PLAYER
@@ -69,6 +70,8 @@ int		cub_nobject(t_world *world);
 void	cub_cast_sprites(t_cub *game);
 void	cub_sort_sprites(t_objs *objs, int count);
 void	cub_render(t_cub *game);
+void	cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs objs,
+		t_pixel *px);
 /*
 ** MINIMAP
 */
@@ -106,6 +109,7 @@ double	ft_fmin(double a, double b);
 */
 void	cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx);
 int		cub_mouse(int x, int y, t_cub *game);
+int		cub_set_shadow(int colour, double dist);
 /*
 ** TEST - PRINT INFO
 */

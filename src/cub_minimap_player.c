@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 04:00:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 14:40:17 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void		cub_player_dir(t_player *player, t_world *world, t_mlx *mlx)
 		x1 = player->vector.x * world->offset + player->vector.dx * l;
 		y1 = player->vector.y * world->offset + player->vector.dy * l;
 		if (cub_can_see(world, x1, y1))
-			mlx->buffer[(int)(y1 * MAP_SIZE)][(int)(x1 * MAP_SIZE)] = 0x00FFFFFF;
+			mlx->buffer[(int)(y1 * MAP_SIZE)]
+				[(int)(x1 * MAP_SIZE)] = 0x00FFFFFF;
 		if (cub_can_see(world, x1, y1) == 0)
 			break ;
 		l++;
