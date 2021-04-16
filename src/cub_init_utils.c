@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:35:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 18:53:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 10:58:04 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int		cub_check_color(t_color color)
 	return (1);
 }
 
-void			cub_init_world(t_world *world, t_mlx mlx, char *map_path)
+void			cub_init_world(t_world *world, t_mlx mlx, char *map_path,
+		t_error *error)
 {
 	world->offset = (float)mlx.res.x / (float)world->msize.x;
 	world->map = cub_copy_map(map_path, world);

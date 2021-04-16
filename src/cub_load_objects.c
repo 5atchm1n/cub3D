@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 18:51:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 11:04:09 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			cub_init_object(t_world *world, t_error *error)
 	while (i < SPRITES)
 	{
 		world->obj[i] = (int *)malloc(sizeof(int) * (SPRITE_W * SPRITE_H));
-		if (world->obj[i] = NULL)
+		if (world->obj[i] == NULL)
 			return (cub_error_set(error, MEM_FAIL));
 		i++;
 	}

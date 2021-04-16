@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 18:52:27 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/16 10:59:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	cub_load_textures(t_mlx *mlx, t_world *world);
 void	cub_load_objects(t_world *world);
 void	cub_init_object_pos(t_world *world);
 void	cub_init_object(t_world *world, t_error *error);
-void	cub_init_world(t_world *world, t_mlx mlx, char *map_path);
+void	cub_init_world(t_world *world, t_mlx mlx, char *map_path, t_error *error);
 void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 /*
 ** MOVE PLAYER
