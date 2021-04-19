@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 14:18:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/19 23:40:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void		cub_set_sprites(t_objs *objs, t_vector player, t_world world)
 	}
 }
 
-static void		cub_transform_sprite(t_sprite *sprite, t_player player, t_objs *obj, int i)
+static void		cub_transform_sprite(t_sprite *sprite, t_player player,
+		t_objs *obj, int i)
 {
 	double		x;
 	double		y;
@@ -37,9 +38,8 @@ static void		cub_transform_sprite(t_sprite *sprite, t_player player, t_objs *obj
 	obj->index = i;
 	x = sprite[obj->order[i]].x - player.vector.x;
 	y = sprite[obj->order[i]].y - player.vector.y;
-	inv = 1.0
-		/ (player.camera.px * player.vector.dy
-		- player.camera.py * player.vector.dx);
+	inv = 1.0 / ((player.camera.px) * (player.vector.dy) -
+			(player.camera.py) * (player.vector.dx));
 	obj->tx = inv * (player.vector.dy * x - player.vector.dx * y);
 	obj->ty = inv * (-player.camera.py * x + player.camera.px * y);
 }
@@ -66,15 +66,18 @@ static void		cub_set_sprite_screen(t_mlx mlx, t_objs *objs, t_sprite *s,
 		objs->endx = mlx.res.x - 1;
 }
 
-static void		cub_set_sprite_image_buffer(t_mlx *mlx, t_objs obj, t_world world)
+static void		cub_set_sprite_image_buffer(t_mlx *mlx, t_objs obj,
+		t_world world)
 {
 	t_pixel		px;
 
 	px.x = obj.startx;
 	while (px.x < obj.endx)
 	{
-		px.tex_x = (int)(256 * (px.x - (-obj.spritew / 2 + obj.hitx)) * SPRITE_W / obj.spritew) / 256;
-		if (obj.ty > 0 && px.x > 0 && px.x < mlx->res.x && obj.ty < world.zbuffer[px.x])
+		px.tex_x = (int)(256 * (px.x - (-obj.spritew / 2 + obj.hitx)) *
+				(SPRITE_W) / obj.spritew) / 256;
+		if (obj.ty > 0 && px.x > 0 && px.x < mlx->res.x &&
+				obj.ty < world.zbuffer[px.x])
 			cub_set_buffer_pixel(mlx, world, obj, &px);
 		px.x += 1;
 	}
@@ -93,7 +96,8 @@ void			cub_cast_sprites(t_cub *game)
 	while (i < game->world.scount)
 	{
 		cub_transform_sprite(game->world.sprite, game->player, &objs, i);
-		cub_set_sprite_screen(game->mlx, &objs, game->world.sprite, game->player.vector);
+		cub_set_sprite_screen(game->mlx, &objs, game->world.sprite,
+				game->player.vector);
 		cub_set_sprite_image_buffer(&game->mlx, objs, game->world);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 12:10:23 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/19 23:03:10 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		cub_init_img_buffer(t_mlx *mlx, t_error *error)
 	i = 0;
 	mlx->buffer = (int **)malloc(sizeof(int *) * mlx->res.y);
 	if (mlx->buffer == NULL)
-		return(cub_error_set(error, MEM_FAIL));
+		return (cub_error_set(error, MEM_FAIL));
 	while (i < mlx->res.y)
 	{
 		mlx->buffer[i] = (int *)malloc(sizeof(int) * mlx->res.x);
@@ -47,12 +47,12 @@ static void		cub_init_map(t_world *world, t_error *error)
 	i = 0;
 	world->map = (char **)malloc(sizeof(char *) * world->msize.y);
 	if (world->map == NULL)
-		return(cub_error_set(error, MEM_FAIL));
+		return (cub_error_set(error, MEM_FAIL));
 	while (i < world->msize.y)
 	{
 		world->map[i] = (char *)malloc(sizeof(char) * world->msize.x);
 		if (world->map[i] == NULL)
-			return(cub_error_set(error, MEM_FAIL));
+			return (cub_error_set(error, MEM_FAIL));
 		i++;
 	}
 	i = 0;
@@ -72,10 +72,10 @@ static void		cub_init_sky_ground(t_world *world, t_error *error)
 {
 	int			i;
 
-	world->ground = (int *)malloc(sizeof(int) * TEX_X * TEX_Y);
+	world->ground = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
 	if (world->ground == NULL)
 		return (cub_error_set(error, MEM_FAIL));
-	world->sky = (int *)malloc(sizeof(int) * TEX_X * TEX_Y);
+	world->sky = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
 	if (world->sky == NULL)
 		return (cub_error_set(error, MEM_FAIL));
 	i = 0;

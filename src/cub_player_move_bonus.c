@@ -6,13 +6,12 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 08:02:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/19 22:49:03 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/19 23:12:34 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*
 static int		cub_mouse_stop(int x, int y, t_player *player, t_mlx mlx)
 {
 	if (x < mlx.mouse.x)
@@ -25,7 +24,6 @@ static int		cub_mouse_stop(int x, int y, t_player *player, t_mlx mlx)
 		player->move &= ~L_UP;
 	return (0);
 }
-*/
 
 static void		cub_mouse_move(int x, int y, t_player *player, t_mlx mlx)
 {
@@ -42,13 +40,11 @@ static void		cub_mouse_move(int x, int y, t_player *player, t_mlx mlx)
 int				cub_mouse(int x, int y, t_cub *game)
 {
 	mlx_mouse_hide(game->mlx.win.mlx, game->mlx.win.win);
+	printf("%d\t%d\n", x, y);
 	if (x <= 1 || y <= 1 || x >= game->mlx.res.x - 1 ||
 			y >= game->mlx.res.y - 1)
 	{
-		mlx_mouse_move(game->mlx.win.mlx, game->mlx.win.win,
-				game->mlx.res.x / 2, game->mlx.res.y / 2);
-		game->mlx.mouse.x = game->mlx.res.x / 2;
-		game->mlx.mouse.y = game->mlx.res.y / 2;
+		cub_mouse_stop(x, y, &game->player, game->mlx);
 		return (0);
 	}
 	if (x == game->mlx.mouse.x)
