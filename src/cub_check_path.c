@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 20:43:40 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 07:20:39 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/19 06:49:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,23 @@ void			cub_check_files(t_world *world, t_error *error)
 		i++;
 	}
 }
+
+int				cub_check_map_arg(char *map)
+{
+	int			len;
+
+	len = ft_strlen(map);
+	if (len < 5 || len > 25)
+		return (0);
+	len = len - 1;
+	if (map[len] != 'b')
+		return (0);
+	if (map[len - 1] != 'u')
+		return (0);
+	if (map[len - 2] != 'c')
+		return (0);
+	if (map[len - 3] != '.')
+		return (0);
+	return (1);
+}
+

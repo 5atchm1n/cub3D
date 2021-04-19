@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:10:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 14:32:08 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/19 07:14:09 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static void		cub_set_player_dir_ew(t_player *player, char dir)
 	if (dir == 'E')
 	{
 		player->vector.dx = 0;
-		player->vector.dy = -1;
+		player->vector.dy = 1;
 		player->camera.px = 0.66;
 		player->camera.py = 0.0;
 	}
 	if (dir == 'W')
 	{
 		player->vector.dx = 0;
-		player->vector.dy = 1;
+		player->vector.dy = -1;
 		player->camera.px = -0.66;
 		player->camera.py = 0.00;
 	}

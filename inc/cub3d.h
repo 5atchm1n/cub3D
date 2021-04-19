@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 14:20:56 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/19 06:51:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int		cub_quit(t_cub *game);
 void	cub_error(t_error error, t_cub *game, int state);
 void	cub_free_world(t_world *world);
 void	cub_error_set(t_error *error, t_errn id);
+int		cub_check_save_arg(char *save_arg);
+int		cub_check_map_arg(char *map);
 /*
 ** UTILS FUNCTION
 */
@@ -97,6 +99,7 @@ int		cub_set_res(char *line, t_res *res);
 void	cub_set_texture_paths(char *line, t_world *world, int *i);
 int		cub_rgb_to_int(t_color color);
 int		cub_isdir(char c);
+void	cub_save_bmp(t_cub *game);
 /*
 ** ADD TO LIBFT
 */

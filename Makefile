@@ -29,6 +29,7 @@ SRCS =	cub_check.c \
 		cub_ray_texture.c \
 		cub_raycasting.c \
 		cub_read_map.c \
+		cub_save_bmp.c \
 		cub_settings.c \
 		cub_settings_utils.c \
 		cub_utils.c \
