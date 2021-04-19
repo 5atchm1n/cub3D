@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 14:27:16 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/19 08:10:42 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static int		cub_check_next(int x, int y, char **map, t_map_size *size)
 
 static void		cub_check_if_open(char **map, t_map_size *size, t_error *error)
 {
-	int		x;
-	int		y;
-	int		err;
+	int			x;
+	int			y;
+	int			err;
 
 	y = 0;
 	while (y < size->y)

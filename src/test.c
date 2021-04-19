@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:17:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/19 07:04:00 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/19 21:49:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void		cub_mlx_hooks(t_cub *game)
 	if (BONUS)
 		mlx_hook(game->mlx.win.win, 6, 1L << 6, &cub_mouse, game);
 	mlx_loop_hook(game->mlx.win.mlx, &cub_move, game);
-	cub_print_info(game);
 	mlx_loop(game->mlx.win.mlx);
 }
 

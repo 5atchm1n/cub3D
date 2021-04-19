@@ -21,7 +21,6 @@ SRCS =	cub_check.c \
 		cub_player_look.c \
 		cub_player_move.c \
 		cub_player_move_bonus.c \
-		cub_print_info.c \
 		cub_quit.c \
 		cub_ray_floor.c \
 		cub_ray_sprites.c \
