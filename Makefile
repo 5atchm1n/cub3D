@@ -20,9 +20,7 @@ SRCS =	cub_check.c \
 		cub_minimap_player.c \
 		cub_player_look.c \
 		cub_player_move.c \
-		cub_player_move_bonus.c \
 		cub_quit.c \
-		cub_ray_floor.c \
 		cub_ray_sprites.c \
 		cub_ray_sprites_sort.c \
 		cub_ray_texture.c \
@@ -33,27 +31,28 @@ SRCS =	cub_check.c \
 		cub_settings_utils.c \
 		cub_utils.c \
 		cub_utils_colors.c \
+		cub_print_info.c \
 		test.c
 
-CC = clang
+BONUS = cub_floor_bonus.c \
+		cub_mouse_bonus.c
 
 MLX = libmlx.a
-
 LIBFT = libft.a
 
+CC = clang
 CFLAGS = -Wall -Werror -Wextra -g
-
 LIB = -lmlx -lXext -lX11 -lm -lbsd
-
 MEM = -fsanitize=address
 
 OBJDIR = objs
-
 SRCDIR = src
-
 INCDIR = inc
+BONUSDIR = bonus
 
 OBJS = $(addprefix ${OBJDIR}/,${SRCS:.c=.o})
+
+BONUSOBJS = $(addprefix ${OBJDIR}/,${BONUS:.c=.o})
 
 NORM = $(addprefix ${SRCDIR}/,${SRCS})
 NORM2 = $(addprefix ${INCDIR}/,${INC})
@@ -81,17 +80,20 @@ $(NAME) : mlx libft ${OBJS}
 		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-		@mkdir -p ${OBJDIR}
-		@${CC} ${BONUS} ${CFLAGS} -I./inc -c $< -o $@
+bonus : FBONUS = -DBONUS=1
 
-bonus : BONUS = -DBONUS=1
-
-bonus : mlx libft ${OBJS}
+bonus : mlx libft ${OBJS} ${BONUSOBJS}
 		@echo -n  "Generating ${NAME}"
-		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@${CC} ${CFLAGS} ${MEM} ${OBJS} ${BONUSOBJS} -I./inc ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+		@mkdir -p ${OBJDIR}
+		@${CC} ${CFLAGS} ${FBONUS} -I./inc -c $< -o $@
+
+$(OBJDIR)/%.o: $(BONUSDIR)/%.c
+		@${CC} ${CFLAGS} ${FBONUS} -I./inc -c $< -o $@
+		
 norm :
 		@~/.norminette/norminette.rb ${NORM}
 		@~/.norminette/norminette.rb ${NORM2}

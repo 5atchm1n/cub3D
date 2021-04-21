@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/19 08:10:42 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/19 23:49:22 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ static int		cub_isvalid(char c)
 	char		*valid;
 	int			i;
 
-	valid = " NSEW012";
+	if (!BONUS)
+		valid = " NSEW012";
+	if (BONUS)
+		valid = " NSEW0123";
 	i = 0;
 	while (valid[i] != '\0')
 	{

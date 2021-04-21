@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/19 06:51:41 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/20 01:11:20 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ double	ft_fmin(double a, double b);
 void	cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx);
 int		cub_mouse(int x, int y, t_cub *game);
 int		cub_set_shadow(int colour, double dist);
+void	cub_move_objects(t_world *world);
 /*
 ** TEST - PRINT INFO
 */
