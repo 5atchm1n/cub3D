@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   cub_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:17:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/20 02:07:49 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/22 14:26:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static void		cub_play(t_cub *game, char *map_path)
 	cub_settings(map_path, game);
 	cub_init(game, map_path);
 	cub_check(&game->world, game);
-	cub_print_info(game);
+	if (TEST)
+		cub_print_info(game);
 	cub_mlx_hooks(game);
 }
 

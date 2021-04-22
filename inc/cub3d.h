@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/20 01:11:20 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/22 14:36:22 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 
 # ifndef BONUS
 #  define BONUS 0
+# endif
+
+# ifndef TEST
+#  define TEST 0
 # endif
 
 /*

@@ -4,35 +4,33 @@ INC =	cub3d.h \
 		cub3d_game.h \
 		cub3d_world.h
 
-SRCS =	cub_check.c \
-		cub_check_path.c \
-		cub_draw.c \
-		cub_error.c \
-		cub_get_line.c \
-		cub_import_settings.c \
-		cub_init.c \
-		cub_init_utils.c \
-		cub_init_player.c \
-		cub_mlx_keyhook.c \
-		cub_load_objects.c \
-		cub_load_xpm.c \
-		cub_minimap.c \
-		cub_minimap_player.c \
-		cub_player_look.c \
-		cub_player_move.c \
-		cub_quit.c \
-		cub_ray_sprites.c \
-		cub_ray_sprites_sort.c \
-		cub_ray_texture.c \
-		cub_raycasting.c \
-		cub_read_map.c \
-		cub_save_bmp.c \
-		cub_settings.c \
-		cub_settings_utils.c \
-		cub_utils.c \
-		cub_utils_colors.c \
-		cub_print_info.c \
-		test.c
+SRCS =	cub_game.c \
+		engine/cub_draw.c \
+		engine/cub_keyhook.c \
+		engine/cub_look.c \
+		engine/cub_move.c \
+		engine/cub_quit.c \
+		engine/cub_raycasting.c \
+		engine/cub_sprites.c \
+		engine/cub_sprites_sort.c \
+		engine/cub_textures.c \
+		hud/cub_minimap.c \
+		hud/cub_minimap_player.c \
+		init/cub_init.c \
+		init/cub_init_player.c \
+		init/cub_init_utils.c \
+		init/cub_load_objects.c \
+		init/cub_load_xpm.c \
+		settings/cub_check_map.c \
+		settings/cub_check_path.c \
+		settings/cub_error.c \
+		settings/cub_import_settings.c \
+		settings/cub_read_map.c \
+		settings/cub_settings.c \
+		utils/cub_get_line.c \
+		utils/cub_save_bmp.c \
+		utils/cub_utils.c \
+		utils/cub_utils_colors.c
 
 BONUS = cub_floor_bonus.c \
 		cub_mouse_bonus.c
@@ -51,7 +49,6 @@ INCDIR = inc
 BONUSDIR = bonus
 
 OBJS = $(addprefix ${OBJDIR}/,${SRCS:.c=.o})
-
 BONUSOBJS = $(addprefix ${OBJDIR}/,${BONUS:.c=.o})
 
 NORM = $(addprefix ${SRCDIR}/,${SRCS})
@@ -75,9 +72,9 @@ libft :
 		@cp libft/libft.a libft.a
 		@echo "\033[32m\t[OK]\033[0m"
 
-$(NAME) : mlx libft ${OBJS}
+$(NAME) : mlx libft ${OBJS} ${BONUSOBJS}
 		@echo -n  "Generating ${NAME}"
-		@${CC} ${OBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@${CC} ${OBJS} ${BONUSOBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 bonus : FBONUS = -DBONUS=1
@@ -88,7 +85,7 @@ bonus : mlx libft ${OBJS} ${BONUSOBJS}
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-		@mkdir -p ${OBJDIR}
+		@mkdir -p ${@D}
 		@${CC} ${CFLAGS} ${FBONUS} -I./inc -c $< -o $@
 
 $(OBJDIR)/%.o: $(BONUSDIR)/%.c
