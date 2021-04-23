@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/22 14:36:22 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/23 04:11:46 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <stdint.h>
 # include "mlx.h"
-# include "../libft/inc/libft.h"
+# include "libft/inc/libft.h"
 
 # include "cub3d_keys.h"
 # include "cub3d_world.h"

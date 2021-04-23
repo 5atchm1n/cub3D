@@ -30,13 +30,12 @@ SRCS =	cub_game.c \
 		utils/cub_get_line.c \
 		utils/cub_save_bmp.c \
 		utils/cub_utils.c \
-		utils/cub_utils_colors.c
+		utils/cub_utils_colors.c \
+		bonus/cub_floor_bonus.c \
+		bonus/cub_mouse_bonus.c
 
-BONUS = cub_floor_bonus.c \
-		cub_mouse_bonus.c
-
-MLX = libmlx.a
-LIBFT = libft.a
+MLX = inc/mlx_linux/libmlx_Linux.a
+LIBFT = inc/libft/libft.a
 
 CC = clang
 CFLAGS = -Wall -Werror -Wextra -g
@@ -46,10 +45,8 @@ MEM = -fsanitize=address
 OBJDIR = objs
 SRCDIR = src
 INCDIR = inc
-BONUSDIR = bonus
 
 OBJS = $(addprefix ${OBJDIR}/,${SRCS:.c=.o})
-BONUSOBJS = $(addprefix ${OBJDIR}/,${BONUS:.c=.o})
 
 NORM = $(addprefix ${SRCDIR}/,${SRCS})
 NORM2 = $(addprefix ${INCDIR}/,${INC})
@@ -58,38 +55,29 @@ all : ${NAME}
 
 mlx :
 		@echo -n "Compiling minilibx"
-		@make -s -Cmlx_linux > /dev/null 2>&1
+		@make -s -Cinc/mlx_linux > /dev/null 2>&1
 		@echo "\033[32m\t\t\t[OK]\033[0m"
-		@echo -n "Copy libmlx.a to working directory"
-		@cp mlx_linux/libmlx_Linux.a libmlx.a
-		@echo "\033[32m\t[OK]\033[0m"
 
 libft :
 		@echo -n "Compiling libft"
-		@make -s -Clibft
+		@make -s -Cinc/libft
 		@echo "\033[32m\t\t\t\t[OK]\033[0m"
-		@echo -n "Copy libft.a to working directory"
-		@cp libft/libft.a libft.a
-		@echo "\033[32m\t[OK]\033[0m"
 
-$(NAME) : mlx libft ${OBJS} ${BONUSOBJS}
+$(NAME) : mlx libft ${OBJS}
 		@echo -n  "Generating ${NAME}"
-		@${CC} ${OBJS} ${BONUSOBJS} -I./inc ${CFLAGS} ${MEM} ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@${CC} ${CFLAGS} ${MEM} ${OBJS} -I./inc ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
-bonus : FBONUS = -DBONUS=1
+bonus : DEFINE += -DBONUS=1 -DSPRITES=2
 
-bonus : mlx libft ${OBJS} ${BONUSOBJS}
+bonus : mlx libft ${OBJS}
 		@echo -n  "Generating ${NAME}"
-		@${CC} ${CFLAGS} ${MEM} ${OBJS} ${BONUSOBJS} -I./inc ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@${CC} ${CFLAGS} ${MEM} ${OBJS} -I./inc ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 		@mkdir -p ${@D}
-		@${CC} ${CFLAGS} ${FBONUS} -I./inc -c $< -o $@
-
-$(OBJDIR)/%.o: $(BONUSDIR)/%.c
-		@${CC} ${CFLAGS} ${FBONUS} -I./inc -c $< -o $@
+		@${CC} ${CFLAGS} ${DEFINE} -I./inc -c $< -o $@
 		
 norm :
 		@~/.norminette/norminette.rb ${NORM}
@@ -97,10 +85,10 @@ norm :
 
 clean :	
 		@echo -n "deleting mlx object files"
-		@make clean -s -Cmlx_linux > /dev/null
+		@make clean -s -Cinc/mlx_linux > /dev/null
 		@echo "\033[32m\t[OK]\033[0m"
 		@echo -n "deleting libft object files"
-		@make clean -s -Clibft > /dev/null
+		@make clean -s -Cinc/libft > /dev/null
 		@echo "\033[32m\t[OK]\033[0m"
 		@echo -n "deleting object files"
 		@rm -rf ${OBJDIR} > /dev/null

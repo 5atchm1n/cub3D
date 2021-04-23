@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 08:02:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/20 14:01:38 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/22 19:54:04 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void		cub_mouse_move(int x, int y, t_player *player, t_mlx mlx)
 int				cub_mouse(int x, int y, t_cub *game)
 {
 	mlx_mouse_hide(game->mlx.win.mlx, game->mlx.win.win);
-	printf("%d\t%d\n", x, y);
 	if (x <= 1 || y <= 1 || x >= game->mlx.res.x - 1 ||
 			y >= game->mlx.res.y - 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 14:18:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/23 04:08:21 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 # define BUFF_SIZE 256
 # define TEXTURES 4
-# define SPRITES 2
 # define SPRITE_H 64
 # define SPRITE_W 64
 # define TEX_X 64
 # define TEX_Y 64
 # define ERRORS 17
 
+# ifndef SPRITES
+# define SPRITES 1
+# endif
 /*
 ** MLX -- WINDOW, IMAGE, BUFFER --
 */
