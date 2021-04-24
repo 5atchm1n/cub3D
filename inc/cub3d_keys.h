@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 09:51:15 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 10:14:18 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/23 04:40:05 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define KEY_LOOK_RIGHT 65363
 # define KEY_LOOK_LEFT 65361
 # define KEY_ESC_QUIT 0xff1b
+# define KEY_JUMP 32
+# define KEY_CROUCH 17
 
 # define M_UP (1 << 0)
 # define M_DOWN (1 << 1)

@@ -6,16 +6,16 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/22 13:40:05 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/23 05:31:18 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		cub_draw(t_mlx *mlx)
+void			cub_draw(t_mlx *mlx)
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
 
 	y = 0;
 	while (y < mlx->res.y)

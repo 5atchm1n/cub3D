@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:26:22 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 14:31:37 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/24 14:10:03 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ static void		cub_error_msg(int errnum, t_error error)
 	printf("\n");
 }
 
-static int		cub_free_state_0(t_cub *game)
+static int		cub_free_state_0(t_cub *game, t_error error)
 {
 	int			i;
 
 	i = 0;
-	while (i < TEXTURES)
+	while (i < error.texture)
 	{
 		if (game->world.tpath[i])
 			free(game->world.tpath[i]);
 		i++;
 	}
 	i = 0;
-	while (i < SPRITES)
+	while (i < error.sprite)
 	{
 		if (game->world.objpath[i])
 			free(game->world.objpath[i]);
@@ -79,7 +79,7 @@ void			cub_error(t_error error, t_cub *game, int state)
 {
 	cub_error_msg(error.id - 1, error);
 	if (state == 0)
-		cub_free_state_0(game);
+		cub_free_state_0(game, error);
 	if (state == 1)
 		cub_quit(game);
 }

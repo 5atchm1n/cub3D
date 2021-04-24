@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_import_settings.c                               :+:      :+:    :+:   */
+/*   cub_import_settings.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 23:57:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 06:05:20 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/24 14:10:55 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ static void		cub_set_map_textures(char *line, t_cub *game, int *i,
 	if (*line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
 	{
 		cub_set_texture_paths(line, &game->world, i);
-		error->texture += 1;
+		if (ft_isspace(*(line + 1)))
+			error->sprite += 1;
+		else
+			error->texture += 1;
 	}
 }
 
@@ -63,12 +66,15 @@ static void		cub_set_params(char *line, t_cub *game, t_error *error)
 static void		cub_sanity_check(t_error *error)
 {
 	if (error->map == 1)
-		if (error->texture != TEXTURES + SPRITES && error->res != 1 &&
-				error->floor != 1 && error->ceiling != 1)
+		if (error->texture != TEXTURES && error->res != 1 &&
+				error->floor != 1 && error->ceiling != 1 &&
+				error->sprite != SPRITES)
 			error->id = MAP_NOEND;
 	if (error->map == 1)
 	{
-		if (error->texture != TEXTURES + SPRITES)
+		if (error->texture != TEXTURES)
+			error->id = MI_FILES;
+		if (error->sprite != SPRITES)
 			error->id = MI_FILES;
 		if (error->res != 1)
 			error->id = MI_RES;

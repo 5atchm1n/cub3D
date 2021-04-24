@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/23 04:08:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/24 14:06:58 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 # define ERRORS 17
 
 # ifndef SPRITES
-# define SPRITES 1
+#  define SPRITES 1
 # endif
+
 /*
 ** MLX -- WINDOW, IMAGE, BUFFER --
 */
@@ -230,6 +231,7 @@ typedef struct		s_error
 	int				ceiling;
 	int				map;
 	int				dir;
+	int				sprite;
 }					t_error;
 
 typedef struct		s_pixel

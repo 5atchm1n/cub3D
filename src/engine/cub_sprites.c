@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_ray_sprites.c                                  :+:      :+:    :+:   */
+/*   cub_sprites.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/19 23:40:23 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/23 05:30:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,19 @@ static void		cub_transform_sprite(t_sprite *sprite, t_player player,
 static void		cub_set_sprite_screen(t_mlx mlx, t_objs *objs, t_sprite *s,
 		t_vector v)
 {
-	objs->hitx = (int)((mlx.res.x / 2.0) * (1.0 + objs->tx / objs->ty));
-	objs->voffset = (int)(s[objs->index].vmove / objs->ty)
+	objs->hitx = (int)((mlx.res.x / 2) * (1 + objs->tx / objs->ty));
+	objs->voffset = (int)(s[objs->order[objs->index]].vmove / objs->ty)
 		+ v.pitch + v.posz / objs->ty;
-	objs->spriteh = (int)fabs((mlx.res.y / objs->ty)) / s[objs->index].vdiv;
+	objs->spriteh = (int)fabs((mlx.res.y / objs->ty)) /
+		s[objs->order[objs->index]].vdiv;
 	objs->starty = -objs->spriteh / 2 + mlx.res.y / 2 + objs->voffset;
 	if (objs->starty < 0)
 		objs->starty = 0;
 	objs->endy = objs->spriteh / 2 + mlx.res.y / 2 + objs->voffset;
 	if (objs->endy >= mlx.res.y)
 		objs->endy = mlx.res.y - 1;
-	objs->spritew = (int)fabs((mlx.res.y / objs->ty)) / s[objs->index].udiv;
+	objs->spritew = (int)fabs((mlx.res.y / objs->ty)) /
+		s[objs->order[objs->index]].udiv;
 	objs->startx = -objs->spritew / 2 + objs->hitx;
 	if (objs->startx < 0)
 		objs->startx = 0;
@@ -88,6 +90,7 @@ void			cub_cast_sprites(t_cub *game)
 	t_objs		objs;
 	int			i;
 
+	ft_memset(&objs, 0, sizeof(objs));
 	objs.order = malloc(sizeof(int) * game->world.scount);
 	objs.dist = malloc(sizeof(double) * game->world.scount);
 	cub_set_sprites(&objs, game->player.vector, game->world);
