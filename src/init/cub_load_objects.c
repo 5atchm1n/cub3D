@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/23 05:21:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/24 15:26:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,15 @@ static void		cub_set_object_size(t_sprite *sprite)
 {
 	if (sprite->id == 0)
 	{
-		sprite->udiv = 2;
-		sprite->vdiv = 2;
-		sprite->vmove = -64.0;
+		sprite->udiv = 4;
+		sprite->vdiv = 4;
+		sprite->vmove = 256.0;
 	}
 	if (sprite->id == 1)
 	{
-		sprite->udiv = 1;
-		sprite->vdiv = 1;
-		sprite->vmove = 0.0;
+		sprite->udiv = 3;
+		sprite->vdiv = 3;
+		sprite->vmove = 256.0;
 	}
 }
 

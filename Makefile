@@ -31,6 +31,7 @@ SRCS =	cub_game.c \
 		utils/cub_save_bmp.c \
 		utils/cub_utils.c \
 		utils/cub_utils_colors.c \
+		utils/cub_print_info.c \
 		bonus/cub_floor_bonus.c \
 		bonus/cub_mouse_bonus.c
 
@@ -70,10 +71,15 @@ $(NAME) : mlx libft ${OBJS}
 
 bonus : DEFINE += -DBONUS=1 -DSPRITES=2
 
-bonus : mlx libft ${OBJS}
-		@echo -n  "Generating ${NAME}"
-		@${CC} ${CFLAGS} ${MEM} ${OBJS} -I./inc ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
-		@echo "\033[32m\t\t\t[OK]\033[0m"
+bonus : $(NAME)
+
+test : DEFINE += -DTEST=1
+
+test : $(NAME)
+
+testbonus : DEFINE += -DTEST=1
+
+testbonus : bonus
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 		@mkdir -p ${@D}
@@ -100,4 +106,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY: all, clean, fclean, re, libft
+.PHONY: all, clean, fclean, re, libft, test, bonus, mlx, testbonus

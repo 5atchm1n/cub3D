@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/24 14:06:58 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/24 14:25:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,8 @@ typedef enum		e_errn
 	MLX_ERR2 = 15,
 	INV_RGB = 16,
 	MUL_ST = 17,
+	INV_MAP = 18,
+	INV_SAVE = 19
 }					t_errn;
 
 typedef struct		s_grid

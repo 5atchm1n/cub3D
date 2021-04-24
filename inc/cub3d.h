@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/23 04:11:46 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/24 15:10:11 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,11 @@ void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 /*
 ** MOVE PLAYER
 */
-int		cub_keypress(int keycode, t_cub *game);
-int		cub_keyrelease(int keycode, t_cub *game);
 int		cub_move(t_cub *game);
 void	cub_look_left_right(t_vector *v, t_camera *cam, uint_fast8_t move);
 void	cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast8_t move);
 void	cub_player_offset(t_vector *v, double *offset);
+void	cub_mlx_hooks(t_cub *game);
 /*
 ** RAYCASTING - SPRITES, TEXTURES
 */
@@ -93,6 +92,7 @@ void	cub_free_world(t_world *world);
 void	cub_error_set(t_error *error, t_errn id);
 int		cub_check_save_arg(char *save_arg);
 int		cub_check_map_arg(char *map);
+void	cub_error_msg(t_errn id, t_error error);
 /*
 ** UTILS FUNCTION
 */

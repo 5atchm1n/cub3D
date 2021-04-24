@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/23 05:31:18 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/24 15:11:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,14 @@ int				cub_set_shadow(int colour, double dw)
 	if (BONUS)
 		colour = (rgb.r << 16) + (rgb.g << 8) + rgb.b;
 	return (colour);
+}
+
+void			cub_render(t_cub *game)
+{
+	if (BONUS)
+		cub_floor_casting(&game->player, &game->world, &game->mlx);
+	cub_raycasting(game);
+	cub_cast_sprites(game);
+	cub_minimap(game);
+	cub_draw(&game->mlx);
 }

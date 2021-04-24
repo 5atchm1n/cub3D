@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_settings.c                                      :+:      :+:    :+:   */
+/*   cub_settings.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 12:04:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/24 14:56:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int				cub_settings(char *map_path, t_cub *game)
 		cub_error(error, game, 0);
 	cub_import_settings(map_path, game, &error);
 	if (error.id != 0)
-		cub_error(error, game, 0);
+		cub_error(error, game, 1);
 	cub_test_path(game->world.tpath, &error, TEXTURES);
 	if (error.id != 0)
 		cub_error(error, game, 0);
