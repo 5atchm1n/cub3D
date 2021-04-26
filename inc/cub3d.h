@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/25 04:27:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:28:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 ** MOVE PLAYER
 */
 int		cub_move(t_cub *game);
-void	cub_look_left_right(t_vector *v, t_camera *cam, uint_fast8_t move,
+void	cub_look_left_right(t_vector *v, t_camera *cam, uint_fast16_t move,
 		t_mlx mlx);
-void	cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast8_t move);
+void	cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast16_t move);
+void	cub_jump_crouch(t_vector *vector, uint_fast16_t move, t_mlx mlx);
 void	cub_player_offset(t_vector *v, double *offset);
 void	cub_mlx_hooks(t_cub *game);
 /*

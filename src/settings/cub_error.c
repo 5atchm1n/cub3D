@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:26:22 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/24 15:23:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:07:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		cub_set_errmsg(char **errmsg)
 	errmsg[15] = "\033[36m Invalid RGB input [0 - 255]";
 	errmsg[16] = "\033[36m Multiple start positions";
 	errmsg[17] = "\033[36m Invalid map file";
-	errmsg[18] = "\033[36m save argument must be in the format \033[0m[ --save ]";
+	errmsg[18] = "\033[36m Must be in the format \033[0m[ --save ]";
 }
 
 void			cub_error_msg(t_errn id, t_error error)
@@ -88,5 +88,5 @@ void			cub_error(t_error error, t_cub *game, int state)
 		cub_free_state_0(game, error.texture, error.sprite);
 	if (state == 2)
 		cub_quit(game);
-	exit (0);
+	exit(0);
 }

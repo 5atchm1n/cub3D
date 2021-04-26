@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 03:00:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/20 14:01:46 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:53:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,15 @@ static void		cub_init_ray(t_floor *ray, t_player *player, t_mlx *mlx, int y)
 	ray1.dirx = player->vector.dx + player->camera.px;
 	ray1.diry = player->vector.dy + player->camera.py;
 	if (ray->isfloor == 1)
+	{
 		ray->horizon = y - mlx->res.y / 2 - player->vector.pitch;
+		ray->camv = 0.5 * mlx->res.y + player->vector.posz;
+	}
 	if (ray->isfloor == 0)
+	{
 		ray->horizon = mlx->res.y / 2 - y + player->vector.pitch;
-	ray->camv = 0.5 * mlx->res.y + player->vector.posz;
+		ray->camv = 0.5 * mlx->res.y - player->vector.posz;
+	}
 	ray->rdist = ray->camv / ray->horizon;
 	ray->stepx = ray->rdist * (ray1.dirx - ray0.dirx) / mlx->res.x;
 	ray->stepy = ray->rdist * (ray1.diry - ray0.diry) / mlx->res.x;

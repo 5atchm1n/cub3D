@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 03:30:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/25 04:44:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:05:13 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void			cub_speed(t_cub *game)
 {
 	clock_t		oldtime;
 	double		ticks;
-	
+
 	oldtime = game->mlx.time;
 	game->mlx.time = clock();
 	if (BONUS)

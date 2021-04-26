@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 12:28:37 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 17:17:26 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/26 15:43:04 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void			cub_print_info(t_cub *game)
 		printf("bonus\n");
 	if (!BONUS)
 		printf("no bonus\n");
+	mlx_key_hook(game->mlx.win.win, &key_hook, game);
 }
 
 int				key_hook(int keycode, t_win *win)
