@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_player_look.c                                  :+:      :+:    :+:   */
+/*   cub_look.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 08:02:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 14:40:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/25 04:26:38 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,24 @@ void			cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast8_t move)
 {
 	if (move & L_UP)
 	{
-		v->pitch += (mlx.res.y / 2) * MOVE_SPEED;
+		v->pitch += (mlx.res.y / 2) * mlx.move_speed;
 		if (v->pitch > mlx.res.y / 4)
 			v->pitch = mlx.res.y / 4;
 	}
 	if (move & L_DOWN)
 	{
-		v->pitch -= (mlx.res.y / 2) * MOVE_SPEED;
+		v->pitch -= (mlx.res.y / 2) * mlx.move_speed;
 		if (v->pitch < -mlx.res.y / 4)
 			v->pitch = -mlx.res.y / 4;
 	}
 	if (v->pitch > 0)
-		ft_fmax(0, v->pitch - 100 * MOVE_SPEED);
+		ft_fmax(0, v->pitch - 100 * mlx.move_speed);
 	if (v->pitch < 0)
-		ft_fmin(1, v->pitch + 100 * MOVE_SPEED);
+		ft_fmin(1, v->pitch + 100 * mlx.move_speed);
 }
 
 void			cub_look_left_right(t_vector *v, t_camera *cam,
-		uint_fast8_t move)
+		uint_fast8_t move, t_mlx mlx)
 {
 	double		dir;
 	double		p;
@@ -53,19 +53,19 @@ void			cub_look_left_right(t_vector *v, t_camera *cam,
 	if (move & L_RIGHT)
 	{
 		dir = v->dx;
-		v->dx = v->dx * cos(-TURN_SPEED) - v->dy * sin(-TURN_SPEED);
-		v->dy = dir * sin(-TURN_SPEED) + v->dy * cos(-TURN_SPEED);
+		v->dx = v->dx * cos(-mlx.turn_speed) - v->dy * sin(-mlx.turn_speed);
+		v->dy = dir * sin(-mlx.turn_speed) + v->dy * cos(-mlx.turn_speed);
 		p = cam->px;
-		cam->px = cam->px * cos(-TURN_SPEED) - cam->py * sin(-TURN_SPEED);
-		cam->py = p * sin(-TURN_SPEED) + cam->py * cos(-TURN_SPEED);
+		cam->px = cam->px * cos(-mlx.turn_speed) - cam->py * sin(-mlx.turn_speed);
+		cam->py = p * sin(-mlx.turn_speed) + cam->py * cos(-mlx.turn_speed);
 	}
 	if (move & L_LEFT)
 	{
 		dir = v->dx;
-		v->dx = v->dx * cos(TURN_SPEED) - v->dy * sin(TURN_SPEED);
-		v->dy = dir * sin(TURN_SPEED) + v->dy * cos(TURN_SPEED);
+		v->dx = v->dx * cos(mlx.turn_speed) - v->dy * sin(mlx.turn_speed);
+		v->dy = dir * sin(mlx.turn_speed) + v->dy * cos(mlx.turn_speed);
 		p = cam->px;
-		cam->px = cam->px * cos(TURN_SPEED) - cam->py * sin(TURN_SPEED);
-		cam->py = p * sin(TURN_SPEED) + cam->py * cos(TURN_SPEED);
+		cam->px = cam->px * cos(mlx.turn_speed) - cam->py * sin(mlx.turn_speed);
+		cam->py = p * sin(mlx.turn_speed) + cam->py * cos(mlx.turn_speed);
 	}
 }

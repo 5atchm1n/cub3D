@@ -6,17 +6,17 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/23 04:43:26 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/25 04:48:14 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_GAME_H
 # define CUB3D_GAME_H
 
-# define PLAYER_SIZE 0.2
-# define MAP_SIZE 0.2
-# define MOVE_SPEED 0.02
-# define TURN_SPEED 0.015
+# define PLAYER_SIZE 0.1
+# define MAP_SIZE 0.15
+# define MOVE_SPEED 8.0
+# define TURN_SPEED 7.0
 
 /*
 ** MLX -- WIN, IMG, RES
@@ -29,6 +29,9 @@ typedef struct		s_mlx
 	int				**buffer;
 	int				on;
 	t_mouse			mouse;
+	clock_t			time;
+	double			move_speed;
+	double			turn_speed;
 }					t_mlx;
 /*
 ** PLAYER -- MOVE, VECTOR, CAMERA --

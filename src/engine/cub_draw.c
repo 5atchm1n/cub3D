@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/24 15:11:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/25 03:57:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ void			cub_render(t_cub *game)
 	cub_cast_sprites(game);
 	cub_minimap(game);
 	cub_draw(&game->mlx);
+	cub_speed(game);
 }

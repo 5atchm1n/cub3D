@@ -33,6 +33,7 @@ SRCS =	cub_game.c \
 		utils/cub_utils_colors.c \
 		utils/cub_print_info.c \
 		bonus/cub_floor_bonus.c \
+		bonus/cub_speed_bonus.c \
 		bonus/cub_mouse_bonus.c
 
 MLX = inc/mlx_linux/libmlx_Linux.a

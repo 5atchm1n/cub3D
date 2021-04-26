@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/24 15:10:11 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/25 04:27:25 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdint.h>
+# include <time.h>
 # include "mlx.h"
 # include "libft/inc/libft.h"
 
@@ -60,7 +61,8 @@ void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 ** MOVE PLAYER
 */
 int		cub_move(t_cub *game);
-void	cub_look_left_right(t_vector *v, t_camera *cam, uint_fast8_t move);
+void	cub_look_left_right(t_vector *v, t_camera *cam, uint_fast8_t move,
+		t_mlx mlx);
 void	cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast8_t move);
 void	cub_player_offset(t_vector *v, double *offset);
 void	cub_mlx_hooks(t_cub *game);
@@ -118,6 +120,7 @@ void	cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx);
 int		cub_mouse(int x, int y, t_cub *game);
 int		cub_set_shadow(int colour, double dist);
 void	cub_move_objects(t_world *world);
+void	cub_speed(t_cub *game);
 /*
 ** TEST - PRINT INFO
 */

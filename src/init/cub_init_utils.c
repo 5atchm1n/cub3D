@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:35:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 14:22:07 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/25 03:53:33 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void			cub_init_mlx(t_mlx *mlx, t_error *error)
 			mlx->res.y);
 	mlx->img.add = (int *)mlx_get_data_addr(mlx->img.img, &mlx->img.bpp,
 			&mlx->img.len, &mlx->img.endian);
+	mlx->time = 0;
 	mlx->on = 1;
 }
