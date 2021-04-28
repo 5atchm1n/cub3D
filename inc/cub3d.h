@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/26 15:28:50 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/28 05:00:14 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int		cub_set_res(char *line, t_res *res);
 void	cub_set_texture_paths(char *line, t_world *world, int *i);
 int		cub_rgb_to_int(t_color color);
 int		cub_isdir(char c);
+int		cub_issprite(char c);
 void	cub_save_bmp(t_cub *game);
 /*
 ** ADD TO LIBFT
@@ -120,8 +121,9 @@ double	ft_fmin(double a, double b);
 void	cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx);
 int		cub_mouse(int x, int y, t_cub *game);
 int		cub_set_shadow(int colour, double dist);
-void	cub_move_objects(t_world *world);
+void	cub_sprite_move(t_world *world, t_player *player, t_mlx mlx);
 void	cub_speed(t_cub *game);
+void	cub_draw_health(t_mlx *mlx);
 /*
 ** TEST - PRINT INFO
 */

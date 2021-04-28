@@ -6,24 +6,25 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/23 05:30:45 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/28 03:21:39 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_set_sprites(t_objs *objs, t_vector player, t_world world)
+static void		cub_set_sprites(t_objs *objs, t_vector player, t_world *world)
 {
 	int			i;
 
 	i = 0;
-	while (i < world.scount)
+	while (i < world->scount)
 	{
 		objs->order[i] = i;
-		objs->dist[i] = ((player.x - world.sprite[i].x)
-			* (player.x - world.sprite[i].x)
-			+ (player.y - world.sprite[i].y)
-			* (player.y - world.sprite[i].y));
+		objs->dist[i] = ((player.x - world->sprite[i].x)
+			* (player.x - world->sprite[i].x)
+			+ (player.y - world->sprite[i].y)
+			* (player.y - world->sprite[i].y));
+		world->sprite[i].dist = objs->dist[i];
 		i++;
 	}
 }
@@ -93,7 +94,7 @@ void			cub_cast_sprites(t_cub *game)
 	ft_memset(&objs, 0, sizeof(objs));
 	objs.order = malloc(sizeof(int) * game->world.scount);
 	objs.dist = malloc(sizeof(double) * game->world.scount);
-	cub_set_sprites(&objs, game->player.vector, game->world);
+	cub_set_sprites(&objs, game->player.vector, &game->world);
 	cub_sort_sprites(&objs, game->world.scount);
 	i = 0;
 	while (i < game->world.scount)

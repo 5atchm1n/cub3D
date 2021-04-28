@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/25 04:48:14 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/27 20:27:26 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define PLAYER_SIZE 0.1
 # define MAP_SIZE 0.15
-# define MOVE_SPEED 8.0
+# define MOVE_SPEED 9.0
 # define TURN_SPEED 7.0
 
 /*

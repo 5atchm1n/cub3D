@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/24 15:26:45 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/28 03:21:55 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,27 @@ void			cub_init_object(t_world *world, t_error *error)
 	}
 }
 
-static void		cub_set_object_size(t_sprite *sprite)
+static void		cub_set_object(t_sprite *sprite, char *map_char)
 {
 	if (sprite->id == 0)
+	{
+		sprite->udiv = 1;
+		sprite->vdiv = 1;
+		sprite->vmove = 0.0;
+	}
+	if (sprite->id == 1)
 	{
 		sprite->udiv = 4;
 		sprite->vdiv = 4;
 		sprite->vmove = 256.0;
+		*map_char = '0';
 	}
-	if (sprite->id == 1)
+	if (sprite->id == 2)
 	{
-		sprite->udiv = 3;
-		sprite->vdiv = 3;
+		sprite->udiv = 2;
+		sprite->vdiv = 2;
 		sprite->vmove = 256.0;
+		*map_char = '0';
 	}
 }
 
@@ -93,12 +101,13 @@ void			cub_load_objects(t_world *world)
 		j = 0;
 		while (j < world->msize.x)
 		{
-			if (world->map[i][j] == '2' || world->map[i][j] == '3')
+			if (cub_issprite(world->map[i][j]))
 			{
 				world->sprite[x].x = (double)j + 0.5;
 				world->sprite[x].y = (double)i + 0.5;
 				world->sprite[x].id = world->map[i][j] - 48 - 2;
-				cub_set_object_size(&world->sprite[x]);
+				world->sprite[x].state = 0; 
+				cub_set_object(&world->sprite[x], &world->map[i][j]);
 				x++;
 			}
 			j++;

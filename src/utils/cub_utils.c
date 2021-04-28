@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/13 04:21:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/27 20:38:53 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,13 @@ double		ft_fmin(double a, double b)
 int			cub_isdir(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
+int			cub_issprite(char c)
+{
+	if (c == '2' || c == '3' || c == '4')
 		return (1);
 	return (0);
 }

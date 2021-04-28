@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/24 14:25:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/28 02:50:24 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define TEX_X 64
 # define TEX_Y 64
 # define ERRORS 17
+# define BONUS_MAP " NSEW01234"
 
 # ifndef SPRITES
 #  define SPRITES 1
@@ -148,9 +149,11 @@ typedef struct		s_sprite
 	double			x;
 	double			y;
 	double			vmove;
+	double			dist;
 	int				id;
 	int				udiv;
 	int				vdiv;
+	char			state;
 }					t_sprite;
 
 typedef struct		s_map_size
