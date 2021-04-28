@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 05:00:14 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/28 22:15:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void	cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs objs,
 /*
 ** MINIMAP
 */
-void	cub_draw_map(t_world *world, t_mlx *mlx);
-void	cub_minimap(t_cub *game);
 /*
 ** ERROR ,CHECKS AND EXIT
 */
@@ -123,10 +121,8 @@ int		cub_mouse(int x, int y, t_cub *game);
 int		cub_set_shadow(int colour, double dist);
 void	cub_sprite_move(t_world *world, t_player *player, t_mlx mlx);
 void	cub_speed(t_cub *game);
-void	cub_draw_health(t_mlx *mlx);
-/*
-** TEST - PRINT INFO
-*/
-void	cub_print_info(t_cub *game);
-int		key_hook(int keycode, t_win *win);
+void	cub_draw_health(t_mlx *mlx, int health);
+void	cub_draw_map(t_world *world, t_mlx *mlx);
+void	cub_hud(t_cub *game);
+
 #endif

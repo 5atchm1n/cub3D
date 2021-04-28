@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/27 20:27:26 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/28 22:23:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define MAP_SIZE 0.15
 # define MOVE_SPEED 9.0
 # define TURN_SPEED 7.0
+# define LEVEL 7.0
 
 /*
 ** MLX -- WIN, IMG, RES
@@ -41,6 +42,7 @@ typedef struct		s_player
 	t_vector		vector;
 	t_camera		camera;
 	uint_fast16_t	move;
+	int				health;
 }					t_player;
 /*
 ** WORLD -- SPRITE, PARAMS, PATHS

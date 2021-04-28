@@ -31,7 +31,6 @@ SRCS =	cub_game.c \
 		utils/cub_save_bmp.c \
 		utils/cub_utils.c \
 		utils/cub_utils_colors.c \
-		utils/cub_print_info.c \
 		bonus/cub_floor_bonus.c \
 		bonus/cub_sprites_bonus.c \
 		bonus/cub_speed_bonus.c \
@@ -74,14 +73,6 @@ $(NAME) : mlx libft ${OBJS}
 bonus : DEFINE += -DBONUS=1 -DSPRITES=3
 
 bonus : $(NAME)
-
-test : DEFINE += -DTEST=1
-
-test : $(NAME)
-
-testbonus : DEFINE += -DTEST=1
-
-testbonus : bonus
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 		@mkdir -p ${@D}

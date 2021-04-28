@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 03:21:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/28 05:09:21 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void			cub_load_objects(t_world *world)
 				world->sprite[x].x = (double)j + 0.5;
 				world->sprite[x].y = (double)i + 0.5;
 				world->sprite[x].id = world->map[i][j] - 48 - 2;
-				world->sprite[x].state = 0; 
+				world->sprite[x].state = 0;
 				cub_set_object(&world->sprite[x], &world->map[i][j]);
 				x++;
 			}

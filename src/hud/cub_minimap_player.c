@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 14:40:17 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/28 22:23:18 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void		cub_player_dir(t_player *player, t_world *world, t_mlx *mlx)
 		x1 = player->vector.x * world->offset + player->vector.dx * l;
 		y1 = player->vector.y * world->offset + player->vector.dy * l;
 		if (cub_can_see(world, x1, y1))
-			mlx->buffer[(int)(y1 * MAP_SIZE)]
-				[(int)(x1 * MAP_SIZE)] = 0x00FFFFFF;
+			mlx->buffer[(int)(y1 * MAP_SIZE + mlx->res.y / 100)]
+				[(int)(x1 * MAP_SIZE + mlx->res.x / 100)] = 0x00FFFFFF;
 		if (cub_can_see(world, x1, y1) == 0)
 			break ;
 		l++;
@@ -58,8 +58,8 @@ static void		cub_minimap_player(t_player *player, t_world *world, t_mlx *mlx)
 	double		x;
 	double		y;
 
-	x = player->vector.x * world->offset * MAP_SIZE;
-	y = player->vector.y * world->offset * MAP_SIZE;
+	x = player->vector.x * world->offset * MAP_SIZE + mlx->res.x / 100;
+	y = player->vector.y * world->offset * MAP_SIZE + mlx->res.y / 100;
 	angle = 0;
 	while (angle <= 360)
 	{
@@ -70,9 +70,10 @@ static void		cub_minimap_player(t_player *player, t_world *world, t_mlx *mlx)
 	}
 }
 
-void			cub_minimap(t_cub *game)
+void			cub_hud(t_cub *game)
 {
 	cub_draw_map(&game->world, &game->mlx);
 	cub_player_dir(&game->player, &game->world, &game->mlx);
 	cub_minimap_player(&game->player, &game->world, &game->mlx);
+	cub_draw_health(&game->mlx, game->player.health);
 }

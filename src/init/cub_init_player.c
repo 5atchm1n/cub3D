@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:10:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/19 07:14:09 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/28 20:50:35 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void		cub_init_player_pos(t_player *player, int x, int y)
 	player->vector.posz = 0.0;
 	player->vector.pitch = 0.0;
 	player->move = 0;
+	player->health = 100;
 }
 
 void			cub_init_player(t_player *player, t_world *world,
