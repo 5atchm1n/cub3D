@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 22:15:50 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/29 02:48:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,6 @@ void	cub_render(t_cub *game);
 void	cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs objs,
 		t_pixel *px);
 /*
-** MINIMAP
-*/
-/*
 ** ERROR ,CHECKS AND EXIT
 */
 void	cub_test_xpm(t_cub *game, t_error *error);
@@ -107,22 +104,14 @@ int		cub_isdir(char c);
 int		cub_issprite(char c);
 void	cub_save_bmp(t_cub *game);
 /*
-** ADD TO LIBFT
-*/
-int		ft_isspace(char c);
-int		ft_strcmp(char *s1, char *s2);
-double	ft_fmax(double a, double b);
-double	ft_fmin(double a, double b);
-/*
 ** BONUS - FLOOR CASTING
 */
 void	cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx);
-int		cub_mouse(int x, int y, t_cub *game);
+void	cub_mouse_hook(t_cub *game);
 int		cub_set_shadow(int colour, double dist);
 void	cub_sprite_move(t_world *world, t_player *player, t_mlx mlx);
 void	cub_speed(t_cub *game);
-void	cub_draw_health(t_mlx *mlx, int health);
-void	cub_draw_map(t_world *world, t_mlx *mlx);
 void	cub_hud(t_cub *game);
+void	cub_hud_player(t_player *player, t_world *world, t_mlx *mlx);
 
 #endif

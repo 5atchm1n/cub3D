@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 02:50:24 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/29 14:32:49 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define SPRITE_W 64
 # define TEX_X 64
 # define TEX_Y 64
+# define SKY_X 2048
+# define SKY_Y 390
 # define ERRORS 17
 # define BONUS_MAP " NSEW01234"
 
@@ -79,6 +81,8 @@ typedef struct		s_floor
 	int				tx;
 	int				ty;
 	int				isfloor;
+	int				x;
+	int				y;
 }					t_floor;
 /*
 ** RAYCASTING, TEXTURE CASTING

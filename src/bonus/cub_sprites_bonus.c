@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:22:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 21:49:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/29 02:58:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void		cub_move_sprite_init(t_sprite *s, int count)
 	{
 		if (s[i].id != 0)
 		{
-			s[i].state |= (1 << 0);
-			if (s[i].dist < 81.0 && (s[i].state & (1 << 2)) == 0)
-				s[i].state |= (1 << 1);
-			if (s[i].state & (1 << 2) && s[i].dist > 5.0 && s[i].dist < 6.0)
-				s[i].state &= ~(1 << 2);
+			s[i].state |= S_ON;
+			if (s[i].dist < 81.0 && (s[i].state & S_BACK) == 0)
+				s[i].state |= S_MOVE;
+			if (s[i].state & S_BACK && s[i].dist > 5.0 && s[i].dist < 6.0)
+				s[i].state &= ~S_BACK;
 		}
 		if (s[i].id != 0 && s[i].dist >= 81.0)
-			s[i].state &= ~(1 << 1);
+			s[i].state &= ~S_ON;
 		i++;
 	}
 }
@@ -70,9 +70,9 @@ static void		cub_move_enemy(t_world *world, t_vector v, t_mlx mlx)
 	i = 0;
 	while (i < world->scount)
 	{
-		if (world->sprite[i].id == 2 && world->sprite[i].state & (1 << 1))
+		if (world->sprite[i].id == 2 && world->sprite[i].state & S_MOVE)
 			cub_enemy_forward(&world->sprite[i], v, mlx, world->map);
-		if (world->sprite[i].id == 2 && world->sprite[i].state & (1 << 2))
+		if (world->sprite[i].id == 2 && world->sprite[i].state & S_BACK)
 			cub_enemy_back(&world->sprite[i], v, mlx, world->map);
 		i++;
 	}

@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_utils.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:32:50 by sshakya          ###   ########.fr       */
+/*   Created: 2021/04/29 02:32:19 by sshakya           #+#    #+#             */
+/*   Updated: 2021/04/29 02:32:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int			cub_isdir(char c)
+int			ft_strcmp(char *s1, char *s2)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
-}
+	int		l1;
+	int		l2;
+	int		i;
 
-int			cub_issprite(char c)
-{
-	if (c == '2' || c == '3' || c == '4')
-		return (1);
-	return (0);
+	l1 = ft_strlen(s1);
+	l2 = ft_strlen(s2);
+	i = 0;
+	if (l1 != l2)
+		return (0);
+	while (i < l1)
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }

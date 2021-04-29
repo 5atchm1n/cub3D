@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_utils.c                                        :+:      :+:    :+:   */
+/*   ft_fmax.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:32:50 by sshakya          ###   ########.fr       */
+/*   Created: 2021/04/29 02:28:42 by sshakya           #+#    #+#             */
+/*   Updated: 2021/04/29 02:30:52 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int			cub_isdir(char c)
+double		ft_fmax(double a, double b)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
-}
-
-int			cub_issprite(char c)
-{
-	if (c == '2' || c == '3' || c == '4')
-		return (1);
-	return (0);
+	if (a > b)
+		return (a);
+	else
+		return (b);
 }

@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_utils.c                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:32:50 by sshakya          ###   ########.fr       */
+/*   Created: 2021/04/29 02:31:37 by sshakya           #+#    #+#             */
+/*   Updated: 2021/04/29 02:38:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int			cub_isdir(char c)
+int			ft_isspace(char c)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
-}
-
-int			cub_issprite(char c)
-{
-	if (c == '2' || c == '3' || c == '4')
+	if ((c > 8 && c < 14) || c == 32)
 		return (1);
 	return (0);
 }

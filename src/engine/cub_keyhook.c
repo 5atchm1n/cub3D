@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 22:15:11 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/29 02:22:22 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,7 @@ void		cub_mlx_hooks(t_cub *game)
 	mlx_hook(game->mlx.win.win, 3, 1L << 1, &cub_keyrelease, game);
 	mlx_hook(game->mlx.win.win, 33, 1L << 2, &cub_quit, game);
 	if (BONUS)
-	{
-		mlx_mouse_get_pos(game->mlx.win.mlx, game->mlx.win.win,
-				&game->mlx.mouse.x, &game->mlx.mouse.y);
-		mlx_hook(game->mlx.win.win, 6, 1L << 6, &cub_mouse, game);
-		mlx_mouse_move(game->mlx.win.mlx, game->mlx.win.win,
-				game->mlx.res.x / 2, game->mlx.res.y / 2);
-	}
+		cub_mouse_hook(game);
 	mlx_loop_hook(game->mlx.win.mlx, &cub_move, game);
 	mlx_loop(game->mlx.win.mlx);
 }

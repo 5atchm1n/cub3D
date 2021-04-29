@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 22:23:18 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/29 02:49:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		cub_can_see(t_world *world, double x, double y)
 		return (0);
 	if (grid_y > world->msize.y - 1 || grid_y < 0)
 		return (0);
-	if (world->map[grid_y][grid_x] != '0')
+	if (world->map[grid_y][grid_x] == '1')
 		return (0);
 	return (1);
 }
@@ -50,7 +50,7 @@ static void		cub_player_dir(t_player *player, t_world *world, t_mlx *mlx)
 	}
 }
 
-static void		cub_minimap_player(t_player *player, t_world *world, t_mlx *mlx)
+void			cub_hud_player(t_player *player, t_world *world, t_mlx *mlx)
 {
 	double		x1;
 	double		y1;
@@ -68,12 +68,5 @@ static void		cub_minimap_player(t_player *player, t_world *world, t_mlx *mlx)
 		mlx->buffer[(int)(y + y1)][(int)(x + x1)] = 0x00FFFFFF;
 		angle += 0.1;
 	}
-}
-
-void			cub_hud(t_cub *game)
-{
-	cub_draw_map(&game->world, &game->mlx);
-	cub_player_dir(&game->player, &game->world, &game->mlx);
-	cub_minimap_player(&game->player, &game->world, &game->mlx);
-	cub_draw_health(&game->mlx, game->player.health);
+	cub_player_dir(player, world, mlx);
 }

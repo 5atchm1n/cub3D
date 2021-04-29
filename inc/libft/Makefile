@@ -6,7 +6,7 @@
 #    By: sshakya <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 00:09:13 by sshakya           #+#    #+#              #
-#    Updated: 2021/03/04 08:46:43 by sshakya          ###   ########.fr        #
+#    Updated: 2021/04/29 02:38:19 by sshakya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,9 +64,16 @@ BONUS =	bonus/ft_lstadd_front.c \
 GNL = get_next_line/get_next_line.c \
 	  get_next_line/get_next_line_utils.c \
 
+MYFN = libft/ft_fmin.c \
+	   libft/ft_fmax.c \
+	   libft/ft_isspace.c \
+	   libft/ft_strcmp.c \
+
 GNLOBJS = ${GNL:.c=.o}
 
 BONUSOBJS = ${BONUS:.c=.o}
+
+MYFNOBJS = ${MYFN:.c=.o}
 
 OBJS = ${SRCS:.c=.o}
 
@@ -76,7 +83,7 @@ RM = rm -f
 
 CFLAGS	= -Wall -Wextra -Werror
 
-$(NAME) : ${OBJS} ${GNLOBJS}
+$(NAME) : ${OBJS} ${GNLOBJS} ${MYFNOBJS}
 	ar rcs $@ $?
 
 .c.o:
@@ -85,18 +92,18 @@ $(NAME) : ${OBJS} ${GNLOBJS}
 all : ${NAME}
 
 
-bonus:	${BONUSOBJS} ${OBJS}
+bonus:	${BONUSOBJS} ${OBJS} ${MYFNOBJS}
 		ar rcs ${NAME} $?
 
 norm :
-	~/.norminette/norminette.rb ${SRCS} ${BONUS} ${INCLUDE}
+	~/.norminette/norminette.rb ${SRCS} ${BONUS} ${GNL} ${MYFN} ${INCLUDE}
 
 so :
-	${CC} -fPIC -c ${CFLAGS} ${SRCS} ${BONUS}
-	gcc -shared -o ${SONAME} ${OBJS} ${BONUSOBJS}
+	${CC} -fPIC -c ${CFLAGS} ${SRCS} ${BONUS} ${MYFNOBJS}
+	gcc -shared -o ${SONAME} ${OBJS} ${BONUSOBJS} ${MYFNOBJS}
 
 clean :
-	${RM} ${OBJS} ${BONUSOBJS} ${GNLOBJS}
+	${RM} ${OBJS} ${BONUSOBJS} ${GNLOBJS} ${MYFNOBJS} 
 
 fclean : clean
 	${RM} ${NAME} ${SONAME}

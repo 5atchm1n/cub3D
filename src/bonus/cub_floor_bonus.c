@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 03:00:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/26 15:53:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/29 15:52:39 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		cub_init_ray(t_floor *ray, t_player *player, t_mlx *mlx, int y)
 	ray->fly = player->vector.y + ray->rdist * ray0.diry;
 }
 
-static uint32_t	cub_set_floor_color(t_world *world, t_floor *ray)
+static uint32_t	cub_set_floor_color(t_world *world, t_floor *ray, t_mlx mlx)
 {
 	uint32_t	color;
 
@@ -49,9 +49,10 @@ static uint32_t	cub_set_floor_color(t_world *world, t_floor *ray)
 		color = (color >> 1) & 8355711;
 	}
 	else
-	{
-		color = world->sky[TEX_X * ray->ty + ray->tx];
-		color = (color >> 1) & 8355711;
+
+	//	color = world->sky[TEX_X * ray->ty + ray->tx];
+	//	color = (color >> 1) & 8355711;
+		color = world->skybox[SKY_X * ray->y + (int)(ray->x + mlx.skyx)];
 	}
 	return (color);
 }
@@ -66,13 +67,14 @@ static void		cub_cast_ray(t_floor *ray, t_world *world, t_mlx *mlx, int y)
 	x = 0;
 	while (x < mlx->res.x)
 	{
+		ray->x = x;
 		xcell = (int)ray->flx;
 		ycell = (int)ray->fly;
 		ray->tx = (int)((TEX_X) * (ray->flx - xcell)) & (TEX_X - 1);
 		ray->ty = (int)((TEX_Y) * (ray->fly - ycell)) & (TEX_Y - 1);
 		ray->flx += ray->stepx;
 		ray->fly += ray->stepy;
-		color = cub_set_floor_color(world, ray);
+		color = cub_set_floor_color(world, ray, *mlx);
 		mlx->buffer[y][x] = cub_set_shadow(color, ray->rdist);
 		x++;
 	}
@@ -87,6 +89,7 @@ void			cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx)
 	y = 0;
 	while (y < mlx->res.y)
 	{
+		ray.y = y;
 		cub_init_ray(&ray, player, mlx, y);
 		cub_cast_ray(&ray, world, mlx, y);
 		y++;

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 09:51:15 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/26 15:44:49 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/29 02:59:03 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,9 @@
 # define L_RIGHT (1 << 7)
 # define M_JUMP (1 << 8)
 # define M_CROUCH (1 << 9)
+
+# define S_ON (1 << 0)
+# define S_MOVE (1 << 1)
+# define S_BACK (1 << 2)
 
 #endif

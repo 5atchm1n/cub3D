@@ -14,8 +14,8 @@ SRCS =	cub_game.c \
 		engine/cub_sprites.c \
 		engine/cub_sprites_sort.c \
 		engine/cub_textures.c \
-		hud/cub_minimap.c \
-		hud/cub_minimap_player.c \
+		hud/cub_hud.c \
+		hud/cub_hud_player.c \
 		init/cub_init.c \
 		init/cub_init_player.c \
 		init/cub_init_utils.c \
