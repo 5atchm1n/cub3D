@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_minimap.c                                      :+:      :+:    :+:   */
+/*   cub_hud.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:49:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/30 04:33:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ static void		cub_draw_health(t_mlx *mlx, int health)
 		}
 		j++;
 	}
+	mlx_string_put(mlx->win.mlx, mlx->win.win, mlx->res.x - 60,
+			mlx->res.y - 25, 0x00FFFFFF, "HEALTH");
 }
 
 void			cub_hud(t_cub *game)

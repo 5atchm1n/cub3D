@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:22:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:58:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/30 04:14:09 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ static void		cub_enemy_forward(t_sprite *sprite, t_vector v, t_mlx mlx,
 		sprite->x -= v.dx * mlx.move_speed * (LEVEL / 10.0);
 		sprite->y -= v.dy * mlx.move_speed * (LEVEL / 10.0);
 	}
+	else
+	{
+		sprite->state &= ~(S_MOVE);
+		sprite->state |= S_BACK;
+	}
 }
 
 static void		cub_enemy_back(t_sprite *sprite, t_vector v, t_mlx mlx,
@@ -60,6 +65,11 @@ static void		cub_enemy_back(t_sprite *sprite, t_vector v, t_mlx mlx,
 	{
 		sprite->x += v.dx * mlx.move_speed;
 		sprite->y += v.dy * mlx.move_speed;
+	}
+	else
+	{
+		sprite->state &= ~(S_BACK);
+		sprite->state |= S_MOVE;
 	}
 }
 

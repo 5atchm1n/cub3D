@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 22:14:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/30 04:27:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void			cub_draw(t_mlx *mlx)
 		y++;
 	}
 	mlx_put_image_to_window(mlx->win.mlx, mlx->win.win, mlx->img.img, 0, 0);
+	mlx_string_put(mlx->win.mlx, mlx->win.win, mlx->res.x - 60, mlx->res.y - 25, 0x00FFFFFF, "HEALTH");
 }
 
 void			cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs obj,
