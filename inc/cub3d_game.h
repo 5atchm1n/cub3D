@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 13:09:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/30 20:45:55 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct		s_world
 	char			**tpath;
 	char			**objpath;
 	int				*sky;
+	int				*weapon;
 	int				*skybox;
 	int				*ground;
 }					t_world;

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 14:22:34 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/30 20:49:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,15 @@ static void		cub_init_sky_ground(t_world *world, t_error *error)
 	world->skybox = (int *)malloc(sizeof(int) * (SKY_X * SKY_Y));
 	if (world->skybox == NULL)
 		return (cub_error_set(error, MEM_FAIL));
+	world->weapon = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
+	if (world->weapon == NULL)
+		return (cub_error_set(error, MEM_FAIL));
 	i = 0;
 	while (i < TEX_X * TEX_Y)
 	{
 		world->ground[i] = 0;
 		world->sky[i] = 0;
+		world->weapon[i] = 0;
 		i++;
 	}
 	i = 0;

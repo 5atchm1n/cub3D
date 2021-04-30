@@ -1,8 +1,8 @@
 R	720	1024
-NO	textures/wall1-64x64.xpm
-SO	textures/wall5-64x64.xpm
-WE	textures/wall2-64x64.xpm
-EA	textures/wall3-64x64.xpm
+NO	textures/wall42-2-64x64.xpm
+SO	textures/wall42-3-64x64.xpm
+WE	textures/wall42-64x64.xpm
+EA	textures/wall42-4-64x64.xpm
 
 S	textures/tree.xpm
 S	textures/Pikachu-64x64.xpm

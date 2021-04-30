@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/30 04:33:12 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/30 21:10:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,40 @@ static void		cub_draw_health(t_mlx *mlx, int health)
 			mlx->res.y - 25, 0x00FFFFFF, "HEALTH");
 }
 
+static void		cub_draw_weapon(t_world *world, t_mlx *mlx)
+{
+	int			x;
+	int			y;
+	int			i;
+	int			j;
+	uint32_t	color;
+
+	y = 0;
+	i = 0;
+	while (i < TEX_X * 4)
+	{
+		x = 0;
+		j = 0;
+		while (j < TEX_X * 4)
+		{
+			color = world->weapon[TEX_X * y + x];
+			if ((color & 0x00FFFFFF) != 0)
+				mlx->buffer[(mlx->res.y - TEX_Y * 4) + i]
+					[(mlx->res.x / 2 - TEX_X * 2) + j] = color;
+			if (j % 4 == 0)
+				x++;
+			j++;
+		}
+		if (i % 4 == 0)
+			y++;
+		i++;
+	}
+}
+
 void			cub_hud(t_cub *game)
 {
 	cub_draw_map(&game->world, &game->mlx);
 	cub_hud_player(&game->player, &game->world, &game->mlx);
 	cub_draw_health(&game->mlx, game->player.health);
+	cub_draw_weapon(&game->world, &game->mlx);
 }
