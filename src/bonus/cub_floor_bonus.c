@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 03:00:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 15:52:39 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/30 04:01:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,7 @@ static uint32_t	cub_set_floor_color(t_world *world, t_floor *ray, t_mlx mlx)
 		color = (color >> 1) & 8355711;
 	}
 	else
-
-	//	color = world->sky[TEX_X * ray->ty + ray->tx];
-	//	color = (color >> 1) & 8355711;
-		color = world->skybox[SKY_X * ray->y + (int)(ray->x + mlx.skyx)];
-	}
+		color = world->skybox[SKY_X * ray->y + (int)(mlx.skyx + ray->x)];
 	return (color);
 }
 

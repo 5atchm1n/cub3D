@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 14:32:49 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/30 02:12:09 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # define SPRITE_W 64
 # define TEX_X 64
 # define TEX_Y 64
-# define SKY_X 2048
-# define SKY_Y 390
+# define SKY_X 1200
+# define SKY_Y 511
 # define ERRORS 17
 # define BONUS_MAP " NSEW01234"
 

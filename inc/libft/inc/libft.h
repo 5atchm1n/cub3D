@@ -6,7 +6,7 @@
 /*   By: sshakya <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 04:22:05 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:46:17 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/04/30 04:06:01 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr_fd(char *s, int fd);
+
 /*
 ** BONUS
 */
+
 t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)
 		(void *));
@@ -69,9 +71,11 @@ void				ft_lstadd_front(t_list **lst, t_list *new);
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
+
 /*
 ** GNL
 */
+
 int					get_next_line(int fd, char **line);
 char				*gnl_join(char *s1, char *s2);
 int					gnl_find(char *str);
@@ -79,9 +83,11 @@ char				*gnl_sub(const char *s, unsigned int start, size_t len,
 							int n);
 size_t				gnl_len(const char *s);
 char				*gnl_dup(const char *src, const char *srcfree);
+
 /*
 ** MY FUNCTIONS
 */
+
 int					ft_isspace(char c);
 int					ft_strcmp(char *s1, char *s2);
 double				ft_fmax(double a, double b);

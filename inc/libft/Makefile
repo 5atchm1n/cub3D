@@ -6,7 +6,7 @@
 #    By: sshakya <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/24 00:09:13 by sshakya           #+#    #+#              #
-#    Updated: 2021/04/29 02:38:19 by sshakya          ###   ########.fr        #
+#    Updated: 2021/04/30 04:07:08 by sshakya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ bonus:	${BONUSOBJS} ${OBJS} ${MYFNOBJS}
 		ar rcs ${NAME} $?
 
 norm :
-	~/.norminette/norminette.rb ${SRCS} ${BONUS} ${GNL} ${MYFN} ${INCLUDE}
+	@~/.norminette/norminette.rb ${SRCS} ${BONUS} ${GNL} ${MYFN} inc/${INCLUDE}
 
 so :
 	${CC} -fPIC -c ${CFLAGS} ${SRCS} ${BONUS} ${MYFNOBJS}
