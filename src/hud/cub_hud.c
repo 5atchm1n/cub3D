@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 05:43:34 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 22:41:13 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ static void		cub_draw_weapon(t_world *world, t_mlx *mlx)
 
 	tex.y = 0;
 	buff.y = 0;
-	while (buff.y < TEX_X * 4)
+	while (tex.y < TEX_Y)
 	{
 		tex.x = 0;
 		buff.x = 0;
-		while (buff.x < TEX_X * 4)
+		while (tex.x < TEX_X)
 		{
 			color = world->weapon[TEX_X * tex.y + tex.x];
 			if ((color & 0x00FFFFFF) != 0)

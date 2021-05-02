@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:22:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 05:47:40 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 16:29:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void		cub_enemy_back(t_sprite *sprite, t_vector v, t_mlx mlx,
 
 	x = sprite->x + v.dx * mlx.move_speed;
 	y = sprite->y + v.dy * mlx.move_speed;
-	if (map[(int)y][(int)x] == '0')
+	if (x > 0 && y > 0 && map[(int)y][(int)x] == '0')
 	{
 		sprite->x += v.dx * mlx.move_speed;
 		sprite->y += v.dy * mlx.move_speed;

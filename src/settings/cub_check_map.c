@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 05:26:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 23:05:08 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void		cub_check_if_open(char **map, t_grid *size, t_error *error)
 	int			err;
 
 	y = 0;
+	err = 0;
 	while (y < size->y)
 	{
 		x = 0;

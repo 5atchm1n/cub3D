@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 05:47:56 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:50:55 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define SKY_Y 511
 # define ERRORS 17
 # define BONUS_MAP " NSEW01234"
+# define PLAYER_SIZE 0.1
+# define MAP_SIZE 0.15
 
 # ifndef SPRITES
 #  define SPRITES 1

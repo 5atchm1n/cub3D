@@ -6,15 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 05:25:35 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:52:35 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_GAME_H
 # define CUB3D_GAME_H
 
-# define PLAYER_SIZE 0.1
-# define MAP_SIZE 0.15
 # define MOVE_SPEED 9.0
 # define TURN_SPEED 7.0
 # define LEVEL 7.0

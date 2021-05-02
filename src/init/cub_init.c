@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/30 20:49:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 22:40:51 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ static void		cub_init_sky_ground(t_world *world, t_error *error)
 		i++;
 	}
 	i = 0;
-	while (i++ < SKY_X * SKY_Y)
-		world->skybox[i] = 0;
+	while (i < SKY_X * SKY_Y)
+		world->skybox[i++] = 0;
 }
 
 static void		cub_init_textures(t_world *world, t_error *error)

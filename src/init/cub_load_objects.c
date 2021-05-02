@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 05:09:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 22:50:46 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int				cub_nobject(t_world *world)
 		j = 0;
 		while (j < world->msize.x)
 		{
-			if (world->map[i][j] == '2' || world->map[i][j] == '3')
+			if (world->map[i][j] == '2' ||
+					world->map[i][j] == '3' ||
+					world->map[i][j] == '4')
 				count++;
 			j++;
 		}
@@ -96,6 +98,7 @@ void			cub_load_objects(t_world *world)
 	i = 0;
 	x = 0;
 	world->sprite = malloc(sizeof(t_sprite) * world->scount);
+	ft_memset(world->sprite, 0, sizeof(t_sprite));
 	while (i < world->msize.y)
 	{
 		j = 0;
@@ -107,6 +110,7 @@ void			cub_load_objects(t_world *world)
 				world->sprite[x].y = (double)i + 0.5;
 				world->sprite[x].id = world->map[i][j] - 48 - 2;
 				world->sprite[x].state = 0;
+				world->sprite[x].dist = 0.0;
 				cub_set_object(&world->sprite[x], &world->map[i][j]);
 				x++;
 			}
