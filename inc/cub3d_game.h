@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/30 20:45:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:25:35 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ typedef struct		s_mlx
 {
 	t_win			win;
 	t_img			img;
-	t_res			res;
+	t_grid			res;
+	t_grid			mouse;
 	int				**buffer;
 	int				on;
-	t_mouse			mouse;
 	clock_t			time;
 	double			move_speed;
 	double			turn_speed;
-	double			skyx;
 }					t_mlx;
 /*
 ** PLAYER -- MOVE, VECTOR, CAMERA --
@@ -52,7 +51,7 @@ typedef struct		s_player
 typedef struct		s_world
 {
 	t_sprite		*sprite;
-	t_map_size		msize;
+	t_grid			msize;
 	t_color			floor;
 	t_color			ceiling;
 	double			*zbuffer;

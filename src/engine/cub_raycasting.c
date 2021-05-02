@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:16:31 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/30 03:37:44 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:09:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ static void		cub_set_ray(t_ray *ray, t_player *player, int x, t_mlx *mlx)
 	ray->mapy = (int)player->vector.y;
 	ray->deltax = fabs(1 / ray->dirx);
 	ray->deltay = fabs(1 / ray->diry);
-	mlx->skyx = fabs(atan2(ray->diry, ray->dirx)) * 180 / M_PI;
-	if (mlx->skyx <= 0)
-		mlx->skyx = 360 + mlx->skyx;
-	mlx->skyx = (mlx->skyx / 360.0) * mlx->res.x;
 }
 
 static void		cub_set_dda_vector(t_ray *ray, t_vector *v)

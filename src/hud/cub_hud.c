@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/30 21:10:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:43:34 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,71 +55,31 @@ static void		cub_draw_map(t_world *world, t_mlx *mlx)
 	}
 }
 
-static int		cub_shade_health(int colour)
-{
-	t_rgb		rgb;
-
-	rgb.r = ((colour & 0x00FF0000) >> 16);
-	rgb.g = ((colour & 0x0000FF00) >> 8) * 0.05;
-	rgb.b = (colour & 0x000000FF) * 0.05;
-	colour = (rgb.r << 16) + (rgb.g << 8) + rgb.b;
-	return (colour);
-}
-
-static void		cub_draw_health(t_mlx *mlx, int health)
-{
-	int			lenght;
-	int			colour;
-	int			i;
-	int			j;
-
-	lenght = health * 4;
-	j = 0;
-	while (j < mlx->res.x / 30)
-	{
-		i = 0;
-		while (i < lenght)
-		{
-			colour = mlx->buffer[(int)(mlx->res.y - (mlx->res.y / 100) - j)]
-				[(int)(mlx->res.x - (mlx->res.x / 100) - i)];
-			mlx->buffer[(int)(mlx->res.y - (mlx->res.y / 100) - j)]
-				[(int)(mlx->res.x - (mlx->res.x / 100) - i)] =
-				cub_shade_health(colour);
-			i++;
-		}
-		j++;
-	}
-	mlx_string_put(mlx->win.mlx, mlx->win.win, mlx->res.x - 60,
-			mlx->res.y - 25, 0x00FFFFFF, "HEALTH");
-}
-
 static void		cub_draw_weapon(t_world *world, t_mlx *mlx)
 {
-	int			x;
-	int			y;
-	int			i;
-	int			j;
+	t_grid		tex;
+	t_grid		buff;
 	uint32_t	color;
 
-	y = 0;
-	i = 0;
-	while (i < TEX_X * 4)
+	tex.y = 0;
+	buff.y = 0;
+	while (buff.y < TEX_X * 4)
 	{
-		x = 0;
-		j = 0;
-		while (j < TEX_X * 4)
+		tex.x = 0;
+		buff.x = 0;
+		while (buff.x < TEX_X * 4)
 		{
-			color = world->weapon[TEX_X * y + x];
+			color = world->weapon[TEX_X * tex.y + tex.x];
 			if ((color & 0x00FFFFFF) != 0)
-				mlx->buffer[(mlx->res.y - TEX_Y * 4) + i]
-					[(mlx->res.x / 2 - TEX_X * 2) + j] = color;
-			if (j % 4 == 0)
-				x++;
-			j++;
+				mlx->buffer[(mlx->res.y - TEX_Y * 4) + buff.y]
+					[(mlx->res.x / 2 - TEX_X * 2) + buff.x] = color;
+			if (buff.x % 4 == 0)
+				tex.x++;
+			buff.x++;
 		}
-		if (i % 4 == 0)
-			y++;
-		i++;
+		if (buff.y % 4 == 0)
+			tex.y++;
+		buff.y++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:48:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:37:10 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	cub_error_msg(t_errn id, t_error error);
 int		cub_get_line(char **line, int fd);
 char	**cub_copy_map(char *map_path, t_world *world);
 int		cub_set_rgb(char *line, t_color *color);
-int		cub_set_res(char *line, t_res *res);
+int		cub_set_res(char *line, t_grid *res);
 void	cub_set_texture_paths(char *line, t_world *world, int *i);
 int		cub_rgb_to_int(t_color color);
 int		cub_isdir(char c);
@@ -113,5 +113,6 @@ void	cub_sprite_move(t_world *world, t_player *player, t_mlx mlx);
 void	cub_speed(t_cub *game);
 void	cub_hud(t_cub *game);
 void	cub_hud_player(t_player *player, t_world *world, t_mlx *mlx);
+void	cub_draw_health(t_mlx *mlx, int health);
 
 #endif

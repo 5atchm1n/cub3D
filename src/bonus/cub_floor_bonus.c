@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 03:00:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/30 04:01:57 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:46:39 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,13 @@ static void		cub_init_ray(t_floor *ray, t_player *player, t_mlx *mlx, int y)
 	ray->stepy = ray->rdist * (ray1.diry - ray0.diry) / mlx->res.x;
 	ray->flx = player->vector.x + ray->rdist * ray0.dirx;
 	ray->fly = player->vector.y + ray->rdist * ray0.diry;
+	ray->skyx = fabs(atan2(player->vector.dx, player->vector.dy)) * 180 / M_PI;
+	if (ray->skyx <= 0)
+		ray->skyx = 360 + ray->skyx;
+	ray->skyx = (ray->skyx / 360.0) * mlx->res.x;
 }
 
-static uint32_t	cub_set_floor_color(t_world *world, t_floor *ray, t_mlx mlx)
+static uint32_t	cub_set_floor_color(t_world *world, t_floor *ray)
 {
 	uint32_t	color;
 
@@ -49,7 +53,7 @@ static uint32_t	cub_set_floor_color(t_world *world, t_floor *ray, t_mlx mlx)
 		color = (color >> 1) & 8355711;
 	}
 	else
-		color = world->skybox[SKY_X * ray->y + (int)(mlx.skyx + ray->x)];
+		color = world->skybox[SKY_X * ray->y + (int)(ray->skyx + ray->x)];
 	return (color);
 }
 
@@ -70,7 +74,7 @@ static void		cub_cast_ray(t_floor *ray, t_world *world, t_mlx *mlx, int y)
 		ray->ty = (int)((TEX_Y) * (ray->fly - ycell)) & (TEX_Y - 1);
 		ray->flx += ray->stepx;
 		ray->fly += ray->stepy;
-		color = cub_set_floor_color(world, ray, *mlx);
+		color = cub_set_floor_color(world, ray);
 		mlx->buffer[y][x] = cub_set_shadow(color, ray->rdist);
 		x++;
 	}

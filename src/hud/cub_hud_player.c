@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_minimap_player.c                               :+:      :+:    :+:   */
+/*   cub_hud_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:49:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:36:20 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,40 @@ void			cub_hud_player(t_player *player, t_world *world, t_mlx *mlx)
 		angle += 0.1;
 	}
 	cub_player_dir(player, world, mlx);
+}
+
+static int		cub_shade_health(int colour)
+{
+	t_rgb		rgb;
+
+	rgb.r = ((colour & 0x00FF0000) >> 16);
+	rgb.g = ((colour & 0x0000FF00) >> 8) * 0.05;
+	rgb.b = (colour & 0x000000FF) * 0.05;
+	colour = (rgb.r << 16) + (rgb.g << 8) + rgb.b;
+	return (colour);
+}
+
+void			cub_draw_health(t_mlx *mlx, int health)
+{
+	int			lenght;
+	int			colour;
+	int			i;
+	int			j;
+
+	lenght = health * 4;
+	j = 0;
+	while (j < mlx->res.x / 30)
+	{
+		i = 0;
+		while (i < lenght)
+		{
+			colour = mlx->buffer[(int)(mlx->res.y - (mlx->res.y / 100) - j)]
+				[(int)(mlx->res.x - (mlx->res.x / 100) - i)];
+			mlx->buffer[(int)(mlx->res.y - (mlx->res.y / 100) - j)]
+				[(int)(mlx->res.x - (mlx->res.x / 100) - i)] =
+				cub_shade_health(colour);
+			i++;
+		}
+		j++;
+	}
 }

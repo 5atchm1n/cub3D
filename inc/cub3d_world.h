@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/30 02:12:09 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:47:56 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,6 @@ typedef struct		s_img
 	int				y;
 }					t_img;
 
-typedef struct		s_res
-{
-	int				x;
-	int				y;
-}					t_res;
-
-typedef struct		s_mouse
-{
-	int				x;
-	int				y;
-}					t_mouse;
-
 /*
 ** FLOOR , CEILIING CASTING
 */
@@ -72,6 +60,7 @@ typedef struct		s_fray
 typedef struct		s_floor
 {
 	int				horizon;
+	double			skyx;
 	float			camv;
 	float			rdist;
 	float			stepx;
@@ -95,12 +84,12 @@ typedef struct		s_ray
 	double			deltay;
 	double			distx;
 	double			disty;
+	double			dw;
 	int				mapx;
 	int				mapy;
 	int				stepx;
 	int				stepy;
 	int				side;
-	double			dw;
 }					t_ray;
 
 typedef enum		e_dir
@@ -113,28 +102,28 @@ typedef enum		e_dir
 
 typedef struct		s_texture
 {
+	double			pos;
 	t_dir			dir;
 	int				lineheight;
 	int				start;
 	int				end;
-	double			pos;
 }					t_texture;
 /*
 ** OBJECTS CASTING - SORT ORDER , OBJS CASTING
 */
 typedef struct		s_sort
 {
-	int				order;
 	double			dist;
+	int				order;
 }					t_sort;
 
 typedef struct		s_objs
 {
-	int				*order;
 	double			*dist;
-	int				count;
 	double			tx;
 	double			ty;
+	int				count;
+	int				*order;
 	int				spritew;
 	int				spriteh;
 	int				index;
@@ -159,12 +148,6 @@ typedef struct		s_sprite
 	int				vdiv;
 	char			state;
 }					t_sprite;
-
-typedef struct		s_map_size
-{
-	int				x;
-	int				y;
-}					t_map_size;
 
 typedef struct		s_rgb
 {

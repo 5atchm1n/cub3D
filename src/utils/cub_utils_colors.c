@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/22 13:40:09 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:27:27 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int				cub_rgb_to_int(t_color color)
 	return (val);
 }
 
-int				cub_set_res(char *line, t_res *res)
+int				cub_set_res(char *line, t_grid *res)
 {
 	int			y;
 	int			x;

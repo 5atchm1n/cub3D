@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/27 20:22:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:26:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		cub_check_next(int x, int y, char **map, t_map_size *size)
+static int		cub_check_next(int x, int y, char **map, t_grid *size)
 {
 	if (x == 0 || x == size->x - 1)
 		return (1);
@@ -29,7 +29,7 @@ static int		cub_check_next(int x, int y, char **map, t_map_size *size)
 	return (0);
 }
 
-static void		cub_check_if_open(char **map, t_map_size *size, t_error *error)
+static void		cub_check_if_open(char **map, t_grid *size, t_error *error)
 {
 	int			x;
 	int			y;
@@ -75,7 +75,7 @@ static int		cub_isvalid(char c)
 	return (0);
 }
 
-static void		cub_check_map_chars(char **map, t_map_size *size,
+static void		cub_check_map_chars(char **map, t_grid *size,
 		t_error *error)
 {
 	int			x;

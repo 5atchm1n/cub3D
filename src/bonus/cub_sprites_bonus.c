@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:22:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/30 04:14:09 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/02 05:47:40 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,6 @@ static void		cub_enemy_back(t_sprite *sprite, t_vector v, t_mlx mlx,
 	}
 }
 
-static void		cub_move_enemy(t_world *world, t_vector v, t_mlx mlx)
-{
-	int			i;
-
-	i = 0;
-	while (i < world->scount)
-	{
-		if (world->sprite[i].id == 2 && world->sprite[i].state & S_MOVE)
-			cub_enemy_forward(&world->sprite[i], v, mlx, world->map);
-		if (world->sprite[i].id == 2 && world->sprite[i].state & S_BACK)
-			cub_enemy_back(&world->sprite[i], v, mlx, world->map);
-		i++;
-	}
-}
-
 static void		cub_collision(t_sprite *sprite, int count, t_player *player)
 {
 	int			hit;
@@ -110,7 +95,18 @@ static void		cub_collision(t_sprite *sprite, int count, t_player *player)
 
 void			cub_sprite_move(t_world *world, t_player *player, t_mlx mlx)
 {
+	int			i;
+
 	cub_move_sprite_init(world->sprite, world->scount);
-	cub_move_enemy(world, player->vector, mlx);
+	i = 0;
+	while (i < world->scount)
+	{
+		if (world->sprite[i].id == 2 && world->sprite[i].state & S_MOVE)
+			cub_enemy_forward(&world->sprite[i], player->vector, mlx,
+					world->map);
+		if (world->sprite[i].id == 2 && world->sprite[i].state & S_BACK)
+			cub_enemy_back(&world->sprite[i], player->vector, mlx, world->map);
+		i++;
+	}
 	cub_collision(world->sprite, world->scount, player);
 }
