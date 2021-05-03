@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:48:46 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/04 00:05:42 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/04 00:49:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int				cub_quit(t_cub *game)
 	free(game->mlx.buffer);
 	cub_free_world(&game->world);
 	cub_free_map(&game->world);
-	cub_free_utils(&game->world);
+	if (BONUS)
+		cub_free_utils(&game->world);
 	mlx_destroy_image(game->mlx.win.mlx, game->mlx.img.img);
 	mlx_destroy_window(game->mlx.win.mlx, game->mlx.win.win);
 	exit(0);
