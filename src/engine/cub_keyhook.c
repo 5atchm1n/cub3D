@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:22:22 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 20:16:08 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	cub_keypress(int keycode, t_cub *game)
 		game->player.move |= M_JUMP;
 	if (keycode == KEY_CROUCH)
 		game->player.move |= M_CROUCH;
+	if (keycode == KEY_HIT)
+		game->player.move |= M_HIT;
 	return (0);
 }
 
@@ -61,6 +63,8 @@ static int	cub_keyrelease(int keycode, t_cub *game)
 		game->player.move &= ~M_JUMP;
 	if (keycode == KEY_CROUCH)
 		game->player.move &= ~M_CROUCH;
+	if (keycode == KEY_HIT)
+		game->player.move &= ~M_HIT;
 	return (0);
 }
 

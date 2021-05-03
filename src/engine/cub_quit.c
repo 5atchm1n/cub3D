@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:48:46 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 04:52:39 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/04 00:05:42 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,22 @@ void			cub_free_world(t_world *world)
 	free(world->objs.tpath);
 }
 
+void			cub_free_utils(t_world *world)
+{
+	int			i;
+
+	free(world->objs.sky);
+	free(world->objs.skybox);
+	free(world->objs.ground);
+	i = 0;
+	while (i < WEAPONS * 2)
+	{
+		free(world->objs.weapons[i]);
+		i++;
+	}
+	free(world->objs.weapons);
+}
+
 int				cub_quit(t_cub *game)
 {
 	int			i;
@@ -64,10 +80,7 @@ int				cub_quit(t_cub *game)
 	free(game->mlx.buffer);
 	cub_free_world(&game->world);
 	cub_free_map(&game->world);
-	free(game->world.objs.sky);
-	free(game->world.objs.skybox);
-	free(game->world.objs.ground);
-	free(game->world.objs.weapon);
+	cub_free_utils(&game->world);
 	mlx_destroy_image(game->mlx.win.mlx, game->mlx.img.img);
 	mlx_destroy_window(game->mlx.win.mlx, game->mlx.win.win);
 	exit(0);

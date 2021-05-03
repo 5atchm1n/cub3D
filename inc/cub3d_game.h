@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:18:08 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 18:14:38 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ typedef struct		s_mlx
 	t_img			img;
 	t_grid			res;
 	t_grid			mouse;
-	double			move_speed;
-	double			turn_speed;
 	int				**buffer;
 	int				on;
 }					t_mlx;
@@ -42,6 +40,7 @@ typedef struct		s_player
 {
 	t_vector		vector;
 	t_camera		camera;
+	t_speed			speed;
 	uint_fast16_t	move;
 	int				health;
 }					t_player;

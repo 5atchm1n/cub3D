@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:04:33 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/04 00:27:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,35 +68,6 @@ static void		cub_init_map(t_world *world, t_error *error)
 	}
 }
 
-static void		cub_init_sky_ground(t_world *world, t_error *error)
-{
-	int			i;
-
-	world->objs.ground = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
-	if (world->objs.ground == NULL)
-		return (cub_error_set(error, MEM_FAIL));
-	world->objs.sky = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
-	if (world->objs.sky == NULL)
-		return (cub_error_set(error, MEM_FAIL));
-	world->objs.skybox = (int *)malloc(sizeof(int) * (SKY_X * SKY_Y));
-	if (world->objs.skybox == NULL)
-		return (cub_error_set(error, MEM_FAIL));
-	world->objs.weapon = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
-	if (world->objs.weapon == NULL)
-		return (cub_error_set(error, MEM_FAIL));
-	i = 0;
-	while (i < TEX_X * TEX_Y)
-	{
-		world->objs.ground[i] = 0;
-		world->objs.sky[i] = 0;
-		world->objs.weapon[i] = 0;
-		i++;
-	}
-	i = 0;
-	while (i < SKY_X * SKY_Y)
-		world->objs.skybox[i++] = 0;
-}
-
 static void		cub_init_textures(t_world *world, t_error *error)
 {
 	int			i;
@@ -137,8 +108,9 @@ void			cub_init(t_cub *game, char *map_path)
 	cub_init_map(&game->world, &error);
 	cub_init_img_buffer(&game->mlx, &error);
 	cub_init_textures(&game->world, &error);
-	cub_init_sky_ground(&game->world, &error);
 	cub_init_object(&game->world, &error);
+	if (BONUS)
+		cub_init_bonus(&game->world, &game->mlx, &error);
 	if (error.id != 0)
 		cub_error(error, game, 2);
 	cub_init_world(&game->world, game->mlx, map_path, &error);

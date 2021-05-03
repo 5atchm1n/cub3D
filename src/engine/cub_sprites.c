@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 04:59:57 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 20:10:53 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void		cub_set_sprites(t_objs *objs, t_vector player, t_world *world)
 	{
 		objs->order[i] = i;
 		objs->dist[i] = ((player.x - world->sprite[i].x)
-			* (player.x - world->sprite[i].x)
-			+ (player.y - world->sprite[i].y)
-			* (player.y - world->sprite[i].y));
+				* (player.x - world->sprite[i].x)
+				+ (player.y - world->sprite[i].y)
+				* (player.y - world->sprite[i].y));
 		world->sprite[i].dist = objs->dist[i];
 		i++;
 	}
@@ -102,7 +102,8 @@ void			cub_cast_sprites(t_cub *game)
 		cub_transform_sprite(game->world.sprite, game->player, &objs, i);
 		cub_set_sprite_screen(game->mlx, &objs, game->world.sprite,
 				game->player.vector);
-		cub_set_sprite_image_buffer(&game->mlx, objs, game->world);
+		if ((game->world.sprite[objs.order[objs.index]].state & (S_KILL)) == 0)
+			cub_set_sprite_image_buffer(&game->mlx, objs, game->world);
 		i++;
 	}
 	free(objs.order);

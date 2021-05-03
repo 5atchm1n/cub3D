@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:40:05 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/04 00:31:24 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 */
 int		cub_move(t_cub *game);
 void	cub_look_left_right(t_vector *v, t_camera *cam, uint_fast16_t move,
-		t_mlx mlx);
-void	cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast16_t move);
-void	cub_jump_crouch(t_vector *vector, uint_fast16_t move, t_mlx mlx);
+		t_speed speed);
+void	cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast16_t move,
+		t_speed speed);
+void	cub_jump_crouch(t_vector *vector, uint_fast16_t move, t_speed speed);
 void	cub_player_offset(t_vector *v, double *offset);
 void	cub_mlx_hooks(t_cub *game);
 /*
@@ -108,11 +109,16 @@ void	cub_save_bmp(t_cub *game);
 */
 void	cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx);
 void	cub_mouse_hook(t_cub *game);
+void	cub_mouse_move(int x, int y, t_player *player, t_mlx mlx);
+void	cub_mouse_stop(t_player *player);
 int		cub_set_shadow(int colour, double dist);
-void	cub_sprite_move(t_world *world, t_player *player, t_mlx mlx);
+void	cub_sprite_move(t_world *world, t_player *player);
 void	cub_speed(t_cub *game);
 void	cub_hud(t_cub *game);
 void	cub_hud_player(t_player *player, t_world *world, t_mlx *mlx);
 void	cub_draw_health(t_mlx *mlx, int health);
+void	cub_init_bonus(t_world *world, t_mlx *mlx, t_error *error);
+void	cub_kill(t_sprite *sprite, uint_fast16_t move);
+void	cub_collision(t_sprite *sprite, int count, t_player *player);
 
 #endif

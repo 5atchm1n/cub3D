@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:07:11 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:10:06 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/04 00:06:58 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,5 @@ void			cub_load_textures(t_mlx *mlx, t_world *world)
 	{
 		cub_load_xpm(mlx, world->objs.spr[i], world->objs.spath[i], &img);
 		i++;
-	}
-	if (BONUS)
-	{
-		cub_load_xpm(mlx, world->objs.sky, "textures/wall42-5-64x64.xpm", &img);
-		cub_load_xpm(mlx, world->objs.ground, "textures/wall6-64x64.xpm", &img);
-		cub_load_xpm(mlx, world->objs.skybox, "textures/skybox.xpm", &img);
-		cub_load_xpm(mlx, world->objs.weapon, "textures/knife.xpm", &img);
 	}
 }

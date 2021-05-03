@@ -6,29 +6,12 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 06:17:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 23:59:25 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_WORLD_H
 # define CUB3D_WORLD_H
-
-# define BUFF_SIZE 256
-# define TEXTURES 4
-# define SPRITE_H 64
-# define SPRITE_W 64
-# define TEX_X 64
-# define TEX_Y 64
-# define SKY_X 1200
-# define SKY_Y 511
-# define ERRORS 19
-# define BONUS_MAP " NSEW01234"
-# define PLAYER_SIZE 0.1
-# define MAP_SIZE 0.15
-
-# ifndef SPRITES
-#  define SPRITES 1
-# endif
 
 /*
 ** MLX -- WINDOW, IMAGE, BUFFER --
@@ -164,7 +147,7 @@ typedef struct		s_objects
 	int				**tex;
 	int				**spr;
 	int				*sky;
-	int				*weapon;
+	int				**weapons;
 	int				*skybox;
 	int				*ground;
 	char			**tpath;
@@ -196,6 +179,12 @@ typedef struct		s_sprite
 /*
 ** PLAYER -- MOVE , VECTOR, CAMERA PLANE
 */
+
+typedef struct		s_speed
+{
+	double			move;
+	double			turn;
+}					t_speed;
 
 typedef struct		s_vector
 {

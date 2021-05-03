@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 04:49:06 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 17:09:14 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void			cub_render(t_cub *game)
 	if (BONUS)
 	{
 		cub_floor_casting(&game->player, &game->world, &game->mlx);
-		cub_sprite_move(&game->world, &game->player, game->mlx);
+		cub_sprite_move(&game->world, &game->player);
 	}
 	cub_raycasting(game);
 	cub_cast_sprites(game);
