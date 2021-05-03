@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:16:31 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 05:09:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 04:53:40 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void			cub_raycasting(t_cub *game)
 	t_texture	texture;
 
 	x = 0;
-	game->world.zbuffer = malloc(sizeof(double) * game->mlx.res.x);
+	game->world.info.zbuffer = malloc(sizeof(double) * game->mlx.res.x);
 	ft_memset(&ray, 0, sizeof(ray));
 	while (x < game->mlx.res.x)
 	{
@@ -107,7 +107,7 @@ void			cub_raycasting(t_cub *game)
 		cub_run_dda(&ray, &game->player.vector, game->world.map);
 		cub_set_stripe(&game->mlx, &ray, &texture, &game->player.vector);
 		cub_set_texture(game, &texture, &ray, x);
-		game->world.zbuffer[x] = ray.dw;
+		game->world.info.zbuffer[x] = ray.dw;
 		x++;
 	}
 }

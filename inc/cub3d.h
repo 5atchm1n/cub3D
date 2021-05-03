@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 05:37:10 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 05:40:05 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	cub_test_xpm(t_cub *game, t_error *error);
 void	cub_check(t_world *world, t_cub *game);
 void	cub_check_files(t_world *world, t_error *error);
 int		cub_quit(t_cub *game);
-void	cub_error(t_error error, t_cub *game, int state);
+int		cub_error(t_error error, t_cub *game, int state);
 void	cub_free_world(t_world *world);
 void	cub_error_set(t_error *error, t_errn id);
 int		cub_check_save_arg(char *save_arg);
@@ -98,7 +98,7 @@ int		cub_get_line(char **line, int fd);
 char	**cub_copy_map(char *map_path, t_world *world);
 int		cub_set_rgb(char *line, t_color *color);
 int		cub_set_res(char *line, t_grid *res);
-void	cub_set_texture_paths(char *line, t_world *world, int *i);
+void	cub_set_texture_paths(char *line, t_objects *objs, int *i);
 int		cub_rgb_to_int(t_color color);
 int		cub_isdir(char c);
 int		cub_issprite(char c);

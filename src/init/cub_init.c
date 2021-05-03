@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 22:40:51 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 05:04:33 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ static void		cub_init_map(t_world *world, t_error *error)
 	int			j;
 
 	i = 0;
-	world->map = (char **)malloc(sizeof(char *) * world->msize.y);
+	world->map = (char **)malloc(sizeof(char *) * world->info.msize.y);
 	if (world->map == NULL)
 		return (cub_error_set(error, MEM_FAIL));
-	while (i < world->msize.y)
+	while (i < world->info.msize.y)
 	{
-		world->map[i] = (char *)malloc(sizeof(char) * world->msize.x);
+		world->map[i] = (char *)malloc(sizeof(char) * world->info.msize.x);
 		if (world->map[i] == NULL)
 			return (cub_error_set(error, MEM_FAIL));
 		i++;
 	}
 	i = 0;
-	while (i < world->msize.y)
+	while (i < world->info.msize.y)
 	{
 		j = 0;
-		while (j < world->msize.x)
+		while (j < world->info.msize.x)
 		{
 			world->map[i][j] = ' ';
 			j++;
@@ -72,29 +72,29 @@ static void		cub_init_sky_ground(t_world *world, t_error *error)
 {
 	int			i;
 
-	world->ground = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
-	if (world->ground == NULL)
+	world->objs.ground = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
+	if (world->objs.ground == NULL)
 		return (cub_error_set(error, MEM_FAIL));
-	world->sky = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
-	if (world->sky == NULL)
+	world->objs.sky = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
+	if (world->objs.sky == NULL)
 		return (cub_error_set(error, MEM_FAIL));
-	world->skybox = (int *)malloc(sizeof(int) * (SKY_X * SKY_Y));
-	if (world->skybox == NULL)
+	world->objs.skybox = (int *)malloc(sizeof(int) * (SKY_X * SKY_Y));
+	if (world->objs.skybox == NULL)
 		return (cub_error_set(error, MEM_FAIL));
-	world->weapon = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
-	if (world->weapon == NULL)
+	world->objs.weapon = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
+	if (world->objs.weapon == NULL)
 		return (cub_error_set(error, MEM_FAIL));
 	i = 0;
 	while (i < TEX_X * TEX_Y)
 	{
-		world->ground[i] = 0;
-		world->sky[i] = 0;
-		world->weapon[i] = 0;
+		world->objs.ground[i] = 0;
+		world->objs.sky[i] = 0;
+		world->objs.weapon[i] = 0;
 		i++;
 	}
 	i = 0;
 	while (i < SKY_X * SKY_Y)
-		world->skybox[i++] = 0;
+		world->objs.skybox[i++] = 0;
 }
 
 static void		cub_init_textures(t_world *world, t_error *error)
@@ -103,13 +103,13 @@ static void		cub_init_textures(t_world *world, t_error *error)
 	int			j;
 
 	i = 0;
-	world->tex = (int **)malloc(sizeof(int *) * TEXTURES);
-	if (world->tex == NULL)
+	world->objs.tex = (int **)malloc(sizeof(int *) * TEXTURES);
+	if (world->objs.tex == NULL)
 		return (cub_error_set(error, MEM_FAIL));
 	while (i < TEXTURES)
 	{
-		world->tex[i] = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
-		if (world->tex[i] == NULL)
+		world->objs.tex[i] = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
+		if (world->objs.tex[i] == NULL)
 			return (cub_error_set(error, MEM_FAIL));
 		i++;
 	}
@@ -119,7 +119,7 @@ static void		cub_init_textures(t_world *world, t_error *error)
 		j = 0;
 		while (j < TEX_X * TEX_Y)
 		{
-			world->tex[i][j] = 0;
+			world->objs.tex[i][j] = 0;
 			j++;
 		}
 		i++;

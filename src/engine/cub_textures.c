@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_ray_texture.c                                  :+:      :+:    :+:   */
+/*   cub_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 03:51:42 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/16 13:48:33 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 05:00:34 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ static void		cub_set_floor_ceiling(int start, int end, int x, t_cub *game)
 
 	y = 0;
 	while (y <= start)
-		game->mlx.buffer[y++][x] = game->world.ceiling.color;
+		game->mlx.buffer[y++][x] = game->world.info.ceiling.color;
 	y = end;
 	while (y < game->mlx.res.y)
 	{
-		game->mlx.buffer[y][x] = game->world.floor.color;
+		game->mlx.buffer[y][x] = game->world.info.floor.color;
 		y++;
 	}
 }
@@ -85,7 +85,7 @@ void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 	{
 		tex.y = (int)tex_pos & (TEX_Y - 1);
 		tex_pos += step;
-		colour = game->world.tex[t->dir][TEX_Y * tex.y + tex.x];
+		colour = game->world.objs.tex[t->dir][TEX_Y * tex.y + tex.x];
 		game->mlx.buffer[y][x] = cub_set_shadow(colour, ray->dw);
 		y++;
 	}

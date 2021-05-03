@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:22:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 16:29:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 05:14:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ void			cub_sprite_move(t_world *world, t_player *player, t_mlx mlx)
 {
 	int			i;
 
-	cub_move_sprite_init(world->sprite, world->scount);
+	cub_move_sprite_init(world->sprite, world->info.scount);
 	i = 0;
-	while (i < world->scount)
+	while (i < world->info.scount)
 	{
 		if (world->sprite[i].id == 2 && world->sprite[i].state & S_MOVE)
 			cub_enemy_forward(&world->sprite[i], player->vector, mlx,
@@ -108,5 +108,5 @@ void			cub_sprite_move(t_world *world, t_player *player, t_mlx mlx)
 			cub_enemy_back(&world->sprite[i], player->vector, mlx, world->map);
 		i++;
 	}
-	cub_collision(world->sprite, world->scount, player);
+	cub_collision(world->sprite, world->info.scount, player);
 }

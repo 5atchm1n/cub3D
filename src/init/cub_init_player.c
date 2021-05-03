@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:10:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 20:50:35 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 05:04:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void			cub_init_player(t_player *player, t_world *world,
 	int			y;
 
 	y = 0;
-	while (y < world->msize.y)
+	while (y < world->info.msize.y)
 	{
 		x = 0;
-		while (x < world->msize.x)
+		while (x < world->info.msize.x)
 		{
 			if (cub_isdir(world->map[y][x]) == 1)
 			{

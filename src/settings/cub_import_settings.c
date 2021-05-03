@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 23:57:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/24 14:10:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 04:40:52 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static void		cub_set_map_textures(char *line, t_cub *game, int *i,
 		line++;
 	if (*line == '1')
 	{
-		cub_set_size(line, &game->world.msize.x);
-		game->world.msize.y = game->world.msize.y + 1;
+		cub_set_size(line, &game->world.info.msize.x);
+		game->world.info.msize.y = game->world.info.msize.y + 1;
 		error->map = 1;
 	}
 	if (*line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
 	{
-		cub_set_texture_paths(line, &game->world, i);
+		cub_set_texture_paths(line, &game->world.objs, i);
 		if (ft_isspace(*(line + 1)))
 			error->sprite += 1;
 		else
@@ -53,12 +53,12 @@ static void		cub_set_params(char *line, t_cub *game, t_error *error)
 	}
 	if (*line == 'F')
 	{
-		cub_set_rgb(line, &game->world.floor);
+		cub_set_rgb(line, &game->world.info.floor);
 		error->floor += 1;
 	}
 	if (*line == 'C')
 	{
-		cub_set_rgb(line, &game->world.ceiling);
+		cub_set_rgb(line, &game->world.info.ceiling);
 		error->ceiling += 1;
 	}
 }

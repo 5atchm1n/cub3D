@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 04:53:56 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 04:49:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void			cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs obj,
 	{
 		d = (px->y - obj.voffset) * 256 - mlx->res.y * 128 + obj.spriteh * 128;
 		px->tex_y = ((d * SPRITE_H) / obj.spriteh) / 256;
-		colour = world.obj[sorted][SPRITE_W * px->tex_y + px->tex_x];
+		colour = world.objs.spr[sorted][SPRITE_W * px->tex_y + px->tex_x];
 		if ((colour & 0x00FFFFFF) != 0)
 			mlx->buffer[px->y][px->x] = cub_set_shadow(colour, obj.ty);
 		px->y += 1;

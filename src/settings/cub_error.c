@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:26:22 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/26 15:07:41 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 06:13:29 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,29 +49,27 @@ void			cub_error_msg(t_errn id, t_error error)
 	if (errnum == 11)
 		printf("\033[0m - Must be %d by %d", TEX_X, TEX_Y);
 	printf("\n");
+	return ;
 }
 
-static int		cub_free_state_0(t_cub *game, int tex, int spr)
+static void		cub_free_state_0(t_cub *game, int tex, int spr)
 {
 	int			i;
 
 	i = 0;
 	while (i < tex)
 	{
-		if (game->world.tpath[i])
-			free(game->world.tpath[i]);
+		free(game->world.objs.tpath[i]);
 		i++;
 	}
 	i = 0;
 	while (i < spr)
 	{
-		if (game->world.objpath[i])
-			free(game->world.objpath[i]);
+		free(game->world.objs.spath[i]);
 		i++;
 	}
-	free(game->world.tpath);
-	free(game->world.objpath);
-	exit(0);
+	free(game->world.objs.tpath);
+	free(game->world.objs.spath);
 }
 
 void			cub_error_set(t_error *error, t_errn id)
@@ -79,7 +77,7 @@ void			cub_error_set(t_error *error, t_errn id)
 	error->id = id;
 }
 
-void			cub_error(t_error error, t_cub *game, int state)
+int				cub_error(t_error error, t_cub *game, int state)
 {
 	cub_error_msg(error.id, error);
 	if (state == 0)
@@ -88,5 +86,5 @@ void			cub_error(t_error error, t_cub *game, int state)
 		cub_free_state_0(game, error.texture, error.sprite);
 	if (state == 2)
 		cub_quit(game);
-	exit(0);
+	return (1);
 }

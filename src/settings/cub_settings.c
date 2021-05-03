@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/24 14:56:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 06:08:38 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,23 @@ int				cub_settings(char *map_path, t_cub *game)
 	t_error		error;
 
 	ft_memset(&error, 0, sizeof(t_error));
-	game->world.tpath = (char **)malloc(sizeof(char *) * TEXTURES);
-	if (game->world.tpath == NULL)
+	error.id = 0;
+	game->world.objs.tpath = (char **)malloc(sizeof(char *) * TEXTURES);
+	if (game->world.objs.tpath == NULL)
 		error.id = MEM_FAIL;
-	game->world.objpath = (char **)malloc(sizeof(char *) * SPRITES);
-	if (game->world.objpath == NULL)
+	game->world.objs.spath = (char **)malloc(sizeof(char *) * SPRITES);
+	if (game->world.objs.spath == NULL)
 		error.id = MEM_FAIL;
 	if (error.id != 0)
-		cub_error(error, game, 0);
+		return (cub_error(error, game, 0));
 	cub_import_settings(map_path, game, &error);
 	if (error.id != 0)
-		cub_error(error, game, 1);
-	cub_test_path(game->world.tpath, &error, TEXTURES);
+		return (cub_error(error, game, 1));
+	cub_test_path(game->world.objs.tpath, &error, TEXTURES);
 	if (error.id != 0)
-		cub_error(error, game, 0);
-	cub_test_path(game->world.objpath, &error, SPRITES);
+		return (cub_error(error, game, 0));
+	cub_test_path(game->world.objs.spath, &error, SPRITES);
 	if (error.id != 0)
-		cub_error(error, game, 0);
+		return (cub_error(error, game, 0));
 	return (0);
 }

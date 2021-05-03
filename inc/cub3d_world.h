@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 05:50:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 06:17:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define TEX_Y 64
 # define SKY_X 1200
 # define SKY_Y 511
-# define ERRORS 17
+# define ERRORS 19
 # define BONUS_MAP " NSEW01234"
 # define PLAYER_SIZE 0.1
 # define MAP_SIZE 0.15
@@ -139,17 +139,12 @@ typedef struct		s_objs
 /*
 ** WORLD -- SPRITE , COLOR[RGB], MAP SIZE
 */
-typedef struct		s_sprite
+
+typedef struct		s_grid
 {
-	double			x;
-	double			y;
-	double			vmove;
-	double			dist;
-	int				id;
-	int				udiv;
-	int				vdiv;
-	char			state;
-}					t_sprite;
+	int				x;
+	int				y;
+}					t_grid;
 
 typedef struct		s_rgb
 {
@@ -163,6 +158,41 @@ typedef union		u_color
 	int				color;
 	t_rgb			rgb;
 }					t_color;
+
+typedef struct		s_objects
+{
+	int				**tex;
+	int				**spr;
+	int				*sky;
+	int				*weapon;
+	int				*skybox;
+	int				*ground;
+	char			**tpath;
+	char			**spath;
+}					t_objects;
+
+typedef struct		s_info
+{
+	t_grid			msize;
+	t_color			floor;
+	t_color			ceiling;
+	double			*zbuffer;
+	float			offset;
+	int				scount;
+}					t_info;
+
+typedef struct		s_sprite
+{
+	double			x;
+	double			y;
+	double			vmove;
+	double			dist;
+	int				id;
+	int				udiv;
+	int				vdiv;
+	char			state;
+}					t_sprite;
+
 /*
 ** PLAYER -- MOVE , VECTOR, CAMERA PLANE
 */
@@ -208,12 +238,6 @@ typedef enum		e_errn
 	INV_MAP = 18,
 	INV_SAVE = 19
 }					t_errn;
-
-typedef struct		s_grid
-{
-	int				x;
-	int				y;
-}					t_grid;
 
 typedef struct		s_error
 {

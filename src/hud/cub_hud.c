@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 22:41:13 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 05:01:33 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static void		cub_draw_map(t_world *world, t_mlx *mlx)
 	t_grid		grid;
 	float		size;
 
-	size = world->offset * MAP_SIZE;
+	size = world->info.offset * MAP_SIZE;
 	grid.y = 0;
-	while (grid.y < world->msize.y)
+	while (grid.y < world->info.msize.y)
 	{
 		grid.x = 0;
-		while (grid.x < world->msize.x)
+		while (grid.x < world->info.msize.x)
 		{
 			if (world->map[grid.y][grid.x] == '0')
 				cub_map_wall(size, grid, mlx, 0x00000000);
@@ -69,7 +69,7 @@ static void		cub_draw_weapon(t_world *world, t_mlx *mlx)
 		buff.x = 0;
 		while (tex.x < TEX_X)
 		{
-			color = world->weapon[TEX_X * tex.y + tex.x];
+			color = world->objs.weapon[TEX_X * tex.y + tex.x];
 			if ((color & 0x00FFFFFF) != 0)
 				mlx->buffer[(mlx->res.y - TEX_Y * 4) + buff.y]
 					[(mlx->res.x / 2 - TEX_X * 2) + buff.x] = color;

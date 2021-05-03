@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 03:21:39 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 04:59:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		cub_set_sprites(t_objs *objs, t_vector player, t_world *world)
 	int			i;
 
 	i = 0;
-	while (i < world->scount)
+	while (i < world->info.scount)
 	{
 		objs->order[i] = i;
 		objs->dist[i] = ((player.x - world->sprite[i].x)
@@ -80,7 +80,7 @@ static void		cub_set_sprite_image_buffer(t_mlx *mlx, t_objs obj,
 		px.tex_x = (int)(256 * (px.x - (-obj.spritew / 2 + obj.hitx)) *
 				(SPRITE_W) / obj.spritew) / 256;
 		if (obj.ty > 0 && px.x > 0 && px.x < mlx->res.x &&
-				obj.ty < world.zbuffer[px.x])
+				obj.ty < world.info.zbuffer[px.x])
 			cub_set_buffer_pixel(mlx, world, obj, &px);
 		px.x += 1;
 	}
@@ -92,12 +92,12 @@ void			cub_cast_sprites(t_cub *game)
 	int			i;
 
 	ft_memset(&objs, 0, sizeof(objs));
-	objs.order = malloc(sizeof(int) * game->world.scount);
-	objs.dist = malloc(sizeof(double) * game->world.scount);
+	objs.order = malloc(sizeof(int) * game->world.info.scount);
+	objs.dist = malloc(sizeof(double) * game->world.info.scount);
 	cub_set_sprites(&objs, game->player.vector, &game->world);
-	cub_sort_sprites(&objs, game->world.scount);
+	cub_sort_sprites(&objs, game->world.info.scount);
 	i = 0;
-	while (i < game->world.scount)
+	while (i < game->world.info.scount)
 	{
 		cub_transform_sprite(game->world.sprite, game->player, &objs, i);
 		cub_set_sprite_screen(game->mlx, &objs, game->world.sprite,
@@ -107,5 +107,5 @@ void			cub_cast_sprites(t_cub *game)
 	}
 	free(objs.order);
 	free(objs.dist);
-	free(game->world.zbuffer);
+	free(game->world.info.zbuffer);
 }

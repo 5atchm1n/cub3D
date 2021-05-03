@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:35:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 03:21:12 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 05:07:03 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ static int		cub_check_color(t_color color)
 void			cub_init_world(t_world *world, t_mlx mlx, char *map_path,
 		t_error *error)
 {
-	world->offset = (float)mlx.res.x / (float)world->msize.x;
+	world->info.offset = (float)mlx.res.x / (float)world->info.msize.x;
 	world->map = cub_copy_map(map_path, world);
-	world->scount = cub_nobject(world);
-	if (!(cub_check_color(world->floor)) || !(cub_check_color(world->ceiling)))
+	world->info.scount = cub_nobject(world);
+	if (!(cub_check_color(world->info.floor))
+			|| !(cub_check_color(world->info.ceiling)))
 		return (cub_error_set(error, INV_RGB));
-	world->floor.color = cub_rgb_to_int(world->floor);
-	world->ceiling.color = cub_rgb_to_int(world->ceiling);
+	world->info.floor.color = cub_rgb_to_int(world->info.floor);
+	world->info.ceiling.color = cub_rgb_to_int(world->info.ceiling);
 }
 
 void			cub_test_xpm(t_cub *game, t_error *error)
@@ -43,8 +44,8 @@ void			cub_test_xpm(t_cub *game, t_error *error)
 	i = 0;
 	while (i < TEXTURES)
 	{
-		img.img = mlx_xpm_file_to_image(game->mlx.win.mlx, game->world.tpath[i],
-				&img.x, &img.endian);
+		img.img = mlx_xpm_file_to_image(game->mlx.win.mlx,
+				game->world.objs.tpath[i], &img.x, &img.endian);
 		if (img.img == NULL)
 			return (cub_error_set(error, MLX_ERR2));
 		mlx_destroy_image(game->mlx.win.mlx, img.img);
@@ -54,7 +55,7 @@ void			cub_test_xpm(t_cub *game, t_error *error)
 	while (i < SPRITES)
 	{
 		img.img = mlx_xpm_file_to_image(game->mlx.win.mlx,
-				game->world.objpath[i], &img.x, &img.endian);
+				game->world.objs.spath[i], &img.x, &img.endian);
 		if (img.img == NULL)
 			return (cub_error_set(error, MLX_ERR2));
 		mlx_destroy_image(game->mlx.win.mlx, img.img);

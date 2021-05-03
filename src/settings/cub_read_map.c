@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 02:23:03 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/22 14:23:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 04:51:31 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,21 @@ static char		*cub_set_sprite_path(char *line)
 	return (path);
 }
 
-void			cub_set_texture_paths(char *line, t_world *world, int *i)
+void			cub_set_texture_paths(char *line, t_objects *objs, int *i)
 {
 	while (ft_isspace(*line) == 1)
 		line++;
 	if (*line && *line == 'N')
-		world->tpath[0] = cub_set_path(line, "NO");
+		objs->tpath[0] = cub_set_path(line, "NO");
 	if (*line && *line == 'S' && *(line + 1) == 'O')
-		world->tpath[1] = cub_set_path(line, "SO");
+		objs->tpath[1] = cub_set_path(line, "SO");
 	if (*line && *line == 'E')
-		world->tpath[2] = cub_set_path(line, "EA");
+		objs->tpath[2] = cub_set_path(line, "EA");
 	if (*line && *line == 'W')
-		world->tpath[3] = cub_set_path(line, "WE");
+		objs->tpath[3] = cub_set_path(line, "WE");
 	if (*line && *line == 'S' && ft_isspace(*(line + 1)) && *i < SPRITES)
 	{
-		world->objpath[*i] = cub_set_sprite_path(line);
+		objs->spath[*i] = cub_set_sprite_path(line);
 		*i = *i + 1;
 	}
 }

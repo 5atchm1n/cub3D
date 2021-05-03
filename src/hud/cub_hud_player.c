@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/02 05:36:20 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 05:02:53 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static int		cub_can_see(t_world *world, double x, double y)
 	int			grid_y;
 	float		offset;
 
-	offset = world->offset;
+	offset = world->info.offset;
 	grid_y = (int)(y / offset);
 	grid_x = (int)(x / offset);
-	if (grid_x > world->msize.x - 1 || grid_x < 0)
+	if (grid_x > world->info.msize.x - 1 || grid_x < 0)
 		return (0);
-	if (grid_y > world->msize.y - 1 || grid_y < 0)
+	if (grid_y > world->info.msize.y - 1 || grid_y < 0)
 		return (0);
 	if (world->map[grid_y][grid_x] == '1')
 		return (0);
@@ -39,8 +39,8 @@ static void		cub_player_dir(t_player *player, t_world *world, t_mlx *mlx)
 	l = 0;
 	while (l < 40)
 	{
-		x1 = player->vector.x * world->offset + player->vector.dx * l;
-		y1 = player->vector.y * world->offset + player->vector.dy * l;
+		x1 = player->vector.x * world->info.offset + player->vector.dx * l;
+		y1 = player->vector.y * world->info.offset + player->vector.dy * l;
 		if (cub_can_see(world, x1, y1))
 			mlx->buffer[(int)(y1 * MAP_SIZE + mlx->res.y / 100)]
 				[(int)(x1 * MAP_SIZE + mlx->res.x / 100)] = 0x00FFFFFF;
@@ -58,8 +58,8 @@ void			cub_hud_player(t_player *player, t_world *world, t_mlx *mlx)
 	double		x;
 	double		y;
 
-	x = player->vector.x * world->offset * MAP_SIZE + mlx->res.x / 100;
-	y = player->vector.y * world->offset * MAP_SIZE + mlx->res.y / 100;
+	x = player->vector.x * world->info.offset * MAP_SIZE + mlx->res.x / 100;
+	y = player->vector.y * world->info.offset * MAP_SIZE + mlx->res.y / 100;
 	angle = 0;
 	while (angle <= 360)
 	{

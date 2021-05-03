@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 20:43:40 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/19 21:51:42 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/03 05:11:27 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ void			cub_check_files(t_world *world, t_error *error)
 	i = 0;
 	while (i < TEXTURES)
 	{
-		cub_check_extension(world->tpath[i], error);
-		cub_check_path(world->tpath[i], error);
+		cub_check_extension(world->objs.tpath[i], error);
+		cub_check_path(world->objs.tpath[i], error);
 		i++;
 	}
 	i = 0;
 	while (i < SPRITES)
 	{
-		cub_check_extension(world->objpath[i], error);
-		cub_check_path(world->objpath[i], error);
+		cub_check_extension(world->objs.spath[i], error);
+		cub_check_path(world->objs.spath[i], error);
 		i++;
 	}
 }
