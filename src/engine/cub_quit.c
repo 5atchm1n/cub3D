@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:48:46 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 04:08:24 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 04:52:01 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void			cub_free_world(t_world *world)
 	free(world->objs.spr);
 	free(world->objs.tex);
 	free(world->objs.tpath);
+	free(world->sprite);
 }
 
 void			cub_free_utils(t_world *world)

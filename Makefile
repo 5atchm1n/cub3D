@@ -70,7 +70,7 @@ libft :
 
 $(NAME) : mlx libft ${OBJS}
 		@echo -n  "Generating ${NAME}"
-		@${CC} ${CFLAGS} ${MEM} ${OBJS} -I./inc ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
+		@${CC} ${CFLAGS} ${OBJS} -I./inc ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
 bonus : DEFINE += -DBONUS=1 -DSPRITES=3 -DBONUS_OBJECTS=4
