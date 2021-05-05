@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 03:25:05 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 04:29:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,9 @@ int			cub_isbonus(char c1, char c2)
 	if (c1 == 'W' && c2 == '2')
 		return (1);
 	return (0);
+}
+
+void		cub_error_set(t_error *error, t_errn id)
+{
+	error->id = id;
 }

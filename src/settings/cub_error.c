@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:26:22 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 04:22:56 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 04:29:42 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,6 @@ static void		cub_free_bonus(t_cub *game, int bonus)
 	free(game->world.objs.bpath);
 	if (game->world.objs.skypath != NULL)
 		free(game->world.objs.skypath);
-}
-
-void			cub_error_set(t_error *error, t_errn id)
-{
-	error->id = id;
 }
 
 int				cub_error(t_error error, t_cub *game, int state)

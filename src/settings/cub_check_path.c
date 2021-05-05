@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 20:43:40 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 03:45:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 04:31:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,13 @@ int				cub_check_map_arg(char *map)
 	len = ft_strlen(map);
 	if (len < 5 || len > 25)
 		return (0);
-	len = len - 1;
-	if (map[len] != 'b')
+	if (map[len - 1] != 'b')
 		return (0);
-	if (map[len - 1] != 'u')
+	if (map[len - 2] != 'u')
 		return (0);
-	if (map[len - 2] != 'c')
+	if (map[len - 3] != 'c')
 		return (0);
-	if (map[len - 3] != '.')
+	if (map[len - 4] != '.')
 		return (0);
 	return (1);
 }

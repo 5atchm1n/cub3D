@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 23:50:33 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 04:13:10 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 04:28:46 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void			cub_init_bonus(t_world *world, t_mlx *mlx, t_error *error)
 	cub_init_weapon(world, error);
 	cub_init_sky_ground(world, error);
 	cub_load_xpm(mlx, world->objs.sky, world->objs.bpath[1], &img);
-	cub_load_xpm(mlx, world->objs.ground,world->objs.bpath[0], &img);
+	cub_load_xpm(mlx, world->objs.ground, world->objs.bpath[0], &img);
 	cub_load_xpm(mlx, world->objs.skybox, world->objs.skypath, &img);
 	cub_load_xpm(mlx, world->objs.weapons[0], world->objs.bpath[2], &img);
 	cub_load_xpm(mlx, world->objs.weapons[1], world->objs.bpath[3], &img);
