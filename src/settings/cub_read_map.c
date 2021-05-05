@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 02:23:03 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 04:51:31 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 03:01:58 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char			**cub_copy_map(char *map, t_world *world)
 	return (world->map);
 }
 
-static char		*cub_set_path(char *line, char *dir)
+char			*cub_set_path(char *line, char *dir)
 {
 	char		*path;
 	int			isdir;

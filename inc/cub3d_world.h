@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 23:59:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 02:53:00 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ typedef struct		s_objects
 	int				*ground;
 	char			**tpath;
 	char			**spath;
+	char			**bpath;
+	char			*skypath;
 }					t_objects;
 
 typedef struct		s_info
@@ -225,7 +227,8 @@ typedef enum		e_errn
 	INV_RGB = 16,
 	MUL_ST = 17,
 	INV_MAP = 18,
-	INV_SAVE = 19
+	INV_SAVE = 19,
+	MI_BONUS = 20
 }					t_errn;
 
 typedef struct		s_error
@@ -239,6 +242,7 @@ typedef struct		s_error
 	int				map;
 	int				dir;
 	int				sprite;
+	int				bonus;
 }					t_error;
 
 typedef struct		s_pixel

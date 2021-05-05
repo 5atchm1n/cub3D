@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/04 00:31:24 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 03:25:29 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,10 @@ int		cub_set_res(char *line, t_grid *res);
 void	cub_set_texture_paths(char *line, t_objects *objs, int *i);
 int		cub_rgb_to_int(t_color color);
 int		cub_isdir(char c);
+int		cub_istex(char c);
 int		cub_issprite(char c);
 void	cub_save_bmp(t_cub *game);
+char	*cub_set_path(char *line, char *dir);
 /*
 ** BONUS - FLOOR CASTING
 */
@@ -120,5 +122,7 @@ void	cub_draw_health(t_mlx *mlx, int health);
 void	cub_init_bonus(t_world *world, t_mlx *mlx, t_error *error);
 void	cub_kill(t_sprite *sprite, uint_fast16_t move);
 void	cub_collision(t_sprite *sprite, int count, t_player *player);
+int		cub_isbonus(char c1, char c2);
+void	cub_bonus_textures(char *line, t_cub *game, t_error *error);
 
 #endif

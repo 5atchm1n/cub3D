@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 23:57:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 04:40:52 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 03:29:42 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static void		cub_set_map_textures(char *line, t_cub *game, int *i,
 		game->world.info.msize.y = game->world.info.msize.y + 1;
 		error->map = 1;
 	}
-	if (*line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
+	if (cub_isdir(*line) == 1)
 	{
 		cub_set_texture_paths(line, &game->world.objs, i);
-		if (ft_isspace(*(line + 1)))
+		if (ft_isspace(*(line + 1)) == 1)
 			error->sprite += 1;
-		else
+		else if (cub_istex(*(line + 1)) == 1)
 			error->texture += 1;
 	}
 }
@@ -46,17 +46,17 @@ static void		cub_set_params(char *line, t_cub *game, t_error *error)
 {
 	while (ft_isspace(*line) == 1)
 		line++;
-	if (*line == 'R')
+	if (*line == 'R' && ft_isspace(*(line + 1)))
 	{
 		cub_set_res(line, &game->mlx.res);
 		error->res += 1;
 	}
-	if (*line == 'F')
+	if (*line == 'F' && ft_isspace(*(line + 1)))
 	{
 		cub_set_rgb(line, &game->world.info.floor);
 		error->floor += 1;
 	}
-	if (*line == 'C')
+	if (*line == 'C' && ft_isspace(*(line + 1)))
 	{
 		cub_set_rgb(line, &game->world.info.ceiling);
 		error->ceiling += 1;
@@ -82,6 +82,8 @@ static void		cub_sanity_check(t_error *error)
 			error->id = MI_FLO;
 		if (error->ceiling != 1)
 			error->id = MI_CEI;
+		if (BONUS && error->bonus != BONUS_OBJECTS + 1)
+			error->id = MI_BONUS;
 	}
 }
 
@@ -98,6 +100,8 @@ void			cub_import_settings(char *map_path, t_cub *game, t_error *error)
 		cub_set_params(line, game, error);
 		cub_set_map_textures(line, game, &i, error);
 		cub_sanity_check(error);
+		if (BONUS)
+			cub_bonus_textures(line, game, error);
 		free(line);
 	}
 	free(line);

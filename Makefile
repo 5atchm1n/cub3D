@@ -31,6 +31,7 @@ SRCS =	cub_game.c \
 		utils/cub_utils_colors.c \
 		bonus/cub_hud_bonus.c \
 		bonus/cub_hud_player_bonus.c \
+		bonus/cub_settings_bonus.c \
 		bonus/cub_utils_bonus.c \
 		bonus/cub_init_bonus.c \
 		bonus/cub_floor_bonus.c \
@@ -72,7 +73,7 @@ $(NAME) : mlx libft ${OBJS}
 		@${CC} ${CFLAGS} ${MEM} ${OBJS} -I./inc ${MLX} ${LIBFT} ${LIB} -o ${NAME} 
 		@echo "\033[32m\t\t\t[OK]\033[0m"
 
-bonus : DEFINE += -DBONUS=1 -DSPRITES=3
+bonus : DEFINE += -DBONUS=1 -DSPRITES=3 -DBONUS_OBJECTS=4
 
 bonus : $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:32:50 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 03:25:05 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,28 @@ int			cub_isdir(char c)
 int			cub_issprite(char c)
 {
 	if (c == '2' || c == '3' || c == '4')
+		return (1);
+	return (0);
+}
+
+int			cub_istex(char c)
+{
+	if (c == 'O' || c == 'A' || c == 'E')
+		return (1);
+	return (0);
+}
+
+int			cub_isbonus(char c1, char c2)
+{
+	if (c1 == 'F' && c2 == 'L')
+		return (1);
+	if (c1 == 'C' && c2 == 'E')
+		return (1);
+	if (c1 == 'S' && c2 == 'K')
+		return (1);
+	if (c1 == 'W' && c2 == '1')
+		return (1);
+	if (c1 == 'W' && c2 == '2')
 		return (1);
 	return (0);
 }
