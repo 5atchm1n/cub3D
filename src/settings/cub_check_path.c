@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 20:43:40 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:11:27 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 03:45:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,18 @@ void			cub_check_files(t_world *world, t_error *error)
 int				cub_check_map_arg(char *map)
 {
 	int			len;
+	int			test;
 
+	test = open(map, O_DIRECTORY);
+	if (test > 0)
+	{
+		close(test);
+		return (0);
+	}
+	test = open(map, O_RDONLY);
+	if (test < 0)
+		return (0);
+	close(test);
 	len = ft_strlen(map);
 	if (len < 5 || len > 25)
 		return (0);
