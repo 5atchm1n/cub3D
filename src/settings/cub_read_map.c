@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 02:23:03 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 03:01:58 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 03:58:20 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void			cub_set_texture_paths(char *line, t_objects *objs, int *i)
 		objs->tpath[1] = cub_set_path(line, "SO");
 	if (*line && *line == 'E')
 		objs->tpath[2] = cub_set_path(line, "EA");
-	if (*line && *line == 'W')
+	if (*line && *line == 'W' && *(line + 1) == 'E')
 		objs->tpath[3] = cub_set_path(line, "WE");
 	if (*line && *line == 'S' && ft_isspace(*(line + 1)) && *i < SPRITES)
 	{

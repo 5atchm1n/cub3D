@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 03:35:04 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 04:18:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void		cub_test_path(char **paths, t_error *error, int num, int bonus)
 	while (i < num)
 	{
 		ln = 0;
+		line = NULL;
 		fd = open(paths[i], O_RDONLY);
 		while ((cub_get_line(&line, fd) > 0))
 		{
@@ -67,7 +68,7 @@ static void		cub_test_path(char **paths, t_error *error, int num, int bonus)
 			free(line);
 			ln++;
 		}
-//		free(line);
+		free(line);
 		close(fd);
 		if (error->id != 0)
 			break ;
@@ -113,7 +114,7 @@ int				cub_settings(char *map_path, t_cub *game)
 	{
 		cub_test_path(game->world.objs.bpath, &error, BONUS_OBJECTS, 0);
 		if (error.id != 0)
-			return (cub_error(error, game, 0));
+			return (cub_error(error, game, 1));
 	}
 	return (0);
 }

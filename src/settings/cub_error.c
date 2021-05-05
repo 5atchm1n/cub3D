@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:26:22 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 03:05:06 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 04:22:56 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,22 @@ static void		cub_free_state_0(t_cub *game, int tex, int spr)
 	free(game->world.objs.spath);
 }
 
+static void		cub_free_bonus(t_cub *game, int bonus)
+{
+	int			i;
+
+	i = 0;
+	while (i < bonus)
+	{
+		free(game->world.objs.bpath[i]);
+		i++;
+	}
+	i = 0;
+	free(game->world.objs.bpath);
+	if (game->world.objs.skypath != NULL)
+		free(game->world.objs.skypath);
+}
+
 void			cub_error_set(t_error *error, t_errn id)
 {
 	error->id = id;
@@ -83,8 +99,13 @@ int				cub_error(t_error error, t_cub *game, int state)
 	cub_error_msg(error.id, error);
 	if (state == 0)
 		cub_free_state_0(game, TEXTURES, SPRITES);
-	if (state == 1)
+	if (state == 1 && !BONUS)
 		cub_free_state_0(game, error.texture, error.sprite);
+	if (BONUS && state == 1)
+	{
+		cub_free_state_0(game, error.texture, error.sprite);
+		cub_free_bonus(game, error.bonus);
+	}
 	if (state == 2)
 		cub_quit(game);
 	return (1);

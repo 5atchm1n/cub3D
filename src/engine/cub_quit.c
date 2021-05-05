@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:48:46 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/04 00:49:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/05 04:08:24 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ void			cub_free_utils(t_world *world)
 {
 	int			i;
 
-	free(world->objs.sky);
-	free(world->objs.skybox);
-	free(world->objs.ground);
 	i = 0;
 	while (i < WEAPONS * 2)
 	{
@@ -63,6 +60,16 @@ void			cub_free_utils(t_world *world)
 		i++;
 	}
 	free(world->objs.weapons);
+	i = 0;
+	while (i < BONUS_OBJECTS)
+	{
+		free(world->objs.bpath[i]);
+		i++;
+	}
+	free(world->objs.bpath);
+	free(world->objs.sky);
+	free(world->objs.skybox);
+	free(world->objs.ground);
 }
 
 int				cub_quit(t_cub *game)

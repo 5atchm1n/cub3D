@@ -10,8 +10,8 @@ S	textures/Octane-64x64.xpm
 F	220,100,0
 C	225,30,0
 
-FL	textures/wall42-5-64x64.xpm
-CE	textures/wall42-6-64x64.xpm
+FL	textures/wall6-64x64.xpm
+CE	textures/wall42-5-64x64.xpm
 SK	textures/skybox.xpm
 W1	textures/knife.xpm
 W2	textures/knife-2.xpm
