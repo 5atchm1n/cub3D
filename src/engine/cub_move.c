@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:47:00 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 17:04:26 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/14 10:51:55 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int				cub_move(t_cub *game)
 		cub_move_right(&game->player.vector, game->world.map,
 				game->player.speed);
 	cub_render(game);
-	if (game->mlx.on == 0)
+	if (game->mlx.on == 0 || game->player.health < 1)
 		cub_quit(game);
 	return (0);
 }

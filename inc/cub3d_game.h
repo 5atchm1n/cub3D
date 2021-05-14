@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 23:04:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 18:14:38 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/07 08:12:08 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,19 @@
 ** MLX -- WIN, IMG, RES, MOUSE, BUFFER, SPEED --
 */
 
+typedef struct		s_time
+{
+	clock_t			cycle;
+	int				step;
+}					t_time;
+
 typedef struct		s_mlx
 {
-	clock_t			time;
 	t_win			win;
 	t_img			img;
 	t_grid			res;
 	t_grid			mouse;
+	t_time			time;
 	int				**buffer;
 	int				on;
 }					t_mlx;

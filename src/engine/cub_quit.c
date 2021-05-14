@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:48:46 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 04:52:01 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/14 11:49:05 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void			cub_free_utils(t_world *world)
 		i++;
 	}
 	free(world->objs.bpath);
+	free(world->objs.skypath);
 	free(world->objs.sky);
 	free(world->objs.skybox);
 	free(world->objs.ground);
@@ -86,11 +87,14 @@ int				cub_quit(t_cub *game)
 		i++;
 	}
 	free(game->mlx.buffer);
+	if (BONUS)
+		cub_win(game->world.info, game->world.sprite, game->player);
 	cub_free_world(&game->world);
 	cub_free_map(&game->world);
 	if (BONUS)
 		cub_free_utils(&game->world);
 	mlx_destroy_image(game->mlx.win.mlx, game->mlx.img.img);
+	mlx_clear_window(game->mlx.win.mlx, game->mlx.win.win);
 	mlx_destroy_window(game->mlx.win.mlx, game->mlx.win.win);
 	exit(0);
 	return (0);
