@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/07 08:04:23 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/14 18:27:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int				cub_rgb_to_int(t_color color)
 	return (val);
 }
 
-int				cub_set_res(char *line, t_grid *res)
+int				cub_set_res(char *line, t_grid *res, t_error *error)
 {
 	int			y;
 	int			x;
@@ -44,12 +44,14 @@ int				cub_set_res(char *line, t_grid *res)
 		x = x * 10 + (*line - '0');
 		line++;
 	}
+	if (*line != '\0')
+		error->id = MI_RES;
 	res->y = y;
 	res->x = x;
 	return (0);
 }
 
-int				cub_set_rgb(char *line, t_color *c)
+int				cub_set_rgb(char *line, t_color *c, t_error *error)
 {
 	line++;
 	while (ft_isspace(*line))
@@ -71,5 +73,7 @@ int				cub_set_rgb(char *line, t_color *c)
 		c->rgb.b = c->rgb.b * 10 + (*line - '0');
 		line++;
 	}
+	if (*line != '\0')
+		error->id = INV_RGB;
 	return (0);
 }

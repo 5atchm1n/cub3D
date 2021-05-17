@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:35:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/14 11:23:45 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/15 10:06:02 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void			cub_init_world(t_world *world, t_mlx mlx, char *map_path,
 {
 	world->info.offset = (float)mlx.res.x / (float)world->info.msize.x;
 	world->map = cub_copy_map(map_path, world);
+	if (world->map == NULL)
+		return (cub_error_set(error, INV_MAP));
 	world->info.scount = cub_nobject(world);
 	if (!(cub_check_color(world->info.floor))
 			|| !(cub_check_color(world->info.ceiling)))
@@ -63,24 +65,30 @@ void			cub_test_xpm(t_cub *game, t_error *error)
 	}
 }
 
-void			cub_init_mlx(t_mlx *mlx, t_error *error)
+void			cub_start_mlx(t_mlx *mlx)
 {
-	int			screenx;
-	int			screeny;
-
-	mlx->win.mlx = mlx_init();
-	if (mlx->win.mlx == NULL)
-		return (cub_error_set(error, 14));
-	mlx_get_screen_size(mlx->win.mlx, &screenx, &screeny);
-	if (screenx < mlx->res.x)
-		mlx->res.x = screenx;
-	if (screeny < mlx->res.y)
-		mlx->res.y = screeny;
 	mlx->win.win = mlx_new_window(mlx->win.mlx, mlx->res.x,
 			mlx->res.y, "cub3D");
-	mlx->img.img = mlx_new_image(mlx->win.mlx, mlx->res.x,
-			mlx->res.y);
-	mlx->img.add = (int *)mlx_get_data_addr(mlx->img.img, &mlx->img.bpp,
-			&mlx->img.len, &mlx->img.endian);
 	mlx->on = 1;
+}
+
+void		cub_init_structs(t_cub *game)
+{
+	game->mlx.buffer = NULL;
+	game->mlx.win.mlx = NULL;
+	game->mlx.img.img = NULL;
+	game->mlx.img.add = NULL;
+	game->world.sprite = NULL;
+	game->world.map = NULL;
+	game->world.objs.tex = NULL;
+	game->world.objs.spr = NULL;
+	game->world.objs.sky = NULL;
+	game->world.objs.weapons = NULL;
+	game->world.objs.skybox = NULL;
+	game->world.objs.ground = NULL;
+	game->world.objs.tpath = NULL;
+	game->world.objs.spath = NULL;
+	game->world.objs.bpath = NULL;
+	game->world.objs.skypath = NULL;
+	game->world.info.zbuffer = NULL;
 }

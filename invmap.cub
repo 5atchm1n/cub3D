@@ -1,7 +1,7 @@
 R	900 1200
 NO	textures/wood.xpm
 SO	textures/purplestone.xpm
-WE	textures/colorstone.xpm
+SO	textures/purplestone.xpm
 EA	textures/moss.xpm
 
 S	textures/tree.xpm

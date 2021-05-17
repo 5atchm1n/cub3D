@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 02:53:00 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:27:01 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,8 @@ typedef enum		e_errn
 	MUL_ST = 17,
 	INV_MAP = 18,
 	INV_SAVE = 19,
-	MI_BONUS = 20
+	DUP_TEX = 20,
+	MI_BONUS = 21
 }					t_errn;
 
 typedef struct		s_error
@@ -243,6 +244,7 @@ typedef struct		s_error
 	int				dir;
 	int				sprite;
 	int				bonus;
+	char			tflags;
 }					t_error;
 
 typedef struct		s_pixel

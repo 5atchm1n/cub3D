@@ -6,11 +6,32 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/04 00:27:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/15 10:08:00 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void		cub_init_mlx(t_mlx *mlx, t_error *error)
+{
+	int			screenx;
+	int			screeny;
+
+	mlx->win.mlx = mlx_init();
+	if (mlx->win.mlx == NULL)
+		return (cub_error_set(error, 14));
+	mlx_get_screen_size(mlx->win.mlx, &screenx, &screeny);
+	if (screenx < mlx->res.x)
+		mlx->res.x = screenx;
+	if (screeny < mlx->res.y)
+		mlx->res.y = screeny;
+	if (mlx->res.y <= 0 || mlx->res.x <= 0)
+		return (cub_error_set(error, MI_RES));
+	mlx->img.img = mlx_new_image(mlx->win.mlx, mlx->res.x,
+			mlx->res.y);
+	mlx->img.add = (int *)mlx_get_data_addr(mlx->img.img, &mlx->img.bpp,
+			&mlx->img.len, &mlx->img.endian);
+}
 
 static void		cub_init_img_buffer(t_mlx *mlx, t_error *error)
 {

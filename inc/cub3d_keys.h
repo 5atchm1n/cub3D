@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 09:51:15 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 03:04:18 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:28:22 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define WEAPONS 1
 # define SKY_X 1200
 # define SKY_Y 511
-# define ERRORS 20
+# define ERRORS 22
 # define BONUS_MAP " NSEW01234"
 # define PLAYER_SIZE 0.1
 # define MAP_SIZE 0.15
@@ -65,5 +65,10 @@
 # define S_MOVE (1 << 1)
 # define S_BACK (1 << 2)
 # define S_KILL (1 << 3)
+
+# define E_TNO (1 << 0)
+# define E_TSO (1 << 1)
+# define E_TEA (1 << 2)
+# define E_TWE (1 << 3)
 
 #endif

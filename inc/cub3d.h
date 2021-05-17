@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/14 11:07:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 18:02:21 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <stdint.h>
 # include <time.h>
-# include "mlx.h"
+# include "mlx_linux/mlx.h"
 # include "libft/inc/libft.h"
 
 # include "cub3d_keys.h"
@@ -48,7 +48,7 @@ void	cub_import_settings(char *map_path, t_cub *game, t_error *error);
 ** INITIALIZE GAME
 */
 void	cub_init(t_cub *game, char *map);
-void	cub_init_mlx(t_mlx *mlx, t_error *error);
+void	cub_init_structs(t_cub *game);
 void	cub_init_player(t_player *player, t_world *world, t_error *error);
 void	cub_load_textures(t_mlx *mlx, t_world *world);
 void	cub_load_objects(t_world *world);
@@ -57,6 +57,7 @@ void	cub_init_object(t_world *world, t_error *error);
 void	cub_init_world(t_world *world, t_mlx mlx, char *map_path, t_error
 		*error);
 void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
+void	cub_start_mlx(t_mlx *mlx);
 /*
 ** MOVE PLAYER
 */
@@ -97,9 +98,10 @@ void	cub_error_msg(t_errn id, t_error error);
 */
 int		cub_get_line(char **line, int fd);
 char	**cub_copy_map(char *map_path, t_world *world);
-int		cub_set_rgb(char *line, t_color *color);
-int		cub_set_res(char *line, t_grid *res);
-void	cub_set_texture_paths(char *line, t_objects *objs, int *i);
+int		cub_set_rgb(char *line, t_color *color, t_error *error);
+int		cub_set_res(char *line, t_grid *res, t_error *error);
+void	cub_set_texture_paths(char *line, t_objects *objs, int *i,
+		t_error *error);
 int		cub_rgb_to_int(t_color color);
 int		cub_isdir(char c);
 int		cub_istex(char c);

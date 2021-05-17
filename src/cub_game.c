@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:17:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:41:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/15 10:06:54 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		cub_play(t_cub *game, char *map_path)
 	if (err)
 		return ;
 	cub_init(game, map_path);
+	cub_start_mlx(&game->mlx);
 	cub_check(&game->world, game);
 	cub_mlx_hooks(game);
 }
@@ -53,6 +54,7 @@ int				main(int argc, char **argv)
 	t_cub		game;
 
 	ft_memset(&game, 0, sizeof(game));
+	cub_init_structs(&game);
 	if (argc != 2 && argc != 3)
 		return (0);
 	if (argc == 2)

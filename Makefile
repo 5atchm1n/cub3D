@@ -25,6 +25,7 @@ SRCS =	cub_game.c \
 		settings/cub_import_settings.c \
 		settings/cub_read_map.c \
 		settings/cub_settings.c \
+		utils/cub_settings_utils.c \
 		utils/cub_get_line.c \
 		utils/cub_save_bmp.c \
 		utils/cub_utils.c \
@@ -44,7 +45,7 @@ LIBFT = inc/libft/libft.a
 
 CC = clang
 CFLAGS = -Wall -Werror -Wextra -g
-LIB = -lmlx -lXext -lX11 -lm -lbsd
+LIB = -lXext -lX11 -lm -lbsd
 MEM = -fsanitize=address
 
 OBJDIR = objs

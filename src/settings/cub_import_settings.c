@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 23:57:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 03:29:42 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 19:00:05 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		cub_set_map_textures(char *line, t_cub *game, int *i,
 {
 	while (ft_isspace(*line) == 1)
 		line++;
-	if (*line == '1')
+	if (*line == '1' || *line == '0')
 	{
 		cub_set_size(line, &game->world.info.msize.x);
 		game->world.info.msize.y = game->world.info.msize.y + 1;
@@ -34,7 +34,7 @@ static void		cub_set_map_textures(char *line, t_cub *game, int *i,
 	}
 	if (cub_isdir(*line) == 1)
 	{
-		cub_set_texture_paths(line, &game->world.objs, i);
+		cub_set_texture_paths(line, &game->world.objs, i, error);
 		if (ft_isspace(*(line + 1)) == 1)
 			error->sprite += 1;
 		else if (cub_istex(*(line + 1)) == 1)
@@ -48,17 +48,17 @@ static void		cub_set_params(char *line, t_cub *game, t_error *error)
 		line++;
 	if (*line == 'R' && ft_isspace(*(line + 1)))
 	{
-		cub_set_res(line, &game->mlx.res);
+		cub_set_res(line, &game->mlx.res, error);
 		error->res += 1;
 	}
 	if (*line == 'F' && ft_isspace(*(line + 1)))
 	{
-		cub_set_rgb(line, &game->world.info.floor);
+		cub_set_rgb(line, &game->world.info.floor, error);
 		error->floor += 1;
 	}
 	if (*line == 'C' && ft_isspace(*(line + 1)))
 	{
-		cub_set_rgb(line, &game->world.info.ceiling);
+		cub_set_rgb(line, &game->world.info.ceiling, error);
 		error->ceiling += 1;
 	}
 }
