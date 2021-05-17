@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 02:23:03 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 18:48:54 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 19:48:21 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,34 +67,41 @@ static char		*cub_set_sprite_path(char *line)
 	return (path);
 }
 
-void			cub_set_texture_paths(char *line, t_objects *objs, int *i,
-		t_error *error)
+void			cub_sprite_path(char *line, t_objects *objs, int *i)
 {
 	while (ft_isspace(*line) == 1)
 		line++;
-	if (*line && *line == 'N' && error->tflags & ~(E_TNO))
-	{
-		objs->tpath[0] = cub_set_path(line, "NO");
-		error->tflags |= E_TNO;
-	}
-	if (*line && *line == 'S' && *(line + 1) == 'O' && error->tflags & ~(E_TSO))
-	{
-		objs->tpath[1] = cub_set_path(line, "SO");
-		error->tflags |= E_TSO;
-	}
-	if (*line && *line == 'E' && error->tflags & ~(E_TEA))
-	{
-		objs->tpath[2] = cub_set_path(line, "EA");
-		error->tflags |= E_TEA;
-	}
-	if (*line && *line == 'W' && *(line + 1) == 'E' && error->tflags & ~(E_TWE))
-	{
-		objs->tpath[3] = cub_set_path(line, "WE");
-		error->tflags |= E_TWE;
-	}
 	if (*line && *line == 'S' && ft_isspace(*(line + 1)) && *i < SPRITES)
 	{
 		objs->spath[*i] = cub_set_sprite_path(line);
 		*i = *i + 1;
+	}
+}
+
+void			cub_texture_path(char *line, t_objects *objs, t_error *error)
+{
+	while (ft_isspace(*line) == 1)
+		line++;
+	if (*line && *line == 'N' && !(error->tflags & (E_TNO)))
+	{
+		objs->tpath[0] = cub_set_path(line, "NO");
+		error->tflags |= E_TNO;
+	}
+	if (*line && *line == 'S' && *(line + 1) == 'O'
+			&& !(error->tflags & (E_TSO)))
+	{
+		objs->tpath[1] = cub_set_path(line, "SO");
+		error->tflags |= E_TSO;
+	}
+	if (*line && *line == 'E' && !(error->tflags & (E_TEA)))
+	{
+		objs->tpath[2] = cub_set_path(line, "EA");
+		error->tflags |= E_TEA;
+	}
+	if (*line && *line == 'W' && *(line + 1) == 'E'
+			&& !(error->tflags & (E_TWE)))
+	{
+		objs->tpath[3] = cub_set_path(line, "WE");
+		error->tflags |= E_TWE;
 	}
 }

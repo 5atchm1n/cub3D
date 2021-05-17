@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:35:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/15 10:06:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 19:47:49 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void			cub_start_mlx(t_mlx *mlx)
 	mlx->on = 1;
 }
 
-void		cub_init_structs(t_cub *game)
+void			cub_init_structs(t_cub *game)
 {
 	game->mlx.buffer = NULL;
 	game->mlx.win.mlx = NULL;

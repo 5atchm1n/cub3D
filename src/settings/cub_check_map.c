@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:10:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 19:30:01 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,5 @@ void			cub_check(t_world *world, t_cub *game)
 	cub_check_if_open(world->map, &world->info.msize, &error);
 	cub_check_files(world, &error);
 	if (error.id != 0)
-		cub_error(error, game, 0);
+		cub_error(error, game);
 }

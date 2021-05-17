@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 23:57:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:00:05 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 19:26:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void		cub_set_map_textures(char *line, t_cub *game, int *i,
 	}
 	if (cub_isdir(*line) == 1)
 	{
-		cub_set_texture_paths(line, &game->world.objs, i, error);
+		cub_texture_path(line, &game->world.objs, error);
+		cub_sprite_path(line, &game->world.objs, i);
 		if (ft_isspace(*(line + 1)) == 1)
 			error->sprite += 1;
 		else if (cub_istex(*(line + 1)) == 1)
@@ -60,30 +61,6 @@ static void		cub_set_params(char *line, t_cub *game, t_error *error)
 	{
 		cub_set_rgb(line, &game->world.info.ceiling, error);
 		error->ceiling += 1;
-	}
-}
-
-static void		cub_sanity_check(t_error *error)
-{
-	if (error->map == 1)
-		if (error->texture != TEXTURES && error->res != 1 &&
-				error->floor != 1 && error->ceiling != 1 &&
-				error->sprite != SPRITES)
-			error->id = MAP_NOEND;
-	if (error->map == 1)
-	{
-		if (error->texture != TEXTURES)
-			error->id = MI_FILES;
-		if (error->sprite != SPRITES)
-			error->id = MI_FILES;
-		if (error->res != 1)
-			error->id = MI_RES;
-		if (error->floor != 1)
-			error->id = MI_FLO;
-		if (error->ceiling != 1)
-			error->id = MI_CEI;
-		if (BONUS && error->bonus != BONUS_OBJECTS + 1)
-			error->id = MI_BONUS;
 	}
 }
 

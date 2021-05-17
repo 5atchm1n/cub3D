@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 18:02:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 19:45:13 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	cub_test_xpm(t_cub *game, t_error *error);
 void	cub_check(t_world *world, t_cub *game);
 void	cub_check_files(t_world *world, t_error *error);
 int		cub_quit(t_cub *game);
-int		cub_error(t_error error, t_cub *game, int state);
+int		cub_error(t_error error, t_cub *game);
 void	cub_free_world(t_world *world);
 void	cub_error_set(t_error *error, t_errn id);
 int		cub_check_save_arg(char *save_arg);
@@ -100,14 +100,16 @@ int		cub_get_line(char **line, int fd);
 char	**cub_copy_map(char *map_path, t_world *world);
 int		cub_set_rgb(char *line, t_color *color, t_error *error);
 int		cub_set_res(char *line, t_grid *res, t_error *error);
-void	cub_set_texture_paths(char *line, t_objects *objs, int *i,
-		t_error *error);
+void	cub_sprite_path(char *line, t_objects *objs, int *i);
+void	cub_texture_path(char *line, t_objects *objs, t_error *error);
 int		cub_rgb_to_int(t_color color);
 int		cub_isdir(char c);
 int		cub_istex(char c);
 int		cub_issprite(char c);
 void	cub_save_bmp(t_cub *game);
 char	*cub_set_path(char *line, char *dir);
+void	cub_sanity_check(t_error *error);
+
 /*
 ** BONUS - FLOOR, SKYBOX, MULTIPLE SPRITES, MOUSE, KILL, DAMAGE, JUMP, CROUCH
 */
@@ -126,6 +128,6 @@ void	cub_kill(t_sprite *sprite, uint_fast16_t move);
 void	cub_collision(t_sprite *sprite, int count, t_player *player);
 int		cub_isbonus(char c1, char c2);
 void	cub_bonus_textures(char *line, t_cub *game, t_error *error);
-void	cub_win(t_info info, t_sprite *sprites, t_player player);
+void	cub_quit_bonus(t_cub *game);
 
 #endif

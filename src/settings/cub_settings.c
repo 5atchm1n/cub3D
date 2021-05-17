@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 04:18:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 19:29:39 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,21 +100,21 @@ int				cub_settings(char *map_path, t_cub *game)
 	error.id = 0;
 	cub_init_paths(&game->world.objs, &error);
 	if (error.id != 0)
-		return (cub_error(error, game, 0));
+		return (cub_error(error, game));
 	cub_import_settings(map_path, game, &error);
 	if (error.id != 0)
-		return (cub_error(error, game, 1));
+		return (cub_error(error, game));
 	cub_test_path(game->world.objs.tpath, &error, TEXTURES, 0);
 	if (error.id != 0)
-		return (cub_error(error, game, 0));
+		return (cub_error(error, game));
 	cub_test_path(game->world.objs.spath, &error, SPRITES, 0);
 	if (error.id != 0)
-		return (cub_error(error, game, 0));
+		return (cub_error(error, game));
 	if (BONUS)
 	{
 		cub_test_path(game->world.objs.bpath, &error, BONUS_OBJECTS, 0);
 		if (error.id != 0)
-			return (cub_error(error, game, 1));
+			return (cub_error(error, game));
 	}
 	return (0);
 }

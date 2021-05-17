@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/15 10:08:00 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 19:31:33 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void			cub_init(t_cub *game, char *map_path)
 	ft_memset(&error, 0, sizeof(error));
 	cub_init_mlx(&game->mlx, &error);
 	if (error.id != 0)
-		cub_error(error, game, 0);
+		cub_error(error, game);
 	cub_init_map(&game->world, &error);
 	cub_init_img_buffer(&game->mlx, &error);
 	cub_init_textures(&game->world, &error);
@@ -133,14 +133,14 @@ void			cub_init(t_cub *game, char *map_path)
 	if (BONUS)
 		cub_init_bonus(&game->world, &game->mlx, &error);
 	if (error.id != 0)
-		cub_error(error, game, 2);
+		cub_error(error, game);
 	cub_init_world(&game->world, game->mlx, map_path, &error);
 	if (error.id != 0)
-		cub_error(error, game, 2);
+		cub_error(error, game);
 	cub_init_player(&game->player, &game->world, &error);
 	cub_test_xpm(game, &error);
 	if (error.id != 0)
-		cub_error(error, game, 2);
+		cub_error(error, game);
 	cub_load_objects(&game->world);
 	cub_load_textures(&game->mlx, &game->world);
 }

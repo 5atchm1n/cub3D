@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 23:36:35 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/14 11:09:05 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 19:46:37 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,32 +57,4 @@ void		cub_kill(t_sprite *sprite, uint_fast16_t move)
 {
 	if (sprite->id == 2 && move & M_HIT && sprite->dist < 0.8)
 		sprite->state |= S_KILL;
-}
-
-void		cub_win(t_info info, t_sprite *sprite, t_player player)
-{
-	int		i;
-	int		count;
-	int		kill;
-
-	kill = 0;
-	count = 0;
-	i = 0;
-	while (i < info.scount)
-	{
-		if (sprite[i].id == 2)
-			count++;
-		i++;
-	}
-	i = 0;
-	while (i < info.scount)
-	{
-		if (sprite[i].id == 2 && sprite[i].state & S_KILL)
-			kill++;
-		i++;
-	}
-	if (player.health < 1)
-		printf("GAME OVER\n");
-	if (kill == count && player.health >= 1)
-		printf("YOU WIN !\n");
 }

@@ -31,6 +31,7 @@ SRCS =	cub_game.c \
 		utils/cub_utils.c \
 		utils/cub_utils_colors.c \
 		bonus/cub_hud_bonus.c \
+		bonus/cub_quit_bonus.c \
 		bonus/cub_hud_player_bonus.c \
 		bonus/cub_settings_bonus.c \
 		bonus/cub_utils_bonus.c \
