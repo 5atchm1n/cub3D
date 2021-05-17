@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 23:57:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:26:12 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 23:26:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		cub_set_map_textures(char *line, t_cub *game, int *i,
 {
 	while (ft_isspace(*line) == 1)
 		line++;
-	if (*line == '1' || *line == '0')
+	if (*line == '1' || *line == '0' || *line == ' ')
 	{
 		cub_set_size(line, &game->world.info.msize.x);
 		game->world.info.msize.y = game->world.info.msize.y + 1;
@@ -38,7 +38,7 @@ static void		cub_set_map_textures(char *line, t_cub *game, int *i,
 		cub_sprite_path(line, &game->world.objs, i);
 		if (ft_isspace(*(line + 1)) == 1)
 			error->sprite += 1;
-		else if (cub_istex(*(line + 1)) == 1)
+		if (cub_istex(*(line + 1)) == 1)
 			error->texture += 1;
 	}
 }

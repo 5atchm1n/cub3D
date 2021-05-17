@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:16:25 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/04 00:45:01 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 23:38:52 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static void			cub_draw_map(t_world *world, t_mlx *mlx)
 			if (world->map[grid.y][grid.x] == '0')
 				cub_map_wall(size, grid, mlx, 0x00000000);
 			if (world->map[grid.y][grid.x] == '1')
-				cub_map_wall(size, grid, mlx, 0x00FF0000);
+				cub_map_wall(size, grid, mlx, 0x0000008b);
 			if (world->map[grid.y][grid.x] == '2')
-				cub_map_wall(size, grid, mlx, 0x0000FF00);
+				cub_map_wall(size, grid, mlx, 0x00000000);
 			grid.x++;
 		}
 		grid.y++;

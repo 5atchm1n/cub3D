@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:45:13 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 22:32:05 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int		cub_issprite(char c);
 void	cub_save_bmp(t_cub *game);
 char	*cub_set_path(char *line, char *dir);
 void	cub_sanity_check(t_error *error);
+void	cub_world_null(t_objects *objects);
 
 /*
 ** BONUS - FLOOR, SKYBOX, MULTIPLE SPRITES, MOUSE, KILL, DAMAGE, JUMP, CROUCH

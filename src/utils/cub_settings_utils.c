@@ -6,16 +6,16 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:45:35 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:13:44 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 23:32:21 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char		*cub_set_path(char *line, char *dir)
+char			*cub_set_path(char *line, char *dir)
 {
-	char	*path;
-	int		isdir;
+	char		*path;
+	int			isdir;
 
 	path = NULL;
 	isdir = 0;
@@ -34,12 +34,11 @@ char		*cub_set_path(char *line, char *dir)
 	return (path);
 }
 
-void		cub_sanity_check(t_error *error)
+void			cub_sanity_check(t_error *error)
 {
 	if (error->map == 1)
 		if (error->texture != TEXTURES && error->res != 1 &&
-				error->floor != 1 && error->ceiling != 1 &&
-				error->sprite != SPRITES)
+		error->floor != 1 && error->ceiling != 1 && error->sprite != SPRITES)
 			error->id = MAP_NOEND;
 	if (error->map == 1)
 	{
@@ -57,5 +56,45 @@ void		cub_sanity_check(t_error *error)
 			error->id = MI_BONUS;
 		if (error->texture == TEXTURES && error->tflags != 0xf)
 			error->id = DUP_TEX;
+	}
+}
+
+static void		cub_bonus_null(t_objects *objs)
+{
+	int			i;
+
+	i = 0;
+	if (objs->bpath != NULL)
+	{
+		while (i < BONUS_OBJECTS)
+		{
+			objs->bpath[i] = NULL;
+			i++;
+		}
+	}
+}
+
+void			cub_world_null(t_objects *objs)
+{
+	int			i;
+
+	i = 0;
+	cub_bonus_null(objs);
+	if (objs->spath != NULL)
+	{
+		while (i < SPRITES)
+		{
+			objs->spath[i] = NULL;
+			i++;
+		}
+	}
+	i = 0;
+	if (objs->tpath != NULL)
+	{
+		while (i < TEXTURES)
+		{
+			objs->tpath[i] = NULL;
+			i++;
+		}
 	}
 }

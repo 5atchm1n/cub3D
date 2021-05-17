@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:29:39 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 22:33:29 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static void		cub_init_paths(t_objects *objs, t_error *error)
 		if (objs->bpath == NULL)
 			error->id = MEM_FAIL;
 	}
+	cub_world_null(objs);
 }
 
 int				cub_settings(char *map_path, t_cub *game)

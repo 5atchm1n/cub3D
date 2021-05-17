@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 19:41:15 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:45:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/17 23:41:19 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,17 @@ static void	cub_win(t_info info, t_sprite *sprite, t_player player)
 		i++;
 	}
 	if (player.health < 1)
-		printf("GAME OVER\n");
+		printf("\033[31m \t\tGAME OVER\033[0m\n");
 	if (kill == count && player.health >= 1)
-		printf("YOU WIN !\n");
+		printf("\033[31m \t\tYOU WIN !\033[0m\n");
 }
 
 void		cub_quit_bonus(t_cub *game)
 {
 	if (game->mlx.on == 1)
+	{
 		mlx_mouse_show(game->mlx.win.mlx, game->mlx.win.win);
-	cub_win(game->world.info, game->world.sprite, game->player);
+		cub_win(game->world.info, game->world.sprite, game->player);
+	}
 	cub_free_utils(&game->world);
 }
