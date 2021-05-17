@@ -19,14 +19,16 @@ static void	cub_free_utils(t_world *world)
 	i = 0;
 	while (i < WEAPONS * 2)
 	{
-		free(world->objs.weapons[i]);
+		if (world->objs.weapons != NULL)
+			free(world->objs.weapons[i]);
 		i++;
 	}
 	free(world->objs.weapons);
 	i = 0;
 	while (i < BONUS_OBJECTS)
 	{
-		free(world->objs.bpath[i]);
+		if (world->objs.bpath != NULL)
+			free(world->objs.bpath[i]);
 		i++;
 	}
 	free(world->objs.bpath);
@@ -66,7 +68,8 @@ static void	cub_win(t_info info, t_sprite *sprite, t_player player)
 
 void		cub_quit_bonus(t_cub *game)
 {
-	mlx_mouse_show(game->mlx.win.mlx, game->mlx.win.win);
+	if (game->mlx.on == 1)
+		mlx_mouse_show(game->mlx.win.mlx, game->mlx.win.win);
 	cub_win(game->world.info, game->world.sprite, game->player);
 	cub_free_utils(&game->world);
 }
