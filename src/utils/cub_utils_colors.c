@@ -6,15 +6,15 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/14 18:27:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 04:02:33 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int				cub_rgb_to_int(t_color color)
+int	cub_rgb_to_int(t_color color)
 {
-	int			val;
+	int	val;
 
 	val = color.rgb.r;
 	val = (val << 8) + color.rgb.g;
@@ -22,10 +22,10 @@ int				cub_rgb_to_int(t_color color)
 	return (val);
 }
 
-int				cub_set_res(char *line, t_grid *res, t_error *error)
+int	cub_set_res(char *line, t_grid *res, t_error *error)
 {
-	int			y;
-	int			x;
+	int	y;
+	int	x;
 
 	line++;
 	x = 0;
@@ -51,7 +51,7 @@ int				cub_set_res(char *line, t_grid *res, t_error *error)
 	return (0);
 }
 
-int				cub_set_rgb(char *line, t_color *c, t_error *error)
+int	cub_set_rgb(char *line, t_color *c, t_error *error)
 {
 	line++;
 	while (ft_isspace(*line))

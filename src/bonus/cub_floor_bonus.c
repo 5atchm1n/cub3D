@@ -6,16 +6,16 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 03:00:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:55:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:22:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_init_ray(t_floor *ray, t_player *player, t_mlx *mlx, int y)
+static void	cub_init_ray(t_floor *ray, t_player *player, t_mlx *mlx, int y)
 {
-	t_fray		ray0;
-	t_fray		ray1;
+	t_fray	ray0;
+	t_fray	ray1;
 
 	ray->isfloor = (y > mlx->res.y / 2 + player->vector.pitch);
 	ray0.dirx = player->vector.dx - player->camera.px;
@@ -53,7 +53,7 @@ static uint32_t	cub_set_floor_color(t_world *world, t_floor *ray)
 	return (color);
 }
 
-static void		cub_cast_ray(t_floor *ray, t_world *world, t_mlx *mlx, int y)
+static void	cub_cast_ray(t_floor *ray, t_world *world, t_mlx *mlx, int y)
 {
 	int			xcell;
 	int			ycell;
@@ -76,7 +76,7 @@ static void		cub_cast_ray(t_floor *ray, t_world *world, t_mlx *mlx, int y)
 	}
 }
 
-void			cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx)
+void	cub_floor_casting(t_player *player, t_world *world, t_mlx *mlx)
 {
 	int			y;
 	t_floor		ray;

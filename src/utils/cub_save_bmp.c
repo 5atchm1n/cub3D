@@ -6,17 +6,17 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 14:48:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/19 03:12:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:59:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_bmp_header(t_mlx mlx, int fd)
+static void	cub_bmp_header(t_mlx mlx, int fd)
 {
-	int			filesize;
-	int			offset;
-	int			zero;
+	int	filesize;
+	int	offset;
+	int	zero;
 
 	filesize = 14 + 40 + (4 * mlx.res.x * mlx.res.y);
 	offset = 54;
@@ -28,11 +28,11 @@ static void		cub_bmp_header(t_mlx mlx, int fd)
 	write(fd, &offset, 4);
 }
 
-static void		cub_bmp_infoheader(t_mlx mlx, int fd)
+static void	cub_bmp_infoheader(t_mlx mlx, int fd)
 {
-	int			headersize;
-	int			colorplanes;
-	int			zero;
+	int	headersize;
+	int	colorplanes;
+	int	zero;
 
 	headersize = 40;
 	colorplanes = 1;
@@ -50,10 +50,10 @@ static void		cub_bmp_infoheader(t_mlx mlx, int fd)
 	write(fd, &zero, 4);
 }
 
-static void		cub_bmp_img(t_mlx mlx, int fd)
+static void	cub_bmp_img(t_mlx mlx, int fd)
 {
-	int			x;
-	int			y;
+	int	x;
+	int	y;
 
 	y = mlx.res.y;
 	while (y >= 0)
@@ -68,9 +68,9 @@ static void		cub_bmp_img(t_mlx mlx, int fd)
 	}
 }
 
-void			cub_save_bmp(t_cub *game)
+void	cub_save_bmp(t_cub *game)
 {
-	int			fd;
+	int	fd;
 
 	fd = open("image.bmp", O_CREAT | O_RDWR | O_TRUNC, 777);
 	if (fd <= 0)
@@ -80,9 +80,9 @@ void			cub_save_bmp(t_cub *game)
 	cub_bmp_img(game->mlx, fd);
 }
 
-int				cub_check_save_arg(char *save_arg)
+int	cub_check_save_arg(char *save_arg)
 {
-	int			len;
+	int	len;
 
 	len = ft_strlen(save_arg);
 	if (len != 6)

@@ -6,17 +6,17 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 16:08:55 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:48:15 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:48:48 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int				cub_nobject(t_world *world)
+int	cub_nobject(t_world *world)
 {
-	int			i;
-	int			j;
-	int			count;
+	int	i;
+	int	j;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -26,8 +26,8 @@ int				cub_nobject(t_world *world)
 		while (j < world->info.msize.x)
 		{
 			if (world->map[i][j] == '2' ||
-					world->map[i][j] == '3' ||
-					world->map[i][j] == '4')
+				world->map[i][j] == '3' ||
+				world->map[i][j] == '4')
 				count++;
 			j++;
 		}
@@ -36,10 +36,10 @@ int				cub_nobject(t_world *world)
 	return (count);
 }
 
-void			cub_init_object(t_world *world, t_error *error)
+void	cub_init_object(t_world *world, t_error *error)
 {
-	int			i;
-	int			j;
+	int	i;
+	int	j;
 
 	i = 0;
 	world->objs.spr = (int **)malloc(sizeof(int *) * SPRITES);
@@ -65,7 +65,7 @@ void			cub_init_object(t_world *world, t_error *error)
 	}
 }
 
-static void		cub_set_object(t_sprite *sprite, char *map_char)
+static void	cub_set_object(t_sprite *sprite, char *map_char)
 {
 	if (sprite->id == 0)
 	{
@@ -89,7 +89,7 @@ static void		cub_set_object(t_sprite *sprite, char *map_char)
 	}
 }
 
-static void		cub_set_object_init(t_world *world, int x, int i, int j)
+static void	cub_set_object_init(t_world *world, int x, int i, int j)
 {
 	world->sprite[x].x = (double)j + 0.5;
 	world->sprite[x].y = (double)i + 0.5;
@@ -98,11 +98,11 @@ static void		cub_set_object_init(t_world *world, int x, int i, int j)
 	world->sprite[x].dist = 0.0;
 }
 
-void			cub_load_objects(t_world *world)
+void	cub_load_objects(t_world *world)
 {
-	int			i;
-	int			j;
-	int			x;
+	int	i;
+	int	j;
+	int	x;
 
 	i = 0;
 	x = 0;

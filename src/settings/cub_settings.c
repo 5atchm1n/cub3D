@@ -6,15 +6,15 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:39:29 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 22:33:29 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:56:16 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		cub_check_size(char *line, int size_x, int size_y)
+static int	cub_check_size(char *line, int size_x, int size_y)
 {
-	int			num;
+	int		num;
 
 	num = 0;
 	if (line && *line == '"')
@@ -38,7 +38,7 @@ static int		cub_check_size(char *line, int size_x, int size_y)
 	return (1);
 }
 
-static void		cub_check_header(char *line, int line_number, t_error *error,
+static void	cub_check_header(char *line, int line_number, t_error *error,
 		int bonus)
 {
 	if (line_number == 0 && ft_strcmp(line, "/* XPM */") == 0)
@@ -49,12 +49,12 @@ static void		cub_check_header(char *line, int line_number, t_error *error,
 		error->id = INV_SIZE;
 }
 
-static void		cub_test_path(char **paths, t_error *error, int num, int bonus)
+static void	cub_test_path(char **paths, t_error *error, int num, int bonus)
 {
-	int			i;
-	char		*line;
-	int			fd;
-	int			ln;
+	int		i;
+	char	*line;
+	int		fd;
+	int		ln;
 
 	i = 0;
 	while (i < num)
@@ -76,7 +76,7 @@ static void		cub_test_path(char **paths, t_error *error, int num, int bonus)
 	}
 }
 
-static void		cub_init_paths(t_objects *objs, t_error *error)
+static void	cub_init_paths(t_objects *objs, t_error *error)
 {
 	objs->tpath = (char **)malloc(sizeof(char *) * TEXTURES);
 	if (objs->tpath == NULL)
@@ -93,9 +93,9 @@ static void		cub_init_paths(t_objects *objs, t_error *error)
 	cub_world_null(objs);
 }
 
-int				cub_settings(char *map_path, t_cub *game)
+int	cub_settings(char *map_path, t_cub *game)
 {
-	t_error		error;
+	t_error	error;
 
 	ft_memset(&error, 0, sizeof(t_error));
 	error.id = 0;

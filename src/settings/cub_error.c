@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:26:22 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:32:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:53:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_set_errmsg(char **errmsg)
+static void	cub_set_errmsg(char **errmsg)
 {
 	errmsg[0] = "\033[36m\tInvalid char in map\033[0m";
 	errmsg[1] = "\033[36m\tMap is open - check co-oridnates\033[0m";
@@ -37,10 +37,10 @@ static void		cub_set_errmsg(char **errmsg)
 	errmsg[20] = "\033[36m\tBonus Map is not valid \033[0m";
 }
 
-void			cub_error_msg(t_errn id, t_error error)
+void	cub_error_msg(t_errn id, t_error error)
 {
-	char		*errmsg[ERRORS];
-	int			errnum;
+	char	*errmsg[ERRORS];
+	int		errnum;
 
 	errnum = id - 1;
 	cub_set_errmsg(errmsg);
@@ -53,7 +53,7 @@ void			cub_error_msg(t_errn id, t_error error)
 	printf("\n");
 }
 
-int				cub_error(t_error error, t_cub *game)
+int	cub_error(t_error error, t_cub *game)
 {
 	cub_error_msg(error.id, error);
 	cub_quit(game);

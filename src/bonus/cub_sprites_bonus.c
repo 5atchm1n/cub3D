@@ -6,15 +6,15 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 02:22:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/04 00:30:54 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:33:06 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_move_sprite_init(t_sprite *s, int count)
+static void	cub_move_sprite_init(t_sprite *s, int count)
 {
-	int			i;
+	int		i;
 
 	i = 0;
 	while (i < count)
@@ -33,11 +33,11 @@ static void		cub_move_sprite_init(t_sprite *s, int count)
 	}
 }
 
-static void		cub_enemy_forward(t_sprite *sprite, t_vector v, t_speed speed,
+static void	cub_enemy_forward(t_sprite *sprite, t_vector v, t_speed speed,
 		char **map)
 {
-	double		x;
-	double		y;
+	double	x;
+	double	y;
 
 	x = sprite->x - v.dx * speed.move * (LEVEL / 10.0);
 	y = sprite->y - v.dy * speed.move * (LEVEL / 10.0);
@@ -53,11 +53,11 @@ static void		cub_enemy_forward(t_sprite *sprite, t_vector v, t_speed speed,
 	}
 }
 
-static void		cub_enemy_back(t_sprite *sprite, t_vector v, t_speed speed,
+static void	cub_enemy_back(t_sprite *sprite, t_vector v, t_speed speed,
 		char **map)
 {
-	double		x;
-	double		y;
+	double	x;
+	double	y;
 
 	x = sprite->x + v.dx * speed.move;
 	y = sprite->y + v.dy * speed.move;
@@ -73,9 +73,9 @@ static void		cub_enemy_back(t_sprite *sprite, t_vector v, t_speed speed,
 	}
 }
 
-void			cub_sprite_move(t_world *world, t_player *player)
+void	cub_sprite_move(t_world *world, t_player *player)
 {
-	int			i;
+	int	i;
 
 	cub_move_sprite_init(world->sprite, world->info.scount);
 	i = 0;
@@ -83,10 +83,10 @@ void			cub_sprite_move(t_world *world, t_player *player)
 	{
 		if (world->sprite[i].id == 2 && world->sprite[i].state & S_MOVE)
 			cub_enemy_forward(&world->sprite[i], player->vector, player->speed,
-					world->map);
+				world->map);
 		if (world->sprite[i].id == 2 && world->sprite[i].state & S_BACK)
 			cub_enemy_back(&world->sprite[i], player->vector, player->speed,
-					world->map);
+				world->map);
 		cub_kill(&world->sprite[i], player->move);
 		i++;
 	}

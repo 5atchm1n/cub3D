@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 03:32:36 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 20:16:08 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:35:57 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	cub_keyrelease(int keycode, t_cub *game)
 	return (0);
 }
 
-void		cub_mlx_hooks(t_cub *game)
+void	cub_mlx_hooks(t_cub *game)
 {
 	mlx_hook(game->mlx.win.win, 2, 1L << 0, &cub_keypress, game);
 	mlx_hook(game->mlx.win.win, 3, 1L << 1, &cub_keyrelease, game);

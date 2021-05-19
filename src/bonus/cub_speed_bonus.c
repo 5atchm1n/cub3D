@@ -6,17 +6,17 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 03:30:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/14 10:47:21 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:32:22 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			cub_speed(t_cub *game)
+void	cub_speed(t_cub *game)
 {
-	clock_t		oldtime;
-	double		ticks;
-	double		oldelapsed;
+	clock_t	oldtime;
+	double	ticks;
+	double	oldelapsed;
 
 	oldtime = game->mlx.time.cycle;
 	oldelapsed = (double)game->mlx.time.cycle / CLOCKS_PER_SEC;

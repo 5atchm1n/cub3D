@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 18:35:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:47:49 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:47:31 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		cub_check_color(t_color color)
+static int	cub_check_color(t_color color)
 {
 	if (color.rgb.r > 255 || color.rgb.r < 0)
 		return (0);
@@ -23,7 +23,7 @@ static int		cub_check_color(t_color color)
 	return (1);
 }
 
-void			cub_init_world(t_world *world, t_mlx mlx, char *map_path,
+void	cub_init_world(t_world *world, t_mlx mlx, char *map_path,
 		t_error *error)
 {
 	world->info.offset = (float)mlx.res.x / (float)world->info.msize.x;
@@ -32,13 +32,13 @@ void			cub_init_world(t_world *world, t_mlx mlx, char *map_path,
 		return (cub_error_set(error, INV_MAP));
 	world->info.scount = cub_nobject(world);
 	if (!(cub_check_color(world->info.floor))
-			|| !(cub_check_color(world->info.ceiling)))
+		|| !(cub_check_color(world->info.ceiling)))
 		return (cub_error_set(error, INV_RGB));
 	world->info.floor.color = cub_rgb_to_int(world->info.floor);
 	world->info.ceiling.color = cub_rgb_to_int(world->info.ceiling);
 }
 
-void			cub_test_xpm(t_cub *game, t_error *error)
+void	cub_test_xpm(t_cub *game, t_error *error)
 {
 	t_img		img;
 	int			i;
@@ -65,14 +65,14 @@ void			cub_test_xpm(t_cub *game, t_error *error)
 	}
 }
 
-void			cub_start_mlx(t_mlx *mlx)
+void	cub_start_mlx(t_mlx *mlx)
 {
 	mlx->win.win = mlx_new_window(mlx->win.mlx, mlx->res.x,
 			mlx->res.y, "cub3D");
 	mlx->on = 1;
 }
 
-void			cub_init_structs(t_cub *game)
+void	cub_init_structs(t_cub *game)
 {
 	game->mlx.buffer = NULL;
 	game->mlx.win.mlx = NULL;

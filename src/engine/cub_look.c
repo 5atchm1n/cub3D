@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 08:02:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 17:02:22 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:36:52 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			cub_player_offset(t_vector *vector, double *offset)
+void	cub_player_offset(t_vector *vector, double *offset)
 {
 	if (vector->dx > 0)
 		offset[0] = PLAYER_SIZE;
@@ -24,7 +24,7 @@ void			cub_player_offset(t_vector *vector, double *offset)
 		offset[1] = -PLAYER_SIZE;
 }
 
-void			cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast16_t move,
+void	cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast16_t move,
 		t_speed speed)
 {
 	if (move & L_UP)
@@ -45,11 +45,11 @@ void			cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast16_t move,
 		ft_fmin(0, v->pitch + 100 * speed.move);
 }
 
-void			cub_look_left_right(t_vector *v, t_camera *cam,
-		uint_fast16_t move, t_speed speed)
+void	cub_look_left_right(t_vector *v, t_camera *cam, uint_fast16_t move,
+		t_speed speed)
 {
-	double		dir;
-	double		p;
+	double	dir;
+	double	p;
 
 	if (move & L_RIGHT)
 	{
@@ -72,7 +72,7 @@ void			cub_look_left_right(t_vector *v, t_camera *cam,
 	}
 }
 
-void			cub_jump_crouch(t_vector *v, uint_fast16_t move, t_speed speed)
+void	cub_jump_crouch(t_vector *v, uint_fast16_t move, t_speed speed)
 {
 	if (move & M_JUMP)
 		v->posz = 200;

@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 22:54:53 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 18:27:01 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 04:11:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,197 +16,197 @@
 /*
 ** MLX -- WINDOW, IMAGE, BUFFER --
 */
-typedef struct		s_win
+typedef struct s_win
 {
-	void			*mlx;
-	void			*win;
-}					t_win;
+	void	*mlx;
+	void	*win;
+}	t_win;
 
-typedef struct		s_img
+typedef struct s_img
 {
-	void			*img;
-	int				*add;
-	int				bpp;
-	int				len;
-	int				endian;
-	int				x;
-	int				y;
-}					t_img;
+	void	*img;
+	int		*add;
+	int		bpp;
+	int		len;
+	int		endian;
+	int		x;
+	int		y;
+}	t_img;
 
 /*
 ** FLOOR , CEILIING CASTING
 */
-typedef struct		s_fray
+typedef struct s_fray
 {
-	float			dirx;
-	float			diry;
-}					t_fray;
+	float	dirx;
+	float	diry;
+}	t_fray;
 
-typedef struct		s_floor
+typedef struct s_floor
 {
-	int				horizon;
-	double			skyx;
-	float			camv;
-	float			rdist;
-	float			stepx;
-	float			stepy;
-	float			flx;
-	float			fly;
-	int				tx;
-	int				ty;
-	int				isfloor;
-	int				x;
-	int				y;
-}					t_floor;
+	int		horizon;
+	double	skyx;
+	float	camv;
+	float	rdist;
+	float	stepx;
+	float	stepy;
+	float	flx;
+	float	fly;
+	int		tx;
+	int		ty;
+	int		isfloor;
+	int		x;
+	int		y;
+}	t_floor;
 /*
 ** RAYCASTING, TEXTURE CASTING
 */
-typedef struct		s_ray
+typedef struct s_ray
 {
-	double			dirx;
-	double			diry;
-	double			deltax;
-	double			deltay;
-	double			distx;
-	double			disty;
-	double			dw;
-	int				mapx;
-	int				mapy;
-	int				stepx;
-	int				stepy;
-	int				side;
-}					t_ray;
+	double	dirx;
+	double	diry;
+	double	deltax;
+	double	deltay;
+	double	distx;
+	double	disty;
+	double	dw;
+	int		mapx;
+	int		mapy;
+	int		stepx;
+	int		stepy;
+	int		side;
+}	t_ray;
 
-typedef enum		e_dir
+typedef enum e_dir
 {
 	NO = 0,
 	SO = 1,
 	EA = 2,
 	WE = 3
-}					t_dir;
+}	t_dir;
 
-typedef struct		s_texture
+typedef struct s_texture
 {
 	double			pos;
 	t_dir			dir;
 	int				lineheight;
 	int				start;
 	int				end;
-}					t_texture;
+}	t_texture;
 /*
 ** OBJECTS CASTING - SORT ORDER , OBJS CASTING
 */
-typedef struct		s_sort
+typedef struct s_sort
 {
 	double			dist;
 	int				order;
-}					t_sort;
+}	t_sort;
 
-typedef struct		s_objs
+typedef struct s_objs
 {
-	double			*dist;
-	double			tx;
-	double			ty;
-	int				count;
-	int				*order;
-	int				spritew;
-	int				spriteh;
-	int				index;
-	int				hitx;
-	int				voffset;
-	int				startx;
-	int				starty;
-	int				endx;
-	int				endy;
-}					t_objs;
+	double	*dist;
+	double	tx;
+	double	ty;
+	int		count;
+	int		*order;
+	int		spritew;
+	int		spriteh;
+	int		index;
+	int		hitx;
+	int		voffset;
+	int		startx;
+	int		starty;
+	int		endx;
+	int		endy;
+}	t_objs;
 /*
 ** WORLD -- SPRITE , COLOR[RGB], MAP SIZE
 */
 
-typedef struct		s_grid
+typedef struct s_grid
 {
-	int				x;
-	int				y;
-}					t_grid;
+	int		x;
+	int		y;
+}	t_grid;
 
-typedef struct		s_rgb
+typedef struct s_rgb
 {
-	int				r;
-	int				g;
-	int				b;
-}					t_rgb;
+	int		r;
+	int		g;
+	int		b;
+}	t_rgb;
 
-typedef union		u_color
+typedef union u_color
 {
-	int				color;
-	t_rgb			rgb;
-}					t_color;
+	int		color;
+	t_rgb	rgb;
+}	t_color;
 
-typedef struct		s_objects
+typedef struct s_objects
 {
-	int				**tex;
-	int				**spr;
-	int				*sky;
-	int				**weapons;
-	int				*skybox;
-	int				*ground;
-	char			**tpath;
-	char			**spath;
-	char			**bpath;
-	char			*skypath;
-}					t_objects;
+	int		**tex;
+	int		**spr;
+	int		*sky;
+	int		**weapons;
+	int		*skybox;
+	int		*ground;
+	char	**tpath;
+	char	**spath;
+	char	**bpath;
+	char	*skypath;
+}	t_objects;
 
-typedef struct		s_info
+typedef struct s_info
 {
-	t_grid			msize;
-	t_color			floor;
-	t_color			ceiling;
-	double			*zbuffer;
-	float			offset;
-	int				scount;
-}					t_info;
+	t_grid		msize;
+	t_color		floor;
+	t_color		ceiling;
+	double		*zbuffer;
+	float		offset;
+	int			scount;
+}	t_info;
 
-typedef struct		s_sprite
+typedef struct s_sprite
 {
-	double			x;
-	double			y;
-	double			vmove;
-	double			dist;
-	int				id;
-	int				udiv;
-	int				vdiv;
-	char			state;
-}					t_sprite;
+	double	x;
+	double	y;
+	double	vmove;
+	double	dist;
+	int		id;
+	int		udiv;
+	int		vdiv;
+	char	state;
+}	t_sprite;
 
 /*
 ** PLAYER -- MOVE , VECTOR, CAMERA PLANE
 */
 
-typedef struct		s_speed
+typedef struct s_speed
 {
-	double			move;
-	double			turn;
-}					t_speed;
+	double	move;
+	double	turn;
+}	t_speed;
 
-typedef struct		s_vector
+typedef struct s_vector
 {
-	double			x;
-	double			y;
-	double			dx;
-	double			dy;
-	double			pitch;
-	double			posz;
-}					t_vector;
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+	double	pitch;
+	double	posz;
+}	t_vector;
 
-typedef struct		s_camera
+typedef struct s_camera
 {
-	double			px;
-	double			py;
-}					t_camera;
+	double	px;
+	double	py;
+}	t_camera;
 /*
 ** ERROR HANDLING
 */
-typedef enum		e_errn
+typedef enum e_errn
 {
 	NO_ERR = 0,
 	INV_CHAR = 1,
@@ -230,29 +230,29 @@ typedef enum		e_errn
 	INV_SAVE = 19,
 	DUP_TEX = 20,
 	MI_BONUS = 21
-}					t_errn;
+}	t_errn;
 
-typedef struct		s_error
+typedef struct s_error
 {
-	t_errn			id;
-	t_grid			coords;
-	int				texture;
-	int				res;
-	int				floor;
-	int				ceiling;
-	int				map;
-	int				dir;
-	int				sprite;
-	int				bonus;
-	char			tflags;
-}					t_error;
+	t_errn	id;
+	t_grid	coords;
+	int		texture;
+	int		res;
+	int		floor;
+	int		ceiling;
+	int		map;
+	int		dir;
+	int		sprite;
+	int		bonus;
+	char	tflags;
+}	t_error;
 
-typedef struct		s_pixel
+typedef struct s_pixel
 {
-	int				x;
-	int				y;
-	int				tex_x;
-	int				tex_y;
-}					t_pixel;
+	int		x;
+	int		y;
+	int		tex_x;
+	int		tex_y;
+}	t_pixel;
 
 #endif

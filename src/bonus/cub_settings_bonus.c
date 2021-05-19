@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:24:26 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 03:22:55 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:32:04 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		cub_set_bonus_paths(char *line, t_objects *objs)
+void	cub_set_bonus_paths(char *line, t_objects *objs)
 {
 	while (ft_isspace(*line) == 1)
 		line++;
@@ -28,7 +28,7 @@ void		cub_set_bonus_paths(char *line, t_objects *objs)
 		objs->skypath = cub_set_path(line, "SK");
 }
 
-void		cub_bonus_textures(char *line, t_cub *game, t_error *error)
+void	cub_bonus_textures(char *line, t_cub *game, t_error *error)
 {
 	while (ft_isspace(*line) == 1)
 		line++;

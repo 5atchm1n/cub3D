@@ -6,16 +6,16 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 21:17:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 23:29:13 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 04:11:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_play(t_cub *game, char *map_path)
+static void	cub_play(t_cub *game, char *map_path)
 {
-	t_error		error;
-	int			err;
+	t_error	error;
+	int		err;
 
 	ft_memset(&error, 0, sizeof(error));
 	if (cub_check_map_arg(map_path) == 0)
@@ -29,10 +29,10 @@ static void		cub_play(t_cub *game, char *map_path)
 	cub_mlx_hooks(game);
 }
 
-static void		cub_save(t_cub *game, char *map_path, char *save_arg)
+static void	cub_save(t_cub *game, char *map_path, char *save_arg)
 {
-	t_error		error;
-	int			err;
+	t_error	error;
+	int		err;
 
 	ft_memset(&error, 0, sizeof(error));
 	if (cub_check_map_arg(map_path) == 0)
@@ -49,9 +49,9 @@ static void		cub_save(t_cub *game, char *map_path, char *save_arg)
 	cub_quit(game);
 }
 
-int				main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_cub		game;
+	t_cub	game;
 
 	ft_memset(&game, 0, sizeof(game));
 	cub_init_structs(&game);

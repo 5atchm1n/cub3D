@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 03:51:42 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:00:34 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:44:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_set_tex_dir(t_texture *t, t_ray *ray)
+static void	cub_set_tex_dir(t_texture *t, t_ray *ray)
 {
 	if (ray->side == 0 && ray->dirx < 0)
 		t->dir = NO;
@@ -36,10 +36,10 @@ static double	cub_set_wallx(t_ray *ray, t_vector *v)
 	return (wallx);
 }
 
-static int		cub_set_texturex(t_ray *ray, t_vector *vector)
+static int	cub_set_texturex(t_ray *ray, t_vector *vector)
 {
-	double		wallx;
-	int			texturex;
+	double	wallx;
+	int		texturex;
 
 	wallx = cub_set_wallx(ray, vector);
 	texturex = (int)(wallx * (double)TEX_X);
@@ -50,9 +50,9 @@ static int		cub_set_texturex(t_ray *ray, t_vector *vector)
 	return (texturex);
 }
 
-static void		cub_set_floor_ceiling(int start, int end, int x, t_cub *game)
+static void	cub_set_floor_ceiling(int start, int end, int x, t_cub *game)
 {
-	int			y;
+	int		y;
 
 	y = 0;
 	while (y <= start)
@@ -65,13 +65,13 @@ static void		cub_set_floor_ceiling(int start, int end, int x, t_cub *game)
 	}
 }
 
-void			cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
+void	cub_set_texture(t_cub *game, t_texture *t, t_ray *ray, int x)
 {
-	double		step;
-	double		tex_pos;
-	t_grid		tex;
-	int			colour;
-	int			y;
+	double	step;
+	double	tex_pos;
+	t_grid	tex;
+	int		colour;
+	int		y;
 
 	step = 1.0 * TEX_Y / t->lineheight;
 	tex.x = cub_set_texturex(ray, &game->player.vector);

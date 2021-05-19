@@ -6,15 +6,15 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 23:50:33 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 04:57:54 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:30:04 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_init_sky_ground(t_world *world, t_error *error)
+static void	cub_init_sky_ground(t_world *world, t_error *error)
 {
-	int			i;
+	int		i;
 
 	world->objs.ground = (int *)malloc(sizeof(int) * (TEX_X * TEX_Y));
 	if (world->objs.ground == NULL)
@@ -40,9 +40,9 @@ static void		cub_init_sky_ground(t_world *world, t_error *error)
 	}
 }
 
-static void		cub_init_weapon(t_world *world, t_error *error)
+static void	cub_init_weapon(t_world *world, t_error *error)
 {
-	int			i;
+	int		i;
 
 	world->objs.weapons = (int **)malloc(sizeof(int *) * WEAPONS * 2);
 	if (world->objs.weapons == NULL)
@@ -64,9 +64,9 @@ static void		cub_init_weapon(t_world *world, t_error *error)
 	}
 }
 
-void			cub_init_bonus(t_world *world, t_mlx *mlx, t_error *error)
+void	cub_init_bonus(t_world *world, t_mlx *mlx, t_error *error)
 {
-	t_img		img;
+	t_img	img;
 
 	cub_init_weapon(world, error);
 	cub_init_sky_ground(world, error);

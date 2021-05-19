@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_line.c                                      :+:      :+:    :+:   */
+/*   cub_get_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 04:52:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/10 05:54:20 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 04:15:49 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int			gnl_return(char **line, char **gnline)
+static int	gnl_return(char **line, char **gnline)
 {
-	int				ret;
+	int		ret;
 
 	ret = 0;
 	if (*gnline)
@@ -30,17 +30,19 @@ static int			gnl_return(char **line, char **gnline)
 	return (ret);
 }
 
-int					cub_get_line(char **line, int fd)
+int	cub_get_line(char **line, int fd)
 {
-	int				n;
-	int				i;
-	static char		*temp;
-	char			buffer[BUFF_SIZE + 1];
+	int			n;
+	int			i;
+	char		buffer[BUFF_SIZE + 1];
+	static char	*temp;
 
 	if (fd < 0 || !line || read(0, buffer, 0) < 0)
 		return (-1);
-	while ((n = read(fd, buffer, BUFF_SIZE)) > 0)
-	{
+	n = 1;
+	while (n > 0)
+	{	
+		n = read(fd, buffer, BUFF_SIZE);
 		buffer[n] = '\0';
 		temp = gnl_join(temp, buffer);
 		if (gnl_find(temp) != -1)

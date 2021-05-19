@@ -6,15 +6,15 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 21:48:46 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:47:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:38:29 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_free_map(t_world *world)
+static void	cub_free_map(t_world *world)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (i < world->info.msize.y)
@@ -25,9 +25,9 @@ static void		cub_free_map(t_world *world)
 	free(world->map);
 }
 
-void			cub_free_world(t_world *world)
+void	cub_free_world(t_world *world)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (i < TEXTURES)
@@ -54,9 +54,9 @@ void			cub_free_world(t_world *world)
 	free(world->sprite);
 }
 
-static void		cub_free_buffer(t_cub *game)
+static void	cub_free_buffer(t_cub *game)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	if (game->mlx.buffer != NULL)
@@ -71,7 +71,7 @@ static void		cub_free_buffer(t_cub *game)
 	}
 }
 
-int				cub_quit(t_cub *game)
+int	cub_quit(t_cub *game)
 {
 	if (BONUS)
 		cub_quit_bonus(game);

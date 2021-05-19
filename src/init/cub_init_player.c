@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:10:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/03 05:04:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:46:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_set_player_dir_ew(t_player *player, char dir)
+static void	cub_set_player_dir_ew(t_player *player, char dir)
 {
 	if (dir == 'E')
 	{
@@ -30,7 +30,7 @@ static void		cub_set_player_dir_ew(t_player *player, char dir)
 	}
 }
 
-static void		cub_set_player_dir_ns(t_player *player, char dir)
+static void	cub_set_player_dir_ns(t_player *player, char dir)
 {
 	if (dir == 'N')
 	{
@@ -48,7 +48,7 @@ static void		cub_set_player_dir_ns(t_player *player, char dir)
 	}
 }
 
-static void		cub_init_player_pos(t_player *player, int x, int y)
+static void	cub_init_player_pos(t_player *player, int x, int y)
 {
 	player->vector.x = (double)x + 0.5;
 	player->vector.y = (double)y + 0.5;
@@ -58,8 +58,7 @@ static void		cub_init_player_pos(t_player *player, int x, int y)
 	player->health = 100;
 }
 
-void			cub_init_player(t_player *player, t_world *world,
-		t_error *error)
+void	cub_init_player(t_player *player, t_world *world, t_error *error)
 {
 	int			x;
 	int			y;

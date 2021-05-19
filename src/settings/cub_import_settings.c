@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 23:57:32 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 23:56:24 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:53:52 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_set_size(char *line, int *size_x)
+static void	cub_set_size(char *line, int *size_x)
 {
 	int			n;
 
@@ -21,7 +21,7 @@ static void		cub_set_size(char *line, int *size_x)
 		*size_x = n;
 }
 
-static void		cub_set_map_textures(char *line, t_cub *game, int *i,
+static void	cub_set_map_textures(char *line, t_cub *game, int *i,
 		t_error *error)
 {
 	if (*line == '1' || *line == '0' || *line == ' ')
@@ -43,7 +43,7 @@ static void		cub_set_map_textures(char *line, t_cub *game, int *i,
 	}
 }
 
-static void		cub_set_params(char *line, t_cub *game, t_error *error)
+static void	cub_set_params(char *line, t_cub *game, t_error *error)
 {
 	while (ft_isspace(*line) == 1)
 		line++;
@@ -64,11 +64,11 @@ static void		cub_set_params(char *line, t_cub *game, t_error *error)
 	}
 }
 
-void			cub_import_settings(char *map_path, t_cub *game, t_error *error)
+void	cub_import_settings(char *map_path, t_cub *game, t_error *error)
 {
-	int			fd;
-	int			i;
-	char		*line;
+	int		fd;
+	int		i;
+	char	*line;
 
 	fd = open(map_path, O_RDONLY);
 	i = 0;

@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 02:23:03 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 23:54:51 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:54:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char		**cub_setmap(char *line, char **map, int *n)
+static char	**cub_setmap(char *line, char **map, int *n)
 {
 	int			i;
 
@@ -26,11 +26,11 @@ static char		**cub_setmap(char *line, char **map, int *n)
 	return (map);
 }
 
-char			**cub_copy_map(char *map, t_world *world)
+char	**cub_copy_map(char *map, t_world *world)
 {
-	int			fd;
-	char		*line;
-	int			n;
+	int		fd;
+	char	*line;
+	int		n;
 
 	n = 0;
 	fd = open(map, O_RDONLY);
@@ -48,10 +48,10 @@ char			**cub_copy_map(char *map, t_world *world)
 	return (world->map);
 }
 
-static char		*cub_set_sprite_path(char *line)
+static char	*cub_set_sprite_path(char *line)
 {
-	char		*path;
-	int			issprite;
+	char	*path;
+	int		issprite;
 
 	issprite = 0;
 	path = NULL;
@@ -67,7 +67,7 @@ static char		*cub_set_sprite_path(char *line)
 	return (path);
 }
 
-void			cub_sprite_path(char *line, t_objects *objs, int *i)
+void	cub_sprite_path(char *line, t_objects *objs, int *i)
 {
 	while (ft_isspace(*line) == 1)
 		line++;
@@ -78,7 +78,7 @@ void			cub_sprite_path(char *line, t_objects *objs, int *i)
 	}
 }
 
-void			cub_texture_path(char *line, t_objects *objs, t_error *error)
+void	cub_texture_path(char *line, t_objects *objs, t_error *error)
 {
 	while (ft_isspace(*line) == 1)
 		line++;
@@ -88,7 +88,7 @@ void			cub_texture_path(char *line, t_objects *objs, t_error *error)
 		error->tflags |= E_TNO;
 	}
 	if (*line && *line == 'S' && *(line + 1) == 'O'
-			&& !(error->tflags & (E_TSO)))
+		&& !(error->tflags & (E_TSO)))
 	{
 		objs->tpath[1] = cub_set_path(line, "SO");
 		error->tflags |= E_TSO;
@@ -99,7 +99,7 @@ void			cub_texture_path(char *line, t_objects *objs, t_error *error)
 		error->tflags |= E_TEA;
 	}
 	if (*line && *line == 'W' && *(line + 1) == 'E'
-			&& !(error->tflags & (E_TWE)))
+		&& !(error->tflags & (E_TWE)))
 	{
 		objs->tpath[3] = cub_set_path(line, "WE");
 		error->tflags |= E_TWE;

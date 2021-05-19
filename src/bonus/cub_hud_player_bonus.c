@@ -6,17 +6,17 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 15:20:09 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/06 01:51:44 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:28:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		cub_can_see(t_world *world, double x, double y)
+static int	cub_can_see(t_world *world, double x, double y)
 {
-	int			grid_x;
-	int			grid_y;
-	float		offset;
+	int		grid_x;
+	int		grid_y;
+	float	offset;
 
 	offset = world->info.offset;
 	grid_y = (int)(y / offset);
@@ -30,11 +30,11 @@ static int		cub_can_see(t_world *world, double x, double y)
 	return (1);
 }
 
-static void		cub_player_dir(t_player *player, t_world *world, t_mlx *mlx)
+static void	cub_player_dir(t_player *player, t_world *world, t_mlx *mlx)
 {
-	int			l;
-	double		x1;
-	double		y1;
+	int		l;
+	double	x1;
+	double	y1;
 
 	l = 0;
 	while (l < 40)
@@ -43,20 +43,20 @@ static void		cub_player_dir(t_player *player, t_world *world, t_mlx *mlx)
 		y1 = player->vector.y * world->info.offset + player->vector.dy * l;
 		if (cub_can_see(world, x1, y1))
 			mlx->buffer[(int)(y1 * MAP_SIZE + mlx->res.y / 100)]
-				[(int)(x1 * MAP_SIZE + mlx->res.x / 100)] = 0x00FFFFFF;
+			[(int)(x1 * MAP_SIZE + mlx->res.x / 100)] = 0x00FFFFFF;
 		if (cub_can_see(world, x1, y1) == 0)
 			break ;
 		l++;
 	}
 }
 
-void			cub_hud_player(t_player *player, t_world *world, t_mlx *mlx)
+void	cub_hud_player(t_player *player, t_world *world, t_mlx *mlx)
 {
-	double		x1;
-	double		y1;
-	double		angle;
-	double		x;
-	double		y;
+	double	x1;
+	double	y1;
+	double	angle;
+	double	x;
+	double	y;
 
 	x = player->vector.x * world->info.offset * MAP_SIZE + mlx->res.x / 100;
 	y = player->vector.y * world->info.offset * MAP_SIZE + mlx->res.y / 100;
@@ -71,9 +71,9 @@ void			cub_hud_player(t_player *player, t_world *world, t_mlx *mlx)
 	cub_player_dir(player, world, mlx);
 }
 
-static int		cub_shade_health(int colour)
+static int	cub_shade_health(int colour)
 {
-	t_rgb		rgb;
+	t_rgb	rgb;
 
 	rgb.r = ((colour & 0x00FF0000) >> 16);
 	rgb.g = ((colour & 0x0000FF00) >> 8) * 0.05;
@@ -82,12 +82,12 @@ static int		cub_shade_health(int colour)
 	return (colour);
 }
 
-void			cub_draw_health(t_mlx *mlx, int health)
+void	cub_draw_health(t_mlx *mlx, int health)
 {
-	int			lenght;
-	int			colour;
-	int			i;
-	int			j;
+	int	lenght;
+	int	colour;
+	int	i;
+	int	j;
 
 	lenght = health * 4;
 	j = 0;
@@ -97,10 +97,10 @@ void			cub_draw_health(t_mlx *mlx, int health)
 		while (i < lenght)
 		{
 			colour = mlx->buffer[(int)(mlx->res.y - (mlx->res.y / 100) - j)]
-				[(int)(mlx->res.x - (mlx->res.x / 100) - i)];
+			[(int)(mlx->res.x - (mlx->res.x / 100) - i)];
 			mlx->buffer[(int)(mlx->res.y - (mlx->res.y / 100) - j)]
-				[(int)(mlx->res.x - (mlx->res.x / 100) - i)] =
-				cub_shade_health(colour);
+			[(int)(mlx->res.x - (mlx->res.x / 100) - i)]
+				= cub_shade_health(colour);
 			i++;
 		}
 		j++;

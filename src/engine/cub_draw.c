@@ -6,16 +6,16 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 17:31:08 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/14 18:42:40 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:35:28 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			cub_draw(t_mlx *mlx)
+void	cub_draw(t_mlx *mlx)
 {
-	int			x;
-	int			y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < mlx->res.y)
@@ -34,17 +34,16 @@ void			cub_draw(t_mlx *mlx)
 		if (BONUS)
 		{
 			mlx_string_put(mlx->win.mlx, mlx->win.win,
-					mlx->res.x - 50, mlx->res.y - 20, 0x00FFFFFF, "HEALTH");
+				mlx->res.x - 50, mlx->res.y - 20, 0x00FFFFFF, "HEALTH");
 		}
 	}
 }
 
-void			cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs obj,
-		t_pixel *px)
+void	cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs obj, t_pixel *px)
 {
-	int			d;
-	int			colour;
-	int			sorted;
+	int	d;
+	int	colour;
+	int	sorted;
 
 	px->y = obj.starty;
 	sorted = world.sprite[obj.order[obj.index]].id;
@@ -59,10 +58,10 @@ void			cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs obj,
 	}
 }
 
-int				cub_set_shadow(int colour, double dw)
+int	cub_set_shadow(int colour, double dw)
 {
-	t_rgb		rgb;
-	double		shade;
+	t_rgb	rgb;
+	double	shade;
 
 	shade = (10 - dw) / 10.0;
 	if (shade < 0)
@@ -75,7 +74,7 @@ int				cub_set_shadow(int colour, double dw)
 	return (colour);
 }
 
-void			cub_render(t_cub *game)
+void	cub_render(t_cub *game)
 {
 	if (BONUS)
 	{

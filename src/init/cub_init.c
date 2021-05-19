@@ -6,16 +6,16 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:06:12 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:31:33 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:46:16 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_init_mlx(t_mlx *mlx, t_error *error)
+static void	cub_init_mlx(t_mlx *mlx, t_error *error)
 {
-	int			screenx;
-	int			screeny;
+	int	screenx;
+	int	screeny;
 
 	mlx->win.mlx = mlx_init();
 	if (mlx->win.mlx == NULL)
@@ -33,10 +33,10 @@ static void		cub_init_mlx(t_mlx *mlx, t_error *error)
 			&mlx->img.len, &mlx->img.endian);
 }
 
-static void		cub_init_img_buffer(t_mlx *mlx, t_error *error)
+static void	cub_init_img_buffer(t_mlx *mlx, t_error *error)
 {
-	int			i;
-	int			j;
+	int		i;
+	int		j;
 
 	i = 0;
 	mlx->buffer = (int **)malloc(sizeof(int *) * mlx->res.y);
@@ -60,10 +60,10 @@ static void		cub_init_img_buffer(t_mlx *mlx, t_error *error)
 	}
 }
 
-static void		cub_init_map(t_world *world, t_error *error)
+static void	cub_init_map(t_world *world, t_error *error)
 {
-	int			i;
-	int			j;
+	int		i;
+	int		j;
 
 	i = 0;
 	world->map = (char **)malloc(sizeof(char *) * world->info.msize.y);
@@ -89,10 +89,10 @@ static void		cub_init_map(t_world *world, t_error *error)
 	}
 }
 
-static void		cub_init_textures(t_world *world, t_error *error)
+static void	cub_init_textures(t_world *world, t_error *error)
 {
-	int			i;
-	int			j;
+	int		i;
+	int		j;
 
 	i = 0;
 	world->objs.tex = (int **)malloc(sizeof(int *) * TEXTURES);
@@ -118,9 +118,9 @@ static void		cub_init_textures(t_world *world, t_error *error)
 	}
 }
 
-void			cub_init(t_cub *game, char *map_path)
+void	cub_init(t_cub *game, char *map_path)
 {
-	t_error		error;
+	t_error	error;
 
 	ft_memset(&error, 0, sizeof(error));
 	cub_init_mlx(&game->mlx, &error);

@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:20:39 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 19:30:01 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:51:38 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int		cub_check_next(int x, int y, char **map, t_grid *size)
+static int	cub_check_next(int x, int y, char **map, t_grid *size)
 {
 	if (x == 0 || x == size->x - 1)
 		return (1);
@@ -29,11 +29,11 @@ static int		cub_check_next(int x, int y, char **map, t_grid *size)
 	return (0);
 }
 
-static void		cub_check_if_open(char **map, t_grid *size, t_error *error)
+static void	cub_check_if_open(char **map, t_grid *size, t_error *error)
 {
-	int			x;
-	int			y;
-	int			err;
+	int	x;
+	int	y;
+	int	err;
 
 	y = 0;
 	err = 0;
@@ -57,10 +57,10 @@ static void		cub_check_if_open(char **map, t_grid *size, t_error *error)
 	}
 }
 
-static int		cub_isvalid(char c)
+static int	cub_isvalid(char c)
 {
-	char		*valid;
-	int			i;
+	char	*valid;
+	int		i;
 
 	if (!BONUS)
 		valid = " NSEW012";
@@ -76,8 +76,7 @@ static int		cub_isvalid(char c)
 	return (0);
 }
 
-static void		cub_check_map_chars(char **map, t_grid *size,
-		t_error *error)
+static void	cub_check_map_chars(char **map, t_grid *size, t_error *error)
 {
 	int			x;
 	int			y;
@@ -101,9 +100,9 @@ static void		cub_check_map_chars(char **map, t_grid *size,
 	}
 }
 
-void			cub_check(t_world *world, t_cub *game)
+void	cub_check(t_world *world, t_cub *game)
 {
-	t_error		error;
+	t_error	error;
 
 	ft_memset(&error, 0, sizeof(error));
 	cub_check_map_chars(world->map, &world->info.msize, &error);

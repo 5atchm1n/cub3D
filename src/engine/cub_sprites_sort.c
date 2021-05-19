@@ -6,17 +6,17 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:17:48 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/28 03:18:33 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:41:49 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_sprite_order(t_sort *sort, int count)
+static void	cub_sprite_order(t_sort *sort, int count)
 {
-	t_sort		tmp;
-	int			i;
-	int			j;
+	t_sort	tmp;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (i < count)
@@ -39,10 +39,10 @@ static void		cub_sprite_order(t_sort *sort, int count)
 	}
 }
 
-void			cub_sort_sprites(t_objs *s, int count)
+void	cub_sort_sprites(t_objs *s, int count)
 {
-	t_sort		*tmp;
-	int			i;
+	t_sort	*tmp;
+	int		i;
 
 	tmp = malloc(sizeof(t_sort) * count);
 	i = 0;

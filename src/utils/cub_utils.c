@@ -6,34 +6,34 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 00:47:14 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 04:29:57 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 04:01:56 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			cub_isdir(char c)
+int	cub_isdir(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
 }
 
-int			cub_issprite(char c)
+int	cub_issprite(char c)
 {
 	if (c == '2' || c == '3' || c == '4')
 		return (1);
 	return (0);
 }
 
-int			cub_istex(char c)
+int	cub_istex(char c)
 {
 	if (c == 'O' || c == 'A' || c == 'E')
 		return (1);
 	return (0);
 }
 
-int			cub_isbonus(char c1, char c2)
+int	cub_isbonus(char c1, char c2)
 {
 	if (c1 == 'F' && c2 == 'L')
 		return (1);
@@ -48,7 +48,7 @@ int			cub_isbonus(char c1, char c2)
 	return (0);
 }
 
-void		cub_error_set(t_error *error, t_errn id)
+void	cub_error_set(t_error *error, t_errn id)
 {
 	error->id = id;
 }

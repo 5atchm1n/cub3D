@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 20:43:40 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/05 04:31:02 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:52:42 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		cub_check_path(char *path, t_error *error)
+static void	cub_check_path(char *path, t_error *error)
 {
 	int		test;
 
@@ -28,23 +28,23 @@ static void		cub_check_path(char *path, t_error *error)
 	close(test);
 }
 
-static void		cub_check_extension(char *path, t_error *error)
+static void	cub_check_extension(char *path, t_error *error)
 {
-	int			len;
+	int		len;
 
 	len = ft_strlen(path) - 1;
 	if (len < 4)
 		error->id = INV_FILE;
 	if (ft_isspace(path[len]))
 		error->id = SPACE_EOL;
-	if (path[len] != 'm' || path[len - 1] != 'p' ||
-			path[len - 2] != 'x' || path[len - 3] != '.')
+	if (path[len] != 'm' || path[len - 1] != 'p'
+		|| path[len - 2] != 'x' || path[len - 3] != '.')
 		error->id = INV_EXT;
 }
 
-void			cub_check_files(t_world *world, t_error *error)
+void	cub_check_files(t_world *world, t_error *error)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (i < TEXTURES)
@@ -62,10 +62,10 @@ void			cub_check_files(t_world *world, t_error *error)
 	}
 }
 
-int				cub_check_map_arg(char *map)
+int	cub_check_map_arg(char *map)
 {
-	int			len;
-	int			test;
+	int	len;
+	int	test;
 
 	test = open(map, O_DIRECTORY);
 	if (test > 0)
