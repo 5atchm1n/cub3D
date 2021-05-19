@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 02:31:37 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:38:50 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 04:28:50 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_isspace(char c)
+int	ft_isspace(char c)
 {
 	if ((c > 8 && c < 14) || c == 32)
 		return (1);

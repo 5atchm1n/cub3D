@@ -6,7 +6,7 @@
 /*   By: sshakya <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 03:28:58 by sshakya           #+#    #+#             */
-/*   Updated: 2020/11/27 17:35:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 04:35:58 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,17 @@ static	size_t	ft_end(const char *str, const char *set, size_t len)
 	return (0);
 }
 
-char			*ft_strtrim(char const *str, char const *set)
+char	*ft_strtrim(char const *str, char const *set)
 {
-	size_t		i;
-	size_t		j;
-	size_t		len;
-	char		*ret;
+	size_t	i;
+	size_t	j;
+	size_t	len;
+	char	*ret;
 
 	len = ft_strlen(str);
 	len = len - (ft_start(str, set) + ft_end(str, set, len));
-	if (!(ret = (char *)malloc(sizeof(char) * (len + 1))))
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (ret == NULL)
 		return (NULL);
 	i = ft_start(str, set);
 	j = 0;

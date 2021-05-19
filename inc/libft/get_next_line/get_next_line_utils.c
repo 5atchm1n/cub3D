@@ -6,27 +6,15 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/03/05 16:56:39 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 19:17:35 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		gnl_len(const char *s)
+int	gnl_find(char *str)
 {
-	size_t	i;
-
-	i = 0;
-	while (s && s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-int			gnl_find(char *str)
-{
-	int		i;
+	int	i;
 
 	i = 0;
 	while (str && str[i])
@@ -38,13 +26,14 @@ int			gnl_find(char *str)
 	return (-1);
 }
 
-char		*gnl_dup(const char *src, const char *srcfree)
+char	*gnl_dup(const char *src, const char *srcfree)
 {
 	size_t	i;
 	char	*dup;
 
 	i = 0;
-	if (!(dup = malloc(sizeof(char) * (gnl_len(src) + 1))))
+	dup = malloc(sizeof(char) * (gnl_len(src) + 1));
+	if (dup == NULL)
 		return (NULL);
 	while (src && src[i] != '\0')
 	{
@@ -57,16 +46,11 @@ char		*gnl_dup(const char *src, const char *srcfree)
 	return (dup);
 }
 
-char		*gnl_join(char *s1, char *s2)
+static char	*gnl_do_join(char *s1, char *s2, char *str)
 {
-	char	*str;
-	size_t	len;
 	size_t	i;
 	size_t	j;
 
-	len = gnl_len(s1) + gnl_len(s2);
-	if (!(str = malloc(sizeof(char) * (len + 1))))
-		return (NULL);
 	i = 0;
 	while (s1 && s1[i] != '\0')
 	{
@@ -86,7 +70,20 @@ char		*gnl_join(char *s1, char *s2)
 	return (str);
 }
 
-char		*gnl_sub(const char *s, unsigned int start, size_t len, int n)
+char	*gnl_join(char *s1, char *s2)
+{
+	char	*str;
+	size_t	len;
+
+	len = gnl_len(s1) + gnl_len(s2);
+	str = malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	str = gnl_do_join(s1, s2, str);
+	return (str);
+}
+
+char	*gnl_sub(const char *s, unsigned int start, size_t len, int n)
 {
 	char	*sub;
 	size_t	i;
@@ -95,7 +92,8 @@ char		*gnl_sub(const char *s, unsigned int start, size_t len, int n)
 		return (NULL);
 	if (gnl_len(s) < start + len)
 		len = gnl_len(s) - start;
-	if (!(sub = malloc(sizeof(char) * (len + 1))))
+	sub = malloc(sizeof(char) * (len + 1));
+	if (sub == NULL)
 		return (NULL);
 	i = 0;
 	while (len > 0 && *(s + start) != '\0')

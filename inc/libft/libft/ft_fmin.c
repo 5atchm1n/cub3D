@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 02:30:57 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:31:19 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 04:27:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-double		ft_fmin(double a, double b)
+double	ft_fmin(double a, double b)
 {
 	if (a < b)
 		return (a);

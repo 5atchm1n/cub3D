@@ -6,13 +6,13 @@
 /*   By: sshakya <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 15:36:02 by sshakya           #+#    #+#             */
-/*   Updated: 2020/11/28 22:00:16 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 04:40:41 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		*ft_memccpy(void *dest, const void *src, int c, size_t n)
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
 	size_t				i;
 	unsigned char		*new_dest;

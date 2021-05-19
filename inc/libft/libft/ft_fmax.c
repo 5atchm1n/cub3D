@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 02:28:42 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/29 02:30:52 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 04:27:31 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-double		ft_fmax(double a, double b)
+double	ft_fmax(double a, double b)
 {
 	if (a > b)
 		return (a);

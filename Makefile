@@ -92,6 +92,9 @@ norm2 :
 		@norminette ${NORM2}
 		@norminette ${NORM}
 
+norm-libft : 
+		@norminette inc/libft/*/*.c
+
 clean :	
 		@echo -n "deleting mlx object files"
 		@make clean -s -Cinc/mlx_linux > /dev/null
