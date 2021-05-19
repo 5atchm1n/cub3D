@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 00:11:19 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 22:32:05 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/18 21:19:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	cub_load_objects(t_world *world);
 void	cub_init_object_pos(t_world *world);
 void	cub_init_object(t_world *world, t_error *error);
 void	cub_init_world(t_world *world, t_mlx mlx, char *map_path, t_error
-		*error);
+			*error);
 void	cub_load_xpm(t_mlx *mlx, int *tex, char *path, t_img *img);
 void	cub_start_mlx(t_mlx *mlx);
 /*
@@ -63,9 +63,9 @@ void	cub_start_mlx(t_mlx *mlx);
 */
 int		cub_move(t_cub *game);
 void	cub_look_left_right(t_vector *v, t_camera *cam, uint_fast16_t move,
-		t_speed speed);
+			t_speed speed);
 void	cub_look_up_down(t_vector *v, t_mlx mlx, uint_fast16_t move,
-		t_speed speed);
+			t_speed speed);
 void	cub_jump_crouch(t_vector *vector, uint_fast16_t move, t_speed speed);
 void	cub_player_offset(t_vector *v, double *offset);
 void	cub_mlx_hooks(t_cub *game);
@@ -79,7 +79,7 @@ void	cub_cast_sprites(t_cub *game);
 void	cub_sort_sprites(t_objs *objs, int count);
 void	cub_render(t_cub *game);
 void	cub_set_buffer_pixel(t_mlx *mlx, t_world world, t_objs objs,
-		t_pixel *px);
+			t_pixel *px);
 /*
 ** ERROR ,CHECKS AND EXIT
 */

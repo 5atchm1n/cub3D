@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 14:48:38 by sshakya           #+#    #+#             */
-/*   Updated: 2021/04/19 23:26:31 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/19 03:12:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,12 @@ void			cub_save_bmp(t_cub *game)
 {
 	int			fd;
 
-	fd = open("image.bmp", O_CREAT | O_RDWR | O_TRUNC);
+	fd = open("image.bmp", O_CREAT | O_RDWR | O_TRUNC, 777);
 	if (fd <= 0)
 		return ;
 	cub_bmp_header(game->mlx, fd);
 	cub_bmp_infoheader(game->mlx, fd);
 	cub_bmp_img(game->mlx, fd);
-	system("chmod 777 image.bmp");
 }
 
 int				cub_check_save_arg(char *save_arg)

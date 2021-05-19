@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 09:51:15 by sshakya           #+#    #+#             */
-/*   Updated: 2021/05/17 18:28:22 by sshakya          ###   ########.fr       */
+/*   Updated: 2021/05/18 22:04:14 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,26 @@
 # define KEY_SPRINT 65505
 # define KEY_HIT 102
 
-# define M_UP (1 << 0)
-# define M_DOWN (1 << 1)
-# define M_RIGHT (1 << 2)
-# define M_LEFT (1 << 3)
-# define L_UP (1 << 4)
-# define L_DOWN (1 << 5)
-# define L_LEFT (1 << 6)
-# define L_RIGHT (1 << 7)
-# define M_JUMP (1 << 8)
-# define M_CROUCH (1 << 9)
-# define M_HIT (1 << 10)
+# define M_UP 1
+# define M_DOWN 2
+# define M_RIGHT 4
+# define M_LEFT 8
+# define L_UP 16
+# define L_DOWN 32
+# define L_LEFT 64
+# define L_RIGHT 128
+# define M_JUMP 256
+# define M_CROUCH 512
+# define M_HIT 1024
 
-# define S_ON (1 << 0)
-# define S_MOVE (1 << 1)
-# define S_BACK (1 << 2)
-# define S_KILL (1 << 3)
+# define S_ON 1
+# define S_MOVE 2
+# define S_BACK 4
+# define S_KILL 8
 
-# define E_TNO (1 << 0)
-# define E_TSO (1 << 1)
-# define E_TEA (1 << 2)
-# define E_TWE (1 << 3)
+# define E_TNO 1
+# define E_TSO 2
+# define E_TEA 4
+# define E_TWE 8
 
 #endif

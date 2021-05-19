@@ -2,6 +2,7 @@ NAME = cub3D
 
 INC =	cub3d.h \
 		cub3d_game.h \
+		cub3d_keys.h \
 		cub3d_world.h
 
 SRCS =	cub_game.c \
@@ -86,6 +87,10 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 norm :
 		@~/.norminette/norminette.rb ${NORM}
 		@~/.norminette/norminette.rb ${NORM2}
+
+norm2 : 
+		@norminette ${NORM2}
+		@norminette ${NORM}
 
 clean :	
 		@echo -n "deleting mlx object files"
