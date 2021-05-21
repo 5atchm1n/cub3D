@@ -94,6 +94,7 @@ norm2 :
 
 norm-libft : 
 		@norminette inc/libft/*/*.c
+		@norminette inc/libft/*/*.h
 
 clean :	
 		@echo -n "deleting mlx object files"
